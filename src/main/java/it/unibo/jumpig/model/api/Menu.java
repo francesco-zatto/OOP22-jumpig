@@ -5,7 +5,13 @@ package it.unibo.jumpig.model.api;
  */
 public interface Menu {
     /**
-     * this method starts a new Game.
+     * method that starts a new Game.
      */
     void startGame();
+
+    /**
+     * getter for the leaderboard.
+     * @return the leaderboard
+     */
+    Leaderboard getLeaderboard();
 }
