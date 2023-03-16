@@ -1,16 +1,16 @@
 package it.unibo.jumpig.model.api;
 
 /**
- * interface Menu.
+ * Interface Menu.
  */
 public interface Menu {
     /**
-     * method that starts a new Game.
+     * Method that starts a new Game.
      */
     void startGame();
 
     /**
-     * getter for the leaderboard.
+     * Getter for the leaderboard.
      * @return the leaderboard
      */
     Leaderboard getLeaderboard();
