@@ -1,7 +1,7 @@
 package it.unibo.jumpig.controller.api;
 
 /**
- * Game controller
+ * Interface Menu Controller
  */
 
 public interface MenuController {
