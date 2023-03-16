@@ -5,14 +5,14 @@ package it.unibo.jumpig.view.api;
  */
 
 public interface ViewScene {
-      /**
+    /**
      * The method to show the view.
      */
     void show();
 
     /**
-     * The metod to close the view.
+     * The method to close the view.
      */
     void quit();
-    
+
 }
