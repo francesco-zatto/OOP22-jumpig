@@ -1,11 +1,11 @@
 package it.unibo.jumpig.model.api;
 
 /**
- * interface World.
+ * Interface World.
  */
 public interface World {
     /**
-     * getter for game gravity.
+     * Getter for game gravity.
      * @return the value of the gravity
      */
     Integer getGravity();
