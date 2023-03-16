@@ -12,3 +12,4 @@ bin/
 *.class
 *.DS_Store
 deleteme/
+.vscode
