@@ -46,7 +46,7 @@ dependencies {
 application {
     // Define the main class for the application.
     /*TO DO*/
-    mainClass.set("")
+    mainClass.set("it.unibo.jumpig.LaunchApplication")
 }
 
 tasks.test {
