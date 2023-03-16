@@ -16,4 +16,10 @@ public interface Player extends GameEntity {
      */
     void setVelocityFromJump(int velocity);
 
+    /**
+     * Method that changes the player's velocity because of the world's gravity.
+     * @param gravity gravity of the game's world.
+     */
+    void computeVelocity(double gravity);
+
 }
