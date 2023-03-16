@@ -1,22 +1,22 @@
 package it.unibo.jumpig.model.api;
 
 /**
- * interface Game.
+ * Interface Game.
  */
 public interface Game {
     /**
-     * this method checks if the game is over.
+     * Method that checks if the game is over.
      * @return the game status
      */
     boolean isOVer();
 
     /**
-     * this method updates positions for every entity in a game.
+     * Method that updates the positions for every entity inside the game.
      */
     void updateGame();
 
     /**
-     * this method returns the player's final score.
+     * Getter that returns the player's final score.
      * @return the player's score
      */
     int getCurrentScore();
