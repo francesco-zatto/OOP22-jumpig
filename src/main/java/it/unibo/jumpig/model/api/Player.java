@@ -10,4 +10,10 @@ public interface Player extends GameEntity {
      */
     int getLives();
 
+    /**
+     * Method that sets the player's velocity after a jump on a platform.
+     * @param velocity the velocity given by the platform.
+     */
+    void setVelocityFromJump(int velocity);
+
 }
