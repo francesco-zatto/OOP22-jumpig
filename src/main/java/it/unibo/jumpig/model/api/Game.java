@@ -9,4 +9,6 @@ public interface Game {
     boolean isOVer();
 
     void updateGame();
+
+    int getCurrentScore();
 }
