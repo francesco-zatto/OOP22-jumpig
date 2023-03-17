@@ -11,5 +11,9 @@ public interface GameViewScene extends ViewScene {
      */
     void renderEntities();
 
+    /**
+     * The method to render the current score.
+     */
+    void renderCurrentScore();
 
 }
