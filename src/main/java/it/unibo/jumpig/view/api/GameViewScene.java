@@ -5,4 +5,11 @@ package it.unibo.jumpig.view.api;
  */
 
 public interface GameViewScene extends ViewScene {
+
+    /**
+     * The method to render the entities.
+     */
+    void renderEntities();
+
+
 }
