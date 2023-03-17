@@ -17,4 +17,10 @@ public interface World {
      * @return a set of platforms
      */
     Set<Platform> getPlatform();
+
+    /**
+     * Getter for the player.
+     * @return the player
+     */
+    Player getPlayer();
 }
