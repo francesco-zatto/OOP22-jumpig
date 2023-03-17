@@ -29,4 +29,10 @@ public interface World {
      * @return a set of enemies
      */
     Set<Enemy> getEnemies();
+
+    /**
+     * Getter for the coins.
+     * @return a set of coins
+     */
+    Set<Coin> getCoins();
 }
