@@ -23,4 +23,10 @@ public interface World {
      * @return the player
      */
     Player getPlayer();
+
+    /**
+     * Getter for the enemies.
+     * @return a set of enemies
+     */
+    Set<Enemy> getEnemies();
 }
