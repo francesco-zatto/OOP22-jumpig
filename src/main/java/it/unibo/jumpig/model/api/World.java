@@ -10,7 +10,7 @@ public interface World {
      * Getter for game gravity.
      * @return the value of the gravity
      */
-    Integer getGravity();
+    double getGravity();
 
     /**
      * Getter for platforms.
