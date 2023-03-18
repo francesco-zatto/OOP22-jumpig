@@ -9,7 +9,7 @@ public interface Platform extends GameEntity {
      * when he jumps on it.
      * @return the velocity of the jump on the platform.
      */
-    int getJumpVelocity();
+    Velocity getJumpVelocity();
 
     /**
      * Getter for the horizontal length of the platform.
