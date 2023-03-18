@@ -10,4 +10,10 @@ public interface Velocity {
      * @return the length of the velocity vector.
      */
     double getModule();
+
+    /**
+     * Getter for the component of the velocity on the x axis.
+     * @return the length of the horizontal component.
+     */
+    double getXComponent();
 }
