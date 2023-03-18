@@ -1,7 +1,7 @@
 package it.unibo.jumpig.model.api;
 
 /**
- * An interface that represents the player piloted by the player in the game.
+ * An interface that represents the player piloted by the user in the game.
  */
 public interface Player extends GameEntity {
     /**
@@ -14,7 +14,7 @@ public interface Player extends GameEntity {
      * Method that sets the player's velocity after a jump on a platform.
      * @param velocity the velocity given by the platform.
      */
-    void setVelocityFromJump(int velocity);
+    void setVelocityFromJump(Velocity velocity);
 
     /**
      * Method that changes the player's velocity because of the world's gravity.
