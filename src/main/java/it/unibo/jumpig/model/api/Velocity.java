@@ -16,4 +16,10 @@ public interface Velocity {
      * @return the length of the horizontal component.
      */
     double getXComponent();
+
+    /**
+     * Getter for the component of the velocity on the y axis.
+     * @return the length of the veritcal component.
+     */
+    double getYComponent();
 }
