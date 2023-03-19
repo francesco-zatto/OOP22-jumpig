@@ -4,7 +4,7 @@ package it.unibo.jumpig.controller.api;
  * Interface Menu Controller
  */
 
-public interface MenuController {
+public interface MenuController extends Status {
     /**
      * This method notify when the game starts
      */
