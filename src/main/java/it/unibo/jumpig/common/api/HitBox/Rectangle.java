@@ -37,6 +37,7 @@ public class Rectangle implements ShapeHitBox {
 
     /**
      * The method to get x.
+     * @return x
      */
     public double getX(){
         return this.x;
@@ -44,6 +45,7 @@ public class Rectangle implements ShapeHitBox {
 
     /**
      * The method to get y.
+     * @return y
      */
     public double getY(){
         return this.y;
@@ -51,6 +53,7 @@ public class Rectangle implements ShapeHitBox {
 
     /**
      * The method to get width.
+     * @return width
      */
     public double getWidth(){
         return this.width;
@@ -58,6 +61,7 @@ public class Rectangle implements ShapeHitBox {
 
     /**
      * The method to get height.
+     * @return height
      */
     public double getHeight(){
         return this.height;
