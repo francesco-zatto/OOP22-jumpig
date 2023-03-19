@@ -1,27 +1,26 @@
 package it.unibo.jumpig.common.api.hitbox;
 
+import it.unibo.jumpig.common.api.Position;
+
 /**
  * The class to manage the rectangular area of the HitBox.
  */
 
 public class Rectangle implements ShapeHitBox {
 
-    private double x;
-    private double y;
-    private double width;
-    private double height;
+    private final Position xy;
+    private final double width;
+    private final double height;
 
     /**
      * Constructor for the Rectangle.
      * 
-     * @param x  the abscissa from which the Rectangle begins
-     * @param y  the ordinate from which the Rectangle begins
+     * @param xy  the abscissa and the ordinate from which the Rectangle begins
      * @param width  the width of the Rectangle
      * @param height  the height of the Rectangle
      */
-    public Rectangle(final double x, final double y, final double width, final double height){
-        this.x = x;
-        this.y = y;
+    public Rectangle(final Position xy, final double width, final double height){
+        this.xy = xy;
         this.width = width;
         this.height = height;
     }
@@ -32,23 +31,23 @@ public class Rectangle implements ShapeHitBox {
      */
     @Override
     public double computeArea() {
-        return (this.getWidth() * this.getHeight());
+        return this.getWidth() * this.getHeight();
     }
 
     /**
-     * The method to get x.
+     * The method to get the abscissa from which the Rectangle begins.
      * @return x
      */
     public double getX(){
-        return this.x;
+        return this.xy.getX();
     }
 
     /**
-     * The method to get y.
+     * The method to get the ordinate from which the Rectangle begins.
      * @return y
      */
     public double getY(){
-        return this.y;
+        return this.xy.getY();
     }
 
     /**
