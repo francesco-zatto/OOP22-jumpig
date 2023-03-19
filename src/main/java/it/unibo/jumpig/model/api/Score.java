@@ -16,4 +16,10 @@ public interface Score {
      * @return the score
      */
     int getScore();
+
+    /**
+     * Getter for the amount of coins collected in a game.
+     * @return the amount of coins collected in a game by one player
+     */
+    int getCoins();
 }
