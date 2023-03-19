@@ -8,7 +8,7 @@ public interface Hitbox {
 
     /**
      * The method to get the HitBox in the form of a Rectangle.
-     * @return the Rectangle that rapresents the HitBox.
+     * @return the Rectangle that rapresents the HitBox
      */
     Rectangle getBounds();
 }
