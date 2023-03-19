@@ -7,6 +7,7 @@ package it.unibo.jumpig.common.api.hitbox;
 public interface ShapeHitBox {
     /**
      * The method to compute the area of the shape.
+     * @return the computed area of the shape.
      */
     double computeArea();
 }
