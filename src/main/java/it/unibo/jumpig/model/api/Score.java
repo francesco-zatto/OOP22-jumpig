@@ -12,7 +12,8 @@ public interface Score {
     String getUsername();
 
     /**
-     * Getter for the score.
+     * Getter for the score, i.e. the maximum height 
+     * the player has reached in a game.
      * @return the score
      */
     int getScore();
