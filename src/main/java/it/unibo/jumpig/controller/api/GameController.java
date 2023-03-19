@@ -5,12 +5,12 @@ package it.unibo.jumpig.controller.api;
  */
 public interface GameController {
     /**
-     * This method should register the input from the keyboard while in game
+     * This method register the input from the keyboard while in game
      */
     void registerInput();
 
     /**
-     * This method should notify any update from the game
+     * This method notify any update from the game
      */
     void notifyUpdate();
 
