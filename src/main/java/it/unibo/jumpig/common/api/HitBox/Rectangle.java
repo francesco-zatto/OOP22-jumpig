@@ -32,6 +32,34 @@ public class Rectangle implements ShapeHitBox {
      */
     @Override
     public double computeArea() {
-        return 0.55; //TODO
+        return (this.getWidth() * this.getHeight());
+    }
+
+    /**
+     * The method to get x.
+     */
+    public double getX(){
+        return this.x;
+    }
+
+    /**
+     * The method to get y.
+     */
+    public double getY(){
+        return this.y;
+    }
+
+    /**
+     * The method to get width.
+     */
+    public double getWidth(){
+        return this.width;
+    }
+
+    /**
+     * The method to get height.
+     */
+    public double getHeight(){
+        return this.height;
     }
 }
