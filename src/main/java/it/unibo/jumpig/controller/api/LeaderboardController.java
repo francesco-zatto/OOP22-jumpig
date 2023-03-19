@@ -4,9 +4,10 @@ package it.unibo.jumpig.controller.api;
  * Interface Leaderboard Controller
  */
 
-public interface LeaderboardController {
+public interface LeaderboardController extends Status {
     /*
-     * Methods still to be definded
+     * This method should save the score in leaderboard
      */
+    void saveScore();
 
 }
