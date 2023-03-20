@@ -1,16 +1,16 @@
 package it.unibo.jumpig.controller.api;
 
 /**
- * Interface Game Controller
+ * Interface Game Controller.
  */
 public interface GameController extends Status {
     /**
-     * This method register the input from the keyboard while in game
+     * This method register the input from the keyboard while in game.
      */
     void registerInput();
 
     /**
-     * This method notify any update from the game
+     * This method notify any update from the game.
      */
     void notifyUpdate();
 
