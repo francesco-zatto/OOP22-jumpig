@@ -11,11 +11,17 @@ public abstract class AbstractGameEntity implements GameEntity {
     private Position position;
     private Hitbox hitbox;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Position getPosition() {
         return this.position;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Hitbox getHitbox() {
         return this.hitbox;
