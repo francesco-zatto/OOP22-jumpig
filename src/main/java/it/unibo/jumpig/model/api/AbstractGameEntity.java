@@ -13,8 +13,7 @@ public abstract class AbstractGameEntity implements GameEntity {
 
     @Override
     public Position getPosition() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPosition'");
+        return this.position;
     }
 
     @Override
