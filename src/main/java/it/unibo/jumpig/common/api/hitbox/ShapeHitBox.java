@@ -1,7 +1,7 @@
 package it.unibo.jumpig.common.api.hitbox;
 
 /**
- * The interface to manage the shape of the HitBox.
+ * The interface to manage the shape of the Hitbox.
  */
 public interface ShapeHitbox {
     /**
