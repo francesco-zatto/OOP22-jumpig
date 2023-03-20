@@ -21,5 +21,5 @@ public interface Hitbox {
      * @param height  the height of the Rectangle
      * @return  the Rectangle created that is the updated HitBox
      */
-    Rectangle updateHitBox(final Position xy, final double width, final double height);
+    Rectangle updateHitBox(Position xy, double width, double height);
 }
