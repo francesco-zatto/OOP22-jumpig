@@ -2,6 +2,11 @@ package it.unibo.jumpig.model.api;
 
 import java.util.Set;
 
+import it.unibo.jumpig.model.api.gameentity.Coin;
+import it.unibo.jumpig.model.api.gameentity.Enemy;
+import it.unibo.jumpig.model.api.gameentity.Platform;
+import it.unibo.jumpig.model.api.gameentity.Player;
+
 /**
  * Interface World.
  */
