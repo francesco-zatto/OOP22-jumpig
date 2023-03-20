@@ -8,8 +8,18 @@ import it.unibo.jumpig.common.api.hitbox.Hitbox;
 */
 public abstract class AbstractGameEntity implements GameEntity {
 
-    private Position position;
-    private Hitbox hitbox;
+    private final Position position;
+    private final Hitbox hitbox;
+
+    /**
+     * Constructor for any gameEntity.
+     * @param position position of the gameEntity in the world.
+     * @param hitbox hitbox of the gameEntity.
+     */
+    public AbstractGameEntity(final Position position, final Hitbox hitbox) {
+        this.position = position;
+        this.hitbox = hitbox;
+    }
 
     /**
      * {@inheritDoc}
@@ -26,5 +36,4 @@ public abstract class AbstractGameEntity implements GameEntity {
     public Hitbox getHitbox() {
         return this.hitbox;
     }
-    
 }
