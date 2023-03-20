@@ -19,7 +19,7 @@ public class Rectangle implements ShapeHitBox {
      * @param width  the width of the Rectangle
      * @param height  the height of the Rectangle
      */
-    public Rectangle(final Position xy, final double width, final double height){
+    public Rectangle(final Position xy, final double width, final double height) {
         this.xy = xy;
         this.width = width;
         this.height = height;
@@ -38,7 +38,7 @@ public class Rectangle implements ShapeHitBox {
      * The method to get the abscissa from which the Rectangle begins.
      * @return x
      */
-    public double getX(){
+    public double getX() {
         return this.xy.getX();
     }
 
@@ -46,7 +46,7 @@ public class Rectangle implements ShapeHitBox {
      * The method to get the ordinate from which the Rectangle begins.
      * @return y
      */
-    public double getY(){
+    public double getY() {
         return this.xy.getY();
     }
 
@@ -54,7 +54,7 @@ public class Rectangle implements ShapeHitBox {
      * The method to get width.
      * @return width
      */
-    public double getWidth(){
+    public double getWidth() {
         return this.width;
     }
 
@@ -62,7 +62,7 @@ public class Rectangle implements ShapeHitBox {
      * The method to get height.
      * @return height
      */
-    public double getHeight(){
+    public double getHeight() {
         return this.height;
     }
 }
