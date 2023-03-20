@@ -1,18 +1,18 @@
 package it.unibo.jumpig.controller.api;
 
-/*
- * Interface Controller
+/**
+ * Interface Controller.
  */
 
 public interface Status {
 
-    /*
-     * This method start an interface
+    /**
+     * This method start an interface.
      */
     void start();
 
-    /*
-     * This method close an opened interface
+    /**
+     * This method close an opened interface.
      */
 
     void close();
