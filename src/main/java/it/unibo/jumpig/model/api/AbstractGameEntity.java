@@ -18,8 +18,7 @@ public abstract class AbstractGameEntity implements GameEntity {
 
     @Override
     public Hitbox getHitbox() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getHitbox'");
+        return this.hitbox;
     }
     
 }
