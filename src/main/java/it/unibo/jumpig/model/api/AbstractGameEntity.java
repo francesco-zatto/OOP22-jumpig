@@ -8,6 +8,9 @@ import it.unibo.jumpig.common.api.hitbox.Hitbox;
 */
 public abstract class AbstractGameEntity implements GameEntity {
 
+    private Position position;
+    private Hitbox hitbox;
+
     @Override
     public Position getPosition() {
         // TODO Auto-generated method stub
