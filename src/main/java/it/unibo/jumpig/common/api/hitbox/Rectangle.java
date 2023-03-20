@@ -6,7 +6,7 @@ import it.unibo.jumpig.common.api.Position;
  * The class to manage the rectangular area of the HitBox.
  */
 
-public class Rectangle implements ShapeHitBox {
+public class Rectangle implements ShapeHitbox {
 
     private final Position xy;
     private final double width;
