@@ -33,8 +33,7 @@ public class BasicPlatform extends AbstractGameEntity implements Platform {
      */
     @Override
     public Velocity getJumpVelocity() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getJumpVelocity'");
+        return this.jumpVelocity;
     }
 
     /**
@@ -42,7 +41,6 @@ public class BasicPlatform extends AbstractGameEntity implements Platform {
      */
     @Override
     public int getLength() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getLength'");
+        return this.length;    
     }
 }
