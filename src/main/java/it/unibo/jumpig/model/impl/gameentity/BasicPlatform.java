@@ -41,6 +41,43 @@ public class BasicPlatform extends AbstractGameEntity implements Platform {
      */
     @Override
     public int getLength() {
-        return this.length;    
+        return this.length;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((jumpVelocity == null) ? 0 : jumpVelocity.hashCode());
+        result = prime * result + length;
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final BasicPlatform other = (BasicPlatform) obj;
+        if (this.jumpVelocity == null) {
+            if (other.jumpVelocity != null) {
+                return false;
+            }
+        } else if (!this.jumpVelocity.equals(other.jumpVelocity)) {
+            return false;
+        }
+        return this.length == other.length;
     }
 }
