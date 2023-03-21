@@ -11,9 +11,17 @@ import it.unibo.jumpig.model.api.gameentity.Platform;
  */
 public class BasicPlatform extends AbstractGameEntity implements Platform {
 
-    public BasicPlatform(final Position position, final Hitbox hitbox) {
+    /**
+     * Constructor for a basic platform.
+     * @param position position of the platform in the world.
+     * @param hitbox hitbox of the platform.
+     * @param jumpVelocity velocity of a player when jumps on the platform. 
+     * @param length horizontal length of the platform
+     */
+    public BasicPlatform(final Position position, final Hitbox hitbox, final Velocity jumpVelocity,
+            final int length) {
         super(position, hitbox);
-        //TODO Auto-generated constructor stub
+
     }
 
     /**
