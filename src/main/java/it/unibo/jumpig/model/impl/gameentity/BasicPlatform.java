@@ -13,12 +13,18 @@ public class BasicPlatform extends AbstractGameEntity implements Platform {
         //TODO Auto-generated constructor stub
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Velocity getJumpVelocity() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getJumpVelocity'");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getLength() {
         // TODO Auto-generated method stub
