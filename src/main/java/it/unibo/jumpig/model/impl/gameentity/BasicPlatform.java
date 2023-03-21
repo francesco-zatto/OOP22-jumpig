@@ -6,9 +6,12 @@ import it.unibo.jumpig.model.api.Velocity;
 import it.unibo.jumpig.model.api.gameentity.AbstractGameEntity;
 import it.unibo.jumpig.model.api.gameentity.Platform;
 
+/**
+ * Class that represents a basic platform, that simply causes the player's jump.
+ */
 public class BasicPlatform extends AbstractGameEntity implements Platform {
 
-    public BasicPlatform(Position position, Hitbox hitbox) {
+    public BasicPlatform(final Position position, final Hitbox hitbox) {
         super(position, hitbox);
         //TODO Auto-generated constructor stub
     }
@@ -30,5 +33,4 @@ public class BasicPlatform extends AbstractGameEntity implements Platform {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getLength'");
     }
-    
 }
