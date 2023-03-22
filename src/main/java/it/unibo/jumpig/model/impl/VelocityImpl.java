@@ -46,7 +46,7 @@ public class VelocityImpl implements Velocity {
      * {@inheritDoc}
      */
     @Override
-    public Position computeMovement(final Position initialPosition, final double dt) {
+    public Position computeMovement(final Position initialPosition, final double deltaTime) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'computeMovement'");
     }

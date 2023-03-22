@@ -32,5 +32,5 @@ public interface Velocity {
      * @param dt time interval of the movement.
      * @return the final position after the movement.
      */
-    Position computeMovement(Position initialPosition, double dt);
+    Position computeMovement(Position initialPosition, double deltaTime);
 }
