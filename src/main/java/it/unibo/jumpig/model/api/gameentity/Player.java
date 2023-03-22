@@ -23,6 +23,6 @@ public interface Player extends GameEntity {
      * @param gravity gravity of the game's world.
      * @param dt the time interval in which to compute the next velocity.
      */
-    void computeVelocity(double gravity, double delta);
+    void computeVelocity(double gravity, double deltaTime);
 
 }
