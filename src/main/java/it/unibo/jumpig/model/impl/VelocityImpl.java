@@ -23,8 +23,7 @@ public class VelocityImpl implements Velocity {
      */
     @Override
     public double getModule() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getModule'");
+        return Math.sqrt(Math.pow(getXComponent(), 2) + Math.pow(getYComponent(), 2));
     }
 
     /**
