@@ -8,6 +8,16 @@ import it.unibo.jumpig.model.api.Velocity;
  */
 public class VelocityImpl implements Velocity {
 
+    private final Position position;
+
+    /**
+     * Constructor for the velocity.
+     * @param position the entity's position inside the game
+     */
+    public VelocityImpl(final Position position) {
+        this.position = position;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -22,8 +32,7 @@ public class VelocityImpl implements Velocity {
      */
     @Override
     public double getXComponent() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getXComponent'");
+        return this.position.getX();
     }
 
     /**
@@ -31,8 +40,7 @@ public class VelocityImpl implements Velocity {
      */
     @Override
     public double getYComponent() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getYComponent'");
+        return this.position.getY();
     }
 
     /**
