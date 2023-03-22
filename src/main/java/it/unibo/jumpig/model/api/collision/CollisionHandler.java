@@ -1,4 +1,4 @@
-package it.unibo.jumpig.model.api;
+package it.unibo.jumpig.model.api.collision;
 
 import it.unibo.jumpig.model.api.gameentity.GameEntity;
 import it.unibo.jumpig.model.api.gameentity.Player;
