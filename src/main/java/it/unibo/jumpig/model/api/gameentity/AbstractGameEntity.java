@@ -25,7 +25,7 @@ public abstract class AbstractGameEntity implements GameEntity {
      * {@inheritDoc}
      */
     @Override
-    public Position getPosition() {
+    public final Position getPosition() {
         return this.position;
     }
 
@@ -33,7 +33,7 @@ public abstract class AbstractGameEntity implements GameEntity {
      * {@inheritDoc}
      */
     @Override
-    public Hitbox getHitbox() {
+    public final Hitbox getHitbox() {
         return this.hitbox;
     }
 }

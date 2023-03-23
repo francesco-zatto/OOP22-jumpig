@@ -12,20 +12,17 @@ import it.unibo.jumpig.model.api.gameentity.Platform;
 public class BasicPlatform extends AbstractGameEntity implements Platform {
 
     private final Velocity jumpVelocity;
-    private final int length;
+    private final double length = this.getHitbox().getBounds().getWidth();
 
     /**
      * Constructor for a basic platform.
      * @param position position of the platform in the world.
      * @param hitbox hitbox of the platform.
      * @param jumpVelocity velocity of a player when jumps on the platform. 
-     * @param length horizontal length of the platform
-     */
-    public BasicPlatform(final Position position, final Hitbox hitbox, final Velocity jumpVelocity,
-            final int length) {
+    */
+    public BasicPlatform(final Position position, final Hitbox hitbox, final Velocity jumpVelocity) {
         super(position, hitbox);
         this.jumpVelocity = jumpVelocity;
-        this.length = length;
     }
 
     /**
@@ -40,7 +37,7 @@ public class BasicPlatform extends AbstractGameEntity implements Platform {
      * {@inheritDoc}
      */
     @Override
-    public int getLength() {
+    public double getLength() {
         return this.length;
     }
 
@@ -52,7 +49,9 @@ public class BasicPlatform extends AbstractGameEntity implements Platform {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((jumpVelocity == null) ? 0 : jumpVelocity.hashCode());
-        result = prime * result + length;
+        long temp;
+        temp = Double.doubleToLongBits(length);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
 
@@ -78,6 +77,6 @@ public class BasicPlatform extends AbstractGameEntity implements Platform {
         } else if (!this.jumpVelocity.equals(other.jumpVelocity)) {
             return false;
         }
-        return this.length == other.length;
+        return Double.doubleToLongBits(this.length) == Double.doubleToLongBits(other.length);
     }
 }
