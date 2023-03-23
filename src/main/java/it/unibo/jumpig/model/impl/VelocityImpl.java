@@ -12,8 +12,9 @@ public class VelocityImpl implements Velocity {
     private final double componentY;
 
     /**
-     * Constructor for the velocity.
-     * @param position the entity's position inside the game
+     * Contructor for the velocity.
+     * @param componentX the X component of the vector velocity
+     * @param componentY the Y component of the vector velocity
      */
     public VelocityImpl(final double componentX, final double componentY) {
         this.componentX = componentX;
