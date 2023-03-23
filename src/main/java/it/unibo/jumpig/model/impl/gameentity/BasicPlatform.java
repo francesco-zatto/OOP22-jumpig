@@ -21,6 +21,7 @@ public class BasicPlatform extends AbstractGameEntity implements Platform {
      * @param jumpVelocity velocity of a player when jumps on the platform. 
     */
     public BasicPlatform(final Position position, final Hitbox hitbox, final Velocity jumpVelocity) {
+        //TODO togli hitbox e crea una platformHitbox passando come parametro non Hitbox ma direttamente length
         super(position, hitbox);
         this.jumpVelocity = jumpVelocity;
     }
@@ -41,19 +42,7 @@ public class BasicPlatform extends AbstractGameEntity implements Platform {
         return this.length;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((jumpVelocity == null) ? 0 : jumpVelocity.hashCode());
-        long temp;
-        temp = Double.doubleToLongBits(length);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
-        return result;
-    }
+    //TODO sposta hashCode e equals in Abstract
 
     /**
      * {@inheritDoc}
