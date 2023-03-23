@@ -1,6 +1,7 @@
 package it.unibo.jumpig.model.impl;
 
 import it.unibo.jumpig.common.api.Position;
+import it.unibo.jumpig.common.impl.PositionImpl;
 import it.unibo.jumpig.model.api.Velocity;
 
 /**
@@ -50,7 +51,7 @@ public class VelocityImpl implements Velocity {
      */
     @Override
     public Position computeMovement(final Position initialPosition, final double deltaTime) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'computeMovement'");
+        return new PositionImpl(initialPosition.getX() + this.componentX * deltaTime, 
+        initialPosition.getY() + this.componentY * deltaTime);
     }
 }
