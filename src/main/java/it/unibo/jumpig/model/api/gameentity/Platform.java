@@ -17,6 +17,6 @@ public interface Platform extends GameEntity {
      * Getter for the horizontal length of the platform.
      * @return the length of the platform.
      */
-    int getLength();
+    double getLength();
 
 }
