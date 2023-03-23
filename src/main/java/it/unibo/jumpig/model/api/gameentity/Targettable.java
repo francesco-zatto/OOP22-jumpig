@@ -4,6 +4,8 @@ package it.unibo.jumpig.model.api.gameentity;
  * For example, if a coin has been taken it has to disappear.
  */
 public interface Targettable {
+
+    void setTarget(boolean setTargettable);
     /**
      * The method to know if the targettable entity has to disappear.
      * @return true if the entity has to disappear.
