@@ -23,8 +23,7 @@ public class Rectangle implements ShapeHitbox {
         this.position = position;
         this.width = width;
         this.height = height;
-    }
-  
+    } 
     /**
      * The method to get the abscissa of the center of the Rectangle.
      * @return x
@@ -56,7 +55,9 @@ public class Rectangle implements ShapeHitbox {
     public double getHeight() {
         return this.height;
     }
-    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Position getCenter() {
         return this.position;
