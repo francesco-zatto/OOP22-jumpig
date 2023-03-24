@@ -17,7 +17,7 @@ public class RectangleHitbox implements Hitbox<Rectangle> {
      * @param width  the width of the rectangular Hitbox.
      * @param height  the height of the rectangular Hitbox.
      */
-    
+
     public RectangleHitbox(final Position position, final double width, final double height) {
         this.rectangle = new Rectangle(position, width, height);
     }
@@ -34,9 +34,8 @@ public class RectangleHitbox implements Hitbox<Rectangle> {
      * {@inheritDoc}
      */
     @Override
-    public Rectangle updateHitBox(Position center) {
-        // TODO 
-        throw new UnsupportedOperationException("Unimplemented method 'updateHitBox'");
+    public Rectangle updateHitBox(final Position center) {
+        return new Rectangle(center, this.rectangle.getWidth(), this.rectangle.getHeight());
     }
 
 }
