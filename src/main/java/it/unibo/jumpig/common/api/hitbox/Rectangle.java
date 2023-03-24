@@ -8,19 +8,19 @@ import it.unibo.jumpig.common.api.Position;
 
 public class Rectangle implements ShapeHitbox {
 
-    private final Position xy;
+    private final Position position;
     private final double width;
     private final double height;
 
     /**
      * Constructor for the Rectangle.
      * 
-     * @param xy  the abscissa and the ordinate from which the Rectangle begins
+     * @param position  the abscissa and the ordinate from which the Rectangle begins
      * @param width  the width of the Rectangle
      * @param height  the height of the Rectangle
      */
-    public Rectangle(final Position xy, final double width, final double height) {
-        this.xy = xy;
+    public Rectangle(final Position position, final double width, final double height) {
+        this.position = position;
         this.width = width;
         this.height = height;
     }
@@ -39,7 +39,7 @@ public class Rectangle implements ShapeHitbox {
      * @return x
      */
     public double getX() {
-        return this.xy.getX();
+        return this.position.getX();
     }
 
     /**
@@ -47,7 +47,7 @@ public class Rectangle implements ShapeHitbox {
      * @return y
      */
     public double getY() {
-        return this.xy.getY();
+        return this.position.getY();
     }
 
     /**
