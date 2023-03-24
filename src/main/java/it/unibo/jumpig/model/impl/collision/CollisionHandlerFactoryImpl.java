@@ -22,7 +22,7 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
     }
 
     private boolean isPlayerJumpingOnPlatform(final Player player, final Platform platform) {
-        return true; //TO DO
+        return player.getPosition().equals(platform.getPosition()); //TO DO
     }
 
     private void playerJumps(final Player player, final Platform platform) {
