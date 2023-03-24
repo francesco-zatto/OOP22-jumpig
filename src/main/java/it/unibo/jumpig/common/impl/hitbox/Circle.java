@@ -19,7 +19,11 @@ public class Circle implements ShapeHitbox {
     public Position getCenter() {
         return this.center;
     }
-
+    
+    /**
+     * The method to get the radius of the Circle.
+     * @return a double that is the radius of the Circle.
+     */
     public double getRadius() {
         return this.radius;
     }
