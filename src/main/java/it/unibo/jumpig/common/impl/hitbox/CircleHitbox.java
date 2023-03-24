@@ -16,20 +16,25 @@ public class CircleHitbox implements Hitbox<Circle> {
      * @param center the center of the circular Hitbox.
      * @param radius the radius of the circular Hitbox.
      */
-    
+
     public CircleHitbox(final Position center, final double radius) {
         this.circle = new Circle(center, radius);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Circle getBounds() {
         return this.circle;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Circle updateHitBox(Position center) {
+    public Circle updateHitBox(final Position center) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'updateHitBox'");
     }
-    
 }
