@@ -9,7 +9,11 @@ import it.unibo.jumpig.common.api.hitbox.Hitbox;
 
 public class CircleHitbox implements Hitbox<Circle> {
 
-    private final Circle circle = null;
+    private final Circle circle;
+
+    public CircleHitbox(final Position center, final double radius) {
+        this.circle = new Circle(center, radius);
+    }
 
     @Override
     public Circle getBounds() {
