@@ -34,7 +34,6 @@ public class CircleHitbox implements Hitbox<Circle> {
      */
     @Override
     public Circle updateHitBox(final Position center) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateHitBox'");
+        return new Circle(center, this.circle.getRadius());
     }
 }
