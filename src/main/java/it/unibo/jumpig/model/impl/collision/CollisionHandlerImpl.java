@@ -33,7 +33,8 @@ public class CollisionHandlerImpl<E extends GameEntity> implements CollisionHand
     */
     @Override
     public void handle(final Player player, final E gameEntity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'handle'");
+        if (this.collisionChecker.check(player, gameEntity)) {
+            collisionActioner.act(player, gameEntity);
+        }
     }
 }
