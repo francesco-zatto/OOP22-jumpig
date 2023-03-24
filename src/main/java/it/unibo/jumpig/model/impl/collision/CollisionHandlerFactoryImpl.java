@@ -26,6 +26,6 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
     }
 
     private void playerJumps(final Player player, final Platform platform) {
-
+        player.setVelocityFromJump(platform.getJumpVelocity());
     }
 }
