@@ -1,12 +1,14 @@
 package it.unibo.jumpig.common.api.hitbox;
 
+import it.unibo.jumpig.common.api.Position;
+
 /**
  * The interface to manage the shape of the Hitbox.
  */
 public interface ShapeHitbox {
     /**
-     * The method to compute the area of the shape.
-     * @return the computed area of the shape
+     * The method to get the center of the shape.
+     * @return the center of the shape.
      */
-    double computeArea();
+    Position getCenter();
 }

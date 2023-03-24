@@ -1,6 +1,7 @@
-package it.unibo.jumpig.common.api.hitbox;
+package it.unibo.jumpig.common.impl.hitbox;
 
 import it.unibo.jumpig.common.api.Position;
+import it.unibo.jumpig.common.api.hitbox.ShapeHitbox;
 
 /**
  * The class to manage the rectangular area of the HitBox.
@@ -15,9 +16,9 @@ public class Rectangle implements ShapeHitbox {
     /**
      * Constructor for the Rectangle.
      * 
-     * @param position  the abscissa and the ordinate from which the Rectangle begins
-     * @param width  the width of the Rectangle
-     * @param height  the height of the Rectangle
+     * @param position  the abscissa and the ordinate of the center of the Rectangle.
+     * @param width  the width of the Rectangle.
+     * @param height  the height of the Rectangle.
      */
     public Rectangle(final Position position, final double width, final double height) {
         this.position = position;
@@ -26,16 +27,7 @@ public class Rectangle implements ShapeHitbox {
     }
 
     /**
-     * The method to compute the area of the Rectangle which is base multiplied by height.
-     * @return the computed area of the Rectangle
-     */
-    @Override
-    public double computeArea() {
-        return this.getWidth() * this.getHeight();
-    }
-
-    /**
-     * The method to get the abscissa from which the Rectangle begins.
+     * The method to get the abscissa of the center of the Rectangle.
      * @return x
      */
     public double getX() {
@@ -43,7 +35,7 @@ public class Rectangle implements ShapeHitbox {
     }
 
     /**
-     * The method to get the ordinate from which the Rectangle begins.
+     * The method to get the ordinate of the center of the Rectangle.
      * @return y
      */
     public double getY() {
@@ -64,5 +56,13 @@ public class Rectangle implements ShapeHitbox {
      */
     public double getHeight() {
         return this.height;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Position getCenter() {
+        return this.position;
     }
 }
