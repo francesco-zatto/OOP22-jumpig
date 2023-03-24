@@ -10,7 +10,11 @@ import it.unibo.jumpig.common.api.hitbox.ShapeHitbox;
 public class Circle implements ShapeHitbox {
 
     private final Position center = null;
+    private final double radius = 0.0;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Position getCenter() {
         return this.center;
