@@ -9,8 +9,13 @@ import it.unibo.jumpig.common.api.hitbox.ShapeHitbox;
 
 public class Circle implements ShapeHitbox {
 
-    private final Position center = null;
-    private final double radius = 0.0;
+    private final Position center;
+    private final double radius;
+
+    public Circle(final Position center,final double radius) {
+        this.center = center;
+        this.radius = radius;
+    }
 
     /**
      * {@inheritDoc}
@@ -19,7 +24,7 @@ public class Circle implements ShapeHitbox {
     public Position getCenter() {
         return this.center;
     }
-    
+
     /**
      * The method to get the radius of the Circle.
      * @return a double that is the radius of the Circle.
