@@ -15,7 +15,7 @@ public class Rectangle implements ShapeHitbox {
     /**
      * Constructor for the Rectangle.
      * 
-     * @param position  the abscissa and the ordinate from which the Rectangle begins
+     * @param position  the abscissa and the ordinate of the center of the Rectangle.
      * @param width  the width of the Rectangle
      * @param height  the height of the Rectangle
      */
@@ -24,18 +24,9 @@ public class Rectangle implements ShapeHitbox {
         this.width = width;
         this.height = height;
     }
-
+  
     /**
-     * The method to compute the area of the Rectangle which is base multiplied by height.
-     * @return the computed area of the Rectangle
-     */
-    @Override
-    public double computeArea() {
-        return this.getWidth() * this.getHeight();
-    }
-
-    /**
-     * The method to get the abscissa from which the Rectangle begins.
+     * The method to get the abscissa of the center of the Rectangle.
      * @return x
      */
     public double getX() {
@@ -43,7 +34,7 @@ public class Rectangle implements ShapeHitbox {
     }
 
     /**
-     * The method to get the ordinate from which the Rectangle begins.
+     * The method to get the ordinate of the center of the Rectangle.
      * @return y
      */
     public double getY() {
@@ -64,5 +55,10 @@ public class Rectangle implements ShapeHitbox {
      */
     public double getHeight() {
         return this.height;
+    }
+    
+    @Override
+    public Position getCenter() {
+        return this.position;
     }
 }
