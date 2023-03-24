@@ -9,7 +9,7 @@ import it.unibo.jumpig.common.api.hitbox.ShapeHitbox;
 
 public class Rectangle implements ShapeHitbox {
 
-    private final Position position;
+    private Position position;
     private final double width;
     private final double height;
 
@@ -55,6 +55,10 @@ public class Rectangle implements ShapeHitbox {
      */
     public double getHeight() {
         return this.height;
+    }
+
+    public void setCenter(Position center){
+        this.position = center;
     }
     /**
      * {@inheritDoc}
