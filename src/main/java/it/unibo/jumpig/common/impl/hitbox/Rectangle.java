@@ -17,8 +17,8 @@ public class Rectangle implements ShapeHitbox {
      * Constructor for the Rectangle.
      * 
      * @param position  the abscissa and the ordinate of the center of the Rectangle.
-     * @param width  the width of the Rectangle
-     * @param height  the height of the Rectangle
+     * @param width  the width of the Rectangle.
+     * @param height  the height of the Rectangle.
      */
     public Rectangle(final Position position, final double width, final double height) {
         this.position = position;
