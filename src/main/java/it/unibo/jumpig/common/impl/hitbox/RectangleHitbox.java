@@ -9,13 +9,17 @@ import it.unibo.jumpig.common.api.hitbox.Hitbox;
 
 public class RectangleHitbox implements Hitbox<Rectangle> {
 
+    private final Rectangle rectangle;
+
+    public RectangleHitbox(final Position position, final double width, final double height) {
+        this.rectangle = new Rectangle(position, width, height);
+    }
     /**
      * {@inheritDoc}
      */
     @Override
     public Rectangle getBounds() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getBounds'");
+        return this.rectangle;
     }
 
     /**
@@ -23,7 +27,7 @@ public class RectangleHitbox implements Hitbox<Rectangle> {
      */
     @Override
     public Rectangle updateHitBox(Position center) {
-        // TODO Auto-generated method stub
+        // TODO 
         throw new UnsupportedOperationException("Unimplemented method 'updateHitBox'");
     }
 
