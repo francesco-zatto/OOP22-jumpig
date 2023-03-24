@@ -8,6 +8,7 @@ import it.unibo.jumpig.model.api.gameentity.Player;
  * with a gameEntity.
  * @param <E> any kind of gameEntity that the player could collide with.
  */
+@FunctionalInterface
 public interface CollisionChecker<E extends GameEntity> {
     /**
      * Method that checks if the given player and gameEntity are colliding.
