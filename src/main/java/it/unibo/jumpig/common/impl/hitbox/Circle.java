@@ -11,8 +11,12 @@ public class Circle implements ShapeHitbox {
 
     private final Position center;
     private final double radius;
-
-    public Circle(final Position center,final double radius) {
+    /**
+     * Constructor for the Circle.
+     * @param center the center of the Circle.
+     * @param radius the radius of the Circle.
+     */
+    public Circle(final Position center, final double radius) {
         this.center = center;
         this.radius = radius;
     }
