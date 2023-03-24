@@ -1,11 +1,13 @@
 package it.unibo.jumpig.model.api.gameentity;
 
+import it.unibo.jumpig.common.impl.hitbox.Rectangle;
+import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.model.api.Velocity;
 
 /**
  * An interface that represents the platform on which the player jumps.
  */
-public interface Platform extends GameEntity {
+public interface Platform extends GameEntity<Rectangle, RectangleHitbox> {
     /**
      * Getter for the velocity that the platform gives to the player
      * when he jumps on it.
@@ -17,6 +19,6 @@ public interface Platform extends GameEntity {
      * Getter for the horizontal length of the platform.
      * @return the length of the platform.
      */
-    int getLength();
+    double getLength();
 
 }
