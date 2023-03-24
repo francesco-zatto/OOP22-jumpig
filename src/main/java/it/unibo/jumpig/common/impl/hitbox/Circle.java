@@ -1,5 +1,6 @@
 package it.unibo.jumpig.common.impl.hitbox;
 
+import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.api.hitbox.ShapeHitbox;
 
 /**
@@ -7,5 +8,11 @@ import it.unibo.jumpig.common.api.hitbox.ShapeHitbox;
  */
 
 public class Circle implements ShapeHitbox {
-    
+
+    private final Position center = null;
+
+    @Override
+    public Position getCenter() {
+        return this.center;
+    }
 }
