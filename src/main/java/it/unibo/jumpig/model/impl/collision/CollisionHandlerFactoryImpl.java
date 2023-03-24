@@ -3,10 +3,10 @@ package it.unibo.jumpig.model.impl.collision;
 import it.unibo.jumpig.common.impl.hitbox.Rectangle;
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.model.api.collision.CollisionActioner;
-import it.unibo.jumpig.model.api.collision.CollisionChecker;
 import it.unibo.jumpig.model.api.collision.CollisionHandler;
 import it.unibo.jumpig.model.api.collision.CollisionHandlerFactory;
 import it.unibo.jumpig.model.api.gameentity.Platform;
+import it.unibo.jumpig.model.api.gameentity.Player;
 
 /**
  * Class that produces any kind of collisionHandler for any kind of
@@ -19,11 +19,11 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
      */
     @Override
     public CollisionHandler<Rectangle, RectangleHitbox, Platform> createPlatformCollisionHandler() {
-        return new CollisionHandlerImpl<>(createPlatformCollisionChecker(), createPlatformCollisionActioner());
+        return new CollisionHandlerImpl<>(this::isPlayerJumpingOnPlatform, createPlatformCollisionActioner());
     }
 
-    private CollisionChecker<Rectangle, RectangleHitbox, Platform> createPlatformCollisionChecker() {
-        return null;
+    private boolean isPlayerJumpingOnPlatform(final Player player, final Platform platform) {
+        return true;
     }
 
     private CollisionActioner<Rectangle, RectangleHitbox, Platform> createPlatformCollisionActioner() {
