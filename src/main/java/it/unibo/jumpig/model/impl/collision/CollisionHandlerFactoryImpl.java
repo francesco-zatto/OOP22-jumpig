@@ -23,6 +23,10 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
         return new CollisionHandlerImpl<>(this::isPlayerJumpingOnPlatform, this::playerJumps);
     }
 
+    /*The variable isPlayerAligned indicates if the player has the right abscissas to jump on the platform,
+     * i.e. if the player is vertically aligned. The variable isPlayerAbove indicates if the player is above 
+     * the platform. Also the vertical velocity of the player has to be checked, if is going down or up.
+     */
     private boolean isPlayerJumpingOnPlatform(final Player player, final Platform platform) {
         final Rectangle playerShape = player.getHitbox().getBounds();
         final Rectangle platformShape = platform.getHitbox().getBounds();
@@ -32,7 +36,7 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
                 && this.getRectangleRightX(playerShape) > this.getRectangleRightX(platformShape);
         final boolean isPlayerAbove = this.getRectangleLowerY(playerShape) < this.getRectangleUpperY(platformShape)
                 && this.getRectangleLowerY(playerShape) > platformShape.getY();
-        return isPlayerAligned && isPlayerAbove;
+        return isPlayerAligned && isPlayerAbove && player.getVelocity().getYComponent() < 0;
     }
 
     private double getRectangleLeftX(final Rectangle rectangle) {
