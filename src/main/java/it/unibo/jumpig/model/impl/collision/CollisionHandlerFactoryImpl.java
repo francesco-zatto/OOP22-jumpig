@@ -31,32 +31,32 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
     private boolean isPlayerJumpingOnPlatform(final Player player, final Platform platform) {
         final Rectangle playerShape = player.getHitbox().getBounds();
         final Rectangle platformShape = platform.getHitbox().getBounds();
-        final double playerLeftX = this.getRectangleLeftX(playerShape);
-        final double playerRightX = this.getRectangleRightX(playerShape);
-        final double platformLeftX = this.getRectangleLeftX(platformShape);
-        final double platformRightX = this.getRectangleRightX(platformShape);
-        final boolean isPlayerAligned = platformLeftX < playerLeftX && playerLeftX < platformRightX
-                || platformLeftX < playerRightX && playerRightX < platformRightX;
-        final boolean isPlayerAbove = platformShape.getX() < this.getRectangleLowerY(playerShape)
-                && this.getRectangleLowerY(playerShape) < this.getRectangleUpperY(platformShape);
+        final double playerLeftX = getRectangleLeftX(playerShape);
+        final double playerRightX = getRectangleRightX(playerShape);
+        final double platformLeftX = getRectangleLeftX(platformShape);
+        final double platformRightX = getRectangleRightX(platformShape);
+        final boolean isPlayerAligned = isBetween(playerLeftX, platformLeftX, platformRightX) 
+                || isBetween(playerRightX, platformLeftX, platformRightX);
+        final boolean isPlayerAbove = isBetween(getRectangleLowerY(playerShape), platformShape.getY(),
+                getRectangleUpperY(platformShape));
         System.out.println(isPlayerAligned + " " + isPlayerAbove);
         return isPlayerAligned && isPlayerAbove && player.getVelocity().getYComponent() < 0;
     }
 
     private double getRectangleLeftX(final Rectangle rectangle) {
-        return this.getRectangleCoordinate(rectangle, true, Rectangle::getX, Rectangle::getWidth);
+        return getRectangleCoordinate(rectangle, true, Rectangle::getX, Rectangle::getWidth);
     }
 
     private double getRectangleRightX(final Rectangle rectangle) {
-        return this.getRectangleCoordinate(rectangle, false, Rectangle::getX, Rectangle::getWidth);
+        return getRectangleCoordinate(rectangle, false, Rectangle::getX, Rectangle::getWidth);
     }
 
     private double getRectangleLowerY(final Rectangle rectangle) {
-        return this.getRectangleCoordinate(rectangle, true, Rectangle::getY, Rectangle::getHeight);
+        return getRectangleCoordinate(rectangle, true, Rectangle::getY, Rectangle::getHeight);
     }
 
     private double getRectangleUpperY(final Rectangle rectangle) {
-        return this.getRectangleCoordinate(rectangle, false, Rectangle::getY, Rectangle::getHeight);
+        return getRectangleCoordinate(rectangle, false, Rectangle::getY, Rectangle::getHeight);
     }
 
     /*The boolean isSignNegative is true for lowerY and leftX, because this method to get those coordinates has to
@@ -65,6 +65,10 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
     private double getRectangleCoordinate(final Rectangle rectangle, final boolean isSignNegative, 
             final Function<Rectangle, Double> getCenterCoordinate, final Function<Rectangle, Double> getDimension) {
         return getCenterCoordinate.apply(rectangle) + (isSignNegative ? -1 : +1) * (getDimension.apply(rectangle) / 2);
+    }
+
+    private boolean isBetween(final double num, final double min, final double max) {
+        return min < num && num < max;
     }
 
     private void playerJumps(final Player player, final Platform platform) {
