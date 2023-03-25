@@ -15,6 +15,11 @@ public interface Player extends GameEntity<Rectangle, RectangleHitbox> {
     int getLives();
 
     /**
+     * Method to decrease the player's lives by one unit.
+     */
+    void decreaseLives();
+
+    /**
      * Method that sets the player's velocity after a jump on a platform.
      * @param velocity the velocity given by the platform.
      */
