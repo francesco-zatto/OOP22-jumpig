@@ -10,5 +10,5 @@ public interface Leaderboard {
      * Method that returns a list of scores achieved from various players.
      * @return a list of scores
      */
-    List<Integer> getScores();
+    List<Score> getScores();
 }

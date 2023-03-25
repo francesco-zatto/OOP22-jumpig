@@ -29,8 +29,8 @@ public interface Velocity {
      * Method to compute the next position given the time interval 
      * and the initial position.
      * @param initialPosition position where the movement starts.
-     * @param dt time interval of the movement.
+     * @param deltaTime time interval of the movement.
      * @return the final position after the movement.
      */
-    Position computeMovement(Position initialPosition, double dt);
+    Position computeMovement(Position initialPosition, double deltaTime);
 }

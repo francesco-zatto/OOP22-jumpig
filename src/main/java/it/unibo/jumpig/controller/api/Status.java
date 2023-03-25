@@ -14,7 +14,6 @@ public interface Status {
     /**
      * This method close an opened interface.
      */
-
     void close();
 
 }
