@@ -39,7 +39,6 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
                 || isBetween(playerRightX, platformLeftX, platformRightX);
         final boolean isPlayerAbove = isBetween(getRectangleLowerY(playerShape), platformShape.getY(),
                 getRectangleUpperY(platformShape));
-        System.out.println(isPlayerAligned + " " + isPlayerAbove);
         return isPlayerAligned && isPlayerAbove && player.getVelocity().getYComponent() < 0;
     }
 
