@@ -26,26 +26,34 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
     private boolean isPlayerJumpingOnPlatform(final Player player, final Platform platform) {
         final Rectangle playerShape = player.getHitbox().getBounds();
         final Rectangle platformShape = platform.getHitbox().getBounds();
-        final double playerLeftX = this.getRectangleX(playerShape, true);
-        final double playerRightX = this.getRectangleX(playerShape, false);
-        final double platformLeftX = this.getRectangleX(platformShape, true);
-        final double platformRightX = this.getRectangleX(platformShape, false);
-        final double playerLowerY = this.getRectangleY(playerShape, true);
-        final double platformUpperY = this.getRectangleY(platformShape, false);
-        final boolean isPlayerAligned = playerLeftX < platformLeftX && playerRightX > platformLeftX
-                || playerLeftX < platformRightX && playerRightX > platformRightX;
-        final boolean isPlayerAbove = playerLowerY < platformUpperY && playerLowerY > platformShape.getY();
-        return isPlayerAligned && isPlayerAbove; 
+        final boolean isPlayerAligned = this.getRectangleLeftX(playerShape) < this.getRectangleLeftX(platformShape)
+                && this.getRectangleRightX(playerShape) > this.getRectangleLeftX(platformShape)
+                || this.getRectangleLeftX(playerShape) < this.getRectangleRightX(platformShape) 
+                && this.getRectangleRightX(playerShape) > this.getRectangleRightX(platformShape);
+        final boolean isPlayerAbove = this.getRectangleLowerY(playerShape) < this.getRectangleUpperY(platformShape)
+                && this.getRectangleLowerY(playerShape) > platformShape.getY();
+        return isPlayerAligned && isPlayerAbove;
     }
 
-    private double getRectangleX(final Rectangle rectangle, final boolean left) {
-        return this.getRectangleCoordinate(rectangle, left, Rectangle::getX, Rectangle::getWidth);
+    private double getRectangleLeftX(final Rectangle rectangle) {
+        return this.getRectangleCoordinate(rectangle, true, Rectangle::getX, Rectangle::getWidth);
     }
 
-    private double getRectangleY(final Rectangle rectangle, final boolean lower) {
-        return this.getRectangleCoordinate(rectangle, lower, Rectangle::getY, Rectangle::getHeight);
+    private double getRectangleRightX(final Rectangle rectangle) {
+        return this.getRectangleCoordinate(rectangle, false, Rectangle::getX, Rectangle::getWidth);
     }
 
+    private double getRectangleLowerY(final Rectangle rectangle) {
+        return this.getRectangleCoordinate(rectangle, true, Rectangle::getY, Rectangle::getHeight);
+    }
+
+    private double getRectangleUpperY(final Rectangle rectangle) {
+        return this.getRectangleCoordinate(rectangle, false, Rectangle::getX, Rectangle::getWidth);
+    }
+
+    /*The boolean flag is true for lowerY and leftX, because this method to get those coordinates has to
+     * subtract the dimension from the center coordinate. Instead, flag is false for upperY and rightY.
+    */
     private double getRectangleCoordinate(final Rectangle rectangle, final boolean flag, 
             final Function<Rectangle, Double> getCenterCoordinate, final Function<Rectangle, Double> getDimension) {
         return getCenterCoordinate.apply(rectangle) + (flag ? -1 : +1) * (getDimension.apply(rectangle) / 2);
