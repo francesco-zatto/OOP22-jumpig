@@ -15,6 +15,12 @@ public interface Player extends GameEntity<Rectangle, RectangleHitbox> {
     int getLives();
 
     /**
+     * Getter for the player's velocity.
+     * @return the player's velocity
+     */
+    Velocity getVelocity();
+
+    /**
      * Method to decrease the player's lives by one unit.
      */
     void decreaseLives();
