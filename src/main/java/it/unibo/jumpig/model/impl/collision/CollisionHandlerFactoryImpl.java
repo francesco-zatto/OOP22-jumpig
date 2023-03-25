@@ -22,8 +22,26 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
     }
 
     private boolean isPlayerJumpingOnPlatform(final Player player, final Platform platform) {
-        return player.getPosition().equals(platform.getPosition()); //TO DO
+        final Rectangle playerShape = player.getHitbox().getBounds();
+        final Rectangle platformShape = platform.getHitbox().getBounds();
+        final double playerLeftX = this.getRectangleX(playerShape, true);
+        final double playerRightX = this.getRectangleX(playerShape, false);
+        final double platformLeftX = this.getRectangleX(platformShape, true);
+        final double platformRightX = this.getRectangleX(platformShape, false);
+        //final double playerLowerY = this.getRectangleY(playerShape, true);
+        //final double platformUpperY = this.getRectangleY(platformShape, false);
+        return playerLeftX < platformLeftX && playerRightX > platformLeftX
+                || playerLeftX < platformRightX && playerRightX > platformRightX;
+        //return isPlayerAligned; 
     }
+
+    private double getRectangleX(final Rectangle rectangle, final boolean left) {
+        return rectangle.getCenter().getX() + (left ? -1 : +1) * (rectangle.getWidth() / 2);
+    }
+
+    /*private double getRectangleY(final Rectangle rectangle, final boolean lower) {
+        return rectangle.getCenter().getY() + (lower ? -1 : +1) * (rectangle.getHeight() / 2);
+    }*/
 
     private void playerJumps(final Player player, final Platform platform) {
         player.setVelocityFromJump(platform.getJumpVelocity());
