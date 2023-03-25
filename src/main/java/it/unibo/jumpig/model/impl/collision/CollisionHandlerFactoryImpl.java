@@ -24,18 +24,22 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
     }
 
     /*The variable isPlayerAligned indicates if the player has the right abscissas to jump on the platform,
-     * i.e. if the player is vertically aligned. The variable isPlayerAbove indicates if the player is above 
-     * the platform. Also the vertical velocity of the player has to be checked, if is going down or up.
+     * i.e. if a part of the player has the same x of the platform. The variable isPlayerAbove indicates if the player is above 
+     * the platform and it's touching the superior part of the platform.
+     * Also the vertical velocity of the player has to be checked, if is going down or up.
      */
     private boolean isPlayerJumpingOnPlatform(final Player player, final Platform platform) {
         final Rectangle playerShape = player.getHitbox().getBounds();
         final Rectangle platformShape = platform.getHitbox().getBounds();
-        final boolean isPlayerAligned = this.getRectangleLeftX(playerShape) < this.getRectangleLeftX(platformShape)
-                && this.getRectangleRightX(playerShape) > this.getRectangleLeftX(platformShape)
-                || this.getRectangleLeftX(playerShape) < this.getRectangleRightX(platformShape) 
-                && this.getRectangleRightX(playerShape) > this.getRectangleRightX(platformShape);
-        final boolean isPlayerAbove = this.getRectangleLowerY(playerShape) < this.getRectangleUpperY(platformShape)
-                && this.getRectangleLowerY(playerShape) > platformShape.getY();
+        final double playerLeftX = this.getRectangleLeftX(playerShape);
+        final double playerRightX = this.getRectangleRightX(playerShape);
+        final double platformLeftX = this.getRectangleLeftX(platformShape);
+        final double platformRightX = this.getRectangleRightX(platformShape);
+        final boolean isPlayerAligned = platformLeftX < playerLeftX && playerLeftX < platformRightX
+                || platformLeftX < playerRightX && playerRightX < platformRightX;
+        final boolean isPlayerAbove = platformShape.getX() < this.getRectangleLowerY(playerShape)
+                && this.getRectangleLowerY(playerShape) < this.getRectangleUpperY(platformShape);
+        System.out.println(isPlayerAligned + " " + isPlayerAbove);
         return isPlayerAligned && isPlayerAbove && player.getVelocity().getYComponent() < 0;
     }
 
@@ -52,15 +56,15 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
     }
 
     private double getRectangleUpperY(final Rectangle rectangle) {
-        return this.getRectangleCoordinate(rectangle, false, Rectangle::getX, Rectangle::getWidth);
+        return this.getRectangleCoordinate(rectangle, false, Rectangle::getY, Rectangle::getHeight);
     }
 
-    /*The boolean flag is true for lowerY and leftX, because this method to get those coordinates has to
-     * subtract the dimension from the center coordinate. Instead, flag is false for upperY and rightY.
+    /*The boolean isSignNegative is true for lowerY and leftX, because this method to get those coordinates has to
+     * subtract the dimension from the center coordinate. Instead, isSignNegative is false for upperY and rightY.
     */
-    private double getRectangleCoordinate(final Rectangle rectangle, final boolean flag, 
+    private double getRectangleCoordinate(final Rectangle rectangle, final boolean isSignNegative, 
             final Function<Rectangle, Double> getCenterCoordinate, final Function<Rectangle, Double> getDimension) {
-        return getCenterCoordinate.apply(rectangle) + (flag ? -1 : +1) * (getDimension.apply(rectangle) / 2);
+        return getCenterCoordinate.apply(rectangle) + (isSignNegative ? -1 : +1) * (getDimension.apply(rectangle) / 2);
     }
 
     private void playerJumps(final Player player, final Platform platform) {
