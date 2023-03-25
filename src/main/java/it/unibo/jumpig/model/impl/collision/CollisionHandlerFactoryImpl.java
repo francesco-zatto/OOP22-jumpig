@@ -26,9 +26,12 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
     /*The variable isPlayerAligned indicates if the player has the right abscissas to jump on the platform,
      * i.e. if a part of the player has the same x of the platform. The variable isPlayerAbove indicates if the player is above 
      * the platform and it's touching the superior part of the platform.
-     * Also the vertical velocity of the player has to be checked, if is going down or up.
+     * Also the vertical velocity of the player has to be checked, if it is going down or up.
      */
     private boolean isPlayerJumpingOnPlatform(final Player player, final Platform platform) {
+        if (player.getVelocity().getYComponent() >= 0) {
+            return false;
+        }
         final Rectangle playerShape = player.getHitbox().getBounds();
         final Rectangle platformShape = platform.getHitbox().getBounds();
         final double playerLeftX = getRectangleLeftX(playerShape);
@@ -39,7 +42,7 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
                 || isBetween(playerRightX, platformLeftX, platformRightX);
         final boolean isPlayerAbove = isBetween(getRectangleLowerY(playerShape), platformShape.getY(),
                 getRectangleUpperY(platformShape));
-        return isPlayerAligned && isPlayerAbove && player.getVelocity().getYComponent() < 0;
+        return isPlayerAligned && isPlayerAbove;
     }
 
     private double getRectangleLeftX(final Rectangle rectangle) {
@@ -59,7 +62,7 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
     }
 
     /*The boolean isSignNegative is true for lowerY and leftX, because this method to get those coordinates has to
-     * subtract the dimension from the center coordinate. Instead, isSignNegative is false for upperY and rightY.
+     * subtract the half of dimension from the center coordinate. Instead, isSignNegative is false for upperY and rightY.
     */
     private double getRectangleCoordinate(final Rectangle rectangle, final boolean isSignNegative, 
             final Function<Rectangle, Double> getCenterCoordinate, final Function<Rectangle, Double> getDimension) {
