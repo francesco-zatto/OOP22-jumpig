@@ -1,5 +1,7 @@
 package it.unibo.jumpig.model.impl.collision;
 
+import java.util.function.Function;
+
 import it.unibo.jumpig.common.impl.hitbox.Rectangle;
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.model.api.collision.CollisionHandler;
@@ -28,20 +30,26 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
         final double playerRightX = this.getRectangleX(playerShape, false);
         final double platformLeftX = this.getRectangleX(platformShape, true);
         final double platformRightX = this.getRectangleX(platformShape, false);
-        //final double playerLowerY = this.getRectangleY(playerShape, true);
-        //final double platformUpperY = this.getRectangleY(platformShape, false);
-        return playerLeftX < platformLeftX && playerRightX > platformLeftX
+        final double playerLowerY = this.getRectangleY(playerShape, true);
+        final double platformUpperY = this.getRectangleY(platformShape, false);
+        final boolean isPlayerAligned = playerLeftX < platformLeftX && playerRightX > platformLeftX
                 || playerLeftX < platformRightX && playerRightX > platformRightX;
-        //return isPlayerAligned; 
+        final boolean isPlayerAbove = playerLowerY < platformUpperY && playerLowerY > platformShape.getY();
+        return isPlayerAligned && isPlayerAbove; 
     }
 
     private double getRectangleX(final Rectangle rectangle, final boolean left) {
-        return rectangle.getCenter().getX() + (left ? -1 : +1) * (rectangle.getWidth() / 2);
+        return this.getRectangleCoordinate(rectangle, left, Rectangle::getX, Rectangle::getWidth);
     }
 
-    /*private double getRectangleY(final Rectangle rectangle, final boolean lower) {
-        return rectangle.getCenter().getY() + (lower ? -1 : +1) * (rectangle.getHeight() / 2);
-    }*/
+    private double getRectangleY(final Rectangle rectangle, final boolean lower) {
+        return this.getRectangleCoordinate(rectangle, lower, Rectangle::getY, Rectangle::getHeight);
+    }
+
+    private double getRectangleCoordinate(final Rectangle rectangle, final boolean flag, 
+            final Function<Rectangle, Double> getCenterCoordinate, final Function<Rectangle, Double> getDimension) {
+        return getCenterCoordinate.apply(rectangle) + (flag ? -1 : +1) * (getDimension.apply(rectangle) / 2);
+    }
 
     private void playerJumps(final Player player, final Platform platform) {
         player.setVelocityFromJump(platform.getJumpVelocity());
