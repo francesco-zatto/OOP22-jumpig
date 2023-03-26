@@ -39,7 +39,7 @@ public class CollisionHandlerImpl<S extends ShapeHitbox, H extends Hitbox<S>, E 
     @Override
     public void handle(final Player player, final E gameEntity) {
         if (this.collisionChecker.check(player, gameEntity)) {
-            collisionActioner.act(player, gameEntity);
+            this.collisionActioner.act(player, gameEntity);
         }
     }
 }
