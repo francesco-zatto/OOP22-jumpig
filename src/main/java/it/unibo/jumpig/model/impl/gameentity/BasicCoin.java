@@ -12,6 +12,8 @@ import it.unibo.jumpig.model.api.gameentity.Coin;
  */
 public class BasicCoin extends AbstractGameEntity<Circle,CircleHitbox> implements Coin {
 
+    private boolean targettable;
+
     /**
      * The constructor for a basic coin.
      * @param position position of the coin in the world.
@@ -23,8 +25,7 @@ public class BasicCoin extends AbstractGameEntity<Circle,CircleHitbox> implement
     
     @Override
     public void setTarget(boolean setTargettable) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setTarget'");
+        this.targettable = setTargettable;
     }
 
     @Override
