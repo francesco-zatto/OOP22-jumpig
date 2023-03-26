@@ -2,9 +2,7 @@ package it.unibo.jumpig.model.impl.collision;
 
 import java.util.function.Supplier;
 
-import it.unibo.jumpig.common.impl.hitbox.Circle;
 import it.unibo.jumpig.common.impl.hitbox.CircleHitbox;
-import it.unibo.jumpig.common.impl.hitbox.Rectangle;
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.model.api.collision.CollisionHandler;
 import it.unibo.jumpig.model.api.collision.CollisionHandlerFactory;
@@ -23,7 +21,7 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
      * {@inheritDoc}
      */
     @Override
-    public CollisionHandler<Rectangle, RectangleHitbox, Platform> createPlatformCollisionHandler() {
+    public CollisionHandler<RectangleHitbox, Platform> createPlatformCollisionHandler() {
         return new CollisionHandlerImpl<>(this::isPlayerJumpingOnPlatform, this::playerJumps);
     }
 
@@ -36,66 +34,59 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
         if (player.getVelocity().getYComponent() >= 0) {
             return false;
         }
-        final Rectangle playerShape = player.getHitbox().getBounds();
-        final Rectangle platformShape = platform.getHitbox().getBounds();
-        final double playerLeftX = getRectangleLeftX(playerShape);
-        final double playerRightX = getRectangleRightX(playerShape);
-        final double platformLeftX = getRectangleLeftX(platformShape);
-        final double platformRightX = getRectangleRightX(platformShape);
+        final RectangleHitbox playerHitbox = player.getHitbox();
+        final RectangleHitbox platformHitbox = platform.getHitbox();
+        final double playerLeftX = getRectangleLeftX(playerHitbox);
+        final double playerRightX = getRectangleRightX(playerHitbox);
+        final double platformLeftX = getRectangleLeftX(platformHitbox);
+        final double platformRightX = getRectangleRightX(platformHitbox);
         final boolean isPlayerAligned = isBetween(playerLeftX, platformLeftX, platformRightX) 
                 || isBetween(playerRightX, platformLeftX, platformRightX);
-        final boolean isPlayerAbove = isBetween(getRectangleLowerY(playerShape), platformShape.getY(),
-                getRectangleUpperY(platformShape));
+        final boolean isPlayerAbove = isBetween(getRectangleLowerY(playerHitbox), platformHitbox.getCenter().getY(),
+                getRectangleUpperY(platformHitbox));
         return isPlayerAligned && isPlayerAbove;
-    }
-
-    private double getRectangleLeftX(final Rectangle rectangle) {
-        return getRectangleCoordinate(rectangle::getX, rectangle::getWidth, true);
-    }
-
-    private double getRectangleRightX(final Rectangle rectangle) {
-        return getRectangleCoordinate(rectangle::getX, rectangle::getWidth, false);
-    }
-
-    private double getRectangleLowerY(final Rectangle rectangle) {
-        return getRectangleCoordinate(rectangle::getY, rectangle::getHeight, true);
-    }
-
-    private double getRectangleUpperY(final Rectangle rectangle) {
-        return getRectangleCoordinate(rectangle::getY, rectangle::getHeight, false);
-    }
-
-    /*The boolean isSignNegative is true for lowerY and leftX, because this method to get those coordinates has to
-     * subtract the half of dimension from the center coordinate. Instead, isSignNegative is false for upperY and rightY.
-    */
-    private double getRectangleCoordinate(final Supplier<Double> coordinateSupplier, final Supplier<Double> dimensionSupplier,
-            final boolean isSignNegative) {
-        return coordinateSupplier.get() + (isSignNegative ? -1 : +1) * (dimensionSupplier.get() / 2);
-    }
-
-    private boolean isBetween(final double num, final double min, final double max) {
-        return min < num && num < max;
     }
 
     private void playerJumps(final Player player, final Platform platform) {
         player.setVelocityFromJump(platform.getJumpVelocity());
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public CollisionHandler<Rectangle, RectangleHitbox, Enemy> createEnemyCollisionHandler() {
+    public CollisionHandler<RectangleHitbox, Enemy> createEnemyCollisionHandler() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'createEnemyCollisionHandler'");
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public CollisionHandler<Circle, CircleHitbox, Coin> createCoinCollisionHandler() {
+    public CollisionHandler<CircleHitbox, Coin> createCoinCollisionHandler() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'createCoinCollisionHandler'");
+    }
+
+    private double getRectangleLeftX(final RectangleHitbox rectangle) {
+        return getRectangleCoordinate(rectangle.getCenter().getX(), rectangle.getWidth(), true);
+    }
+
+    private double getRectangleRightX(final RectangleHitbox rectangle) {
+        return getRectangleCoordinate(rectangle.getCenter().getX(), rectangle.getWidth(), false);
+    }
+
+    private double getRectangleLowerY(final RectangleHitbox rectangle) {
+        return getRectangleCoordinate(rectangle.getCenter().getY(), rectangle.getHeight(), true);
+    }
+
+    private double getRectangleUpperY(final RectangleHitbox rectangle) {
+        return getRectangleCoordinate(rectangle.getCenter().getY(), rectangle.getHeight(), false);
+    }
+
+    /*The boolean isSignNegative is true for lowerY and leftX, because this method to get those coordinates has to
+     * subtract the half of dimension from the center coordinate. Instead, isSignNegative is false for upperY and rightY.
+    */
+    private double getRectangleCoordinate(final double coordinate, final double dimension, final boolean isSignNegative) {
+        return coordinate + (isSignNegative ? -1 : +1) * (dimension / 2);
+    }
+
+    private boolean isBetween(final double num, final double min, final double max) {
+        return min < num && num < max;
     }
 }
