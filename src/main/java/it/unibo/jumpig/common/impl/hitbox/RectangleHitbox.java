@@ -35,6 +35,14 @@ public class RectangleHitbox implements Hitbox {
     }
 
     /**
+     * The method to get the width of the rectangular Hitbox.
+     * @return width
+     */
+    public double getWidth() {
+        return this.width;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
