@@ -30,14 +30,6 @@ public class RectangleHitbox implements Hitbox {
      * {@inheritDoc}
      */
     @Override
-    public Rectangle getBounds() {
-        return this.rectangle;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public Rectangle updateHitBox(final Position center) {
         return new Rectangle(center, this.rectangle.getWidth(), this.rectangle.getHeight());
     }
