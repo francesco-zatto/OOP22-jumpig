@@ -33,7 +33,6 @@ public class BasicCoin extends AbstractGameEntity<Circle,CircleHitbox> implement
 
     @Override
     public boolean isTaken() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isTaken'");
+        return this.targettable;
     }
 }
