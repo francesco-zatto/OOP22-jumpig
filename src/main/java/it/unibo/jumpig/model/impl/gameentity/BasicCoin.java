@@ -23,6 +23,9 @@ public class BasicCoin extends AbstractGameEntity<Circle,CircleHitbox> implement
         super(position, hitbox);
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setTarget(boolean setTargettable) {
         this.targettable = setTargettable;
