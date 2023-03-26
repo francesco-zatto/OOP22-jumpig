@@ -2,10 +2,13 @@ package it.unibo.jumpig.model.impl.collision;
 
 import java.util.function.Supplier;
 
+import it.unibo.jumpig.common.impl.hitbox.Circle;
+import it.unibo.jumpig.common.impl.hitbox.CircleHitbox;
 import it.unibo.jumpig.common.impl.hitbox.Rectangle;
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.model.api.collision.CollisionHandler;
 import it.unibo.jumpig.model.api.collision.CollisionHandlerFactory;
+import it.unibo.jumpig.model.api.gameentity.Coin;
 import it.unibo.jumpig.model.api.gameentity.Enemy;
 import it.unibo.jumpig.model.api.gameentity.Platform;
 import it.unibo.jumpig.model.api.gameentity.Player;
@@ -85,5 +88,14 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
     public CollisionHandler<Rectangle, RectangleHitbox, Enemy> createEnemyCollisionHandler() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'createEnemyCollisionHandler'");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CollisionHandler<Circle, CircleHitbox, Coin> createCoinCollisionHandler() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'createCoinCollisionHandler'");
     }
 }
