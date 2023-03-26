@@ -12,7 +12,7 @@ import it.unibo.jumpig.model.api.gameentity.Player;
  */
 public class PlayerImpl extends AbstractGameEntity<Rectangle, RectangleHitbox> implements Player {
 
-    private final Velocity playerVelocity;
+    private Velocity playerVelocity;
     private int lives;
     /**
      * Constructor for the player.
@@ -59,8 +59,7 @@ public class PlayerImpl extends AbstractGameEntity<Rectangle, RectangleHitbox> i
      */
     @Override
     public void setVelocityFromJump(final Velocity velocity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setVelocityFromJump'");
+        this.playerVelocity = velocity;
     }
 
     /**
