@@ -1,7 +1,6 @@
 package it.unibo.jumpig.model.impl.collision;
 
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
-import it.unibo.jumpig.common.api.hitbox.ShapeHitbox;
 import it.unibo.jumpig.model.api.collision.CollisionActioner;
 import it.unibo.jumpig.model.api.collision.CollisionChecker;
 import it.unibo.jumpig.model.api.collision.CollisionHandler;
@@ -10,15 +9,13 @@ import it.unibo.jumpig.model.api.gameentity.Player;
 
 /**
  * Class that handles possible collision between a player and a gameEntity.
- * @param <S> any kind of ShapeHitbox
  * @param <H> any kind of Hitbox
  * @param <E> any kind of gameEntity that the player could collide with
  */
-public class CollisionHandlerImpl<S extends ShapeHitbox, H extends Hitbox<S>, E extends GameEntity<S, H>> 
-        implements CollisionHandler<S, H, E> {
+public class CollisionHandlerImpl<H extends Hitbox, E extends GameEntity<H>> implements CollisionHandler<H, E> {
 
-    private final CollisionChecker<S, H, E> collisionChecker;
-    private final CollisionActioner<S, H, E> collisionActioner;
+    private final CollisionChecker<H, E> collisionChecker;
+    private final CollisionActioner<H, E> collisionActioner;
 
     /**
      * Constructor that creates a new CollisionHandler, which depends on the collisionChecker and
@@ -26,8 +23,8 @@ public class CollisionHandlerImpl<S extends ShapeHitbox, H extends Hitbox<S>, E 
      * @param collisionChecker
      * @param collisionActioner
      */
-    public CollisionHandlerImpl(final CollisionChecker<S, H, E> collisionChecker, 
-            final CollisionActioner<S, H, E> collisionActioner) {
+    public CollisionHandlerImpl(final CollisionChecker<H, E> collisionChecker, 
+            final CollisionActioner<H, E> collisionActioner) {
         this.collisionChecker = collisionChecker;
         this.collisionActioner = collisionActioner;
     }
