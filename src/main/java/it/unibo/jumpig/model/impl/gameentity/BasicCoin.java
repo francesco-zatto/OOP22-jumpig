@@ -20,19 +20,7 @@ public class BasicCoin extends AbstractGameEntity<Circle,CircleHitbox> implement
     public BasicCoin(Position position, CircleHitbox hitbox) {
         super(position, hitbox);
     }
-
-    @Override
-    public Position getPosition() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPosition'");
-    }
-
-    @Override
-    public CircleHitbox getHitbox() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getHitbox'");
-    }
-
+    
     @Override
     public void setTarget(boolean setTargettable) {
         // TODO Auto-generated method stub
