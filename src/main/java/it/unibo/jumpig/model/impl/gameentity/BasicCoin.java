@@ -10,7 +10,7 @@ import it.unibo.jumpig.model.api.gameentity.Coin;
  * The class that represents a basic coin.
  * It has always the same value and once taken by the player it disappears.
  */
-public class BasicCoin extends AbstractGameEntity<Circle, CircleHitbox> implements Coin {
+public class BasicCoin extends AbstractGameEntity<CircleHitbox> implements Coin {
 
     private boolean targettable;
 
