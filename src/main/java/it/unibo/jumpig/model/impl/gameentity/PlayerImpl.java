@@ -12,15 +12,16 @@ import it.unibo.jumpig.model.api.gameentity.Player;
  */
 public class PlayerImpl extends AbstractGameEntity<Rectangle, RectangleHitbox> implements Player {
 
+    private final Velocity playerVelocity;
     /**
      * Constructor for the player.
      * @param position position of the player in the world
      * @param hitbox hitbox of the platform
-     * @param velocity the player's initial velocity
+     * @param playerVelocity the player's initial velocity
      */
-    public PlayerImpl(final Position position, final RectangleHitbox hitbox, final Velocity velocity) { //NOPMD
+    public PlayerImpl(final Position position, final RectangleHitbox hitbox, final Velocity playerVelocity) {
         super(position, hitbox);
-        //TODO Auto-generated constructor stub
+        this.playerVelocity = playerVelocity;
     }
 
     /**
@@ -37,8 +38,7 @@ public class PlayerImpl extends AbstractGameEntity<Rectangle, RectangleHitbox> i
      */
     @Override
     public Velocity getVelocity() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getVelocity'");
+        return this.playerVelocity;
     }
 
     /**
