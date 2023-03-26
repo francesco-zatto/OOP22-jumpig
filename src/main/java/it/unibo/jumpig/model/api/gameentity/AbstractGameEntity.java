@@ -2,14 +2,12 @@ package it.unibo.jumpig.model.api.gameentity;
 
 import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
-import it.unibo.jumpig.common.api.hitbox.ShapeHitbox;
 
 /**
  * Class to manage the position and the hitbox of each gameEntity.
- * @param <S> any kind of ShapeHitbox
  * @param <H> any kind of Hitbox
 */
-public abstract class AbstractGameEntity<S extends ShapeHitbox, H extends Hitbox<S>> implements GameEntity<S, H> {
+public abstract class AbstractGameEntity<H extends Hitbox> implements GameEntity<H> {
 
     private final Position position;
     private final H hitbox;
@@ -56,6 +54,7 @@ public abstract class AbstractGameEntity<S extends ShapeHitbox, H extends Hitbox
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("unchecked")
     public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
@@ -66,7 +65,7 @@ public abstract class AbstractGameEntity<S extends ShapeHitbox, H extends Hitbox
         if (getClass() != obj.getClass()) {
             return false;
         }
-        AbstractGameEntity<S, H> other = (AbstractGameEntity<S, H>) obj; //NOPMD
+        AbstractGameEntity<H> other = (AbstractGameEntity<H>) obj;
         if (position == null) {
             if (other.position != null) {
                 return false;
