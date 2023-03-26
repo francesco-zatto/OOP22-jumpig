@@ -13,7 +13,7 @@ import it.unibo.jumpig.model.api.gameentity.Player;
 public class PlayerImpl extends AbstractGameEntity<Rectangle, RectangleHitbox> implements Player {
 
     private final Velocity playerVelocity;
-    private final int lives;
+    private int lives;
     /**
      * Constructor for the player.
      * @param position position of the player in the world
@@ -49,8 +49,9 @@ public class PlayerImpl extends AbstractGameEntity<Rectangle, RectangleHitbox> i
      */
     @Override
     public void decreaseLives() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'decreaseLives'");
+        if (this.lives > 0) {
+            this.lives--;
+        }
     }
 
     /**
