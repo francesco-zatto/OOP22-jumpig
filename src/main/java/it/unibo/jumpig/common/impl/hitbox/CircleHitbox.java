@@ -27,6 +27,14 @@ public class CircleHitbox implements Hitbox {
      * {@inheritDoc}
      */
     @Override
+    public Position getCenter() {
+        return this.center;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Circle getBounds() {
         return this.circle;
     }
