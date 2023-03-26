@@ -1,6 +1,6 @@
 package it.unibo.jumpig.model.impl.collision;
 
-import java.util.function.Function;
+import java.util.function.Supplier;
 
 import it.unibo.jumpig.common.impl.hitbox.Rectangle;
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
@@ -46,27 +46,27 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
     }
 
     private double getRectangleLeftX(final Rectangle rectangle) {
-        return getRectangleCoordinate(rectangle, true, Rectangle::getX, Rectangle::getWidth);
+        return getRectangleCoordinate(rectangle::getX, rectangle::getWidth, true);
     }
 
     private double getRectangleRightX(final Rectangle rectangle) {
-        return getRectangleCoordinate(rectangle, false, Rectangle::getX, Rectangle::getWidth);
+        return getRectangleCoordinate(rectangle::getX, rectangle::getWidth, false);
     }
 
     private double getRectangleLowerY(final Rectangle rectangle) {
-        return getRectangleCoordinate(rectangle, true, Rectangle::getY, Rectangle::getHeight);
+        return getRectangleCoordinate(rectangle::getY, rectangle::getHeight, true);
     }
 
     private double getRectangleUpperY(final Rectangle rectangle) {
-        return getRectangleCoordinate(rectangle, false, Rectangle::getY, Rectangle::getHeight);
+        return getRectangleCoordinate(rectangle::getY, rectangle::getHeight, false);
     }
 
     /*The boolean isSignNegative is true for lowerY and leftX, because this method to get those coordinates has to
      * subtract the half of dimension from the center coordinate. Instead, isSignNegative is false for upperY and rightY.
     */
-    private double getRectangleCoordinate(final Rectangle rectangle, final boolean isSignNegative, 
-            final Function<Rectangle, Double> getCenterCoordinate, final Function<Rectangle, Double> getDimension) {
-        return getCenterCoordinate.apply(rectangle) + (isSignNegative ? -1 : +1) * (getDimension.apply(rectangle) / 2);
+    private double getRectangleCoordinate(final Supplier<Double> coordinateSupplier, final Supplier<Double> dimensionSupplier,
+            final boolean isSignNegative) {
+        return coordinateSupplier.get() + (isSignNegative ? -1 : +1) * (dimensionSupplier.get() / 2);
     }
 
     private boolean isBetween(final double num, final double min, final double max) {
