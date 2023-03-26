@@ -7,9 +7,11 @@ import it.unibo.jumpig.common.api.hitbox.Hitbox;
  * The class to manage a rectangular Hitbox.
  */
 
-public class RectangleHitbox implements Hitbox<Rectangle> {
+public class RectangleHitbox implements Hitbox {
 
-    private final Rectangle rectangle;
+    private final Position position;
+    private final double width;
+    private final double height;
 
     /**
      * The constructor to create a new rectangular Hitbox.
@@ -19,7 +21,9 @@ public class RectangleHitbox implements Hitbox<Rectangle> {
      */
 
     public RectangleHitbox(final Position position, final double width, final double height) {
-        this.rectangle = new Rectangle(position, width, height);
+        this.position = position;
+        this.width = width;
+        this.height = height;
     }
 
     /**
