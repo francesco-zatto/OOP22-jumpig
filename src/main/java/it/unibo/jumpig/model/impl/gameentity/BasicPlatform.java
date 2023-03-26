@@ -1,7 +1,6 @@
 package it.unibo.jumpig.model.impl.gameentity;
 
 import it.unibo.jumpig.common.api.Position;
-import it.unibo.jumpig.common.impl.hitbox.Rectangle;
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.model.api.Velocity;
 import it.unibo.jumpig.model.api.gameentity.AbstractGameEntity;
@@ -11,10 +10,10 @@ import it.unibo.jumpig.model.impl.VelocityImpl;
 /**
  * Class that represents a basic platform, that simply causes the player's jump.
  */
-public class BasicPlatform extends AbstractGameEntity<Rectangle, RectangleHitbox> implements Platform {
+public class BasicPlatform extends AbstractGameEntity<RectangleHitbox> implements Platform {
 
     private final Velocity jumpVelocity;
-    private final double length = this.getHitbox().getBounds().getWidth();
+    private final double length = this.getHitbox().getWidth();
 
     /**
      * Constructor for a basic platform.
