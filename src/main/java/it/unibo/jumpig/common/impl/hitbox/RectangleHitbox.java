@@ -30,6 +30,14 @@ public class RectangleHitbox implements Hitbox {
      * {@inheritDoc}
      */
     @Override
+    public Position getCenter() {
+        return this.center;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void updateHitBox(final Position center) {
         this.center = center;
     }
