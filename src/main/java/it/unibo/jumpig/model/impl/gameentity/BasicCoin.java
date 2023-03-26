@@ -12,6 +12,11 @@ import it.unibo.jumpig.model.api.gameentity.Coin;
  */
 public class BasicCoin extends AbstractGameEntity<Circle,CircleHitbox> implements Coin {
 
+    /**
+     * The constructor for a basic coin.
+     * @param position position of the coin in the world.
+     * @param hitbox hitbox of the coin.
+     */
     public BasicCoin(Position position, CircleHitbox hitbox) {
         super(position, hitbox);
     }
