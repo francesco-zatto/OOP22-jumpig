@@ -9,7 +9,7 @@ import it.unibo.jumpig.common.api.hitbox.Hitbox;
 
 public class CircleHitbox implements Hitbox {
 
-    private final Position center;
+    private Position center;
     private final double radius;
 
     /**
@@ -43,15 +43,7 @@ public class CircleHitbox implements Hitbox {
      * {@inheritDoc}
      */
     @Override
-    public Circle getBounds() {
-        return this.circle;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Circle updateHitBox(final Position center) {
-        return new Circle(center, this.circle.getRadius());
+    public void updateHitBox(final Position center) {
+        this.center = center;
     }
 }
