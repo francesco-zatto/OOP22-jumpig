@@ -7,9 +7,10 @@ import it.unibo.jumpig.common.api.hitbox.Hitbox;
  * The class to manage a circular Hitbox.
  */
 
-public class CircleHitbox implements Hitbox<Circle> {
+public class CircleHitbox implements Hitbox {
 
-    private final Circle circle;
+    private Position center;
+    private final double radius;
 
     /**
      * The constructor to create a new circular Hitbox.
@@ -18,22 +19,31 @@ public class CircleHitbox implements Hitbox<Circle> {
      */
 
     public CircleHitbox(final Position center, final double radius) {
-        this.circle = new Circle(center, radius);
+        this.center = center;
+        this.radius = radius;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Circle getBounds() {
-        return this.circle;
+    public Position getCenter() {
+        return this.center;
+    }
+
+    /**
+     * The method to get the radius of the circular Hitbox.
+     * @return a double that is the radius of the circular Hitbox.
+     */
+    public double getRadius() {
+        return this.radius;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Circle updateHitBox(final Position center) {
-        return new Circle(center, this.circle.getRadius());
+    public void updateHitBox(final Position center) {
+        this.center = center;
     }
 }

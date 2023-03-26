@@ -7,35 +7,55 @@ import it.unibo.jumpig.common.api.hitbox.Hitbox;
  * The class to manage a rectangular Hitbox.
  */
 
-public class RectangleHitbox implements Hitbox<Rectangle> {
+public class RectangleHitbox implements Hitbox {
 
-    private final Rectangle rectangle;
+    private Position center;
+    private final double width;
+    private final double height;
 
     /**
      * The constructor to create a new rectangular Hitbox.
-     * @param position  the abscissa and the ordinate of the center of the rectangular Hitbox.
+     * @param center  the abscissa and the ordinate of the center of the rectangular Hitbox.
      * @param width  the width of the rectangular Hitbox.
      * @param height  the height of the rectangular Hitbox.
      */
 
-    public RectangleHitbox(final Position position, final double width, final double height) {
-        this.rectangle = new Rectangle(position, width, height);
+    public RectangleHitbox(final Position center, final double width, final double height) {
+        this.center = center;
+        this.width = width;
+        this.height = height;
+    }
+
+    /**
+     * The method to get the height of the rectangular Hitbox.
+     * @return height
+     */
+    public double getHeight() {
+        return this.height;
+    }
+
+    /**
+     * The method to get the width of the rectangular Hitbox.
+     * @return width
+     */
+    public double getWidth() {
+        return this.width;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Rectangle getBounds() {
-        return this.rectangle;
+    public Position getCenter() {
+        return this.center;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Rectangle updateHitBox(final Position center) {
-        return new Rectangle(center, this.rectangle.getWidth(), this.rectangle.getHeight());
+    public void updateHitBox(final Position center) {
+        this.center = center;
     }
 
 }
