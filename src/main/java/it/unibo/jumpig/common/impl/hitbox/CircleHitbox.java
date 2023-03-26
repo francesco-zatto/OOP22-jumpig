@@ -32,6 +32,14 @@ public class CircleHitbox implements Hitbox {
     }
 
     /**
+     * The method to get the radius of the circular Hitbox.
+     * @return a double that is the radius of the circular Hitbox.
+     */
+    public double getRadius() {
+        return this.radius;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
