@@ -27,6 +27,14 @@ public class RectangleHitbox implements Hitbox {
     }
 
     /**
+     * The method to get the height of the rectangular Hitbox.
+     * @return height
+     */
+    public double getHeight() {
+        return this.height;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
