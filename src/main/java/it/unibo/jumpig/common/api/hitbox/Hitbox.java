@@ -16,7 +16,6 @@ public interface Hitbox {
     /**
      * The method to update the HitBox position.
      * @param center  the abscissa and the ordinate of the center of the Hitbox.
-     * @return the shape created that is the updated Hitbox
      */
      void updateHitBox(Position center);
 }
