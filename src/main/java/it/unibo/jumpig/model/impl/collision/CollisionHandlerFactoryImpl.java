@@ -62,7 +62,8 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
     }
 
     private void playerCollidesWithEnemy(final Player player, final Enemy enemy) {
-
+        player.decreaseLives();
+        enemy.setTarget(true);
     }
 
     /**
