@@ -33,4 +33,11 @@ public interface Velocity {
      * @return the final position after the movement.
      */
     Position computeMovement(Position initialPosition, double deltaTime);
+
+    /**
+     * Method to compute the velocity with the gravity acceleration.
+     * @param gravity the world's gravity
+     * @param deltaTime the time interval of the movement
+     */
+    void computeAcceleratedVelocity(double gravity, double deltaTime);
 }
