@@ -127,9 +127,9 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
         coin.setTarget(true);
     }
 
-    /*This inequality is based on the equation of a circle: (x - xCenter) ^ 2 + (y - yCenter) ^ 2 = radius ^ 2. This equation means
-     * that every point on the circumference is distant from the center a length that equals to the radius. If a point is nearest to
-     * the center then the first member of the equation is less than the second member.
+    /*This inequality is based on the equation of a circle: (x - xCenter) ^ 2 + (y - yCenter) ^ 2 = radius ^ 2.
+     * The equation means that every point on the circumference is distant from the center a length that equals to the radius.
+     * If a point is nearest to the center, then the first member of the equation is less than the second member.
      */
     private boolean isPositionInsideCircle(final Position position, final CircleHitbox circle) {
         return Math.pow(position.getX() - circle.getCenter().getX(), 2) - Math.pow(position.getY() - circle.getCenter().getY(), 2)
