@@ -54,4 +54,10 @@ public class VelocityImpl implements Velocity {
         return new PositionImpl(initialPosition.getX() + this.componentX * deltaTime, 
         initialPosition.getY() + this.componentY * deltaTime);
     }
+
+    @Override
+    public void computeAcceleratedVelocity(double gravity, double deltaTime) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'computeAcceleratedVelocity'");
+    }
 }
