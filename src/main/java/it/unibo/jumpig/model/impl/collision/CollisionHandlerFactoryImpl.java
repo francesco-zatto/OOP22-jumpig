@@ -1,7 +1,5 @@
 package it.unibo.jumpig.model.impl.collision;
 
-import java.util.function.Supplier;
-
 import it.unibo.jumpig.common.impl.hitbox.CircleHitbox;
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.model.api.collision.CollisionHandler;
