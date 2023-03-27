@@ -58,7 +58,24 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
     }
 
     private boolean isPlayerCollidingWithEnemy(final Player player, final Enemy enemy) {
-        return false; //TODO
+        if (enemy.isTaken()) {
+            return true;
+        }
+        final RectangleHitbox playerHitbox = player.getHitbox();
+        final RectangleHitbox enemyHitbox = enemy.getHitbox();
+        final double playerLeftX = getRectangleLeftX(playerHitbox);
+        final double playerRightX = getRectangleRightX(playerHitbox);
+        final double enemyLeftX = getRectangleLeftX(enemyHitbox);
+        final double enemyRightX = getRectangleRightX(enemyHitbox);
+        final boolean isPlayerAligned = isBetween(playerLeftX, enemyLeftX, enemyRightX) 
+                || isBetween(playerRightX, enemyLeftX, enemyRightX);
+        final double playerLowerY = getRectangleLowerY(playerHitbox);
+        final double playerUpperY = getRectangleUpperY(playerHitbox);
+        final double enemyLowerY = getRectangleLowerY(enemyHitbox);
+        final double enemyUpperY = getRectangleUpperY(enemyHitbox);
+        final boolean isPlayerOnTheSameHeight = isBetween(playerLowerY, enemyLowerY, enemyUpperY) 
+                || isBetween(playerUpperY, enemyLowerY, enemyUpperY);
+        return isPlayerAligned && isPlayerOnTheSameHeight;
     }
 
     private void playerCollidesWithEnemy(final Player player, final Enemy enemy) {
