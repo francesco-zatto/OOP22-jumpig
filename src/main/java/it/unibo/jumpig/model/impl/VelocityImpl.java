@@ -55,6 +55,9 @@ public class VelocityImpl implements Velocity {
         initialPosition.getY() + this.componentY * deltaTime);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void computeAcceleratedVelocity(final double gravity, final double deltaTime) {
         this.componentY = this.componentY + (gravity * deltaTime); 
