@@ -7,12 +7,13 @@ import it.unibo.jumpig.model.api.gameentity.AbstractGameEntity;
 import it.unibo.jumpig.model.api.gameentity.Player;
 
 /**
- * Class that represents the player in the game.
+ * Class that manages the player in the game.
  */
 public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements Player {
 
     private Velocity playerVelocity;
     private int lives;
+
     /**
      * Constructor for the player.
      * @param position position of the player in the world
