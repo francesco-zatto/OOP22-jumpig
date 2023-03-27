@@ -7,7 +7,6 @@ import it.unibo.jumpig.model.api.gameentity.Player;
 /**
  * Functional interface that acts in a specific way when a player and
  * a gameEntity collide.
- * @param <S> any kind of ShapeHitbox
  * @param <H> any kind of Hitbox
  * @param <E> any kind of gameEntity that the player could collide with
  */
