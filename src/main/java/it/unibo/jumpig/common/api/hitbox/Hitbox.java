@@ -7,18 +7,18 @@ import it.unibo.jumpig.common.api.Position;
  * @param <S> is the type of ShapeHitbox.
  */
 
-public interface Hitbox<S extends ShapeHitbox> {
+public interface Hitbox {
 
     /**
-     * The method to get the Hitbox in its form.
-     * @return the shape that rapresents the Hitbox
+     * The method to get the center of the shape.
+     * @return the center of the shape.
      */
-    S getBounds();
+    Position getCenter();
 
     /**
      * The method to update the HitBox position.
      * @param center  the abscissa and the ordinate of the center of the Hitbox.
      * @return the shape created that is the updated Hitbox
      */
-     S updateHitBox(Position center);
+     void updateHitBox(Position center);
 }
