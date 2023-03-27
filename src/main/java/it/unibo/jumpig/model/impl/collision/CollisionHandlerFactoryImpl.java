@@ -59,7 +59,7 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
 
     private boolean isPlayerCollidingWithEnemy(final Player player, final Enemy enemy) {
         if (enemy.isTaken()) {
-            return true;
+            return false;
         }
         final RectangleHitbox playerHitbox = player.getHitbox();
         final RectangleHitbox enemyHitbox = enemy.getHitbox();
