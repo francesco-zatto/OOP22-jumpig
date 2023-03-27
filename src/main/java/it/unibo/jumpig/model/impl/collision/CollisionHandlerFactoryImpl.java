@@ -54,8 +54,15 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
      */
     @Override
     public CollisionHandler<RectangleHitbox, Enemy> createEnemyCollisionHandler() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createEnemyCollisionHandler'");
+        return new CollisionHandlerImpl<>(this::isPlayerCollidingWithEnemy, this::playerCollidesWithEnemy);
+    }
+
+    private boolean isPlayerCollidingWithEnemy(final Player player, final Enemy enemy) {
+        return false; //TODO
+    }
+
+    private void playerCollidesWithEnemy(final Player player, final Enemy enemy) {
+
     }
 
     /**
