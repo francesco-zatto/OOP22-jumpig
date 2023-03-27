@@ -1,13 +1,12 @@
 package it.unibo.jumpig.model.api.gameentity;
 
-import it.unibo.jumpig.common.impl.hitbox.Rectangle;
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.model.api.Velocity;
 
 /**
  * An interface that represents the player piloted by the user in the game.
  */
-public interface Player extends GameEntity<Rectangle, RectangleHitbox> {
+public interface Player extends GameEntity<RectangleHitbox> {
     /**
      * Getter of the player's lives.
      * @return the player's lives.
