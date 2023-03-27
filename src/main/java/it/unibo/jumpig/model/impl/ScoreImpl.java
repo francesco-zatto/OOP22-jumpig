@@ -28,8 +28,7 @@ public class ScoreImpl implements Score {
      */
     @Override
     public String getUsername() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
+        return this.username;
     }
 
     /**
@@ -37,8 +36,7 @@ public class ScoreImpl implements Score {
      */
     @Override
     public double getScore() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getScore'");
+        return this.score;
     }
 
     /**
@@ -46,7 +44,6 @@ public class ScoreImpl implements Score {
      */
     @Override
     public int getCoins() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getCoins'");
+        return this.coins;
     }
 }
