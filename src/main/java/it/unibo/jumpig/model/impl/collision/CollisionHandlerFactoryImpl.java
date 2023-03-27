@@ -49,12 +49,18 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
         player.setVelocityFromJump(platform.getJumpVelocity());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public CollisionHandler<RectangleHitbox, Enemy> createEnemyCollisionHandler() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'createEnemyCollisionHandler'");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public CollisionHandler<CircleHitbox, Coin> createCoinCollisionHandler() {
         // TODO Auto-generated method stub
