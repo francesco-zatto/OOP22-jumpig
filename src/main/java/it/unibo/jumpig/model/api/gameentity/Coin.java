@@ -1,6 +1,5 @@
 package it.unibo.jumpig.model.api.gameentity;
 
-import it.unibo.jumpig.common.impl.hitbox.Circle;
 import it.unibo.jumpig.common.impl.hitbox.CircleHitbox;
 
 /**
