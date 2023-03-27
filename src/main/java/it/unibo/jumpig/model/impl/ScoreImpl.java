@@ -6,7 +6,7 @@ import it.unibo.jumpig.model.api.Score;
  * Class ScoreImpl that creates a game's final score.
  */
 public class ScoreImpl implements Score {
-
+    
     /**
      * Constructor for the Score.
      */
@@ -26,7 +26,7 @@ public class ScoreImpl implements Score {
      * {@inheritDoc}
      */
     @Override
-    public int getScore() {
+    public double getScore() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getScore'");
     }
