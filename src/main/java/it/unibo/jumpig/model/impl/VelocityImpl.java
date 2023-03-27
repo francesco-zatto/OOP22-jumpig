@@ -9,8 +9,8 @@ import it.unibo.jumpig.model.api.Velocity;
  */
 public class VelocityImpl implements Velocity {
 
-    private final double componentX;
-    private final double componentY;
+    private double componentX;
+    private double componentY;
 
     /**
      * Contructor for the velocity.
@@ -57,7 +57,6 @@ public class VelocityImpl implements Velocity {
 
     @Override
     public void computeAcceleratedVelocity(double gravity, double deltaTime) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'computeAcceleratedVelocity'");
+        this.componentY = this.componentY + (gravity * deltaTime); 
     }
 }
