@@ -4,9 +4,7 @@ import it.unibo.jumpig.common.api.Position;
 
 /**
  * The interface to manage the existence area(Hitbox) of each game entity.
- * @param <S> is the type of ShapeHitbox.
  */
-
 public interface Hitbox {
 
     /**
