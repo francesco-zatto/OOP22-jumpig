@@ -1,7 +1,6 @@
 package it.unibo.jumpig.model.impl.gameentity;
 
 import it.unibo.jumpig.common.api.Position;
-import it.unibo.jumpig.common.impl.hitbox.Rectangle;
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.model.api.Velocity;
 import it.unibo.jumpig.model.api.gameentity.AbstractGameEntity;
@@ -10,7 +9,7 @@ import it.unibo.jumpig.model.api.gameentity.Player;
 /**
  * Class that represents the player in the game.
  */
-public class PlayerImpl extends AbstractGameEntity<Rectangle, RectangleHitbox> implements Player {
+public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements Player {
 
     private Velocity playerVelocity;
     private int lives;
