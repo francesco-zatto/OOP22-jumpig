@@ -65,7 +65,7 @@ public abstract class AbstractGameEntity<H extends Hitbox> implements GameEntity
         if (getClass() != obj.getClass()) {
             return false;
         }
-        AbstractGameEntity<H> other = (AbstractGameEntity<H>) obj;
+        final AbstractGameEntity<H> other = (AbstractGameEntity<H>) obj;
         if (position == null) {
             if (other.position != null) {
                 return false;
