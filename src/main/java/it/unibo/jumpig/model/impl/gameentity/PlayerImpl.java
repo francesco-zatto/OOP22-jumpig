@@ -66,7 +66,6 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
      */
     @Override
     public void computeVelocity(final double gravity, final double deltaTime) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'computeVelocity'");
+        this.playerVelocity.computeAcceleratedVelocity(gravity, deltaTime);
     }
 }
