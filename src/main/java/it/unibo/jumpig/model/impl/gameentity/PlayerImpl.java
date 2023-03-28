@@ -14,7 +14,7 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
     private static final int MAXLIVES = 3;
     private Velocity playerVelocity;
     private int lives = MAXLIVES;
-    private final int coins;
+    private int coins;
 
     /**
      * Constructor for the player.
@@ -84,7 +84,6 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
      */
     @Override
     public void incrementCoins() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'incrementCoins'");
+        this.coins++;
     }
 }
