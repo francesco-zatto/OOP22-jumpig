@@ -11,21 +11,20 @@ import it.unibo.jumpig.model.api.gameentity.Player;
  */
 public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements Player {
 
+    private static final int MAXLIVES = 3;
     private Velocity playerVelocity;
-    private int lives;
+    private int lives = MAXLIVES;
 
     /**
      * Constructor for the player.
      * @param position position of the player in the world
      * @param hitbox hitbox of the platform
      * @param playerVelocity the player's initial velocity
-     * @param lives the player's total lives
      */
     public PlayerImpl(final Position position, final RectangleHitbox hitbox, 
-        final Velocity playerVelocity, final int lives) {
+        final Velocity playerVelocity) {
         super(position, hitbox);
         this.playerVelocity = playerVelocity;
-        this.lives = lives;
     }
 
     /**
