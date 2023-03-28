@@ -6,10 +6,10 @@ package it.unibo.jumpig.model.api.gameentity;
 public interface Targettable {
 
     /**
-     * The method to set the targettability of a targettable entity. 
-     * @param setTargettable is true if the entity has to be set as taken,i.e. it will disappear.
+     * The method to set the entity visibility.
+     * When this method is called the entity wil disappear.
      */
-    void setTarget(boolean setTargettable);
+    void setTaken();
 
     /**
      * The method to know if the targettable entity has to disappear.
