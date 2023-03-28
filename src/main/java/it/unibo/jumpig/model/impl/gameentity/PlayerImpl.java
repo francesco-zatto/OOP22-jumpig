@@ -78,4 +78,13 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
     public double getCoins() {
         return this.coins;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void incrementCoins() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'incrementCoins'");
+    }
 }
