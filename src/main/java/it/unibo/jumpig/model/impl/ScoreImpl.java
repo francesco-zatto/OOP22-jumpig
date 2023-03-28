@@ -8,18 +8,18 @@ import it.unibo.jumpig.model.api.Score;
 public class ScoreImpl implements Score {
 
     private final String username;
-    private final double score;
+    private final double heightScore;
     private final int coins;
 
     /**
      * Constructor for the score.
      * @param username the player's username
-     * @param score the final score, i.e. the maximum height reached
+     * @param heightScore the final score, i.e. the maximum height reached
      * @param coins the amount of coins collected in a game
      */
-    public ScoreImpl(final String username, final double score, final int coins) {
+    public ScoreImpl(final String username, final double heightScore, final int coins) {
         this.username = username;
-        this.score = score;
+        this.heightScore = heightScore;
         this.coins = coins;
     }
 
@@ -35,8 +35,8 @@ public class ScoreImpl implements Score {
      * {@inheritDoc}
      */
     @Override
-    public double getScore() {
-        return this.score;
+    public double getHeightScore() {
+        return this.heightScore;
     }
 
     /**
