@@ -6,8 +6,7 @@ package it.unibo.jumpig.model.api.gameentity;
 public interface Targettable {
 
     /**
-     * The method to set the entity visibility.
-     * When this method is called the entity wil disappear.
+     * When this method is called the entity will disappear.
      */
     void setTaken();
 
