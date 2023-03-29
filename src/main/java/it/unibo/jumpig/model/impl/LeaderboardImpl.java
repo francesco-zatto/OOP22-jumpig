@@ -19,8 +19,7 @@ public class LeaderboardImpl implements Leaderboard {
 
     @Override
     public List<Score> getScores() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getScores'");
+        return this.scoreLeaderboard;
     }
 
     @Override
