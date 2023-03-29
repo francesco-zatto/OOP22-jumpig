@@ -10,6 +10,7 @@ import it.unibo.jumpig.model.api.gameentity.Coin;
 import it.unibo.jumpig.model.api.gameentity.Enemy;
 import it.unibo.jumpig.model.api.gameentity.Platform;
 import it.unibo.jumpig.model.api.gameentity.Player;
+import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
 
 /**
  * Class that produces any kind of collisionHandler for any kind of
@@ -31,6 +32,9 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
      * Also the vertical velocity of the player has to be checked, if it is going down or up.
      */
     private boolean isPlayerJumpingOnPlatform(final Player player, final Platform platform) {
+        if (platform instanceof VanishingPlatform && ((VanishingPlatform)platform).isTaken()) {
+            return false;
+        }
         if (player.getVelocity().getYComponent() >= 0) {
             return false;
         }
