@@ -11,7 +11,7 @@ import it.unibo.jumpig.model.api.Score;
  */
 public class LeaderboardImpl implements Leaderboard {
 
-    private List<Score> scoreLeaderboard;
+    private final List<Score> scoreLeaderboard;
     /**
      * Constructor for the leaderboard.
      */
@@ -24,15 +24,14 @@ public class LeaderboardImpl implements Leaderboard {
      */
     @Override
     public List<Score> getScores() {
-        return this.scoreLeaderboard;
+        return new ArrayList<>(this.scoreLeaderboard);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void addScore(Score score) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addScore'");
+    public void addScore(final Score score) {
+        this.scoreLeaderboard.add(score);
     }
 }
