@@ -21,7 +21,6 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
     /**
      * Constructor for the player.
      * @param position position of the player in the world
-     * @param hitbox hitbox of the platform
      */
     public PlayerImpl(final Position position) {
         super(position, new PlayerHitbox(position));
