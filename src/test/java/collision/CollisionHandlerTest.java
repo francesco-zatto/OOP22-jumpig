@@ -1,6 +1,7 @@
 package collision;
 
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.impl.PositionImpl;
@@ -24,9 +25,9 @@ class CollisionHandlerTest {
     private static final double PLATFORM_POSITION_Y = 5;
     private static final Position PLATFORM_POSITION = new PositionImpl(PLATFORM_POSITION_X, PLATFORM_POSITION_Y);
     private static final double PLATFORM_VELOCITY = 10;
-    private static final Position PLAYER_POSITION = new PositionImpl(6, 6);
+    private static final Position PLAYER_POSITION = new PositionImpl(5.5, 7.7);
     private final Player player = new PlayerImpl(PLAYER_POSITION, 
-            new RectangleHitbox(PLATFORM_POSITION, PLATFORM_POSITION_Y, PLATFORM_POSITION_X), new VelocityImpl(0, 0)); //TODO
+            new RectangleHitbox(PLAYER_POSITION, 2, 4), new VelocityImpl(0, -1)); //TODO
     private final CollisionHandlerFactory collisionHandlerFactory = new CollisionHandlerFactoryImpl();
 
     @Test
@@ -34,5 +35,6 @@ class CollisionHandlerTest {
        final Platform platform = new BasicPlatform(PLATFORM_POSITION, PLATFORM_VELOCITY);
        final var platformCollisionHandler = this.collisionHandlerFactory.createPlatformCollisionHandler();
        platformCollisionHandler.handle(player, platform);
+       assertEquals(platform.getJumpVelocity().getYComponent(), this.player.getVelocity().getYComponent());
     }
 }
