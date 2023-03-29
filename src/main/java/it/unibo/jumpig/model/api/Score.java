@@ -15,7 +15,7 @@ public interface Score {
      * the player has reached in a game.
      * @return the score
      */
-    int getScore();
+    double getHeightScore();
 
     /**
      * Getter for the amount of coins collected in a game.

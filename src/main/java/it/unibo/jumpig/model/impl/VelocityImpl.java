@@ -10,7 +10,7 @@ import it.unibo.jumpig.model.api.Velocity;
 public class VelocityImpl implements Velocity {
 
     private final double componentX;
-    private final double componentY;
+    private double componentY;
 
     /**
      * Contructor for the velocity.
@@ -53,5 +53,13 @@ public class VelocityImpl implements Velocity {
     public Position computeMovement(final Position initialPosition, final double deltaTime) {
         return new PositionImpl(initialPosition.getX() + this.componentX * deltaTime, 
         initialPosition.getY() + this.componentY * deltaTime);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void computeAcceleratedVelocity(final double gravity, final double deltaTime) {
+        this.componentY = this.componentY + (gravity * deltaTime); 
     }
 }
