@@ -7,14 +7,13 @@ import it.unibo.jumpig.common.api.Position;
  */
 public class PlayerHitbox extends RectangleHitbox {
 
+    private static double PLAYER_WIDTH = 1; //TODO
+    private static double PLAYER_HEIGHT = 2; //TODO
     /**
      * Constructor for the player's hitbox.
-     * @param center //TODO
-     * @param width //TODO
-     * @param height //TODO
+     * @param center center of the hitbox
      */
-    public PlayerHitbox(final Position center, final double width, final double height) {
-        super(center, width, height);
-        //TODO Auto-generated constructor stub
+    public PlayerHitbox(final Position center) {
+        super(center, PLAYER_WIDTH, PLAYER_HEIGHT);
     } 
 }
