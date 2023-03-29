@@ -1,6 +1,7 @@
 package it.unibo.jumpig.model.impl.gameentity;
 
 import it.unibo.jumpig.common.api.Position;
+import it.unibo.jumpig.common.impl.hitbox.PlayerHitbox;
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.model.api.Velocity;
 import it.unibo.jumpig.model.api.gameentity.AbstractGameEntity;
@@ -22,8 +23,8 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
      * @param position position of the player in the world
      * @param hitbox hitbox of the platform
      */
-    public PlayerImpl(final Position position, final RectangleHitbox hitbox) {
-        super(position, hitbox);
+    public PlayerImpl(final Position position) {
+        super(position, new PlayerHitbox(position));
         this.playerVelocity = new VelocityImpl(0, 0);
         this.coins = 0;
     }
