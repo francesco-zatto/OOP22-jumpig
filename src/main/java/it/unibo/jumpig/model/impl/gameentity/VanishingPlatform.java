@@ -3,23 +3,25 @@ package it.unibo.jumpig.model.impl.gameentity;
 import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.model.api.gameentity.Targettable;
 
+/**
+ * Class that represents a platform which, when the player jumps on it, it vanishes.
+ */
 public class VanishingPlatform extends BasicPlatform implements Targettable {
 
-    public VanishingPlatform(Position position, double verticalJumpVelocity) {
+    private boolean targettable = true; 
+
+    public VanishingPlatform(final Position position, final double verticalJumpVelocity) {
         super(position, verticalJumpVelocity);
-        //TODO Auto-generated constructor stub
     }
 
     @Override
-    public void setTarget(boolean setTargettable) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setTarget'");
+    public void setTarget(final boolean setTargettable) {
+        this.targettable = setTargettable;
     }
 
     @Override
     public boolean isTaken() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isTaken'");
+        return this.targettable;
     }
     
 }
