@@ -21,10 +21,8 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
      * Constructor for the player.
      * @param position position of the player in the world
      * @param hitbox hitbox of the platform
-     * @param playerVelocity the player's initial velocity
      */
-    public PlayerImpl(final Position position, final RectangleHitbox hitbox, 
-        final Velocity playerVelocity) {
+    public PlayerImpl(final Position position, final RectangleHitbox hitbox) {
         super(position, hitbox);
         this.playerVelocity = new VelocityImpl(0, 0);
         this.coins = 0;
