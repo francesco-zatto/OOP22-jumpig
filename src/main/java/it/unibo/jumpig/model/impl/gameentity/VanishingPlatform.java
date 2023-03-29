@@ -8,20 +8,30 @@ import it.unibo.jumpig.model.api.gameentity.Targettable;
  */
 public class VanishingPlatform extends BasicPlatform implements Targettable {
 
-    private boolean targettable = true; 
-
+    private boolean targettable = true;
+    
+    /**
+     * Constructor for a vanishing platform.
+     * @param position position of the platform in the world.
+     * @param verticalJumpVelocity vertical velocity of a player when jumps on the platform. 
+    */
     public VanishingPlatform(final Position position, final double verticalJumpVelocity) {
         super(position, verticalJumpVelocity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setTarget(final boolean setTargettable) {
         this.targettable = setTargettable;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isTaken() {
         return this.targettable;
     }
-    
 }
