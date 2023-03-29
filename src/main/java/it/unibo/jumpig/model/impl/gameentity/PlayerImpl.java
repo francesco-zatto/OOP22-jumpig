@@ -91,6 +91,6 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
      * @param deltaTime the time interval
      */
     public void computePosition(final double deltaTime) {
-        this.playerVelocity.computeMovement(getPosition(), deltaTime);
+        super.setPosition(this.playerVelocity.computeMovement(super.getPosition(), deltaTime));
     }
 }
