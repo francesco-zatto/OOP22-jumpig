@@ -123,7 +123,7 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
     }
 
     private void playerTakesCoin(final Player player, final Coin coin) {
-        player.decreaseLives(); //TODO correggi -> aggiungi la moneta presa al Player
+        player.incrementCoins();
         coin.setTarget(true);
     }
 
