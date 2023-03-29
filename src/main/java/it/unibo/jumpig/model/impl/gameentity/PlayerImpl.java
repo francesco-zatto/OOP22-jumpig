@@ -85,4 +85,13 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
     public void incrementCoins() {
         this.coins++;
     }
+
+    /**
+     * Method that computes the next player's position inside the game.
+     * @param deltaTime the time interval the player moved
+     * @return the position after the shift
+     */
+    public Position computePosition(final double deltaTime) {
+        return this.playerVelocity.computeMovement(getPosition(), deltaTime);
+    }
 }
