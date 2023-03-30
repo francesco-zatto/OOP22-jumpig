@@ -1,9 +1,13 @@
 package it.unibo.jumpig.view.impl;
 
+import static javax.swing.BoxLayout.Y_AXIS;
+
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -21,13 +25,15 @@ public class MenuViewSceneImpl implements MenuViewScene {
     /**
      * Constructor for the main menu.
      */
-    public MenuViewSceneImpl() { 
-        final JPanel panel = new JPanel();
-        panel.setLayout(new GridBagLayout());
-        final JButton gameButton = new JButton("START GAME");
-        panel.add(gameButton); 
-        frame.setContentPane(panel);
+    public MenuViewSceneImpl() {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        final JPanel panelButton = new JPanel();
+        panelButton.setLayout(new BoxLayout(panelButton, Y_AXIS));
+        panelButton.add(new JButton("START GAME"));
+        panelButton.add(new JButton("LEADERBOARD"));
+        final JPanel menuPanel = new JPanel(new GridBagLayout());
+        menuPanel.add(panelButton);
+        frame.getContentPane().add(menuPanel, BorderLayout.CENTER);
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         final int screenHeight = (int) screen.getHeight();
         final double percentageHeight = 0.7;
