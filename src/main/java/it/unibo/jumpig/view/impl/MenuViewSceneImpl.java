@@ -21,9 +21,11 @@ public class MenuViewSceneImpl implements MenuViewScene {
     public MenuViewSceneImpl() { 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-        final int screenWidth = (int) screen.getWidth();
         final int screenHeight = (int) screen.getHeight();
-        frame.setSize(screenWidth / 2, screenHeight / 2);
+        final double percentageHeight = 0.7;
+        final int height = (int) (screenHeight * percentageHeight);
+        final int width = (int) (height * 0.5625);
+        frame.setSize(width, height);
     }
 
     /**
