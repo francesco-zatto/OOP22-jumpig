@@ -26,6 +26,7 @@ public class MenuViewSceneImpl implements MenuViewScene {
         final int height = (int) (screenHeight * percentageHeight);
         final int width = (int) (height * 0.5625);
         frame.setSize(width, height);
+        frame.setLocationByPlatform(true);
     }
 
     /**
