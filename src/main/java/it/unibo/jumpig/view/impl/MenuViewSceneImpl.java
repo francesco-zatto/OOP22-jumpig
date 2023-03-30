@@ -10,7 +10,8 @@ import it.unibo.jumpig.view.api.MenuViewScene;
  */
 public class MenuViewSceneImpl implements MenuViewScene {
 
-    private JFrame frame = new JFrame("Jumpig");
+    private static final String FRAME_TITLE = "Jumpig";
+    private final JFrame frame = new JFrame(FRAME_TITLE);
     /**
      * Constructor for the main menu.
      */
