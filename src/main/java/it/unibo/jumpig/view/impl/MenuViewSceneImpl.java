@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -30,7 +31,10 @@ public class MenuViewSceneImpl implements MenuViewScene {
         final JPanel panelButton = new JPanel();
         panelButton.setLayout(new BoxLayout(panelButton, Y_AXIS));
         panelButton.add(new JButton("START GAME"));
+        panelButton.add(Box.createRigidArea(new Dimension(0,10)));
         panelButton.add(new JButton("LEADERBOARD"));
+        panelButton.add(Box.createRigidArea(new Dimension(0,10)));
+        panelButton.add(new JButton("QUIT"));
         final JPanel menuPanel = new JPanel(new GridBagLayout());
         menuPanel.add(panelButton);
         frame.getContentPane().add(menuPanel, BorderLayout.CENTER);
@@ -41,6 +45,7 @@ public class MenuViewSceneImpl implements MenuViewScene {
         final int width = (int) (height * 0.5625);
         frame.setSize(width, height);
         frame.setLocationByPlatform(true);
+        frame.setResizable(false);
     }
 
     /**
