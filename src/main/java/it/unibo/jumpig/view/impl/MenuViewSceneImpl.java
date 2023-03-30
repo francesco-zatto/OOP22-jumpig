@@ -1,9 +1,11 @@
 package it.unibo.jumpig.view.impl;
 
 import java.awt.Dimension;
+import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import it.unibo.jumpig.view.api.MenuViewScene;
@@ -19,6 +21,8 @@ public class MenuViewSceneImpl implements MenuViewScene {
      * Constructor for the main menu.
      */
     public MenuViewSceneImpl() { 
+        final JPanel panel = new JPanel();
+        panel.setLayout(new GridBagLayout());
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         final int screenHeight = (int) screen.getHeight();
@@ -44,5 +48,13 @@ public class MenuViewSceneImpl implements MenuViewScene {
     public void quit() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'quit'");
+    }
+
+    /**
+     * Main to test the GUI menu.
+     * @param args strings
+     */
+    public static void main(final String[] args) {
+        new MenuViewSceneImpl().show();
     }
 }
