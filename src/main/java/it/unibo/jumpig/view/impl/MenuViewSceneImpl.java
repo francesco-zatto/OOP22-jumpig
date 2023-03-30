@@ -26,6 +26,7 @@ public class MenuViewSceneImpl implements MenuViewScene {
         panel.setLayout(new GridBagLayout());
         final JButton gameButton = new JButton("START GAME");
         panel.add(gameButton); 
+        frame.setContentPane(panel);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         final int screenHeight = (int) screen.getHeight();
