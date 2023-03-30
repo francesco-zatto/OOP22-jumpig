@@ -24,8 +24,7 @@ public class MenuViewSceneImpl implements MenuViewScene {
      */
     @Override
     public void show() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'show'");
+        frame.setVisible(true);
     }
 
     /**
