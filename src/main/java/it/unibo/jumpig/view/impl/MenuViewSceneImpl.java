@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
@@ -23,6 +24,8 @@ public class MenuViewSceneImpl implements MenuViewScene {
     public MenuViewSceneImpl() { 
         final JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
+        final JButton gameButton = new JButton("START GAME");
+        panel.add(gameButton); 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         final int screenHeight = (int) screen.getHeight();
