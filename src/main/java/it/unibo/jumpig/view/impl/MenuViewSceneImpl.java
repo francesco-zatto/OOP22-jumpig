@@ -15,17 +15,14 @@ public class MenuViewSceneImpl implements MenuViewScene {
 
     private static final String FRAME_TITLE = "Jumpig";
     private final JFrame frame = new JFrame(FRAME_TITLE);
-    private final Dimension screen;
-    private final int screenWidth;
-    private final int screenHeight;
     /**
      * Constructor for the main menu.
      */
     public MenuViewSceneImpl() { 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        screen = Toolkit.getDefaultToolkit().getScreenSize();
-        screenWidth = (int) screen.getWidth();
-        screenHeight = (int) screen.getHeight();
+        final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+        final int screenWidth = (int) screen.getWidth();
+        final int screenHeight = (int) screen.getHeight();
         frame.setSize(screenWidth / 2, screenHeight / 2);
     }
 
