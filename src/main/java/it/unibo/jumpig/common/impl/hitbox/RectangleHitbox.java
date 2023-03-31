@@ -42,6 +42,10 @@ public class RectangleHitbox implements Hitbox {
         return this.width;
     }
 
+    /**
+     * The method to get the x of the left side of the rectangle.
+     * @return a double that is the x of the left side of the rectangle.
+     */
     public double getRectangleLeftX() {
         return getRectangleCoordinate(this.center.getX(), this.getWidth(), true);
     }
