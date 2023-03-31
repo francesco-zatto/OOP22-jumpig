@@ -50,6 +50,10 @@ public class RectangleHitbox implements Hitbox {
         return getRectangleCoordinate(this.center.getX(), this.getWidth(), true);
     }
 
+    public double getRectangleRightX() {
+        return getRectangleCoordinate(this.center.getX(), this.getWidth(), false);
+    }
+
     /**
      * {@inheritDoc}
      */
