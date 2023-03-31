@@ -6,8 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.impl.PositionImpl;
+import it.unibo.jumpig.common.impl.hitbox.CircleHitbox;
 import it.unibo.jumpig.model.api.collision.CollisionHandlerFactory;
 import it.unibo.jumpig.model.impl.collision.CollisionHandlerFactoryImpl;
+import it.unibo.jumpig.model.impl.gameentity.BasicCoin;
 import it.unibo.jumpig.model.impl.gameentity.BasicPlatform;
 import it.unibo.jumpig.model.impl.gameentity.PlayerImpl;
 import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
@@ -23,11 +25,14 @@ class CollisionHandlerTest {
     private static final double PLATFORM_POSITION_Y = 5;
     private static final double PLAYER_POSITION_X = 5;
     private static final double PLAYER_POSITION_Y = 6.5;
+    private static final double COIN_POSITION_X = 7;
+    private static final double COIN_POSITION_Y = 7.5;
     private static final double PLATFORM_VELOCITY = 10;
     private static final double DELTA_TIME = 0.0001;
     private static final double GRAVITY = -9.81;
     private static final Position PLATFORM_POSITION = new PositionImpl(PLATFORM_POSITION_X, PLATFORM_POSITION_Y);
     private static final Position PLAYER_POSITION = new PositionImpl(PLAYER_POSITION_X, PLAYER_POSITION_Y);
+    private static final Position COIN_POSITION = new PositionImpl(COIN_POSITION_X, COIN_POSITION_Y);
     private final CollisionHandlerFactory collisionHandlerFactory = new CollisionHandlerFactoryImpl();
 
     @Test
@@ -55,6 +60,12 @@ class CollisionHandlerTest {
 
     @Test
     void testCoinCollisionHandler() {
-
+        final var player = new PlayerImpl(PLAYER_POSITION);
+        final var coin = new BasicCoin(COIN_POSITION, new CircleHitbox(COIN_POSITION, 3));
+        final var coinCollisionHandler = this.collisionHandlerFactory.createCoinCollisionHandler();
+        final double pickedCoins = player.getCoins();
+        coinCollisionHandler.handle(player, coin);
+        assertEquals(pickedCoins + 1, player.getCoins());
+        assertTrue(coin.isTaken());
     }
 }
