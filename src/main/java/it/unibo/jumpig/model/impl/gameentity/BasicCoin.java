@@ -26,7 +26,7 @@ public class BasicCoin extends AbstractGameEntity<CircleHitbox> implements Coin 
      * {@inheritDoc}
      */
     @Override
-    public void setTaken() {
+    public void markTarget() {
         this.taken = true;
     }
 

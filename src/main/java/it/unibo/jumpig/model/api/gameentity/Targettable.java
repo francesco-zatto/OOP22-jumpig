@@ -8,7 +8,7 @@ public interface Targettable {
     /**
      * When this method is called the entity will disappear.
      */
-    void setTaken();
+    void markTarget();
 
     /**
      * The method to know if the targettable entity has to disappear.
