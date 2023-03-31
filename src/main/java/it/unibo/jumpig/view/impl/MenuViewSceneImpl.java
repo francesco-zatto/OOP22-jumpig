@@ -3,6 +3,7 @@ package it.unibo.jumpig.view.impl;
 import static javax.swing.BoxLayout.Y_AXIS;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
@@ -13,6 +14,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+import javax.swing.plaf.ColorChooserUI;
+import javax.swing.text.StyleConstants.ColorConstants;
 
 import it.unibo.jumpig.view.api.MenuViewScene;
 
@@ -29,6 +32,7 @@ public class MenuViewSceneImpl implements MenuViewScene {
     public MenuViewSceneImpl() {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         final JPanel panelButton = new JPanel();
+        panelButton.setBackground(Color.CYAN);
         panelButton.setLayout(new BoxLayout(panelButton, Y_AXIS));
         panelButton.add(new JButton("START GAME"));
         panelButton.add(Box.createRigidArea(new Dimension(0,10)));
@@ -36,6 +40,7 @@ public class MenuViewSceneImpl implements MenuViewScene {
         panelButton.add(Box.createRigidArea(new Dimension(0,10)));
         panelButton.add(new JButton("QUIT"));
         final JPanel menuPanel = new JPanel(new GridBagLayout());
+        menuPanel.setBackground(Color.CYAN);
         menuPanel.add(panelButton);
         frame.getContentPane().add(menuPanel, BorderLayout.CENTER);
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
