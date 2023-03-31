@@ -67,6 +67,7 @@ public class MenuViewSceneImpl implements MenuViewScene {
         panelButton.add(new JButton("QUIT"));
         final JPanel menuPanel = new JPanel(new GridBagLayout());
         menuPanel.setBackground(Color.CYAN);
+        menuPanel.add(panelButton);
         frame.getContentPane().add(menuPanel, BorderLayout.CENTER);
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         final int screenHeight = (int) screen.getHeight();
