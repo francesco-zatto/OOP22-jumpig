@@ -8,6 +8,7 @@ import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.impl.PositionImpl;
 import it.unibo.jumpig.common.impl.hitbox.CircleHitbox;
 import it.unibo.jumpig.model.api.collision.CollisionHandlerFactory;
+import it.unibo.jumpig.model.api.gameentity.Targettable;
 import it.unibo.jumpig.model.impl.collision.CollisionHandlerFactoryImpl;
 import it.unibo.jumpig.model.impl.gameentity.BasicCoin;
 import it.unibo.jumpig.model.impl.gameentity.BasicPlatform;
@@ -35,6 +36,10 @@ class CollisionHandlerTest {
     private static final Position COIN_POSITION = new PositionImpl(COIN_POSITION_X, COIN_POSITION_Y);
     private final CollisionHandlerFactory collisionHandlerFactory = new CollisionHandlerFactoryImpl();
 
+    private void assertIsTaken(final Targettable gameEntity) {
+        assertTrue(gameEntity.isTaken());
+    }
+
     @Test
     void testBasicPlatformCollisionHandler() {
        final var player = new PlayerImpl(PLAYER_POSITION);
@@ -55,7 +60,7 @@ class CollisionHandlerTest {
         platform.setTarget(false);
         platformCollisionHandler.handle(player, platform);
         assertEquals(platform.getJumpVelocity().getYComponent(), player.getVelocity().getYComponent());
-        assertTrue(platform.isTaken());
+        assertIsTaken(platform);
     }
 
     @Test
@@ -66,6 +71,10 @@ class CollisionHandlerTest {
         final double pickedCoins = player.getCoins();
         coinCollisionHandler.handle(player, coin);
         assertEquals(pickedCoins + 1, player.getCoins());
-        assertTrue(coin.isTaken());
+        assertIsTaken(coin);
+    }
+
+    @Test
+    void testEnemyCollisionHandler() {
     }
 }
