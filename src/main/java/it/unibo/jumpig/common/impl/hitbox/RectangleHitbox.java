@@ -42,6 +42,7 @@ public class RectangleHitbox implements Hitbox {
         return this.width;
     }
 
+
     /**
      * {@inheritDoc}
      */
@@ -56,6 +57,14 @@ public class RectangleHitbox implements Hitbox {
     @Override
     public void updateHitBox(final Position center) {
         this.center = center;
+    }
+
+    /*The boolean isSignNegative is true for lowerY and leftX, because methods to get those coordinates has to
+     * subtract the half of dimension from the center coordinate. Instead, isSignNegative is false for upperY and rightY, 
+     * because methods to get those coordinates has to add the half of dimension from the center coordinate.
+    */
+    private double getRectangleCoordinate(final double coordinate, final double dimension, final boolean isSignNegative) {
+        return coordinate + (isSignNegative ? -1 : +1) * (dimension / 2);
     }
 
 }
