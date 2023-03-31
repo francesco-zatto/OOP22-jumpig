@@ -46,8 +46,15 @@ class CollisionHandlerTest {
         final var platform = new VanishingPlatform(PLATFORM_POSITION, PLATFORM_VELOCITY);
         final var platformCollisionHandler = this.collisionHandlerFactory.createPlatformCollisionHandler();
         player.computeVelocity(GRAVITY, DELTA_TIME);
+        //TO DO fix Targettable and VenishingPlatform
+        platform.setTarget(false);
         platformCollisionHandler.handle(player, platform);
         assertEquals(platform.getJumpVelocity().getYComponent(), player.getVelocity().getYComponent());
         assertTrue(platform.isTaken());
+    }
+
+    @Test
+    void testCoinCollisionHandler() {
+
     }
 }
