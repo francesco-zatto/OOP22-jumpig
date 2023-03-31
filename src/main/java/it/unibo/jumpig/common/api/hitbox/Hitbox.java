@@ -6,6 +6,7 @@ import it.unibo.jumpig.common.api.Position;
  * The interface to manage the existence area(Hitbox) of each game entity.
  */
 public interface Hitbox {
+
     /**
      * The method to get the center of the shape.
      * @return the center of the shape.

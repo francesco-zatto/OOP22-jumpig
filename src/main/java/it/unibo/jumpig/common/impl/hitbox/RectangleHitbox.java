@@ -58,6 +58,10 @@ public class RectangleHitbox implements Hitbox {
         return getRectangleCoordinate(this.center.getX(), this.getWidth(), false);
     }
 
+    /**
+     * The method to get the y of the lower side of the rectangle.
+     * @return a double that is the y of the lower side of the rectangle.
+     */
     public double getRectangleLowerY() {
         return getRectangleCoordinate(this.center.getY(), this.getHeight(), true);
     }
