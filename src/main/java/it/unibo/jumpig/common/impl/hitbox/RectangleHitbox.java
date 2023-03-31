@@ -42,6 +42,9 @@ public class RectangleHitbox implements Hitbox {
         return this.width;
     }
 
+    public double getRectangleLeftX() {
+        return getRectangleCoordinate(this.center.getX(), this.getWidth(), true);
+    }
 
     /**
      * {@inheritDoc}
