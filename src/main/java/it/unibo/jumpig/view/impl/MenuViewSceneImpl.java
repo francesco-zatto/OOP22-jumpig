@@ -14,8 +14,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
-import javax.swing.plaf.ColorChooserUI;
-import javax.swing.text.StyleConstants.ColorConstants;
 
 import it.unibo.jumpig.view.api.MenuViewScene;
 
@@ -34,9 +32,11 @@ public class MenuViewSceneImpl implements MenuViewScene {
         final JPanel panelButton = new JPanel();
         panelButton.setBackground(Color.CYAN);
         panelButton.setLayout(new BoxLayout(panelButton, Y_AXIS));
-        panelButton.add(new JButton("START GAME"));
+        JButton gameButton = new JButton("START GAME");
+        panelButton.add(gameButton);
         panelButton.add(Box.createRigidArea(new Dimension(0,10)));
-        panelButton.add(new JButton("LEADERBOARD"));
+        JButton leaderboardButton = new JButton("LEADERBOARD");
+        panelButton.add(leaderboardButton);
         panelButton.add(Box.createRigidArea(new Dimension(0,10)));
         panelButton.add(new JButton("QUIT"));
         final JPanel menuPanel = new JPanel(new GridBagLayout());
