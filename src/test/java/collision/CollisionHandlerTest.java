@@ -7,11 +7,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.impl.PositionImpl;
 import it.unibo.jumpig.common.impl.hitbox.CircleHitbox;
+import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.model.api.collision.CollisionHandlerFactory;
 import it.unibo.jumpig.model.api.gameentity.Targettable;
 import it.unibo.jumpig.model.impl.collision.CollisionHandlerFactoryImpl;
 import it.unibo.jumpig.model.impl.gameentity.BasicCoin;
 import it.unibo.jumpig.model.impl.gameentity.BasicPlatform;
+import it.unibo.jumpig.model.impl.gameentity.EnemyImpl;
 import it.unibo.jumpig.model.impl.gameentity.PlayerImpl;
 import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
 
@@ -28,12 +30,15 @@ class CollisionHandlerTest {
     private static final double PLAYER_POSITION_Y = 6.5;
     private static final double COIN_POSITION_X = 7;
     private static final double COIN_POSITION_Y = 7.5;
+    private static final double ENEMY_POSITION_X = 8;
+    private static final double ENEMY_POSITION_Y = 6.5;
     private static final double PLATFORM_VELOCITY = 10;
     private static final double DELTA_TIME = 0.0001;
     private static final double GRAVITY = -9.81;
     private static final Position PLATFORM_POSITION = new PositionImpl(PLATFORM_POSITION_X, PLATFORM_POSITION_Y);
     private static final Position PLAYER_POSITION = new PositionImpl(PLAYER_POSITION_X, PLAYER_POSITION_Y);
     private static final Position COIN_POSITION = new PositionImpl(COIN_POSITION_X, COIN_POSITION_Y);
+    private static final Position ENEMY_POSITION = new PositionImpl(ENEMY_POSITION_X, ENEMY_POSITION_Y);
     private final CollisionHandlerFactory collisionHandlerFactory = new CollisionHandlerFactoryImpl();
 
     private void assertIsTaken(final Targettable gameEntity) {
@@ -60,7 +65,7 @@ class CollisionHandlerTest {
         platform.setTarget(false);
         platformCollisionHandler.handle(player, platform);
         assertEquals(platform.getJumpVelocity().getYComponent(), player.getVelocity().getYComponent());
-        assertIsTaken(platform);
+        this.assertIsTaken(platform);
     }
 
     @Test
@@ -71,10 +76,15 @@ class CollisionHandlerTest {
         final double pickedCoins = player.getCoins();
         coinCollisionHandler.handle(player, coin);
         assertEquals(pickedCoins + 1, player.getCoins());
-        assertIsTaken(coin);
+        this.assertIsTaken(coin);
     }
 
     @Test
     void testEnemyCollisionHandler() {
+        final var player = new PlayerImpl(PLAYER_POSITION);
+        final var enemy = new EnemyImpl(ENEMY_POSITION, new RectangleHitbox(ENEMY_POSITION, 5, 6));
+        final var enemyCollisionHandler = this.collisionHandlerFactory.createEnemyCollisionHandler();
+        enemyCollisionHandler.handle(player, enemy);
+        this.assertIsTaken(enemy);
     }
 }
