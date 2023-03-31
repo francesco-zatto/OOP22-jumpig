@@ -32,18 +32,15 @@ public class MenuViewSceneImpl implements MenuViewScene {
 
     private static final String FRAME_TITLE = "Jumpig";
     private final JFrame frame = new JFrame(FRAME_TITLE);
-    private static final String ROOT = "resources/";
     /**
      * Constructor for the main menu.
      * @throws IOException
      */
     public MenuViewSceneImpl() throws IOException {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
         final JPanel panelButton = new JPanel();
         panelButton.setBackground(Color.CYAN);
         panelButton.setLayout(new BoxLayout(panelButton, Y_AXIS));
-
         final InputStream in = Objects.requireNonNull(
             ClassLoader.getSystemResourceAsStream("settings/settings")
         );
@@ -61,8 +58,6 @@ public class MenuViewSceneImpl implements MenuViewScene {
          * From now on, it's just plain GUI construction
          */
         final JLabel lab1 = new JLabel(icon);
-
-
         JButton gameButton = new JButton("START GAME");
         panelButton.add(gameButton);
         panelButton.add(Box.createRigidArea(new Dimension(0,10)));
@@ -70,16 +65,9 @@ public class MenuViewSceneImpl implements MenuViewScene {
         panelButton.add(leaderboardButton);
         panelButton.add(Box.createRigidArea(new Dimension(0,10)));
         panelButton.add(new JButton("QUIT"));
-
         final JPanel menuPanel = new JPanel(new GridBagLayout());
         menuPanel.setBackground(Color.CYAN);
-        
-        menuPanel.add(lab1);
-        menuPanel.add(lab2);
-        lab1.setSize(10,10);
-        menuPanel.repaint();
         frame.getContentPane().add(menuPanel, BorderLayout.CENTER);
-
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         final int screenHeight = (int) screen.getHeight();
         final double percentageHeight = 0.7;
