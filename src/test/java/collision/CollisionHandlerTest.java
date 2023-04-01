@@ -30,7 +30,7 @@ class CollisionHandlerTest {
     private static final double PLAYER_POSITION_Y = 6.5;
     private static final double COIN_POSITION_X = 7;
     private static final double COIN_POSITION_Y = 7.5;
-    private static final double ENEMY_POSITION_X = 8;
+    private static final double ENEMY_POSITION_X = 6;
     private static final double ENEMY_POSITION_Y = 6.5;
     private static final double PLATFORM_VELOCITY = 10;
     private static final double DELTA_TIME = 0.0001;
@@ -61,8 +61,6 @@ class CollisionHandlerTest {
         final var platform = new VanishingPlatform(PLATFORM_POSITION, PLATFORM_VELOCITY);
         final var platformCollisionHandler = this.collisionHandlerFactory.createPlatformCollisionHandler();
         player.computeVelocity(GRAVITY, DELTA_TIME);
-        //TO DO fix Targettable and VenishingPlatform
-        platform.setTarget(false);
         platformCollisionHandler.handle(player, platform);
         assertEquals(platform.getJumpVelocity().getYComponent(), player.getVelocity().getYComponent());
         this.assertIsTaken(platform);
@@ -84,7 +82,9 @@ class CollisionHandlerTest {
         final var player = new PlayerImpl(PLAYER_POSITION);
         final var enemy = new EnemyImpl(ENEMY_POSITION, new RectangleHitbox(ENEMY_POSITION, 5, 6));
         final var enemyCollisionHandler = this.collisionHandlerFactory.createEnemyCollisionHandler();
+        final int playerLives = player.getLives();
         enemyCollisionHandler.handle(player, enemy);
+        assertEquals(playerLives - 1, player.getLives());
         this.assertIsTaken(enemy);
     }
 }
