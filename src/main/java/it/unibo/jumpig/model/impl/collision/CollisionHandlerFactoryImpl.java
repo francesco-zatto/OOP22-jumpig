@@ -53,7 +53,7 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
 
     private void playerJumps(final Player player, final Platform platform) {
         if (platform instanceof Targettable) {
-            ((Targettable) platform).setTarget(true);
+            ((Targettable) platform).markTarget();
         }
         player.setVelocityFromJump(platform.getJumpVelocity());
     }
@@ -89,7 +89,7 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
 
     private void playerCollidesWithEnemy(final Player player, final Enemy enemy) {
         player.decreaseLives();
-        enemy.setTarget(true);
+        enemy.markTarget();
     }
 
     /**
@@ -131,7 +131,7 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
 
     private void playerTakesCoin(final Player player, final Coin coin) {
         player.incrementCoins();
-        coin.setTarget(true);
+        coin.markTarget();
     }
 
     /*This inequality is based on the equation of a circle: (x - xCenter) ^ 2 + (y - yCenter) ^ 2 = radius ^ 2.
