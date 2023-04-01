@@ -11,7 +11,7 @@ import it.unibo.jumpig.model.api.gameentity.Coin;
  */
 public class BasicCoin extends AbstractGameEntity<CircleHitbox> implements Coin {
 
-    private boolean targettable;
+    private boolean taken;
 
     /**
      * The constructor for a basic coin.
@@ -26,8 +26,8 @@ public class BasicCoin extends AbstractGameEntity<CircleHitbox> implements Coin 
      * {@inheritDoc}
      */
     @Override
-    public void setTarget(final boolean setTargettable) {
-        this.targettable = setTargettable;
+    public void markTarget() {
+        this.taken = true;
     }
 
     /**
@@ -35,6 +35,6 @@ public class BasicCoin extends AbstractGameEntity<CircleHitbox> implements Coin 
      */
     @Override
     public boolean isTaken() {
-        return this.targettable;
+        return this.taken;
     }
 }

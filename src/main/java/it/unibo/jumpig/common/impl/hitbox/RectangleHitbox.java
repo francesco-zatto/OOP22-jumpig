@@ -43,6 +43,38 @@ public class RectangleHitbox implements Hitbox {
     }
 
     /**
+     * The method to get the x of the left side of the rectangle.
+     * @return a double that is the x of the left side of the rectangle.
+     */
+    public double getRectangleLeftX() {
+        return getRectangleCoordinate(this.center.getX(), this.getWidth(), true);
+    }
+
+    /**
+     * The method to get the x of the right side of the rectangle.
+     * @return a double that is the x of the right side of the rectangle.
+     */
+    public double getRectangleRightX() {
+        return getRectangleCoordinate(this.center.getX(), this.getWidth(), false);
+    }
+
+    /**
+     * The method to get the y of the lower side of the rectangle.
+     * @return a double that is the y of the lower side of the rectangle.
+     */
+    public double getRectangleLowerY() {
+        return getRectangleCoordinate(this.center.getY(), this.getHeight(), true);
+    }
+
+    /**
+     * The method to get the y of the upper side of the rectangle.
+     * @return a double that is the y of the upper side of the rectangle.
+     */
+    public double getRectangleUpperY() {
+        return getRectangleCoordinate(this.center.getY(), this.getHeight(), false);
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -56,6 +88,14 @@ public class RectangleHitbox implements Hitbox {
     @Override
     public void updateHitBox(final Position center) {
         this.center = center;
+    }
+
+    /*The boolean isSignNegative is true for lowerY and leftX, because methods to get those coordinates has to
+     * subtract the half of dimension from the center coordinate. Instead, isSignNegative is false for upperY and rightY, 
+     * because methods to get those coordinates has to add the half of dimension from the center coordinate.
+    */
+    private double getRectangleCoordinate(final double coordinate, final double dimension, final boolean isSignNegative) {
+        return coordinate + (isSignNegative ? -1 : +1) * (dimension / 2);
     }
 
 }
