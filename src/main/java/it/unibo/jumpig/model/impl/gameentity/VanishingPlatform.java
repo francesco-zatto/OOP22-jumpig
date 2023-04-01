@@ -8,7 +8,7 @@ import it.unibo.jumpig.model.api.gameentity.Targettable;
  */
 public class VanishingPlatform extends BasicPlatform implements Targettable {
 
-    private boolean targettable = true;
+    private boolean targettable;
     /**
      * Constructor for a vanishing platform.
      * @param position position of the platform in the world.
@@ -22,8 +22,8 @@ public class VanishingPlatform extends BasicPlatform implements Targettable {
      * {@inheritDoc}
      */
     @Override
-    public void setTarget(final boolean setTargettable) {
-        this.targettable = setTargettable;
+    public void markTarget() {
+        this.targettable = true;
     }
 
     /**
