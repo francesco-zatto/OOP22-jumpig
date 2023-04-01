@@ -40,14 +40,14 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
         }
         final RectangleHitbox playerHitbox = player.getHitbox();
         final RectangleHitbox platformHitbox = platform.getHitbox();
-        final double playerLeftX = getRectangleLeftX(playerHitbox);
-        final double playerRightX = getRectangleRightX(playerHitbox);
-        final double platformLeftX = getRectangleLeftX(platformHitbox);
-        final double platformRightX = getRectangleRightX(platformHitbox);
+        final double playerLeftX = playerHitbox.getRectangleLeftX();
+        final double playerRightX = playerHitbox.getRectangleRightX();
+        final double platformLeftX = platformHitbox.getRectangleLeftX();
+        final double platformRightX = platformHitbox.getRectangleRightX();
         final boolean isPlayerAligned = isBetween(playerLeftX, platformLeftX, platformRightX) 
                 || isBetween(playerRightX, platformLeftX, platformRightX);
-        final boolean isPlayerAbove = isBetween(getRectangleLowerY(playerHitbox), platformHitbox.getCenter().getY(),
-                getRectangleUpperY(platformHitbox));
+        final boolean isPlayerAbove = isBetween(playerHitbox.getRectangleLowerY(), platformHitbox.getCenter().getY(),
+                platformHitbox.getRectangleUpperY());
         return isPlayerAligned && isPlayerAbove;
     }
 
@@ -72,16 +72,16 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
         }
         final RectangleHitbox playerHitbox = player.getHitbox();
         final RectangleHitbox enemyHitbox = enemy.getHitbox();
-        final double playerLeftX = getRectangleLeftX(playerHitbox);
-        final double playerRightX = getRectangleRightX(playerHitbox);
-        final double enemyLeftX = getRectangleLeftX(enemyHitbox);
-        final double enemyRightX = getRectangleRightX(enemyHitbox);
+        final double playerLeftX = playerHitbox.getRectangleLeftX();
+        final double playerRightX = playerHitbox.getRectangleRightX();
+        final double enemyLeftX = enemyHitbox.getRectangleLeftX();
+        final double enemyRightX = enemyHitbox.getRectangleRightX();
         final boolean isPlayerAligned = isBetween(playerLeftX, enemyLeftX, enemyRightX) 
                 || isBetween(playerRightX, enemyLeftX, enemyRightX);
-        final double playerLowerY = getRectangleLowerY(playerHitbox);
-        final double playerUpperY = getRectangleUpperY(playerHitbox);
-        final double enemyLowerY = getRectangleLowerY(enemyHitbox);
-        final double enemyUpperY = getRectangleUpperY(enemyHitbox);
+        final double playerLowerY = playerHitbox.getRectangleLowerY();
+        final double playerUpperY = playerHitbox.getRectangleUpperY();
+        final double enemyLowerY = enemyHitbox.getRectangleLowerY();
+        final double enemyUpperY = enemyHitbox.getRectangleUpperY();
         final boolean isPlayerOnTheSameHeight = isBetween(playerLowerY, enemyLowerY, enemyUpperY) 
                 || isBetween(playerUpperY, enemyLowerY, enemyUpperY);
         return isPlayerAligned && isPlayerOnTheSameHeight;
@@ -111,10 +111,10 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
         final RectangleHitbox playerHitbox = player.getHitbox();
         final CircleHitbox coinHitbox = coin.getHitbox();
         final Position coinCenter = coinHitbox.getCenter();
-        final double playerLeftX = getRectangleLeftX(playerHitbox);
-        final double playerRightX = getRectangleRightX(playerHitbox);
-        final double playerLowerY = getRectangleLowerY(playerHitbox);
-        final double playerUpperY = getRectangleUpperY(playerHitbox);
+        final double playerLeftX = playerHitbox.getRectangleLeftX();
+        final double playerRightX = playerHitbox.getRectangleRightX();
+        final double playerLowerY = playerHitbox.getRectangleLowerY();
+        final double playerUpperY = playerHitbox.getRectangleUpperY();
         final Position nearestPosition;
         final boolean isCoinToTheRight = coinCenter.getX() > playerHitbox.getCenter().getX();
         final boolean isCoinAbove = coinCenter.getY() > playerHitbox.getCenter().getY();
@@ -141,29 +141,6 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
     private boolean isPositionInsideCircle(final Position position, final CircleHitbox circle) {
         return Math.pow(position.getX() - circle.getCenter().getX(), 2) - Math.pow(position.getY() - circle.getCenter().getY(), 2)
                 < Math.pow(circle.getRadius(), 2);
-    }
-
-    private double getRectangleLeftX(final RectangleHitbox rectangle) {
-        return getRectangleCoordinate(rectangle.getCenter().getX(), rectangle.getWidth(), true);
-    }
-
-    private double getRectangleRightX(final RectangleHitbox rectangle) {
-        return getRectangleCoordinate(rectangle.getCenter().getX(), rectangle.getWidth(), false);
-    }
-
-    private double getRectangleLowerY(final RectangleHitbox rectangle) {
-        return getRectangleCoordinate(rectangle.getCenter().getY(), rectangle.getHeight(), true);
-    }
-
-    private double getRectangleUpperY(final RectangleHitbox rectangle) {
-        return getRectangleCoordinate(rectangle.getCenter().getY(), rectangle.getHeight(), false);
-    }
-
-    /*The boolean isSignNegative is true for lowerY and leftX, because this method to get those coordinates has to
-     * subtract the half of dimension from the center coordinate. Instead, isSignNegative is false for upperY and rightY.
-    */
-    private double getRectangleCoordinate(final double coordinate, final double dimension, final boolean isSignNegative) {
-        return coordinate + (isSignNegative ? -1 : +1) * (dimension / 2);
     }
 
     private boolean isBetween(final double num, final double min, final double max) {
