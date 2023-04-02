@@ -36,4 +36,8 @@ public abstract class AbstractCollisionHandler<H extends Hitbox, E extends GameE
             this.collisionActioner.act(player, gameEntity);
         }
     }
+
+    protected final boolean isBetween(final double num, final double min, final double max) {
+        return min < num && num < max;
+    }
 }
