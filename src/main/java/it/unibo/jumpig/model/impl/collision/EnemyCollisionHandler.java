@@ -7,6 +7,9 @@ import it.unibo.jumpig.model.api.collision.CollisionChecker;
 import it.unibo.jumpig.model.api.gameentity.Enemy;
 import it.unibo.jumpig.model.api.gameentity.Player;
 
+/**
+ * Class that handles collisions between a player and an enemy.
+ */
 public class EnemyCollisionHandler extends AbstractCollisionHandler<RectangleHitbox, Enemy>{
 
     @Override
