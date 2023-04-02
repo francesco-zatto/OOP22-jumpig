@@ -1,9 +1,6 @@
-package it.unibo.jumpig.model.impl.collision;
+package it.unibo.jumpig.model.api.collision;
 
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
-import it.unibo.jumpig.model.api.collision.CollisionActioner;
-import it.unibo.jumpig.model.api.collision.CollisionChecker;
-import it.unibo.jumpig.model.api.collision.CollisionHandler;
 import it.unibo.jumpig.model.api.gameentity.GameEntity;
 import it.unibo.jumpig.model.api.gameentity.Player;
 
