@@ -13,6 +13,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
@@ -40,7 +41,8 @@ public class MenuViewSceneImpl implements MenuViewScene {
         JButton leaderboardButton = new JButton("LEADERBOARD");
         panelButton.add(leaderboardButton);
         panelButton.add(Box.createRigidArea(new Dimension(0,10)));
-        panelButton.add(new JButton("QUIT"));
+        JButton quitButton = new JButton("QUIT");
+        panelButton.add(quitButton);
         final JPanel menuPanel = new JPanel(new GridBagLayout());
         menuPanel.setBackground(Color.CYAN);
         menuPanel.add(panelButton);
@@ -53,6 +55,7 @@ public class MenuViewSceneImpl implements MenuViewScene {
         frame.setSize(width, height);
         frame.setLocationByPlatform(true);
         frame.setResizable(false);
+        quitButton.addActionListener(e -> this.quit());
     }
 
     /**
@@ -68,8 +71,12 @@ public class MenuViewSceneImpl implements MenuViewScene {
      */
     @Override
     public void quit() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'quit'");
+        int n = JOptionPane.showConfirmDialog(frame,
+                "Do you really want to quit?",
+                "Quitting..", JOptionPane.YES_NO_OPTION); 
+        if (n == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
     }
 
     /**
