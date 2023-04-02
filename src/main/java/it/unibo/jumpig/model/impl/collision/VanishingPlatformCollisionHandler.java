@@ -15,7 +15,7 @@ public class VanishingPlatformCollisionHandler extends AbstractCollisionHandler<
 
     @Override
     protected CollisionChecker<RectangleHitbox, VanishingPlatform> getCollisionChecker() {
-        return (player, platform) -> platform.isTaken()
+        return (player, platform) -> !platform.isTaken()
                 && this.basicPlatformCollisionHandler.getCollisionChecker().check(player, platform);
     }
 
