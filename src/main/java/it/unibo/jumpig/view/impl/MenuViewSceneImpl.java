@@ -16,6 +16,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import it.unibo.jumpig.controller.api.MenuController;
+import it.unibo.jumpig.controller.impl.MenuControllerImpl;
 import it.unibo.jumpig.view.api.MenuViewScene;
 
 /**
@@ -25,6 +27,7 @@ public class MenuViewSceneImpl implements MenuViewScene {
 
     private static final String FRAME_TITLE = "Jumpig";
     private final JFrame frame = new JFrame(FRAME_TITLE);
+    private final MenuController controller = new MenuControllerImpl();
     /**
      * Constructor for the main menu.
      * @throws IOException
@@ -54,9 +57,9 @@ public class MenuViewSceneImpl implements MenuViewScene {
         frame.setSize(width, height);
         frame.setLocationByPlatform(true);
         frame.setResizable(false);
-        quitButton.addActionListener(e -> this.quit());
-        gameButton.addActionListener(e -> System.out.println("Start game")); //NOPMD
-        leaderboardButton.addActionListener(e -> System.out.println("Start LeaderBoard")); //NOPMD
+        quitButton.addActionListener(e -> controller.close());
+        gameButton.addActionListener(e -> controller.notifyStartGame());
+        leaderboardButton.addActionListener(e -> controller.notifyStartLeaderboard());
     }
 
     /**
