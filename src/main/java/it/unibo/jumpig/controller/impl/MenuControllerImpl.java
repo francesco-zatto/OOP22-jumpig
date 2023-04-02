@@ -1,19 +1,21 @@
 package it.unibo.jumpig.controller.impl;
 
 import it.unibo.jumpig.controller.api.MenuController;
+import it.unibo.jumpig.view.api.MenuViewScene;
+import it.unibo.jumpig.view.impl.MenuViewSceneImpl;
 
 /**
  * Class that manages the menu interactions.
  */
 public class MenuControllerImpl implements MenuController {
 
+    private final MenuViewScene view = new MenuViewSceneImpl();
     /**
      * {@inheritDoc}
      */
     @Override
     public void start() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'start'");
+        view.show();
     }
 
     /**
