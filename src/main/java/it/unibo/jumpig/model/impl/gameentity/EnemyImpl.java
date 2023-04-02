@@ -29,8 +29,8 @@ public class EnemyImpl extends AbstractGameEntity<RectangleHitbox> implements En
      * {@inheritDoc}
      */
     @Override
-    public void setTarget(final boolean setTargettable) {
-        this.targettable = setTargettable;
+    public void markTarget() {
+        this.targettable = true;
     }
 
     /**
