@@ -42,5 +42,4 @@ public class MenuControllerImpl implements MenuController {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'notifyStartLeaderboard'");
     }
-    
 }
