@@ -5,37 +5,25 @@ import it.unibo.jumpig.model.api.gameentity.GameEntity;
 import it.unibo.jumpig.model.api.gameentity.Player;
 
 /**
- * Class that handles possible collision between a player and a gameEntity.
+ * Abstract class that handles possible collision between a player and a gameEntity.
  * @param <H> any kind of Hitbox
  * @param <E> any kind of gameEntity that the player could collide with
  */
 public abstract class AbstractCollisionHandler<H extends Hitbox, E extends GameEntity<H>> implements CollisionHandler<H, E> {
-
-    private final CollisionChecker<H, E> collisionChecker;
-    private final CollisionActioner<H, E> collisionActioner;
-
-    /**
-     * Constructor that creates a new CollisionHandler, which depends on the collisionChecker and
-     * on the collisionActioner.
-     * @param collisionChecker
-     * @param collisionActioner
-     */
-    public AbstractCollisionHandler(final CollisionChecker<H, E> collisionChecker, 
-            final CollisionActioner<H, E> collisionActioner) {
-        this.collisionChecker = collisionChecker;
-        this.collisionActioner = collisionActioner;
-    }
-
     /**
      * Method that, given a collisionChecker and a collisionActioner, checks a possible 
      * collision and then it acts on the player and the other gameEntity that have collided.
     */
     @Override
-    public void handle(final Player player, final E gameEntity) {
-        if (this.collisionChecker.check(player, gameEntity)) {
-            this.collisionActioner.act(player, gameEntity);
+    public final void handle(final Player player, final E gameEntity) {
+        if (this.getCollisionChecker().check(player, gameEntity)) {
+            this.getCollisionActioner().act(player, gameEntity);
         }
     }
+
+    protected abstract CollisionChecker<H, E> getCollisionChecker();
+
+    protected abstract CollisionActioner<H, E> getCollisionActioner();
 
     protected final boolean isBetween(final double num, final double min, final double max) {
         return min < num && num < max;
