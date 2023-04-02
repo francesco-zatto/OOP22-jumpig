@@ -16,8 +16,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import it.unibo.jumpig.controller.api.MenuController;
-import it.unibo.jumpig.controller.impl.MenuControllerImpl;
 import it.unibo.jumpig.view.api.MenuViewScene;
 
 /**
@@ -27,7 +25,6 @@ public class MenuViewSceneImpl implements MenuViewScene {
 
     private static final String FRAME_TITLE = "Jumpig";
     private final JFrame frame = new JFrame(FRAME_TITLE);
-    private final MenuController controller = new MenuControllerImpl();
     /**
      * Constructor for the main menu.
      * @throws IOException
@@ -57,9 +54,9 @@ public class MenuViewSceneImpl implements MenuViewScene {
         frame.setSize(width, height);
         frame.setLocationByPlatform(true);
         frame.setResizable(false);
-        quitButton.addActionListener(e -> controller.close());
-        gameButton.addActionListener(e -> controller.notifyStartGame());
-        leaderboardButton.addActionListener(e -> controller.notifyStartLeaderboard());
+        quitButton.addActionListener(e -> this.quit());
+        gameButton.addActionListener(e -> this.quit());
+        leaderboardButton.addActionListener(e -> this.quit());
     }
 
     /**
@@ -81,13 +78,5 @@ public class MenuViewSceneImpl implements MenuViewScene {
         if (option == JOptionPane.YES_OPTION) {
             System.exit(0);
         }
-    }
-
-    /**
-     * Main to test the GUI menu.
-     * @param args strings
-     */
-    public static void main(final String[] args) {
-        new MenuViewSceneImpl().show();
     }
 }

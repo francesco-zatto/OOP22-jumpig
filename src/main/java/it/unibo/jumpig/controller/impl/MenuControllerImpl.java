@@ -15,7 +15,7 @@ public class MenuControllerImpl implements MenuController {
      */
     @Override
     public void start() {
-        view.show();
+        this.view.show();
     }
 
     /**
