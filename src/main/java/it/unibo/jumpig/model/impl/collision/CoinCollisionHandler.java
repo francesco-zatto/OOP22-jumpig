@@ -13,7 +13,7 @@ import it.unibo.jumpig.model.api.gameentity.Player;
 /**
  * Class that handles collisions between a player and a coin.
  */
-public class CoinCollisionHandler extends AbstractCollisionHandler<CircleHitbox, Coin> {
+public final class CoinCollisionHandler extends AbstractCollisionHandler<CircleHitbox, Coin> {
 
     @Override
     protected CollisionChecker<CircleHitbox, Coin> getCollisionChecker() {
@@ -63,5 +63,4 @@ public class CoinCollisionHandler extends AbstractCollisionHandler<CircleHitbox,
         player.incrementCoins();
         coin.markTarget();
     }
-    
 }

@@ -9,7 +9,7 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
 /**
  * Class that handles collisions between a player and a vanishing platform.
  */
-public class VanishingPlatformCollisionHandler extends AbstractCollisionHandler<RectangleHitbox, VanishingPlatform> {
+public final class VanishingPlatformCollisionHandler extends AbstractCollisionHandler<RectangleHitbox, VanishingPlatform> {
 
     private final BasicPlatformCollisionHandler basicPlatformCollisionHandler = new BasicPlatformCollisionHandler();
 

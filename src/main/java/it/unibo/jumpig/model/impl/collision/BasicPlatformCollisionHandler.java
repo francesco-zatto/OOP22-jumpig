@@ -11,8 +11,7 @@ import it.unibo.jumpig.model.api.gameentity.Player;
  * Class that handles collisions between a player and a platform, checking if the player is jumping on 
  * the platform and causing his jump.
  */
-public class BasicPlatformCollisionHandler extends AbstractCollisionHandler<RectangleHitbox, Platform> {
-    
+public final class BasicPlatformCollisionHandler extends AbstractCollisionHandler<RectangleHitbox, Platform> {
     @Override
     protected CollisionChecker<RectangleHitbox, Platform> getCollisionChecker() {
         return this::isPlayerJumpingOnPlatform;
@@ -42,5 +41,5 @@ public class BasicPlatformCollisionHandler extends AbstractCollisionHandler<Rect
 
     private void playerJumps(final Player player, final Platform platform) {
         player.setVelocityFromJump(platform.getJumpVelocity());
-    }    
+    } 
 }

@@ -10,7 +10,7 @@ import it.unibo.jumpig.model.api.gameentity.Player;
 /**
  * Class that handles collisions between a player and an enemy.
  */
-public class EnemyCollisionHandler extends AbstractCollisionHandler<RectangleHitbox, Enemy>{
+public final class EnemyCollisionHandler extends AbstractCollisionHandler<RectangleHitbox, Enemy> {
 
     @Override
     protected CollisionChecker<RectangleHitbox, Enemy> getCollisionChecker() {
@@ -47,6 +47,4 @@ public class EnemyCollisionHandler extends AbstractCollisionHandler<RectangleHit
         player.decreaseLives();
         enemy.markTarget();
     }
-
-    
 }
