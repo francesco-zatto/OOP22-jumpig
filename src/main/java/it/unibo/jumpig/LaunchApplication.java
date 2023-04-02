@@ -1,5 +1,7 @@
 package it.unibo.jumpig;
 
+import it.unibo.jumpig.controller.impl.MenuControllerImpl;
+
 /**
  * Main class of the application.
  */
@@ -13,6 +15,6 @@ public final class LaunchApplication {
     * @param args not used
     */
     public static void main(final String[] args) {
-        //TO DO add MenuController.start()
+        new MenuControllerImpl().start();
     }
 }
