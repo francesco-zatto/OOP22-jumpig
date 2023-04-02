@@ -7,7 +7,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
-import java.io.IOException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -35,13 +34,13 @@ public class MenuViewSceneImpl implements MenuViewScene {
         final JPanel panelButton = new JPanel();
         panelButton.setBackground(Color.CYAN);
         panelButton.setLayout(new BoxLayout(panelButton, Y_AXIS));
-        JButton gameButton = new JButton("START GAME");
+        final JButton gameButton = new JButton("START GAME");
         panelButton.add(gameButton);
-        panelButton.add(Box.createRigidArea(new Dimension(0,10)));
-        JButton leaderboardButton = new JButton("LEADERBOARD");
+        panelButton.add(Box.createRigidArea(new Dimension(0, 10)));
+        final JButton leaderboardButton = new JButton("LEADERBOARD");
         panelButton.add(leaderboardButton);
-        panelButton.add(Box.createRigidArea(new Dimension(0,10)));
-        JButton quitButton = new JButton("QUIT");
+        panelButton.add(Box.createRigidArea(new Dimension(0, 10)));
+        final JButton quitButton = new JButton("QUIT");
         panelButton.add(quitButton);
         final JPanel menuPanel = new JPanel(new GridBagLayout());
         menuPanel.setBackground(Color.CYAN);
@@ -56,6 +55,8 @@ public class MenuViewSceneImpl implements MenuViewScene {
         frame.setLocationByPlatform(true);
         frame.setResizable(false);
         quitButton.addActionListener(e -> this.quit());
+        gameButton.addActionListener(e -> System.out.println("Start game")); //NOPMD
+        leaderboardButton.addActionListener(e -> System.out.println("Start LeaderBoard")); //NOPMD
     }
 
     /**
@@ -71,10 +72,10 @@ public class MenuViewSceneImpl implements MenuViewScene {
      */
     @Override
     public void quit() {
-        int n = JOptionPane.showConfirmDialog(frame,
+        final int option = JOptionPane.showConfirmDialog(frame,
                 "Do you really want to quit?",
                 "Quitting..", JOptionPane.YES_NO_OPTION); 
-        if (n == JOptionPane.YES_OPTION) {
+        if (option == JOptionPane.YES_OPTION) {
             System.exit(0);
         }
     }
