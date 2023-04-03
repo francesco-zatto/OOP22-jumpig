@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import it.unibo.jumpig.controller.api.MenuController;
 import it.unibo.jumpig.view.api.MenuViewScene;
 
 /**
@@ -25,11 +26,13 @@ public class MenuViewSceneImpl implements MenuViewScene {
 
     private static final String FRAME_TITLE = "Jumpig";
     private final JFrame frame = new JFrame(FRAME_TITLE);
+    private final MenuController controller;
     /**
      * Constructor for the main menu.
      * @throws IOException
      */
-    public MenuViewSceneImpl() {
+    public MenuViewSceneImpl(final MenuController controller) {
+        this.controller = controller;
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         final JPanel panelButton = new JPanel();
         panelButton.setBackground(Color.CYAN);

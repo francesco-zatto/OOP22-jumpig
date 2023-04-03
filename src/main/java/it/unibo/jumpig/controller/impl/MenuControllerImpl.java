@@ -9,7 +9,7 @@ import it.unibo.jumpig.view.impl.MenuViewSceneImpl;
  */
 public class MenuControllerImpl implements MenuController {
 
-    private final MenuViewScene view = new MenuViewSceneImpl();
+    private final MenuViewScene view = new MenuViewSceneImpl(this);
     /**
      * {@inheritDoc}
      */
