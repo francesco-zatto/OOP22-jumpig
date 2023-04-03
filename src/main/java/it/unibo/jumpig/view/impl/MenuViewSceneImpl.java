@@ -38,12 +38,12 @@ public class MenuViewSceneImpl implements MenuViewScene {
         panelButton.setBackground(Color.CYAN);
         panelButton.setLayout(new BoxLayout(panelButton, Y_AXIS));
         final JButton gameButton = new JButton("START GAME");
+        final JButton leaderboardButton = new JButton("LEADERBOARD");
+        final JButton quitButton = new JButton("QUIT");
         panelButton.add(gameButton);
         panelButton.add(Box.createRigidArea(new Dimension(0, 10)));
-        final JButton leaderboardButton = new JButton("LEADERBOARD");
         panelButton.add(leaderboardButton);
         panelButton.add(Box.createRigidArea(new Dimension(0, 10)));
-        final JButton quitButton = new JButton("QUIT");
         panelButton.add(quitButton);
         final JPanel menuPanel = new JPanel(new GridBagLayout());
         menuPanel.setBackground(Color.CYAN);
