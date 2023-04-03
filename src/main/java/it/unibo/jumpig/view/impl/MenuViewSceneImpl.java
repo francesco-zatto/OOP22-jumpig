@@ -28,8 +28,8 @@ public class MenuViewSceneImpl implements MenuViewScene {
     private final JFrame frame = new JFrame(FRAME_TITLE);
     private final MenuController controller;
     /**
-     * Constructor for the main menu.
-     * @throws IOException
+     * Contructor for building the view.
+     * @param controller the controller that manages the interactions in the menu
      */
     public MenuViewSceneImpl(final MenuController controller) {
         this.controller = controller;
