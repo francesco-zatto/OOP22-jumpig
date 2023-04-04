@@ -57,7 +57,7 @@ public class MenuViewSceneImpl implements MenuViewScene {
         frame.setSize(width, height);
         frame.setLocationByPlatform(true);
         frame.setResizable(false);
-        quitButton.addActionListener(e -> this.quit());
+        quitButton.addActionListener(e -> this.controller.close());
         gameButton.addActionListener(e -> this.controller.notifyStartGame());
         leaderboardButton.addActionListener(e -> this.controller.notifyStartLeaderboard());
     }
