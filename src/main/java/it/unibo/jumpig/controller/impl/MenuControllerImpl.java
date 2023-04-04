@@ -43,7 +43,6 @@ public class MenuControllerImpl implements MenuController {
      */
     @Override
     public void notifyStartLeaderboard() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'notifyStartLeaderboard'");
+        this.menu.getLeaderboard();
     }
 }
