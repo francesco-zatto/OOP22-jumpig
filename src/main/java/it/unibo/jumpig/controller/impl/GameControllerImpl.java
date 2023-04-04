@@ -13,8 +13,7 @@ public class GameControllerImpl implements GameController {
      */
     @Override
     public void mainLoop() {
-        // TODO Auto-generated method stub
-        
+        // TODO Auto-generated method stub 
     }
 
     /**
@@ -23,7 +22,6 @@ public class GameControllerImpl implements GameController {
     @Override
     public void notifyUpdate() {
         // TODO Auto-generated method stub
-        
     }
 
     /**
@@ -31,8 +29,7 @@ public class GameControllerImpl implements GameController {
      */
     @Override
     public void registerInput() {
-        // TODO Auto-generated method stub
-        
+        // TODO Auto-generated method stub 
     }
 
     /**
@@ -41,7 +38,6 @@ public class GameControllerImpl implements GameController {
     @Override
     public void close() {
         // TODO Auto-generated method stub
-        
     }
 
     /**
@@ -50,7 +46,5 @@ public class GameControllerImpl implements GameController {
     @Override
     public void start() {
         // TODO Auto-generated method stub
-        
     }
-    
 }
