@@ -74,12 +74,13 @@ public class MenuViewSceneImpl implements MenuViewScene {
      * {@inheritDoc}
      */
     @Override
-    public void quit() {
+    public final void quit() {
         final int option = JOptionPane.showConfirmDialog(frame,
                 "Do you really want to quit?",
                 "Quitting..", JOptionPane.YES_NO_OPTION); 
         if (option == JOptionPane.YES_OPTION) {
-            System.exit(0);
+            this.frame.setVisible(false);
+            this.frame.dispose();
         }
     }
 }
