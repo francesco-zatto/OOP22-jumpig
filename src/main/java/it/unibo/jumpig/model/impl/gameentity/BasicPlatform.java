@@ -4,7 +4,6 @@ import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.impl.hitbox.PlatformHitbox;
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.model.api.Velocity;
-import it.unibo.jumpig.model.api.collision.CollisionHandler;
 import it.unibo.jumpig.model.api.gameentity.AbstractGameEntity;
 import it.unibo.jumpig.model.api.gameentity.Platform;
 import it.unibo.jumpig.model.api.gameentity.Player;
@@ -18,7 +17,7 @@ public class BasicPlatform extends AbstractGameEntity<RectangleHitbox> implement
 
     private final Velocity jumpVelocity;
     private final double length = this.getHitbox().getWidth();
-    private final CollisionHandler<RectangleHitbox, Platform> collisionHandler;
+    private final BasicPlatformCollisionHandler collisionHandler;
 
     /**
      * Constructor for a basic platform.
