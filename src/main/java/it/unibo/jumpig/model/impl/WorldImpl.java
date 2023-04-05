@@ -14,7 +14,7 @@ import it.unibo.jumpig.model.api.gameentity.Player;
 
 public class WorldImpl implements World {
 
-    private final static double GRAVITY = 9.8;
+    private static final double GRAVITY = 9.8;
     private final Player player;
 
     /**
@@ -22,7 +22,7 @@ public class WorldImpl implements World {
      * @param player  the player of the world.
      */
     public WorldImpl(final Player player) {
-        this.player = player;
+        this.player = player.copy();
     }
 
     /**
@@ -47,7 +47,7 @@ public class WorldImpl implements World {
      */
     @Override
     public Player getPlayer() {
-        return this.player;
+        return this.player.copy();
     }
 
     /**
