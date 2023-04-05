@@ -14,15 +14,23 @@ import it.unibo.jumpig.model.api.gameentity.Player;
 
 public class WorldImpl implements World {
 
-    private double gravity;
-    private Player player;
+    private final static double GRAVITY = 9.8;
+    private final Player player;
+
+    /**
+     * The constructor to create a new world.
+     * @param player  the player of the world.
+     */
+    public WorldImpl(final Player player) {
+        this.player = player;
+    }
 
     /**
      * {@inheritDoc}
      */
     @Override
     public double getGravity() {
-        return this.gravity;
+        return GRAVITY;
     }
 
     /**
