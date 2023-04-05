@@ -19,17 +19,22 @@ public class WorldImpl implements World {
     private final Player player;
     private final Set<Platform> setplatform;
     private final Set<Enemy> setenemies;
+    private final Set<Coin> setcoins;
 
     /**
      * The constructor to create a new world.
      * @param player  the player of the world.
      * @param setplatform  the set that contains the platforms of the world.
      * @param setenemies  the set that contains the enemies of the world.
+     * @param setcoins  the set that contains the coins of thw world.
      */
-    public WorldImpl(final Player player, final Set<Platform> setplatform, final Set<Enemy> setenemies) {
+
+    public WorldImpl(final Player player, final Set<Platform> setplatform, final Set<Enemy> setenemies,
+     final Set<Coin> setcoins) {
         this.player = player.copy();
         this.setplatform = setplatform.stream().collect(Collectors.toSet());
         this.setenemies = setenemies.stream().collect(Collectors.toSet());
+        this.setcoins = setcoins.stream().collect(Collectors.toSet());
     }
 
     /**
@@ -69,7 +74,6 @@ public class WorldImpl implements World {
      */
     @Override
     public Set<Coin> getCoins() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getCoins'");
+       return this.setcoins.stream().collect(Collectors.toSet());
     }
 }
