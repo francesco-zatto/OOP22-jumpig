@@ -34,5 +34,4 @@ public class GameImpl implements Game {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getCurrentScore'");
     }
-    
 }

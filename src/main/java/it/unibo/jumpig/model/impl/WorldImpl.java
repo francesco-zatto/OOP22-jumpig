@@ -58,5 +58,4 @@ public class WorldImpl implements World {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getCoins'");
     }
-    
 }
