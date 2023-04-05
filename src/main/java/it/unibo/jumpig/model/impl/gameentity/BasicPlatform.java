@@ -6,7 +6,9 @@ import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.model.api.Velocity;
 import it.unibo.jumpig.model.api.gameentity.AbstractGameEntity;
 import it.unibo.jumpig.model.api.gameentity.Platform;
+import it.unibo.jumpig.model.api.gameentity.Player;
 import it.unibo.jumpig.model.impl.VelocityImpl;
+import it.unibo.jumpig.model.impl.collision.BasicPlatformCollisionHandler;
 
 /**
  * Class that represents a basic platform, that simply causes the player's jump.
@@ -15,15 +17,17 @@ public class BasicPlatform extends AbstractGameEntity<RectangleHitbox> implement
 
     private final Velocity jumpVelocity;
     private final double length = this.getHitbox().getWidth();
+    private final BasicPlatformCollisionHandler collisionHandler;
 
     /**
-     * Constructor for a basic platform.
-     * @param position position of the platform in the world.
-     * @param verticalJumpVelocity vertical velocity of a player when jumps on the platform. 
-    */
+     * Constructor for a basic platform that simply causes the jump of the player.
+     * @param position position of the platform.
+     * @param verticalJumpVelocity vertical velocity of a player when jumps on the platform.
+     */
     public BasicPlatform(final Position position, final double verticalJumpVelocity) {
         super(position, new PlatformHitbox(position));
         this.jumpVelocity = new VelocityImpl(0, verticalJumpVelocity);
+        this.collisionHandler = new BasicPlatformCollisionHandler();
     }
 
     /**
@@ -40,5 +44,13 @@ public class BasicPlatform extends AbstractGameEntity<RectangleHitbox> implement
     @Override
     public double getLength() {
         return this.length;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void handleCollision(final Player player) {
+        this.collisionHandler.handle(player, this);
     }
 }
