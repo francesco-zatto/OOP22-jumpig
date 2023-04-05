@@ -15,6 +15,7 @@ import it.unibo.jumpig.model.api.gameentity.Player;
 public class WorldImpl implements World {
 
     private double gravity;
+    private Player player;
 
     /**
      * {@inheritDoc}
@@ -38,8 +39,7 @@ public class WorldImpl implements World {
      */
     @Override
     public Player getPlayer() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPlayer'");
+        return this.player;
     }
 
     /**
