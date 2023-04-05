@@ -47,4 +47,10 @@ public interface Player extends GameEntity<RectangleHitbox> {
      * Method that increments the amount of coins the player collects during a game.
      */
     void incrementCoins();
+
+    /**
+     * Method for a defensive copy.
+     * @return the player's copy
+     */
+    Player copy();
 }
