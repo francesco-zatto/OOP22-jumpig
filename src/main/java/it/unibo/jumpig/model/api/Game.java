@@ -3,7 +3,9 @@ package it.unibo.jumpig.model.api;
 /**
  * Interface Game.
  */
+
 public interface Game {
+
     /**
      * Method that checks if the game is over.
      * @return the game status
