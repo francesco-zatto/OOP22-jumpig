@@ -1,6 +1,7 @@
 package it.unibo.jumpig.model.impl;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import it.unibo.jumpig.model.api.World;
 import it.unibo.jumpig.model.api.gameentity.Coin;
@@ -16,13 +17,16 @@ public class WorldImpl implements World {
 
     private static final double GRAVITY = 9.8;
     private final Player player;
+    private final Set<Platform> setplatform;
 
     /**
      * The constructor to create a new world.
      * @param player  the player of the world.
+     * @param setplatform  the set that contains the platforms.
      */
-    public WorldImpl(final Player player) {
+    public WorldImpl(final Player player, final Set<Platform> setplatform) {
         this.player = player.copy();
+        this.setplatform = setplatform.stream().collect(Collectors.toSet());
     }
 
     /**
@@ -38,8 +42,7 @@ public class WorldImpl implements World {
      */
     @Override
     public Set<Platform> getPlatform() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPlatform'");
+        return this.setplatform.stream().collect(Collectors.toSet());
     }
 
     /**
