@@ -4,6 +4,7 @@ import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.impl.hitbox.CircleHitbox;
 import it.unibo.jumpig.model.api.gameentity.AbstractGameEntity;
 import it.unibo.jumpig.model.api.gameentity.Coin;
+import it.unibo.jumpig.model.api.gameentity.Player;
 
 /**
  * The class that represents a basic coin.
@@ -36,5 +37,11 @@ public class BasicCoin extends AbstractGameEntity<CircleHitbox> implements Coin 
     @Override
     public boolean isTaken() {
         return this.taken;
+    }
+
+    @Override
+    public void handleCollision(Player player) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'handleCollision'");
     }
 }
