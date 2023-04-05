@@ -32,23 +32,47 @@ public class MenuViewSceneImpl implements MenuViewScene {
      * @param controller the controller that manages the interactions in the menu
      */
     public MenuViewSceneImpl(final MenuController controller) {
+        /*
+         * Controller initialization.
+         */
         this.controller = controller;
+        /*
+         * Once you click the window's close button, the app will close.
+         */
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        /*
+         * Panel for the buttons.
+         */
         final JPanel panelButton = new JPanel();
         panelButton.setBackground(Color.CYAN);
         panelButton.setLayout(new BoxLayout(panelButton, Y_AXIS));
+        /*
+         * Initializing buttons.
+         */
         final JButton gameButton = new JButton("START GAME");
         final JButton leaderboardButton = new JButton("LEADERBOARD");
         final JButton quitButton = new JButton("QUIT");
+        /*
+         * Adding buttons into the panelButton.
+         */
         panelButton.add(gameButton);
         panelButton.add(Box.createRigidArea(new Dimension(0, 10)));
         panelButton.add(leaderboardButton);
         panelButton.add(Box.createRigidArea(new Dimension(0, 10)));
         panelButton.add(quitButton);
+        /*
+         * The main panel that contains panelButton.
+         */
         final JPanel menuPanel = new JPanel(new GridBagLayout());
         menuPanel.setBackground(Color.CYAN);
         menuPanel.add(panelButton);
+        /*
+         * Adding all the panels into the frame.
+         */
         frame.getContentPane().add(menuPanel, BorderLayout.CENTER);
+        /*
+         * Resizing the frame based on the screen dimensions.
+         */
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         final int screenHeight = (int) screen.getHeight();
         final double percentageHeight = 0.7;
@@ -57,6 +81,9 @@ public class MenuViewSceneImpl implements MenuViewScene {
         frame.setSize(width, height);
         frame.setLocationByPlatform(true);
         frame.setResizable(false);
+        /*
+         * Adding listeners to buttons.
+         */
         quitButton.addActionListener(e -> this.controller.close());
         gameButton.addActionListener(e -> this.controller.notifyStartGame());
         leaderboardButton.addActionListener(e -> this.controller.notifyStartLeaderboard());
