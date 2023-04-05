@@ -9,10 +9,8 @@ import it.unibo.jumpig.common.impl.PositionImpl;
 import it.unibo.jumpig.common.impl.hitbox.CircleHitbox;
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.model.api.gameentity.Targettable;
-import it.unibo.jumpig.model.impl.collision.BasicPlatformCollisionHandler;
 import it.unibo.jumpig.model.impl.collision.CoinCollisionHandler;
 import it.unibo.jumpig.model.impl.collision.EnemyCollisionHandler;
-import it.unibo.jumpig.model.impl.collision.VanishingPlatformCollisionHandler;
 import it.unibo.jumpig.model.impl.gameentity.BasicCoin;
 import it.unibo.jumpig.model.impl.gameentity.BasicPlatform;
 import it.unibo.jumpig.model.impl.gameentity.EnemyImpl;
@@ -49,9 +47,8 @@ class CollisionHandlerTest {
     void testBasicPlatformCollisionHandler() {
        final var player = new PlayerImpl(PLAYER_POSITION);
        final var platform = new BasicPlatform(PLATFORM_POSITION, PLATFORM_VELOCITY);
-       final var platformCollisionHandler = new BasicPlatformCollisionHandler();
        player.computeVelocity(GRAVITY, DELTA_TIME);
-       platformCollisionHandler.handle(player, platform);
+       platform.handleCollision(player);
        assertEquals(platform.getJumpVelocity().getYComponent(), player.getVelocity().getYComponent());
     }
 
@@ -59,9 +56,8 @@ class CollisionHandlerTest {
     void testVanishingPlatformCollisionHandler() {
         final var player = new PlayerImpl(PLAYER_POSITION);
         final var platform = new VanishingPlatform(PLATFORM_POSITION, PLATFORM_VELOCITY);
-        final var platformCollisionHandler = new VanishingPlatformCollisionHandler();
         player.computeVelocity(GRAVITY, DELTA_TIME);
-        platformCollisionHandler.handle(player, platform);
+        platform.handleCollision(player);
         assertEquals(platform.getJumpVelocity().getYComponent(), player.getVelocity().getYComponent());
         this.assertIsTaken(platform);
     }
