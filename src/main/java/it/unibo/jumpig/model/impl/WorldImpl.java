@@ -18,15 +18,18 @@ public class WorldImpl implements World {
     private static final double GRAVITY = 9.8;
     private final Player player;
     private final Set<Platform> setplatform;
+    private final Set<Enemy> setenemies;
 
     /**
      * The constructor to create a new world.
      * @param player  the player of the world.
-     * @param setplatform  the set that contains the platforms.
+     * @param setplatform  the set that contains the platforms of the world.
+     * @param setenemies  the set that contains the enemies of the world.
      */
-    public WorldImpl(final Player player, final Set<Platform> setplatform) {
+    public WorldImpl(final Player player, final Set<Platform> setplatform, final Set<Enemy> setenemies) {
         this.player = player.copy();
         this.setplatform = setplatform.stream().collect(Collectors.toSet());
+        this.setenemies = setenemies.stream().collect(Collectors.toSet());
     }
 
     /**
@@ -58,8 +61,7 @@ public class WorldImpl implements World {
      */
     @Override
     public Set<Enemy> getEnemies() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getEnemies'");
+        return this.setenemies.stream().collect(Collectors.toSet());
     }
 
     /**
