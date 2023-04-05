@@ -14,13 +14,14 @@ import it.unibo.jumpig.model.api.gameentity.Player;
 
 public class WorldImpl implements World {
 
+    private double gravity;
+
     /**
      * {@inheritDoc}
      */
     @Override
     public double getGravity() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getGravity'");
+        return this.gravity;
     }
 
     /**
