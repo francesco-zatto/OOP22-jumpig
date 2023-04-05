@@ -11,4 +11,10 @@ public interface Leaderboard {
      * @return a list of scores
      */
     List<Score> getScores();
+
+    /**
+     * Method that inserts a new score inside the leaderboard.
+     * @param score the score to add inside the leaderbeard
+     */
+    void addScore(Score score);
 }

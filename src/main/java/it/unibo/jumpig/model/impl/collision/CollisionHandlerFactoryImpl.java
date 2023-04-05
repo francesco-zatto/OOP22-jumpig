@@ -1,5 +1,7 @@
 package it.unibo.jumpig.model.impl.collision;
 
+import it.unibo.jumpig.common.api.Position;
+import it.unibo.jumpig.common.impl.PositionImpl;
 import it.unibo.jumpig.common.impl.hitbox.CircleHitbox;
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.model.api.collision.CollisionHandler;
@@ -54,8 +56,33 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
      */
     @Override
     public CollisionHandler<RectangleHitbox, Enemy> createEnemyCollisionHandler() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createEnemyCollisionHandler'");
+        return new CollisionHandlerImpl<>(this::isPlayerCollidingWithEnemy, this::playerCollidesWithEnemy);
+    }
+
+    private boolean isPlayerCollidingWithEnemy(final Player player, final Enemy enemy) {
+        if (enemy.isTaken()) {
+            return false;
+        }
+        final RectangleHitbox playerHitbox = player.getHitbox();
+        final RectangleHitbox enemyHitbox = enemy.getHitbox();
+        final double playerLeftX = getRectangleLeftX(playerHitbox);
+        final double playerRightX = getRectangleRightX(playerHitbox);
+        final double enemyLeftX = getRectangleLeftX(enemyHitbox);
+        final double enemyRightX = getRectangleRightX(enemyHitbox);
+        final boolean isPlayerAligned = isBetween(playerLeftX, enemyLeftX, enemyRightX) 
+                || isBetween(playerRightX, enemyLeftX, enemyRightX);
+        final double playerLowerY = getRectangleLowerY(playerHitbox);
+        final double playerUpperY = getRectangleUpperY(playerHitbox);
+        final double enemyLowerY = getRectangleLowerY(enemyHitbox);
+        final double enemyUpperY = getRectangleUpperY(enemyHitbox);
+        final boolean isPlayerOnTheSameHeight = isBetween(playerLowerY, enemyLowerY, enemyUpperY) 
+                || isBetween(playerUpperY, enemyLowerY, enemyUpperY);
+        return isPlayerAligned && isPlayerOnTheSameHeight;
+    }
+
+    private void playerCollidesWithEnemy(final Player player, final Enemy enemy) {
+        player.decreaseLives();
+        enemy.setTarget(true);
     }
 
     /**
@@ -63,8 +90,50 @@ public class CollisionHandlerFactoryImpl implements CollisionHandlerFactory {
      */
     @Override
     public CollisionHandler<CircleHitbox, Coin> createCoinCollisionHandler() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createCoinCollisionHandler'");
+        return new CollisionHandlerImpl<>(this::isPlayerCollidingWithCoin, this::playerTakesCoin);
+    }
+
+    /*To check if the player's hitbox, a rectangle, and the coin's hitbox, a circle, are colliding
+     * this method finds the nearest point of the rectangle to the circle's center, named P, and then it checks
+     * if P is inside the circle or not, comparing the distance of P from the center to the radius of the circle.
+     */
+    private boolean isPlayerCollidingWithCoin(final Player player, final Coin coin) {
+        if (coin.isTaken()) {
+            return false;
+        }
+        final RectangleHitbox playerHitbox = player.getHitbox();
+        final CircleHitbox coinHitbox = coin.getHitbox();
+        final Position coinCenter = coinHitbox.getCenter();
+        final double playerLeftX = getRectangleLeftX(playerHitbox);
+        final double playerRightX = getRectangleRightX(playerHitbox);
+        final double playerLowerY = getRectangleLowerY(playerHitbox);
+        final double playerUpperY = getRectangleUpperY(playerHitbox);
+        final Position nearestPosition;
+        final boolean isCoinToTheRight = coinCenter.getX() > playerHitbox.getCenter().getX();
+        final boolean isCoinAbove = coinCenter.getY() > playerHitbox.getCenter().getY();
+        if (isBetween(coinCenter.getY(), playerLowerY, playerUpperY)) {
+            nearestPosition = new PositionImpl(isCoinToTheRight ? playerRightX : playerLeftX, coinCenter.getY());
+        } else if (isBetween(coinCenter.getX(), playerLeftX, playerRightX)) {
+            nearestPosition = new PositionImpl(coinCenter.getX(), isCoinAbove ? playerUpperY : playerLowerY);
+        } else {
+            nearestPosition = new PositionImpl(isCoinToTheRight ? playerRightX : playerLeftX, 
+                    isCoinAbove ? playerUpperY : playerLowerY);
+        }
+        return isPositionInsideCircle(nearestPosition, coinHitbox); 
+    }
+
+    private void playerTakesCoin(final Player player, final Coin coin) {
+        player.incrementCoins();
+        coin.setTarget(true);
+    }
+
+    /*This inequality is based on the equation of a circle: (x - xCenter) ^ 2 + (y - yCenter) ^ 2 = radius ^ 2.
+     * The equation means that every point on the circumference is distant from the center a length that equals to the radius.
+     * If a point is nearest to the center, then the first member of the equation is less than the second member.
+     */
+    private boolean isPositionInsideCircle(final Position position, final CircleHitbox circle) {
+        return Math.pow(position.getX() - circle.getCenter().getX(), 2) - Math.pow(position.getY() - circle.getCenter().getY(), 2)
+                < Math.pow(circle.getRadius(), 2);
     }
 
     private double getRectangleLeftX(final RectangleHitbox rectangle) {
