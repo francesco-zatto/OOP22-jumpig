@@ -21,7 +21,7 @@ public abstract class AbstractPlatform extends AbstractCollidableGameEntity<Rect
      * @param verticalJumpVelocity vertical velocity of a player when jumps on the platform.
      * @param collisionHandler the way is handled the collision with the player.
      */
-    public AbstractPlatform(final Position position, final double verticalJumpVelocity,
+    protected AbstractPlatform(final Position position, final double verticalJumpVelocity,
             final CollisionHandler<RectangleHitbox, Platform> collisionHandler) {
         super(position, new PlatformHitbox(position), collisionHandler);
         this.jumpVelocity = new VelocityImpl(0, verticalJumpVelocity);

@@ -20,7 +20,7 @@ public abstract class AbstractCollidableGameEntity<H extends Hitbox, E extends G
      * @param hitbox hitbox of the gameEntity.
      * @param collisionHandler subtype of {@link it.unibo.jumpig.model.api.collision.CollisionHandler}
      */
-    public AbstractCollidableGameEntity(final Position position, final H hitbox,
+    protected AbstractCollidableGameEntity(final Position position, final H hitbox,
             final CollisionHandler<H, E> collisionHandler) {
         super(position, hitbox);
         this.collisionHandler = collisionHandler;
