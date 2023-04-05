@@ -41,7 +41,7 @@ public interface Player extends GameEntity<RectangleHitbox> {
      * Getter for the amount of coins collected by the player.
      * @return the amount of coins
      */
-    double getCoins();
+    int getCoins();
 
     /**
      * Method that increments the amount of coins the player collects during a game.

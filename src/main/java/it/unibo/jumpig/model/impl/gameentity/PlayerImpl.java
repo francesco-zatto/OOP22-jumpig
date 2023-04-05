@@ -29,6 +29,19 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
     }
 
     /**
+     * Private constructor for the defensive copy.
+     * @param position player's position
+     * @param velocity player's velocity
+     * @param coins player's coins
+     * @param lives player's lives
+     */
+    private PlayerImpl(final Position position, final Velocity velocity, final int coins, final int lives) {
+        super(position, new PlayerHitbox(position));
+        this.playerVelocity = velocity;
+        this.coins = coins;
+        this.lives = lives;
+    }
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -74,7 +87,7 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
      * {@inheritDoc}
      */
     @Override
-    public double getCoins() {
+    public int getCoins() {
         return this.coins;
     }
 
@@ -92,5 +105,13 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
      */
     public void computePosition(final double deltaTime) {
         super.setPosition(this.playerVelocity.computeMovement(super.getPosition(), deltaTime));
+    }
+
+    /**
+     * Defensive copy for the player.
+     * @return the player's copy
+     */
+    public Player copy() {
+        return new PlayerImpl(this.getPosition(), this.getVelocity(), this.getCoins(), this.getLives());
     }
 }
