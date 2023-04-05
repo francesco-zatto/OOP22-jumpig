@@ -39,6 +39,9 @@ public class BasicCoin extends AbstractGameEntity<CircleHitbox> implements Coin 
         return this.taken;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void handleCollision(Player player) {
         // TODO Auto-generated method stub
