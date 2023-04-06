@@ -24,8 +24,7 @@ public class GameImpl implements Game {
      */
     @Override
     public boolean isOVer() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isOVer'");
+        return this.world.getPlayer().getLives() <= 0;
     }
 
     /**
