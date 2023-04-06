@@ -28,4 +28,10 @@ public interface Game {
      * @return the number of coins collected by the player.
      */
     int getCurrentCoins();
+
+    /**
+     * The getter that returns the world of the game.
+     * @return the world of the game.
+     */
+    World getWorld();
 }
