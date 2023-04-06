@@ -43,4 +43,12 @@ public class GameImpl implements Game {
     public int getCurrentScore() {
         return (int) this.world.getPlayer().getPosition().getY();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getCurrentCoins() {
+        return this.world.getPlayer().getCoins();
+    }
 }
