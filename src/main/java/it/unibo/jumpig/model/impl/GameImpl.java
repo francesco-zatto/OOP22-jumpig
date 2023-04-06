@@ -52,6 +52,9 @@ public class GameImpl implements Game {
         return this.world.getPlayer().getCoins();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public World getWorld() {
         return this.world;
