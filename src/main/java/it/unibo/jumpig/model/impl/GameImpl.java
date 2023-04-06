@@ -9,13 +9,13 @@ import it.unibo.jumpig.model.api.World;
 
 public class GameImpl implements Game {
 
-    private World world;
+    private final World world;
 
     /**
      * The constructor to create a new game.
      * @param world  the world of the game.
      */
-    public GameImpl(World world) {
+    public GameImpl(final World world) {
         this.world = world;
     }
 
@@ -41,7 +41,6 @@ public class GameImpl implements Game {
      */
     @Override
     public int getCurrentScore() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getCurrentScore'");
+        return (int) this.world.getPlayer().getPosition().getY();
     }
 }
