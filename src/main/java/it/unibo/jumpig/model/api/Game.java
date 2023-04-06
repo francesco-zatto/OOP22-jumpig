@@ -22,4 +22,10 @@ public interface Game {
      * @return the player's score
      */
     int getCurrentScore();
+
+    /**
+     * Getter that returns the number of coins collected by the player.
+     * @return the number of coins collected by the player.
+     */
+    int getCurrentCoins();
 }
