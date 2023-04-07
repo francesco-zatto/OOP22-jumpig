@@ -25,6 +25,7 @@ public class GameControllerImpl implements GameController {
      */
     @Override
     public void mainLoop() {
+        this.start();
         long previousCycleStartTime = System.currentTimeMillis();
         while (!game.isOVer()) {
             final long currentCycleStartTime = System.currentTimeMillis();
