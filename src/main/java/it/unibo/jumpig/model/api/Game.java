@@ -14,8 +14,9 @@ public interface Game {
 
     /**
      * Method that updates the positions for every entity inside the game.
+     * @param elapsed the elapsed time.
      */
-    void updateGame();
+    void updateGame(long elapsed);
 
     /**
      * Getter that returns the player's final score.
