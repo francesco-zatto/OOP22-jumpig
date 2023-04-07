@@ -1,5 +1,6 @@
 package it.unibo.jumpig.model.impl;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -8,6 +9,7 @@ import it.unibo.jumpig.model.api.gameentity.Coin;
 import it.unibo.jumpig.model.api.gameentity.Enemy;
 import it.unibo.jumpig.model.api.gameentity.Platform;
 import it.unibo.jumpig.model.api.gameentity.Player;
+import it.unibo.jumpig.model.impl.gameentity.PlayerImpl;
 
 /**
  * The class to manage the world of the game.
@@ -23,18 +25,13 @@ public class WorldImpl implements World {
 
     /**
      * The constructor to create a new world.
-     * @param player  the player of the world.
-     * @param setplatform  the set that contains the platforms of the world.
-     * @param setenemies  the set that contains the enemies of the world.
-     * @param setcoins  the set that contains the coins of thw world.
      */
 
-    public WorldImpl(final Player player, final Set<Platform> setplatform, final Set<Enemy> setenemies,
-     final Set<Coin> setcoins) {
-        this.player = player.copy();
-        this.setplatform = setplatform.stream().collect(Collectors.toSet());
-        this.setenemies = setenemies.stream().collect(Collectors.toSet());
-        this.setcoins = setcoins.stream().collect(Collectors.toSet());
+    public WorldImpl() {
+        this.player = new PlayerImpl(null);
+        this.setplatform = new HashSet<Platform>();
+        this.setenemies = new HashSet<Enemy>();
+        this.setcoins = new HashSet<Coin>();
     }
 
     /**
