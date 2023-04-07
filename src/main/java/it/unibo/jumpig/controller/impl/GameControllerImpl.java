@@ -1,6 +1,8 @@
 package it.unibo.jumpig.controller.impl;
 
 import it.unibo.jumpig.controller.api.GameController;
+import it.unibo.jumpig.model.api.Game;
+import it.unibo.jumpig.model.impl.GameImpl;
 
 /**
  *The class to manage the game loop.
@@ -8,12 +10,46 @@ import it.unibo.jumpig.controller.api.GameController;
 
 public class GameControllerImpl implements GameController {
 
+    private static final long PERIOD = 20; /* 20 milliseconds are equal to 50 frames per sec */
+    private final Game game;
+
+    /**
+     * Constructor to create a new Game Controller in order to start a new Game.
+     */
+    public GameControllerImpl() {
+        this.game = new GameImpl();
+    }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void mainLoop() {
-        // TODO Auto-generated method stub 
+        long previousCycleStartTime = System.currentTimeMillis();
+        while (!game.isOVer()) {
+            final long currentCycleStartTime = System.currentTimeMillis();
+            final long elapsed = currentCycleStartTime - previousCycleStartTime;
+            registerInput();
+            this.game.updateGame(elapsed);
+            this.notifyUpdate();
+            this.waitForNextFrame(currentCycleStartTime);
+            previousCycleStartTime = currentCycleStartTime;
+        }
+    }
+
+    /**
+     * The method to wait the next frame.
+     * @param cycleStartTime the current frame.
+     */
+    private void waitForNextFrame(final long cycleStartTime) {
+        final long deltaTime = System.currentTimeMillis() - cycleStartTime;
+        if (deltaTime < PERIOD) {
+            try {
+                Thread.sleep(PERIOD - deltaTime);
+            } catch (IllegalArgumentException | InterruptedException ex) {
+                return;
+            }
+        }
     }
 
     /**
@@ -21,7 +57,7 @@ public class GameControllerImpl implements GameController {
      */
     @Override
     public void notifyUpdate() {
-        // TODO Auto-generated method stub
+        // TODO Avrò una view e un game qui dentro e chiamo view.render() e game.update()
     }
 
     /**
@@ -37,7 +73,7 @@ public class GameControllerImpl implements GameController {
      */
     @Override
     public void close() {
-        // TODO Auto-generated method stub
+        // TODO This method will close the game view.
     }
 
     /**
@@ -45,6 +81,6 @@ public class GameControllerImpl implements GameController {
      */
     @Override
     public void start() {
-        // TODO Auto-generated method stub
+        // TODO This method will show the game view
     }
 }
