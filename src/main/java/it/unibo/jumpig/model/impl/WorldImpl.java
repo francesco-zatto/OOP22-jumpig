@@ -29,9 +29,9 @@ public class WorldImpl implements World {
 
     public WorldImpl() {
         this.player = new PlayerImpl(null);
-        this.setplatform = new HashSet<Platform>();
-        this.setenemies = new HashSet<Enemy>();
-        this.setcoins = new HashSet<Coin>();
+        this.setplatform = new HashSet<>();
+        this.setenemies = new HashSet<>();
+        this.setcoins = new HashSet<>();
     }
 
     /**

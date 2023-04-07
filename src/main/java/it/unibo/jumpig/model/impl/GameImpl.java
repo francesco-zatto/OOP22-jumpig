@@ -13,10 +13,9 @@ public class GameImpl implements Game {
 
     /**
      * The constructor to create a new game.
-     * @param world  the world of the game.
      */
-    public GameImpl(final World world) {
-        this.world = world;
+    public GameImpl() {
+        this.world = new WorldImpl();
     }
 
     /**
