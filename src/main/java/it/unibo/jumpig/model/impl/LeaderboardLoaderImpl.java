@@ -80,22 +80,20 @@ public class LeaderboardLoaderImpl implements LeaderboardLoader, Serializable {
 
     /**
      * {@inheritDoc}
+     * 
+     * @return scores from leaderboard.txt
      */
     @Override
-
-    public void loadScores(final String file) {
-
-        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName()))) {
-
-            final ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName()));
-
-            in.close();
-
-        } catch (IOException e) {
+    @SuppressWarnings("unchecked")
+    public List<Score> loadScores(final String file) {
+        List<Score> scores = null;
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file))) {
+            scores = (List<Score>) inputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
             Logger.getLogger(LeaderboardLoader.class.getName()).log(Level.SEVERE,
-                    "An error occurred while reading from file " + fileName(), e);
+                    "An error occurred while reading from file " + file, e);
         }
-
+        return scores;
     }
 
 }
