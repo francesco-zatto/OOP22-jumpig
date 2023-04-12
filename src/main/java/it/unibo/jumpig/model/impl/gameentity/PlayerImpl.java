@@ -1,5 +1,8 @@
 package it.unibo.jumpig.model.impl.gameentity;
 
+import java.util.Objects;
+import java.util.Optional;
+
 import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.impl.hitbox.PlayerHitbox;
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
@@ -17,6 +20,7 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
     private Velocity playerVelocity;
     private int lives = MAXLIVES;
     private int coins;
+    private Optional<Double> lastPlatformHeight;
 
     /**
      * Constructor for the player.
@@ -26,6 +30,7 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
         super(position, new PlayerHitbox(position));
         this.playerVelocity = new VelocityImpl(0, 0);
         this.coins = 0;
+        this.lastPlatformHeight = Optional.empty();
     }
 
     /**
@@ -119,9 +124,8 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
      * {@inheritDoc}
      */
     @Override
-    public void setLastPlatformHeight(final double lastPlatformHeight) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setLastPlatformHeight'");
+    public void setLastPlatformHeight(final Double lastPlatformHeight) {
+        this.lastPlatformHeight = Optional.of(Objects.requireNonNull(lastPlatformHeight));
     }
 
     /**
