@@ -2,6 +2,7 @@ package it.unibo.jumpig.model.api;
 
 import java.util.Set;
 
+import it.unibo.jumpig.model.api.gameentity.Enemy;
 import it.unibo.jumpig.model.api.gameentity.Platform;
 
 /**
@@ -13,6 +14,10 @@ public interface GeneratorEntities {
     /**
      * The method to generate platforms.
      */
-    Set<Platform> generatePlatform();
+    Set<Platform> generatePlatforms();
 
+    /**
+     * The method to generate enemies.
+     */
+    Set<Enemy> generateEnemies();
 }
