@@ -55,9 +55,14 @@ public interface Player extends GameEntity<RectangleHitbox> {
     Player copy();
 
     /**
-     * Setter for the last platform's height.
+     * Setter for the last platform's height the player has jumped on.
      * @param lastPlatformHeight the platform's height
-     * 
      */
     void setLastPlatformHeight(double lastPlatformHeight);
+
+    /**
+     * Getter for the plast platform's height the player has jumped on.
+     * @return the last platform's height
+     */
+    double getLastPlatformHeight();
 }
