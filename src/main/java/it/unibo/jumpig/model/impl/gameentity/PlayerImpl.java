@@ -132,7 +132,7 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
      * {@inheritDoc}
      */
     @Override
-    public double getLastPlatformHeight() {
+    public Optional<Double> getLastPlatformHeight() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getLastPlatformHeight'");
     }

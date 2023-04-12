@@ -1,5 +1,7 @@
 package it.unibo.jumpig.model.api.gameentity;
 
+import java.util.Optional;
+
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.model.api.Velocity;
 
@@ -64,5 +66,5 @@ public interface Player extends GameEntity<RectangleHitbox> {
      * Getter for the plast platform's height the player has jumped on.
      * @return the last platform's height
      */
-    double getLastPlatformHeight();
+    Optional<Double> getLastPlatformHeight();
 }
