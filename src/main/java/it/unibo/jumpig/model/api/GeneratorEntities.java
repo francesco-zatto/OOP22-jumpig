@@ -14,16 +14,19 @@ public interface GeneratorEntities {
 
     /**
      * The method to generate platforms.
+     * @return a set of generated platforms.
      */
     Set<Platform> generatePlatforms();
 
     /**
      * The method to generate enemies.
+     * @return a set of generated enemies.
      */
     Set<Enemy> generateEnemies();
 
     /**
      * The method to generate coins.
+     * @return a set of generated coins.
      */
     Set<Coin> generateCoins();
 }

@@ -13,22 +13,31 @@ import it.unibo.jumpig.model.api.gameentity.Platform;
 
 public class GeneratorEntitiesImpl implements GeneratorEntities {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Set<Platform> generatePlatforms() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'generatePlatforms'");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Set<Enemy> generateEnemies() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'generateEnemies'");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Set<Coin> generateCoins() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'generateCoins'");
     }
-    
+
 }
