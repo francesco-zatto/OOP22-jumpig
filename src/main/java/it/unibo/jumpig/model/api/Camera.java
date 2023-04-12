@@ -1,5 +1,7 @@
 package it.unibo.jumpig.model.api;
 
+import java.util.Optional;
+
 import it.unibo.jumpig.model.api.gameentity.Player;
 
 /**
@@ -8,8 +10,8 @@ import it.unibo.jumpig.model.api.gameentity.Player;
 public interface Camera {
     /**
      * Getter that returns the camera's height.
-     * @return a value that represents the camera's height.
+     * @return a value that represents the camera's height (if it's present).
      * @param player the player the camera follows. 
      */
-    int getHeight(Player player);
+    Optional<Double> getHeight(Player player);
 }

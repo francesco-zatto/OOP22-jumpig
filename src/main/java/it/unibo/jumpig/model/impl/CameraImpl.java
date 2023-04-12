@@ -1,5 +1,7 @@
 package it.unibo.jumpig.model.impl;
 
+import java.util.Optional;
+
 import it.unibo.jumpig.model.api.Camera;
 import it.unibo.jumpig.model.api.gameentity.Player;
 
@@ -13,9 +15,8 @@ public class CameraImpl implements Camera {
      * {@inheritDoc}
      */
     @Override
-    public int getHeight(final Player player) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getHeight'");
+    public Optional<Double> getHeight(final Player player) {
+        return player.getLastPlatformHeight();
     }
 
 }
