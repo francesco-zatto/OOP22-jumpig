@@ -2,6 +2,7 @@ package it.unibo.jumpig.model.impl.gameentity;
 
 import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.impl.hitbox.CircleHitbox;
+import it.unibo.jumpig.common.impl.hitbox.CoinHitbox;
 import it.unibo.jumpig.model.api.gameentity.AbstractGameEntity;
 import it.unibo.jumpig.model.api.gameentity.Coin;
 import it.unibo.jumpig.model.api.gameentity.Player;
@@ -19,10 +20,9 @@ public class BasicCoin extends AbstractGameEntity<CircleHitbox> implements Coin 
     /**
      * The constructor for a basic coin.
      * @param position position of the coin in the world.
-     * @param hitbox hitbox of the coin.
      */
-    public BasicCoin(final Position position, final CircleHitbox hitbox) {
-        super(position, hitbox);
+    public BasicCoin(final Position position) {
+        super(position, new CoinHitbox(position));
         this.collisionHandler = new CoinCollisionHandler();
     }
 

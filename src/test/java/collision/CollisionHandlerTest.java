@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.impl.PositionImpl;
-import it.unibo.jumpig.common.impl.hitbox.CircleHitbox;
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.model.api.gameentity.Targettable;
 import it.unibo.jumpig.model.impl.collision.CoinCollisionHandler;
@@ -65,7 +64,7 @@ class CollisionHandlerTest {
     @Test
     void testCoinCollisionHandler() {
         final var player = new PlayerImpl(PLAYER_POSITION);
-        final var coin = new BasicCoin(COIN_POSITION, new CircleHitbox(COIN_POSITION, 3));
+        final var coin = new BasicCoin(COIN_POSITION);
         final var coinCollisionHandler = new CoinCollisionHandler();
         final double pickedCoins = player.getCoins();
         coinCollisionHandler.handle(player, coin);
