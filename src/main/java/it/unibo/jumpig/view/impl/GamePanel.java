@@ -11,11 +11,14 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+//import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+//import it.unibo.jumpig.common.impl.PositionImpl;
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.model.api.gameentity.Platform;
+//import it.unibo.jumpig.model.impl.gameentity.BasicPlatform;
 
 /**
  * The GUI that shows the game currently going on.
@@ -23,7 +26,8 @@ import it.unibo.jumpig.model.api.gameentity.Platform;
 public class GamePanel extends JPanel { 
 
     public static final long serialVersionUID = 1L;
-    private static final double NUMBER = 30;
+    private static final double WORLD_WIDTH = 36; //tmp costant
+    private static final double WORLD_HEIGHT = 64; //tmp costant
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     private final Dimension startScreen = new Dimension((int) screen.getWidth() / 5, (int) (screen.getWidth() / 5 * 1.7));
     //private final double WORLD_WIDTH = 1;
@@ -35,8 +39,8 @@ public class GamePanel extends JPanel {
      * @param platformSet a set of platform for testing
      */
     public GamePanel(final Set<Platform> platformSet) { //TODO SBAGLIATISSIMO
-        this.setPreferredSize(this.startScreen);
-        this.setBackground(Color.CYAN);
+        this.setSize(this.startScreen);
+        this.setPreferredSize(super.getSize());
         this.platforms.addAll(platformSet.stream()
                 .map(Platform::getHitbox)
                 .map(this::convertHitboxToRectangle)
@@ -45,8 +49,7 @@ public class GamePanel extends JPanel {
 
     private Rectangle convertHitboxToRectangle(final RectangleHitbox hitbox) {
         return new Rectangle(new Point((int) hitbox.getCenter().getX(), (int) hitbox.getCenter().getY()),
-                new Dimension((int) Math.ceil(hitbox.getWidth() * NUMBER),
-                        (int) Math.ceil(hitbox.getHeight() * NUMBER)));
+                new Dimension((int) (hitbox.getWidth()), (int) (hitbox.getHeight())));
     }
 
     /**
@@ -58,26 +61,28 @@ public class GamePanel extends JPanel {
             justification = "It's a safe and necessary cast because g is Graphics2D")
     public void paint(final Graphics g) {
         final Graphics2D g2D = (Graphics2D) g;
+        g2D.setBackground(Color.CYAN);
+        super.paint(g2D);
         g2D.setColor(Color.RED);
-        this.platforms.forEach(g2D::fill);
+        this.platforms.stream()
+                .map(this::scale).forEach(g2D::fill);
+    }
+
+    private Rectangle scale(final Rectangle rectangle) {
+        return new Rectangle(new Point((int) (rectangle.getCenterX() * this.getWidth() / WORLD_WIDTH),
+                (int) (rectangle.getCenterY() * this.getHeight() / WORLD_HEIGHT)),
+                new Dimension((int) (rectangle.getWidth() * this.getWidth() / WORLD_WIDTH),
+                        (int) (rectangle.getHeight() * this.getHeight() / WORLD_HEIGHT)));
+
     }
 
     /*public static void main(String[] args) {
         var frame = new JFrame();
-        frame.setBackground(Color.CYAN);
         Platform platform = new BasicPlatform(new PositionImpl(15, 15), 30);
-        var panel = new GamePanel(Set.of(platform));
-        panel.print(platform);
+        Platform platform2 = new BasicPlatform(new PositionImpl(28, 56), 40);
+        var panel = new GamePanel(Set.of(platform, platform2));
         frame.getContentPane().add(panel);
         frame.pack();
         frame.setVisible(true);
-    }
-
-    void print(BasicPlatform p) {
-        System.out.println("BASICPLATFORM");
-    }
-
-    void print(Platform p) {
-        System.out.println("PLATFORM!");
     }*/
 }
