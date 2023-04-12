@@ -59,5 +59,5 @@ public interface Player extends GameEntity<RectangleHitbox> {
      * @param lastPlatformHeight the platform's height
      * 
      */
-    void SetLastPlatformHeight(double lastPlatformHeight);
+    void setLastPlatformHeight(double lastPlatformHeight);
 }
