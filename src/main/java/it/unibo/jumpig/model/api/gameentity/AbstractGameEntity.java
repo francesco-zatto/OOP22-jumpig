@@ -17,7 +17,7 @@ public abstract class AbstractGameEntity<H extends Hitbox> implements GameEntity
      * @param position position of the gameEntity in the world.
      * @param hitbox hitbox of the gameEntity.
      */
-    public AbstractGameEntity(final Position position, final H hitbox) {
+    protected AbstractGameEntity(final Position position, final H hitbox) {
         this.position = position;
         this.hitbox = hitbox;
     }
