@@ -40,4 +40,10 @@ public interface World {
      * @return a set of coins
      */
     Set<Coin> getCoins();
+
+    /**
+     * Getter for the camera.
+     * @return the camera.
+     */
+    Camera getCamera();
 }
