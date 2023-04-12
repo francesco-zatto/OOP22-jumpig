@@ -108,10 +108,28 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
     }
 
     /**
-     * Defensive copy for the player.
-     * @return the player's copy
+     * {@inheritDoc}
      */
+    @Override
     public Player copy() {
         return new PlayerImpl(this.getPosition(), this.getVelocity(), this.getCoins(), this.getLives());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setLastPlatformHeight(final double lastPlatformHeight) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setLastPlatformHeight'");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getLastPlatformHeight() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getLastPlatformHeight'");
     }
 }
