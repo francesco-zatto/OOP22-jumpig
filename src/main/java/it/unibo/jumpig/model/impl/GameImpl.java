@@ -31,8 +31,7 @@ public class GameImpl implements Game {
      */
     @Override
     public void updateGame(final long elapsed) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateGame'");
+        this.world.updateGame(elapsed);
     }
 
     /**
