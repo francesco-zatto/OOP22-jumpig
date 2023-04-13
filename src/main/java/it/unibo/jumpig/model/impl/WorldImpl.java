@@ -84,4 +84,13 @@ public class WorldImpl implements World {
     public Camera getCamera() {
         return this.camera;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateGame(final long elapsed) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateGame'");
+    }
 }
