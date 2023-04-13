@@ -1,5 +1,8 @@
 package it.unibo.jumpig.model.impl.gameentity;
 
+import java.util.Objects;
+import java.util.Optional;
+
 import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.impl.hitbox.PlayerHitbox;
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
@@ -17,6 +20,7 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
     private Velocity playerVelocity;
     private int lives = MAXLIVES;
     private int coins;
+    private Optional<Double> lastPlatformHeight;
 
     /**
      * Constructor for the player.
@@ -26,8 +30,22 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
         super(position, new PlayerHitbox(position));
         this.playerVelocity = new VelocityImpl(0, 0);
         this.coins = 0;
+        this.lastPlatformHeight = Optional.empty();
     }
 
+    /**
+     * Private constructor for the defensive copy.
+     * @param position player's position
+     * @param velocity player's velocity
+     * @param coins player's coins
+     * @param lives player's lives
+     */
+    private PlayerImpl(final Position position, final Velocity velocity, final int coins, final int lives) {
+        super(position, new PlayerHitbox(position));
+        this.playerVelocity = velocity;
+        this.coins = coins;
+        this.lives = lives;
+    }
     /**
      * {@inheritDoc}
      */
@@ -74,7 +92,7 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
      * {@inheritDoc}
      */
     @Override
-    public double getCoins() {
+    public int getCoins() {
         return this.coins;
     }
 
@@ -92,5 +110,29 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
      */
     public void computePosition(final double deltaTime) {
         super.setPosition(this.playerVelocity.computeMovement(super.getPosition(), deltaTime));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Player copy() {
+        return new PlayerImpl(this.getPosition(), this.getVelocity(), this.getCoins(), this.getLives());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setLastPlatformHeight(final Double lastPlatformHeight) {
+        this.lastPlatformHeight = Optional.of(Objects.requireNonNull(lastPlatformHeight));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Optional<Double> getLastPlatformHeight() {
+        return this.lastPlatformHeight;
     }
 }

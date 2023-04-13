@@ -1,5 +1,7 @@
 package it.unibo.jumpig.model.api.gameentity;
 
+import java.util.Optional;
+
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.model.api.Velocity;
 
@@ -41,10 +43,28 @@ public interface Player extends GameEntity<RectangleHitbox> {
      * Getter for the amount of coins collected by the player.
      * @return the amount of coins
      */
-    double getCoins();
+    int getCoins();
 
     /**
      * Method that increments the amount of coins the player collects during a game.
      */
     void incrementCoins();
+
+    /**
+     * Method for a defensive copy.
+     * @return the player's copy
+     */
+    Player copy();
+
+    /**
+     * Setter for the last platform's height the player has jumped on.
+     * @param lastPlatformHeight the platform's height
+     */
+    void setLastPlatformHeight(Double lastPlatformHeight);
+
+    /**
+     * Getter for the plast platform's height the player has jumped on.
+     * @return the last platform's height
+     */
+    Optional<Double> getLastPlatformHeight();
 }
