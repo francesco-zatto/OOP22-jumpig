@@ -41,5 +41,6 @@ public final class BasicPlatformCollisionHandler extends AbstractCollisionHandle
 
     private void playerJumps(final Player player, final Platform platform) {
         player.setVelocityFromJump(platform.getJumpVelocity());
+        player.setLastPlatformHeight(platform.getPosition().getY());
     } 
 }
