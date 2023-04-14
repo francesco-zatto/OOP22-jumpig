@@ -3,14 +3,13 @@ package it.unibo.jumpig.model.impl;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import it.unibo.jumpig.common.api.Position;
-import it.unibo.jumpig.common.api.hitbox.Hitbox;
 import it.unibo.jumpig.common.impl.PositionImpl;
 import it.unibo.jumpig.model.api.GeneratorEntities;
 import it.unibo.jumpig.model.api.gameentity.Coin;
 import it.unibo.jumpig.model.api.gameentity.Enemy;
-import it.unibo.jumpig.model.api.gameentity.GameEntity;
 import it.unibo.jumpig.model.api.gameentity.Platform;
 import it.unibo.jumpig.model.impl.gameentity.BasicCoin;
 import it.unibo.jumpig.model.impl.gameentity.BasicPlatform;
@@ -41,7 +40,7 @@ public class GeneratorEntitiesImpl implements GeneratorEntities {
      */
     @Override
     public Set<Platform> generatePlatforms() {
-        this.addPlatforms(setplatforms);
+        this.addPlatforms();
         return setplatforms.stream().collect(Collectors.toSet());
     }
     /**
@@ -58,37 +57,34 @@ public class GeneratorEntitiesImpl implements GeneratorEntities {
      */
     @Override
     public Set<Coin> generateCoins() {
-        this.addCoins(setcoins);
+        this.addCoins();
         return setcoins.stream().collect(Collectors.toSet());
     }
 
-    private void addPlatforms(final Set<Platform> setplatforms) {
+    private void addPlatforms() {
         for (int i = 0; i < NUM_PLATFORM; i++) {
             final Position coordinate = new PositionImpl(Math.random() * MAX_WIDTH, Math.random() * MAX_HEIGHT * 2);
-            setplatforms.add(new BasicPlatform(this.checkEqualsPosition(setplatforms, coordinate), 1));
+            this.setplatforms.add(new BasicPlatform(this.checkEqualsPosition(coordinate), 1));
         }
     }
-    private void addCoins(final Set<Coin> setcoins) {
+
+    private void addCoins() {
         for (int i = 0; i < NUM_COIN; i++) {
             final Position coordinate = new PositionImpl(Math.random() * MAX_WIDTH, Math.random() * MAX_HEIGHT * 2);
-            setcoins.add(new BasicCoin(this.checkEqualsPosition(setcoins, coordinate)));
+            this.setcoins.add(new BasicCoin(this.checkEqualsPosition(coordinate)));
         }
     }
 
     /**
-     * The method to generate coordinates for a generic entity X that have not been used yet.
+     * The method to generate coordinates (for a generic entity) without generating entities on the same y.
      * In this way I will not generate colliding entities.
-     * @param <X> a generic entity
-     * @param <H> a generic Hitbox
-     * @param setentities a generic set to use this method with all other methods.
      * @param startEntity the coordinates of the entity I'm going to generate.
      * @return  the coordinates I'm going to generate.
      */
-   private <X extends GameEntity<H>, H extends Hitbox> Position checkEqualsPosition(
-    final Set<X> setentities, final Position startEntity) {
-        return setentities.stream().anyMatch(x -> x.getPosition().getX() == startEntity.getX() 
-        && x.getPosition().getY() == startEntity.getY()
-        ) ? this.checkEqualsPosition(setentities, 
-        new PositionImpl(Math.random() * MAX_WIDTH, Math.random() * MAX_HEIGHT * 2)) : startEntity;
+   private Position checkEqualsPosition(final Position startEntity) {
+        return Stream.concat(this.setplatforms.stream(), this.setcoins.stream()).anyMatch(
+            x -> x.getPosition().getY() == startEntity.getY()
+        ) ? this.checkEqualsPosition(
+            new PositionImpl(Math.random() * MAX_WIDTH, Math.random() * MAX_HEIGHT * 2)) : startEntity;
     }
 }
