@@ -27,7 +27,7 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
      * @param position position of the player in the world
      */
     public PlayerImpl(final Position position) {
-        super(position, new PlayerHitbox(position));
+        super(position, new PlayerHitbox(position), null); //TODO
         this.playerVelocity = new VelocityImpl(0, 0);
         this.coins = 0;
         this.lastPlatformHeight = Optional.empty();
@@ -41,7 +41,7 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
      * @param lives player's lives
      */
     private PlayerImpl(final Position position, final Velocity velocity, final int coins, final int lives) {
-        super(position, new PlayerHitbox(position));
+        super(position, new PlayerHitbox(position), null); //TODO
         this.playerVelocity = velocity;
         this.coins = coins;
         this.lives = lives;

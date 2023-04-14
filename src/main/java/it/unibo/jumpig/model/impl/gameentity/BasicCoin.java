@@ -19,7 +19,7 @@ public class BasicCoin extends AbstractGameEntity<CircleHitbox> implements Coin 
      * @param hitbox hitbox of the coin.
      */
     public BasicCoin(final Position position, final CircleHitbox hitbox) {
-        super(position, hitbox);
+        super(position, hitbox, null);
     }
 
     /**

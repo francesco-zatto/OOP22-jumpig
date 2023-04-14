@@ -25,7 +25,7 @@ public class BasicPlatform extends AbstractGameEntity<RectangleHitbox> implement
      * @param verticalJumpVelocity vertical velocity of a player when jumps on the platform.
      */
     public BasicPlatform(final Position position, final double verticalJumpVelocity) {
-        super(position, new PlatformHitbox(position));
+        super(position, new PlatformHitbox(position), null); //TODO
         this.jumpVelocity = new VelocityImpl(0, verticalJumpVelocity);
         this.collisionHandler = new BasicPlatformCollisionHandler();
     }
