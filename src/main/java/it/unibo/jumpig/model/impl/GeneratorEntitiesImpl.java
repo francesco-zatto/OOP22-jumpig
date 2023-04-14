@@ -11,6 +11,7 @@ import it.unibo.jumpig.model.api.gameentity.Coin;
 import it.unibo.jumpig.model.api.gameentity.Enemy;
 import it.unibo.jumpig.model.api.gameentity.GameEntity;
 import it.unibo.jumpig.model.api.gameentity.Platform;
+import it.unibo.jumpig.model.impl.gameentity.BasicCoin;
 import it.unibo.jumpig.model.impl.gameentity.BasicPlatform;
 
 /**
@@ -22,6 +23,7 @@ public class GeneratorEntitiesImpl implements GeneratorEntities {
     private static final double MAX_WIDTH = 36;    /* The width of the game */
     private static final double MAX_HEIGHT = 64;    /* The height of the game */
     private static final double NUM_PLATFORM = 50;    /* The number of platforms */
+    private static final double NUM_COIN = 30;    /* The number of coins */
 
     /**
      * {@inheritDoc}
@@ -46,14 +48,21 @@ public class GeneratorEntitiesImpl implements GeneratorEntities {
      */
     @Override
     public Set<Coin> generateCoins() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'generateCoins'");
+        final Set<Coin> setcoins = new HashSet<>();
+        this.addCoins(setcoins);
+        return setcoins;
     }
 
     private void addPlatforms(final Set<Platform> setplatforms) {
         for (int i = 0; i < NUM_PLATFORM; i++) {
             final Position coordinate = new PositionImpl(Math.random() * MAX_WIDTH, Math.random() * MAX_HEIGHT * 2);
             setplatforms.add(new BasicPlatform(this.checkEqualsPosition(setplatforms, coordinate), 1));
+        }
+    }
+    private void addCoins(final Set<Coin> setcoins) {
+        for (int i = 0; i < NUM_COIN; i++) {
+            final Position coordinate = new PositionImpl(Math.random() * MAX_WIDTH, Math.random() * MAX_HEIGHT * 2);
+            setcoins.add(new BasicCoin(this.checkEqualsPosition(setcoins, coordinate)));
         }
     }
 
