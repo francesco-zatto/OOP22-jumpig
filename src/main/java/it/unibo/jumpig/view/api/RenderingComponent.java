@@ -9,6 +9,7 @@ import it.unibo.jumpig.model.api.gameentity.GameEntity;
  * {@link it.unibo.jumpig.view.api.Renderer}
  * @param <H> any kind of hitbox
  */
+@FunctionalInterface
 public interface RenderingComponent<H extends Hitbox> {
 
     /**
