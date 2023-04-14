@@ -9,6 +9,7 @@ import it.unibo.jumpig.model.api.gameentity.Platform;
 import it.unibo.jumpig.model.api.gameentity.Player;
 import it.unibo.jumpig.model.impl.VelocityImpl;
 import it.unibo.jumpig.model.impl.collision.BasicPlatformCollisionHandler;
+import it.unibo.jumpig.view.impl.BasicPlatformRenderingComponent;
 
 /**
  * Class that represents a basic platform, that simply causes the player's jump.
@@ -25,7 +26,7 @@ public class BasicPlatform extends AbstractGameEntity<RectangleHitbox> implement
      * @param verticalJumpVelocity vertical velocity of a player when jumps on the platform.
      */
     public BasicPlatform(final Position position, final double verticalJumpVelocity) {
-        super(position, new PlatformHitbox(position), null); //TODO
+        super(position, new PlatformHitbox(position), new BasicPlatformRenderingComponent());
         this.jumpVelocity = new VelocityImpl(0, verticalJumpVelocity);
         this.collisionHandler = new BasicPlatformCollisionHandler();
     }
