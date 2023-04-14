@@ -6,17 +6,17 @@ import it.unibo.jumpig.view.api.Renderer;
 import it.unibo.jumpig.view.api.RenderingComponent;
 
 /**
- * Class that renders a Basic Platform using a Renderer.
- * {@link it.unibo.jumpig.model.impl.gameentity.BasicPlatform}
+ * Class that renders a Vanishing Platform using a Renderer.
+ * {@link it.unibo.jumpig.model.impl.gameentity.VanishingPlatform}
  */
-public class BasicPlatformRenderingComponent implements RenderingComponent<RectangleHitbox> {
+public class VanishingPlatformRenderingComponent implements RenderingComponent<RectangleHitbox> {
 
     /**
-     * Method that renders a Basic Platform, that is a gameEntity with a rectangle hitbox,
+     * Method that renders a Vanishing Platform, that is a gameEntity with a RectangleHitbox, 
      * using renderer.
      */
     @Override
     public void render(final GameEntity<RectangleHitbox> entity, final Renderer renderer) {
-        renderer.renderBasicPlatform(entity);
+        renderer.renderVanishingPlatform(entity);
     }
 }
