@@ -2,6 +2,7 @@ package it.unibo.jumpig.model.impl;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
@@ -20,19 +21,28 @@ import it.unibo.jumpig.model.impl.gameentity.BasicPlatform;
 
 public class GeneratorEntitiesImpl implements GeneratorEntities {
 
+    private final Set<Platform> setplatforms;
+    private final Set<Coin> setcoins;
     private static final double MAX_WIDTH = 36;    /* The width of the game */
     private static final double MAX_HEIGHT = 64;    /* The height of the game */
     private static final double NUM_PLATFORM = 50;    /* The number of platforms */
     private static final double NUM_COIN = 30;    /* The number of coins */
 
     /**
+     * The constructor to create a new generator of entities.
+     */
+    public GeneratorEntitiesImpl() {
+        this.setplatforms = new HashSet<>();
+        this.setcoins = new HashSet<>();
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public Set<Platform> generatePlatforms() {
-        final Set<Platform> setplatforms = new HashSet<>();
         this.addPlatforms(setplatforms);
-        return setplatforms;
+        return setplatforms.stream().collect(Collectors.toSet());
     }
     /**
      * {@inheritDoc}
@@ -48,9 +58,8 @@ public class GeneratorEntitiesImpl implements GeneratorEntities {
      */
     @Override
     public Set<Coin> generateCoins() {
-        final Set<Coin> setcoins = new HashSet<>();
         this.addCoins(setcoins);
-        return setcoins;
+        return setcoins.stream().collect(Collectors.toSet());
     }
 
     private void addPlatforms(final Set<Platform> setplatforms) {
