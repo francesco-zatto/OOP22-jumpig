@@ -66,7 +66,7 @@ public class WorldImpl implements World {
      */
     @Override
     public Set<Enemy> getEnemies() {
-        return this.setenemies.stream().collect(Collectors.toSet());
+        return this.setenemies.stream().filter(x -> !x.isTaken()).collect(Collectors.toSet());
     }
 
     /**
