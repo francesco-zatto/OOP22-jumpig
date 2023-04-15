@@ -5,19 +5,21 @@ import it.unibo.jumpig.common.api.hitbox.Hitbox;
 
 /**
  * Class to manage the position and the hitbox of each gameEntity.
+ * 
  * @param <H> any kind of Hitbox
-*/
+ */
 public abstract class AbstractGameEntity<H extends Hitbox> implements GameEntity<H> {
 
-    private final Position position;
+    private Position position;
     private final H hitbox;
 
     /**
      * Constructor for any gameEntity.
+     * 
      * @param position position of the gameEntity in the world.
-     * @param hitbox hitbox of the gameEntity.
+     * @param hitbox   hitbox of the gameEntity.
      */
-    public AbstractGameEntity(final Position position, final H hitbox) {
+    protected AbstractGameEntity(final Position position, final H hitbox) {
         this.position = position;
         this.hitbox = hitbox;
     }
@@ -36,6 +38,15 @@ public abstract class AbstractGameEntity<H extends Hitbox> implements GameEntity
     @Override
     public final H getHitbox() {
         return this.hitbox;
+    }
+
+    /**
+     * Setter for the position og the gameEntity.
+     * 
+     * @param position new position of the gameEntity
+     */
+    protected final void setPosition(final Position position) {
+        this.position = position;
     }
 
     /**
