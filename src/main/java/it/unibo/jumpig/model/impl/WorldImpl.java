@@ -74,7 +74,7 @@ public class WorldImpl implements World {
      */
     @Override
     public Set<Coin> getCoins() {
-       return this.setcoins.stream().collect(Collectors.toSet());
+       return this.setcoins.stream().filter(x -> !x.isTaken()).collect(Collectors.toSet());
     }
 
     /**
