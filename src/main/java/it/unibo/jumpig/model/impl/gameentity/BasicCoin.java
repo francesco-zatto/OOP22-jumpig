@@ -2,8 +2,11 @@ package it.unibo.jumpig.model.impl.gameentity;
 
 import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.impl.hitbox.CircleHitbox;
+import it.unibo.jumpig.common.impl.hitbox.CoinHitbox;
 import it.unibo.jumpig.model.api.gameentity.AbstractGameEntity;
 import it.unibo.jumpig.model.api.gameentity.Coin;
+import it.unibo.jumpig.model.api.gameentity.Player;
+import it.unibo.jumpig.model.impl.collision.CoinCollisionHandler;
 
 /**
  * The class that represents a basic coin.
@@ -11,23 +14,25 @@ import it.unibo.jumpig.model.api.gameentity.Coin;
  */
 public class BasicCoin extends AbstractGameEntity<CircleHitbox> implements Coin {
 
-    private boolean targettable;
+    private boolean taken;
+    private final CoinCollisionHandler collisionHandler;
 
     /**
      * The constructor for a basic coin.
+     * 
      * @param position position of the coin in the world.
-     * @param hitbox hitbox of the coin.
      */
-    public BasicCoin(final Position position, final CircleHitbox hitbox) {
-        super(position, hitbox);
+    public BasicCoin(final Position position) {
+        super(position, new CoinHitbox(position));
+        this.collisionHandler = new CoinCollisionHandler();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setTarget(final boolean setTargettable) {
-        this.targettable = setTargettable;
+    public void markTarget() {
+        this.taken = true;
     }
 
     /**
@@ -35,6 +40,14 @@ public class BasicCoin extends AbstractGameEntity<CircleHitbox> implements Coin 
      */
     @Override
     public boolean isTaken() {
-        return this.targettable;
+        return this.taken;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void handleCollision(final Player player) {
+        this.collisionHandler.handle(player, this);
     }
 }
