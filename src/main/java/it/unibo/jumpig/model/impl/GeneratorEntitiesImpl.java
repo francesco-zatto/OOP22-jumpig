@@ -3,7 +3,6 @@ package it.unibo.jumpig.model.impl;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.impl.PositionImpl;
@@ -18,10 +17,11 @@ import it.unibo.jumpig.model.impl.gameentity.BasicPlatform;
  * The class to manage the generation of the entities.
  */
 
-public class GeneratorEntitiesImpl implements GeneratorEntities {
+ public class GeneratorEntitiesImpl implements GeneratorEntities {
 
     private final Set<Platform> setplatforms;
     private final Set<Coin> setcoins;
+    private final Set<Position> setentities;
     private static final double MAX_WIDTH = 36;    /* The width of the game */
     private static final double MAX_HEIGHT = 64;    /* The height of the game */
     private static final double NUM_PLATFORM = 50;    /* The number of platforms */
@@ -33,6 +33,7 @@ public class GeneratorEntitiesImpl implements GeneratorEntities {
     public GeneratorEntitiesImpl() {
         this.setplatforms = new HashSet<>();
         this.setcoins = new HashSet<>();
+        this.setentities = new HashSet<>();
     }
 
     /**
@@ -65,6 +66,7 @@ public class GeneratorEntitiesImpl implements GeneratorEntities {
         for (int i = 0; i < NUM_PLATFORM; i++) {
             final Position coordinate = new PositionImpl(Math.random() * MAX_WIDTH, Math.random() * MAX_HEIGHT * 2);
             this.setplatforms.add(new BasicPlatform(this.checkEqualsPosition(coordinate), 1));
+            this.setentities.add(coordinate);
         }
     }
 
@@ -72,6 +74,7 @@ public class GeneratorEntitiesImpl implements GeneratorEntities {
         for (int i = 0; i < NUM_COIN; i++) {
             final Position coordinate = new PositionImpl(Math.random() * MAX_WIDTH, Math.random() * MAX_HEIGHT * 2);
             this.setcoins.add(new BasicCoin(this.checkEqualsPosition(coordinate)));
+            this.setentities.add(coordinate);
         }
     }
 
@@ -82,8 +85,8 @@ public class GeneratorEntitiesImpl implements GeneratorEntities {
      * @return  the coordinates I'm going to generate.
      */
    private Position checkEqualsPosition(final Position startEntity) {
-        return Stream.concat(this.setplatforms.stream(), this.setcoins.stream()).anyMatch(
-            x -> x.getPosition().getY() == startEntity.getY()
+        return this.setentities.stream().anyMatch(
+            x -> x.getY() == startEntity.getY()
         ) ? this.checkEqualsPosition(
             new PositionImpl(Math.random() * MAX_WIDTH, Math.random() * MAX_HEIGHT * 2)) : startEntity;
     }
