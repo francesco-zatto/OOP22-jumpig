@@ -10,7 +10,9 @@ import it.unibo.jumpig.model.api.gameentity.Coin;
 import it.unibo.jumpig.model.api.gameentity.Enemy;
 import it.unibo.jumpig.model.api.gameentity.Platform;
 import it.unibo.jumpig.model.api.gameentity.Player;
+import it.unibo.jumpig.model.api.gameentity.Targettable;
 import it.unibo.jumpig.model.impl.gameentity.PlayerImpl;
+import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
 
 /**
  * The class to manage the world of the game.
@@ -50,7 +52,8 @@ public class WorldImpl implements World {
      */
     @Override
     public Set<Platform> getPlatform() {
-        return this.setplatform.stream().collect(Collectors.toSet());
+        return this.setplatform.stream().filter(x -> x.getClass() == VanishingPlatform.class 
+        && !((Targettable) x).isTaken() || x.getClass() != VanishingPlatform.class).collect(Collectors.toSet());
     }
 
     /**
