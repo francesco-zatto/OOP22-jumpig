@@ -6,7 +6,9 @@ import java.util.Set;
 
 import it.unibo.jumpig.model.impl.GeneratorEntitiesImpl;
 import it.unibo.jumpig.model.api.GeneratorEntities;
+import it.unibo.jumpig.model.api.gameentity.Coin;
 import it.unibo.jumpig.model.api.gameentity.GameEntity;
+import it.unibo.jumpig.model.api.gameentity.Platform;
 
 
 /**
@@ -27,8 +29,13 @@ class GeneratorEntitiesTest { //NOPMD
 
     @Test
     void testGenerationPlatforms() {
-        final var setplatform = this.generator.generatePlatforms();
+        final Set<Platform> setplatform = this.generator.generatePlatforms();
         this.assertGeneration(setplatform);
     }
 
+    @Test
+    void testGenerationCoins() {
+        final Set<Coin> setcoin = this.generator.generateCoins();
+        this.assertGeneration(setcoin);
+    }
 }
