@@ -13,7 +13,10 @@ public interface GameViewScene extends ViewScene {
 
     /**
      * The method to render the current score.
+     * @param coins number of coins picked by player
+     * @param height height reached by the player
+     * @param lives lives of the player
      */
-    void renderCurrentScore();
+    void renderCurrentScore(int coins, int height, int lives);
 
 }
