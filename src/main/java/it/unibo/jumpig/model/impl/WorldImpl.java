@@ -1,10 +1,10 @@
 package it.unibo.jumpig.model.impl;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import it.unibo.jumpig.model.api.Camera;
+import it.unibo.jumpig.model.api.GeneratorEntities;
 import it.unibo.jumpig.model.api.World;
 import it.unibo.jumpig.model.api.gameentity.Coin;
 import it.unibo.jumpig.model.api.gameentity.Enemy;
@@ -21,6 +21,7 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
 public class WorldImpl implements World {
 
     private static final double GRAVITY = 9.8;
+    private final GeneratorEntities generator; //NOPMD perchè lo useremo in updateGame
     private final Player player;
     private final Set<Platform> setplatform;
     private final Set<Enemy> setenemies;
@@ -32,10 +33,11 @@ public class WorldImpl implements World {
      */
 
     public WorldImpl() {
+        this.generator = new GeneratorEntitiesImpl();
         this.player = new PlayerImpl(null);
-        this.setplatform = new HashSet<>();
-        this.setenemies = new HashSet<>();
-        this.setcoins = new HashSet<>();
+        this.setplatform = generator.generatePlatforms();
+        this.setenemies = generator.generateEnemies();
+        this.setcoins = generator.generateCoins();
         this.camera = new CameraImpl();
     }
 
