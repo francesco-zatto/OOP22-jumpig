@@ -12,6 +12,7 @@ import it.unibo.jumpig.model.api.gameentity.Enemy;
 import it.unibo.jumpig.model.api.gameentity.Platform;
 import it.unibo.jumpig.model.impl.gameentity.BasicCoin;
 import it.unibo.jumpig.model.impl.gameentity.BasicPlatform;
+import it.unibo.jumpig.model.impl.gameentity.EnemyImpl;
 
 /**
  * The class to manage the generation of the entities.
@@ -21,10 +22,12 @@ import it.unibo.jumpig.model.impl.gameentity.BasicPlatform;
 
     private final Set<Platform> setplatforms;
     private final Set<Coin> setcoins;
+    private final Set<Enemy> setenemies;
     private final Set<Position> setentities;
     private static final double MAX_WIDTH = 36;    /* The width of the game */
     private static final double MAX_HEIGHT = 64;    /* The height of the game */
     private static final double NUM_PLATFORM = 50;    /* The number of platforms */
+    private static final double NUM_ENEMY = 2;    /* The number of enemies */
     private static final double NUM_COIN = 30;    /* The number of coins */
 
     /**
@@ -33,6 +36,7 @@ import it.unibo.jumpig.model.impl.gameentity.BasicPlatform;
     public GeneratorEntitiesImpl() {
         this.setplatforms = new HashSet<>();
         this.setcoins = new HashSet<>();
+        this.setenemies = new HashSet<>();
         this.setentities = new HashSet<>();
     }
 
@@ -49,8 +53,8 @@ import it.unibo.jumpig.model.impl.gameentity.BasicPlatform;
      */
     @Override
     public Set<Enemy> generateEnemies() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'generateEnemies'");
+        this.addEnemies();
+        return setenemies.stream().collect(Collectors.toSet());
     }
 
     /**
@@ -70,6 +74,14 @@ import it.unibo.jumpig.model.impl.gameentity.BasicPlatform;
         }
     }
 
+    private void addEnemies() {
+        for (int i = 0; i < NUM_ENEMY; i++) {
+            final Position coordinate = new PositionImpl(Math.random() * MAX_WIDTH, Math.random() * MAX_HEIGHT * 2);
+            this.setenemies.add(new EnemyImpl(this.checkEqualsPosition(coordinate)));
+            this.setentities.add(coordinate);
+        }
+    }
+
     private void addCoins() {
         for (int i = 0; i < NUM_COIN; i++) {
             final Position coordinate = new PositionImpl(Math.random() * MAX_WIDTH, Math.random() * MAX_HEIGHT * 2);
@@ -78,6 +90,12 @@ import it.unibo.jumpig.model.impl.gameentity.BasicPlatform;
         }
     }
 
+   /* private void addEnemies(Set<Enemy> setenemies) {
+        for (int i = 0; i < NUM_ENEMY; i++) {
+            final Position coordinate = new PositionImpl(Math.random() * MAX_WIDTH, Math.random() * MAX_HEIGHT * 2);
+            setenemies.add(new BasicEnemy(this.checkEqualsPosition(setenemies, coordinate), 1));
+        }
+    }*/
     /**
      * The method to generate coordinates (for a generic entity) without generating entities on the same y.
      * In this way I will not generate colliding entities.
