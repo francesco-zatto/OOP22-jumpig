@@ -9,7 +9,7 @@ import it.unibo.jumpig.model.api.GeneratorEntities;
 import it.unibo.jumpig.model.api.gameentity.Coin;
 import it.unibo.jumpig.model.api.gameentity.GameEntity;
 import it.unibo.jumpig.model.api.gameentity.Platform;
-
+import it.unibo.jumpig.model.api.gameentity.Enemy;
 
 /**
  * The class to test the correctness of GeneratorEntitiesImpl.
@@ -37,5 +37,11 @@ class GeneratorEntitiesTest { //NOPMD
     void testGenerationCoins() {
         final Set<Coin> setcoin = this.generator.generateCoins();
         this.assertGeneration(setcoin);
+    }
+
+    @Test
+    void testGenerationEnemies() {
+        final Set<Enemy> setenemy = this.generator.generateEnemies();
+        this.assertGeneration(setenemy);
     }
 }
