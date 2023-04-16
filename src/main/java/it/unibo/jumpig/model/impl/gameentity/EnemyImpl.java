@@ -15,7 +15,7 @@ import it.unibo.jumpig.model.impl.collision.EnemyCollisionHandler;
 public class EnemyImpl extends AbstractGameEntity<RectangleHitbox> implements Enemy {
 
     private boolean targettable;
-    private final EnemyCollisionHandler collisionHandler;
+    private final EnemyCollisionHandler collisionHandler = new EnemyCollisionHandler();
 
     /**
      * The constructor for an enemy.
@@ -25,7 +25,7 @@ public class EnemyImpl extends AbstractGameEntity<RectangleHitbox> implements En
      */
 
     public EnemyImpl(final Position position, final RectangleHitbox hitbox) {
-        super(position, hitbox, null);
+        super(position, hitbox, (e, r) -> r.renderEnemy(e));
     }
 
     /**
