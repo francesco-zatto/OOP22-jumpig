@@ -75,8 +75,9 @@ public final class SwingRenderer implements Renderer {
 
     @Override
     public void renderCoin(final GameEntity<CircleHitbox> entity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'renderCoin'");
+        graphics.fillOval((int) (entity.getHitbox().getCenter().getX() * widthRatio), 
+        (int) (entity.getHitbox().getCenter().getY() * heightRatio), 
+        this.createScaledRadius(entity.getHitbox()), this.createScaledRadius(entity.getHitbox()));
     }
 
     /**
@@ -94,6 +95,10 @@ public final class SwingRenderer implements Renderer {
                 (int) (hitbox.getCenter().getY() * this.heightRatio)),
                 new Dimension((int) (hitbox.getWidth() * this.widthRatio),
                         (int) (hitbox.getHeight() * this.heightRatio)));
+    }
+
+    private int createScaledRadius(final CircleHitbox hitbox) {
+        return (int) (hitbox.getRadius() * this.widthRatio);
     }
 
     /*public static void main(String[] args) {
