@@ -1,6 +1,7 @@
 package it.unibo.jumpig.model.impl.gameentity;
 
 import it.unibo.jumpig.common.api.Position;
+import it.unibo.jumpig.common.impl.hitbox.EnemyHitbox;
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.model.api.gameentity.AbstractGameEntity;
 import it.unibo.jumpig.model.api.gameentity.Enemy;
@@ -21,11 +22,10 @@ public class EnemyImpl extends AbstractGameEntity<RectangleHitbox> implements En
      * The constructor for an enemy.
      * 
      * @param position position of the enemy in the world
-     * @param hitbox   hitbox of the enemy
      */
 
-    public EnemyImpl(final Position position, final RectangleHitbox hitbox) {
-        super(position, hitbox, (e, r) -> r.renderEnemy(e));
+    public EnemyImpl(final Position position) {
+        super(position, new EnemyHitbox(position), (e, r) -> r.renderEnemy(e));
     }
 
     /**
