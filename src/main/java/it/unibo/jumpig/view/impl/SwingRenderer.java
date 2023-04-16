@@ -55,10 +55,13 @@ public final class SwingRenderer implements Renderer {
         throw new UnsupportedOperationException("Unimplemented method 'renderEnemy'");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void renderBasicPlatform(final GameEntity<RectangleHitbox> entity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'renderBasicPlatform'");
+        graphics.setColor(Color.GREEN);
+        graphics.fill(this.createScaledRectangle(entity.getHitbox()));
     }
 
     /**
@@ -67,7 +70,7 @@ public final class SwingRenderer implements Renderer {
     @Override
     public void renderVanishingPlatform(final GameEntity<RectangleHitbox> entity) {
         graphics.setColor(Color.RED);
-        graphics.fill(this.scale(entity.getHitbox()));
+        graphics.fill(this.createScaledRectangle(entity.getHitbox()));
     }
 
     @Override
@@ -86,8 +89,7 @@ public final class SwingRenderer implements Renderer {
         this.heightRatio = realHeight / this.worldHeight;
     }
 
-    /*Method that creates a Rectangle, given a hitbox, and scales it using ratios.*/
-    private Rectangle scale(final RectangleHitbox hitbox) {
+    private Rectangle createScaledRectangle(final RectangleHitbox hitbox) {
         return new Rectangle(new Point((int) (hitbox.getCenter().getX() * this.widthRatio),
                 (int) (hitbox.getCenter().getY() * this.heightRatio)),
                 new Dimension((int) (hitbox.getWidth() * this.widthRatio),
