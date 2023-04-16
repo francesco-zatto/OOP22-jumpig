@@ -50,6 +50,7 @@ public class GamePanel extends JPanel {
         }
         g2D.setBackground(Color.CYAN);
         super.paint(g2D);
+        this.renderer.get().setRatio(this.getWidth(), this.getHeight());
     }
 
     /*public static void main(String[] args) {
