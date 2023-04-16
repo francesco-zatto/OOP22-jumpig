@@ -22,7 +22,7 @@ public class BasicCoin extends AbstractGameEntity<CircleHitbox> implements Coin 
      * @param position position of the coin in the world.
      */
     public BasicCoin(final Position position) {
-        super(position, new CoinHitbox(position));
+        super(position, new CoinHitbox(position),null);
         this.collisionHandler = new CoinCollisionHandler();
     }
 
