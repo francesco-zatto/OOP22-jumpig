@@ -25,7 +25,7 @@ class PlatformCollisionHandlerTest {
     private static final double PLAYER_POSITION_X = 5;
     private static final double PLAYER_POSITION_Y = 6.5;
     private static final double PLATFORM_VELOCITY = 10;
-    private static final double DELTA_TIME = 0.0001;
+    private static final double DELTA_TIME = 0.01;
     private static final double GRAVITY = -9.81;
     private static final Position PLATFORM_POSITION = new PositionImpl(PLATFORM_POSITION_X, PLATFORM_POSITION_Y);
     private static final Position PLAYER_POSITION = new PositionImpl(PLAYER_POSITION_X, PLAYER_POSITION_Y);
@@ -62,5 +62,18 @@ class PlatformCollisionHandlerTest {
         platform.handleCollision(player);
         assertCollision(player, platform);
         CollisionHandlerTest.assertIsTaken(platform);
+    }
+
+    @Test
+    void testVanishingPlatformIsAlreadyTaken() {
+        final var player = new PlayerImpl(PLAYER_POSITION);
+        final var platform = new VanishingPlatform(PLATFORM_POSITION, PLATFORM_VELOCITY);
+        player.computeVelocity(GRAVITY, DELTA_TIME);
+        platform.handleCollision(player);
+        final double fallingTime = 2 * player.getVelocity().getYComponent() / -GRAVITY;
+        player.computeVelocity(GRAVITY, fallingTime);
+        platform.handleCollision(player);
+        CollisionHandlerTest.assertIsTaken(platform);
+        assertEquals(platform.getJumpVelocity().getYComponent(), -player.getVelocity().getYComponent());
     }
 }
