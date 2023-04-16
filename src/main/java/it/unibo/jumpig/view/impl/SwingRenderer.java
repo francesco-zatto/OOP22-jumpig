@@ -1,5 +1,12 @@
 package it.unibo.jumpig.view.impl;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.Rectangle;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.jumpig.common.impl.hitbox.CircleHitbox;
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.model.api.gameentity.GameEntity;
@@ -9,6 +16,32 @@ import it.unibo.jumpig.view.api.Renderer;
  * Class the uses Java Swing library to render the gameEntity.
  */
 public final class SwingRenderer implements Renderer {
+
+    private final Graphics2D graphics;
+    private final double worldWidth;
+    private final double worldHeight;
+    private double widthRatio;
+    private double heightRatio;
+
+    /**
+     * Constructor for a SwingRenderer.
+     * @param graphics Java Swing graphics used to render game entities.
+     * @param worldWidth width of the game's world.
+     * @param worldHeight height of the game's world.
+     * @param realWidth width of the game's panel.
+     * @param realHeight heigth of the game's panel.
+     */
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP",
+            justification = "graphics is used only by this class and by GamePanel superclasses that"
+                    + "should not make no change in the way game entities are rendered.")
+    public SwingRenderer(final Graphics2D graphics, final double worldWidth, final double worldHeight,
+            final double realWidth, final double realHeight) {
+        this.graphics = graphics;
+        this.worldWidth = worldWidth;
+        this.worldHeight = worldHeight;
+        this.widthRatio = realWidth / this.worldWidth;
+        this.heightRatio = realHeight / this.worldHeight; 
+    } 
 
     @Override
     public void renderPlayer(final GameEntity<RectangleHitbox> entity) {
@@ -28,10 +61,13 @@ public final class SwingRenderer implements Renderer {
         throw new UnsupportedOperationException("Unimplemented method 'renderBasicPlatform'");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void renderVanishingPlatform(final GameEntity<RectangleHitbox> entity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'renderVanishingPlatform'");
+        graphics.setColor(Color.RED);
+        graphics.fill(this.scale(entity.getHitbox()));
     }
 
     @Override
@@ -39,4 +75,28 @@ public final class SwingRenderer implements Renderer {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'renderCoin'");
     }
+
+    /**
+     * Setter for the ratio real dimension / world dimension.
+     * @param realWidth width of the window of the game.
+     * @param realHeight height of the window of the game.
+     */
+    public void setRatio(final double realWidth, final double realHeight) {
+        this.widthRatio = realWidth / this.worldWidth;
+        this.heightRatio = realHeight / this.worldHeight;
+    }
+
+    /*Method that creates a Rectangle, given a hitbox, and scales it using ratios.*/
+    private Rectangle scale(final RectangleHitbox hitbox) {
+        return new Rectangle(new Point((int) (hitbox.getCenter().getX() * this.widthRatio),
+                (int) (hitbox.getCenter().getY() * this.heightRatio)),
+                new Dimension((int) (hitbox.getWidth() * this.widthRatio),
+                        (int) (hitbox.getHeight() * this.heightRatio)));
+    }
+
+    /*public static void main(String[] args) {
+        var hitbox = new RectangleHitbox(new PositionImpl(10, 10), 20, 5);
+        var r = new SwingRenderer(null, 200, 100, 50, 75);
+        System.out.println(r.scale(hitbox));
+    }*/
 }
