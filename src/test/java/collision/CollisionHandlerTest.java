@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.impl.PositionImpl;
-import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.model.api.gameentity.Targettable;
 import it.unibo.jumpig.model.impl.collision.CoinCollisionHandler;
 import it.unibo.jumpig.model.impl.collision.EnemyCollisionHandler;
@@ -48,7 +47,7 @@ class CollisionHandlerTest {
     @Test
     void testEnemyCollision() {
         final var player = new PlayerImpl(PLAYER_POSITION);
-        final var enemy = new EnemyImpl(ENEMY_POSITION, new RectangleHitbox(ENEMY_POSITION, 5, 6));
+        final var enemy = new EnemyImpl(ENEMY_POSITION);
         final var enemyCollisionHandler = new EnemyCollisionHandler();
         final int playerLives = player.getLives();
         enemyCollisionHandler.handle(player, enemy);
