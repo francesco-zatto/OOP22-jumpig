@@ -4,50 +4,36 @@ import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.impl.hitbox.PlatformHitbox;
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.model.api.Velocity;
-import it.unibo.jumpig.model.api.collision.CollisionHandler;
 import it.unibo.jumpig.model.impl.VelocityImpl;
+import it.unibo.jumpig.view.api.RenderingComponent;
 
 /**
- * Class to manage the behaviour of every platform in the world.
+ * Class to manage the velocity of the jump and the length of a Platform.
  */
-public abstract class AbstractPlatform extends AbstractCollidableGameEntity<RectangleHitbox, Platform> implements Platform {
+public abstract class AbstractPlatform extends AbstractGameEntity<RectangleHitbox> implements Platform {
 
     private final Velocity jumpVelocity;
     private final double length = this.getHitbox().getWidth();
 
     /**
      * Constructor for any kind of platform.
-     * @param position position of the platform.
-     * @param verticalJumpVelocity vertical velocity of a player when jumps on the platform.
-     * @param collisionHandler the way is handled the collision with the player.
+     * @param position position of the platform in the world.
+     * @param jumpVelocity vertical velocity of a player when jumps on the platform.
+     * @param renderingComponent the rendering component of the platform
      */
-    protected AbstractPlatform(final Position position, final double verticalJumpVelocity,
-            final CollisionHandler<RectangleHitbox, Platform> collisionHandler) {
-        super(position, new PlatformHitbox(position), collisionHandler);
-        this.jumpVelocity = new VelocityImpl(0, verticalJumpVelocity);
+    protected AbstractPlatform(final Position position, final double jumpVelocity,
+            final RenderingComponent<RectangleHitbox> renderingComponent) {
+        super(position, new PlatformHitbox(position), renderingComponent);
+        this.jumpVelocity = new VelocityImpl(0, jumpVelocity);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public void handleCollision(final Player player) {
-        this.getCollisionHandler().handle(player, this);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Velocity getJumpVelocity() {
+    public final Velocity getJumpVelocity() {
         return this.jumpVelocity;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public double getLength() {
+    public final double getLength() {
         return this.length;
     }
 }
