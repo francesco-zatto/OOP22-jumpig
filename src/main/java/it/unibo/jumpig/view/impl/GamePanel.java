@@ -5,13 +5,11 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
+import java.util.Optional;
 
-//import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-//import it.unibo.jumpig.common.impl.PositionImpl;
-//import it.unibo.jumpig.model.impl.gameentity.BasicPlatform;
 
 /**
  * The GUI that shows the game currently going on.
@@ -23,16 +21,18 @@ public class GamePanel extends JPanel {
     private final double worldHeight;
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     private final Dimension startScreen = new Dimension((int) screen.getWidth() / 5, (int) (screen.getWidth() / 5 * 1.7));
+    private transient Optional<SwingRenderer> renderer = Optional.empty();
 
     /**
      * Constructor for a gamePanel.
-     * @param platformSet a set of platform for testing
+     * @param worldWidth width of game's world.
+     * @param worldHeight height of game's world.
      */
     public GamePanel(final double worldWidth, final double worldHeight) { 
         this.worldWidth = worldWidth;
         this.worldHeight = worldHeight;
         this.setSize(this.startScreen);
-        this.setPreferredSize(this.getSize());
+        this.setPreferredSize(super.getSize());
     }
 
     /**
@@ -44,6 +44,10 @@ public class GamePanel extends JPanel {
             justification = "It's a safe and necessary cast because g is Graphics2D")
     public void paint(final Graphics g) {
         final Graphics2D g2D = (Graphics2D) g;
+        if (this.renderer.isEmpty()) {
+            this.renderer = Optional.of(new SwingRenderer(g2D, this.worldWidth, this.worldHeight,
+                    this.getWidth(), this.getHeight()));
+        }
         g2D.setBackground(Color.CYAN);
         super.paint(g2D);
     }
