@@ -41,7 +41,7 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
      * @param lives player's lives
      */
     private PlayerImpl(final Position position, final Velocity velocity, final int coins, final int lives) {
-        super(position, new PlayerHitbox(position), null); //TODO
+        super(position, new PlayerHitbox(position), (e,r) -> r.renderPlayer(e));
         this.playerVelocity = velocity;
         this.coins = coins;
         this.lives = lives;
