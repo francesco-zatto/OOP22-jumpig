@@ -7,7 +7,7 @@ import it.unibo.jumpig.common.api.hitbox.Hitbox;
  * Interface that represent an entity in the game.
  * @param <H> any kind of Hitbox
  */
-public interface GameEntity<H extends Hitbox> {
+public interface GameEntity<H extends Hitbox> extends Renderable {
     /**
      * Getter for the position of the gameEntity.
      * @return the gameEntity's position.

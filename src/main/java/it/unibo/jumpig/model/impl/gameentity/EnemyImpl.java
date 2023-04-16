@@ -25,8 +25,7 @@ public class EnemyImpl extends AbstractGameEntity<RectangleHitbox> implements En
      */
 
     public EnemyImpl(final Position position, final RectangleHitbox hitbox) {
-        super(position, hitbox);
-        this.collisionHandler = new EnemyCollisionHandler();
+        super(position, hitbox, null);
     }
 
     /**

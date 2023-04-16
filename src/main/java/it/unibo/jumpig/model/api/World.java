@@ -40,4 +40,16 @@ public interface World {
      * @return a set of coins
      */
     Set<Coin> getCoins();
+
+    /**
+     * Getter for the camera.
+     * @return the camera.
+     */
+    Camera getCamera();
+
+    /**
+     * Method that updates the positions for every entity inside the game.
+     * @param elapsed the elapsed time.
+     */
+    void updateGame(long elapsed);
 }
