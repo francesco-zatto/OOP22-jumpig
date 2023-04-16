@@ -15,15 +15,14 @@ import it.unibo.jumpig.model.impl.collision.CoinCollisionHandler;
 public class BasicCoin extends AbstractGameEntity<CircleHitbox> implements Coin {
 
     private boolean taken;
-    private final CoinCollisionHandler collisionHandler;
+    private final CoinCollisionHandler collisionHandler = new CoinCollisionHandler();
 
     /**
      * The constructor for a basic coin.
      * @param position position of the coin in the world.
      */
     public BasicCoin(final Position position) {
-        super(position, new CoinHitbox(position), null);
-        this.collisionHandler = new CoinCollisionHandler();
+        super(position, new CoinHitbox(position), (e, r) -> r.renderCoin(e));
     }
 
     /**
