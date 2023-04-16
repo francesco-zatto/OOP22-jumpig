@@ -2,6 +2,7 @@ package collision;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import it.unibo.jumpig.common.api.Position;
@@ -42,6 +43,15 @@ class PlatformCollisionHandlerTest {
        player.computeVelocity(GRAVITY, DELTA_TIME);
        platform.handleCollision(player);
        assertCollision(player, platform);
+    }
+
+    @Test
+    void testPlayerIsNotGoingDown() {
+        final var player = new PlayerImpl(PLAYER_POSITION);
+        final var platform = new BasicPlatform(PLATFORM_POSITION, PLATFORM_VELOCITY);
+        platform.handleCollision(player);
+        assertTrue(player.getVelocity().getYComponent() >= 0);
+        assertNotEquals(player.getVelocity().getYComponent(), platform.getJumpVelocity().getYComponent());
     }
 
     @Test
