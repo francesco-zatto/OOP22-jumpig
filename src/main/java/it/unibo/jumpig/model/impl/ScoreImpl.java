@@ -7,6 +7,7 @@ import it.unibo.jumpig.model.api.Score;
  */
 public class ScoreImpl implements Score {
 
+    private static final long serialVersionUID = 1L;
     private final String username;
     private final double heightScore;
     private final int coins;

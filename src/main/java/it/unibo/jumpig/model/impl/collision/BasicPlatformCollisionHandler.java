@@ -6,6 +6,7 @@ import it.unibo.jumpig.model.api.collision.CollisionActioner;
 import it.unibo.jumpig.model.api.collision.CollisionChecker;
 import it.unibo.jumpig.model.api.gameentity.Platform;
 import it.unibo.jumpig.model.api.gameentity.Player;
+import it.unibo.jumpig.model.impl.VelocityImpl;
 
 /**
  * Class that handles collisions between a player and a platform, checking if the player is jumping on 
@@ -40,7 +41,8 @@ public final class BasicPlatformCollisionHandler extends AbstractCollisionHandle
     }
 
     private void playerJumps(final Player player, final Platform platform) {
-        player.setVelocityFromJump(platform.getJumpVelocity());
+        final var platformJumpVelocity = platform.getJumpVelocity();
+        player.setVelocityFromJump(new VelocityImpl(platformJumpVelocity.getYComponent(), platformJumpVelocity.getYComponent()));
         player.setLastPlatformHeight(platform.getPosition().getY());
     } 
 }
