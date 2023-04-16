@@ -9,14 +9,14 @@ import it.unibo.jumpig.view.impl.MenuViewSceneImpl;
  */
 public class MenuControllerImpl implements MenuController {
 
-    private final MenuViewScene view = new MenuViewSceneImpl(this);
+    private final MenuViewScene menuView = new MenuViewSceneImpl(this);
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void start() {
-        this.view.show();
+        this.menuView.show();
     }
 
     /**
@@ -24,7 +24,7 @@ public class MenuControllerImpl implements MenuController {
      */
     @Override
     public void close() {
-        this.view.quit();
+        this.menuView.quit();
     }
 
     /**
