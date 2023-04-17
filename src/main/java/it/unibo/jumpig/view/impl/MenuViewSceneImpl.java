@@ -80,12 +80,18 @@ public class MenuViewSceneImpl implements MenuViewScene {
         final int width = (int) (height * 0.5625);
         frame.setSize(width, height);
         frame.setLocationByPlatform(true);
-        frame.setResizable(false);
+        frame.setResizable(true);
         /*
          * Adding listeners to buttons.
          */
         quitButton.addActionListener(e -> this.controller.close());
-        gameButton.addActionListener(e -> this.controller.notifyStartGame());
+        gameButton.addActionListener(e -> {
+            frame.remove(menuPanel);
+            final JPanel gamePanel = new GamePanel(width, height);
+            frame.getContentPane().add(gamePanel);
+            frame.pack();
+            
+        });
         leaderboardButton.addActionListener(e -> this.controller.notifyStartLeaderboard());
     }
 
