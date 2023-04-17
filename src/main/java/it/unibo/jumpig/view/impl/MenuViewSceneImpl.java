@@ -115,4 +115,9 @@ public class MenuViewSceneImpl implements MenuViewScene {
             this.frame.dispose();
         }
     }
+    /*
+    public static void main(String[] args) {
+        new MenuViewSceneImpl(null).show();
+    }
+    */
 }
