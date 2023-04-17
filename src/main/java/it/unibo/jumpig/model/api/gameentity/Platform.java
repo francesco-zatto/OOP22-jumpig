@@ -6,7 +6,7 @@ import it.unibo.jumpig.model.api.Velocity;
 /**
  * An interface that represents the platform on which the player jumps.
  */
-public interface Platform extends GameEntity<RectangleHitbox>, Collidable {
+public interface Platform extends CollidableEntity<RectangleHitbox> {
     /**
      * Getter for the velocity that the platform gives to the player
      * when he jumps on it.
