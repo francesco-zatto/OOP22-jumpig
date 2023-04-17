@@ -1,9 +1,6 @@
 package it.unibo.jumpig.view.impl;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
@@ -11,7 +8,6 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
@@ -45,15 +41,6 @@ public class GamePanel extends JPanel {
         this.worldHeight = worldHeight;
         this.setSize(this.startScreen);
         this.setPreferredSize(super.getSize());
-        final JPanel scorePanel = new JPanel(new BorderLayout());
-        final JPanel componentsPanel = new JPanel(new FlowLayout());
-        final JLabel scoreText = new JLabel("Score: ");
-        final JLabel scoreNumber = new JLabel("0");
-        componentsPanel.add(scoreText);
-        componentsPanel.add(scoreNumber);
-        componentsPanel.setBackground(Color.CYAN);
-        scorePanel.add(componentsPanel, BorderLayout.NORTH);
-        this.add(scorePanel);
     }
 
     /**
