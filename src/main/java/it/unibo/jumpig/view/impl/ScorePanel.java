@@ -23,14 +23,14 @@ public class ScorePanel extends JPanel {
           final JLabel coinNumber = new JLabel("0");
           final JLabel livesText = new JLabel("Lives: ");
           final JLabel livesNumber = new JLabel("3"); 
-        componentsPanel.add(scoreText);
-        componentsPanel.add(scoreNumber);
-        componentsPanel.add(coinAmount);
-        componentsPanel.add(coinNumber);
-        componentsPanel.add(livesText);
-        componentsPanel.add(livesNumber);
-        componentsPanel.setBackground(Color.CYAN);
-        this.add(componentsPanel, BorderLayout.NORTH);
+          componentsPanel.add(scoreText);
+          componentsPanel.add(scoreNumber);
+          componentsPanel.add(coinAmount);
+          componentsPanel.add(coinNumber);
+          componentsPanel.add(livesText);
+          componentsPanel.add(livesNumber);
+          componentsPanel.setBackground(Color.CYAN);
+          this.add(componentsPanel, BorderLayout.NORTH);
      }
 
      /**
