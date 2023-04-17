@@ -51,6 +51,11 @@ public interface Player extends GameEntity<RectangleHitbox> {
     void incrementCoins();
 
     /**
+     *  Method that computes the next player's position.
+     * @param deltaTime the time interval
+     */
+    void computePosition(final double deltaTime);
+    /**
      * Method for a defensive copy.
      * @return the player's copy
      */
