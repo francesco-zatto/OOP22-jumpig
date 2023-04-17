@@ -158,4 +158,12 @@ public class WorldImpl implements World {
         }
         return setToRegenerate;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getHeight() {
+        return HEIGHT;
+    }
 }
