@@ -55,6 +55,7 @@ public interface Player extends GameEntity<RectangleHitbox> {
      * @param deltaTime the time interval
      */
     void computePosition(final double deltaTime);
+    
     /**
      * Method for a defensive copy.
      * @return the player's copy
