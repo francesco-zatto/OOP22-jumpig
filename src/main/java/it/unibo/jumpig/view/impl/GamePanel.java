@@ -9,14 +9,10 @@ import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.util.Optional;
 
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.unibo.jumpig.common.impl.PositionImpl;
-import it.unibo.jumpig.model.api.gameentity.Platform;
-import it.unibo.jumpig.model.impl.gameentity.BasicPlatform;
 
 /**
  * The GUI that shows the game currently going on.
@@ -40,10 +36,10 @@ public class GamePanel extends JPanel {
         this.worldHeight = worldHeight;
         this.setSize(this.startScreen);
         this.setPreferredSize(super.getSize());
-        JPanel scorePanel = new JPanel(new BorderLayout());
-        JPanel componentsPanel = new JPanel(new FlowLayout());
-        JLabel scoreText = new JLabel("Score: ");
-        JLabel scoreNumber = new JLabel("0");
+        final JPanel scorePanel = new JPanel(new BorderLayout());
+        final JPanel componentsPanel = new JPanel(new FlowLayout());
+        final JLabel scoreText = new JLabel("Score: ");
+        final JLabel scoreNumber = new JLabel("0");
         componentsPanel.add(scoreText);
         componentsPanel.add(scoreNumber);
         componentsPanel.setBackground(Color.CYAN);
@@ -68,7 +64,7 @@ public class GamePanel extends JPanel {
         super.paint(g2D);
         this.renderer.get().setRatio(this.getWidth(), this.getHeight());
     }
-
+    /*
     public static void main(String[] args) {
         var frame = new JFrame();
         Platform platform = new BasicPlatform(new PositionImpl(15, 15), 30);
@@ -78,4 +74,5 @@ public class GamePanel extends JPanel {
         frame.pack();
         frame.setVisible(true);
     }
+    */
 }
