@@ -35,18 +35,6 @@ public interface World {
     Camera getCamera();
 
     /**
-     * The method to get the height of the world.
-     * @return the height of the world
-     */
-    double getHeight();
-
-    /**
-     * The method to get the width of the world.
-     * @return the width of the world
-     */
-    double getWidth();
-
-    /**
      * Method that updates the positions for every entity inside the game.
      * @param elapsed the elapsed time.
      */

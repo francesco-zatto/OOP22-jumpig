@@ -119,18 +119,18 @@ public class WorldImpl implements World {
     }
 
     /**
-     * {@inheritDoc}
+     * The method to get the height of the world.
+     * @return the height of the world
      */
-    @Override
-    public double getHeight() {
+    public static double getHeight() {
         return HEIGHT;
     }
 
     /**
-     * {@inheritDoc}
+     * The method to get the width of the world.
+     * @return the width of the world
      */
-    @Override
-    public double getWidth() {
+    public static double getWidth() {
         return WIDTH;
     }
 
