@@ -2,15 +2,20 @@ package it.unibo.jumpig.model.api;
 
 import java.util.Set;
 
-import it.unibo.jumpig.model.api.gameentity.Coin;
-import it.unibo.jumpig.model.api.gameentity.Enemy;
-import it.unibo.jumpig.model.api.gameentity.Platform;
+import it.unibo.jumpig.common.api.hitbox.Hitbox;
 import it.unibo.jumpig.model.api.gameentity.Player;
 
 /**
  * Interface World.
  */
 public interface World {
+
+    /**
+     * The method to get the entities' hitbox.
+     * @return a set that contains entities' hitbox
+     */
+    Set<Hitbox> getEntities();
+
     /**
      * Getter for game gravity.
      * @return the value of the gravity
@@ -18,28 +23,10 @@ public interface World {
     double getGravity();
 
     /**
-     * Getter for platforms.
-     * @return a set of platforms
-     */
-    Set<Platform> getPlatform();
-
-    /**
      * Getter for the player.
      * @return the player
      */
     Player getPlayer();
-
-    /**
-     * Getter for the enemies.
-     * @return a set of enemies
-     */
-    Set<Enemy> getEnemies();
-
-    /**
-     * Getter for the coins.
-     * @return a set of coins
-     */
-    Set<Coin> getCoins();
 
     /**
      * Getter for the camera.
