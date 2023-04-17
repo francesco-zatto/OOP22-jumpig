@@ -87,6 +87,21 @@ public class MenuViewSceneImpl implements MenuViewScene {
         quitButton.addActionListener(e -> this.controller.close());
         gameButton.addActionListener(e -> {
             frame.remove(menuPanel);
+            String username = "";
+            while(username.equals("")) {
+                username = (String)JOptionPane.showInputDialog(
+                        frame,
+                        "Enter a valid username",
+                        FRAME_TITLE,
+                        JOptionPane.PLAIN_MESSAGE
+                    );
+                if(username.equals("")) {
+                    JOptionPane.showMessageDialog(frame,
+                        "ENTER A VALID USERNAME!",
+                        "Warning",
+                        JOptionPane.WARNING_MESSAGE);
+                }
+            }
             final JPanel gamePanel = new GamePanel((int) screen.getWidth() / 5, 
             (int) (screen.getWidth() / 5 * 1.7));
             frame.getContentPane().add(gamePanel);
