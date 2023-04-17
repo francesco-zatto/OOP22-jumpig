@@ -44,8 +44,8 @@ public final class SwingRenderer implements Renderer {
 
     @Override
     public void renderPlayer(final RectangleHitbox entity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'renderPlayer'");
+        graphics.setColor(Color.PINK);
+        graphics.fill(this.createScaledRectangle(entity));
     }
 
     @Override
