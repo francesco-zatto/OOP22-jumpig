@@ -34,8 +34,7 @@ public class MenuControllerImpl implements MenuController {
      */
     @Override
     public void notifyStartGame() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'notifyStartGame'");
+       this.gameController.start();
     }
 
     /**
