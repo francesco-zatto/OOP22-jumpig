@@ -7,12 +7,15 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import it.unibo.jumpig.common.api.hitbox.Hitbox;
 
 /**
  * The GUI that shows the game currently going on.
@@ -20,10 +23,16 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 public class GamePanel extends JPanel { 
 
     public static final long serialVersionUID = 1L;
+    private static final double ASPECT_RATIO = 16.0 / 9.0;
+    private static final double SCREEN_FRACTION = 5;
     private final double worldWidth;
     private final double worldHeight;
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-    private final Dimension startScreen = new Dimension((int) screen.getWidth() / 5, (int) (screen.getWidth() / 5 * 1.7));
+    private final Dimension startScreen = new Dimension((int) (screen.getWidth() / SCREEN_FRACTION),
+            (int) (screen.getWidth() / SCREEN_FRACTION * ASPECT_RATIO));
+    @SuppressFBWarnings(value = "SE_BAD_FIELD", justification = "Set is not Serializable, while HashSet is, " 
+            + "but I'd rather use as type the interface Set instead of HashSet.") 
+    private final Set<Hitbox> entities = new HashSet<>();
     private transient Optional<SwingRenderer> renderer = Optional.empty();
 
     /**
@@ -60,9 +69,17 @@ public class GamePanel extends JPanel {
             this.renderer = Optional.of(new SwingRenderer(g2D, this.worldWidth, this.worldHeight,
                     this.getWidth(), this.getHeight()));
         }
-        g2D.setBackground(Color.CYAN);
-        super.paint(g2D);
         this.renderer.get().setRatio(this.getWidth(), this.getHeight());
+        this.entities.forEach(e -> e.updateRendering(this.renderer.get()));
+    }
+
+    /**
+     * Method that refresh the set of entities to render.
+     * @param entities entities to render in the panel.
+     */
+    public void refresh(final Set<Hitbox> entities) {
+        this.entities.clear();
+        this.entities.addAll(entities);
     }
     /*
     public static void main(String[] args) {

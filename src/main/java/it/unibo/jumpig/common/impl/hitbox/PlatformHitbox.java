@@ -1,6 +1,7 @@
 package it.unibo.jumpig.common.impl.hitbox;
 
 import it.unibo.jumpig.common.api.Position;
+import it.unibo.jumpig.view.api.Renderer;
 
 /**
  * Class that represent a platform's hitbox.
@@ -16,5 +17,13 @@ public class PlatformHitbox extends RectangleHitbox {
     */
     public PlatformHitbox(final Position center) {
         super(center, PLATFORM_WIDTH, PLATFORM_HEIGHT);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateRendering(final Renderer renderer) {
+        renderer.renderBasicPlatform(this);
     }
 }

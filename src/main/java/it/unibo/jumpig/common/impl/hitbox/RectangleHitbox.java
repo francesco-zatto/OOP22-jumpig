@@ -7,7 +7,7 @@ import it.unibo.jumpig.common.api.hitbox.Hitbox;
  * The class to manage a rectangular Hitbox.
  */
 
-public class RectangleHitbox implements Hitbox {
+public abstract class RectangleHitbox implements Hitbox {
 
     private Position center;
     private final double width;

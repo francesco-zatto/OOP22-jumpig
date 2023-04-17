@@ -13,4 +13,11 @@ public interface LeaderboardLoader {
      */
     void saveScores(List<Score> score);
 
+    /**
+     * This method should take the list of the score and save them in the file.
+     * 
+     * @param file the file that contains leaderboard
+     * @return saved score
+     */
+    List<Score> loadScores(String file);
 }

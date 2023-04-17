@@ -2,29 +2,25 @@ package it.unibo.jumpig.model.api.gameentity;
 
 import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
-import it.unibo.jumpig.view.api.Renderer;
-import it.unibo.jumpig.view.api.RenderingComponent;
 
 /**
  * Class to manage the position and the hitbox of each gameEntity.
+ * 
  * @param <H> any kind of Hitbox
-*/
+ */
 public abstract class AbstractGameEntity<H extends Hitbox> implements GameEntity<H> {
 
     private Position position;
     private final H hitbox;
-    private final RenderingComponent<H> renderingComponent;
 
     /**
      * Constructor for any gameEntity.
      * @param position position of the gameEntity in the world.
      * @param hitbox hitbox of the gameEntity.
-     * @param renderingComponent the rendering component of the gameEntity
      */
-    protected AbstractGameEntity(final Position position, final H hitbox, final RenderingComponent<H> renderingComponent) {
+    protected AbstractGameEntity(final Position position, final H hitbox) {
         this.position = position;
         this.hitbox = hitbox;
-        this.renderingComponent = renderingComponent;
     }
 
     /**
@@ -41,14 +37,6 @@ public abstract class AbstractGameEntity<H extends Hitbox> implements GameEntity
     @Override
     public final H getHitbox() {
         return this.hitbox;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final void updateRendering(final Renderer renderer) {
-        this.renderingComponent.render(this, renderer);
     }
 
     /**
@@ -98,6 +86,7 @@ public abstract class AbstractGameEntity<H extends Hitbox> implements GameEntity
 
     /**
      * Setter for the position of the gameEntity.
+     * 
      * @param position new position of the gameEntity
      */
     protected final void setPosition(final Position position) {
