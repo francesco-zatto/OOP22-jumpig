@@ -9,7 +9,6 @@ import java.awt.Rectangle;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.jumpig.common.impl.hitbox.CircleHitbox;
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
-import it.unibo.jumpig.model.api.gameentity.GameEntity;
 import it.unibo.jumpig.view.api.Renderer;
 
 /**
@@ -44,13 +43,13 @@ public final class SwingRenderer implements Renderer {
     } 
 
     @Override
-    public void renderPlayer(final GameEntity<RectangleHitbox> entity) {
+    public void renderPlayer(final RectangleHitbox entity) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'renderPlayer'");
     }
 
     @Override
-    public void renderEnemy(final GameEntity<RectangleHitbox> entity) {
+    public void renderEnemy(final RectangleHitbox entity) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'renderEnemy'");
     }
@@ -59,22 +58,22 @@ public final class SwingRenderer implements Renderer {
      * {@inheritDoc}
      */
     @Override
-    public void renderBasicPlatform(final GameEntity<RectangleHitbox> entity) {
+    public void renderBasicPlatform(final RectangleHitbox entity) {
         graphics.setColor(Color.GREEN);
-        graphics.fill(this.createScaledRectangle(entity.getHitbox()));
+        graphics.fill(this.createScaledRectangle(entity));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void renderVanishingPlatform(final GameEntity<RectangleHitbox> entity) {
+    public void renderVanishingPlatform(final RectangleHitbox entity) {
         graphics.setColor(Color.RED);
-        graphics.fill(this.createScaledRectangle(entity.getHitbox()));
+        graphics.fill(this.createScaledRectangle(entity));
     }
 
     @Override
-    public void renderCoin(final GameEntity<CircleHitbox> entity) {
+    public void renderCoin(final CircleHitbox entity) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'renderCoin'");
     }
