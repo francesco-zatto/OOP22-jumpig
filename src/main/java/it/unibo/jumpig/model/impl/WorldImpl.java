@@ -123,9 +123,21 @@ public class WorldImpl implements World {
         throw new UnsupportedOperationException("Unimplemented method 'updateGame'");
     }
 
-   /* private Set<X> regenerate() {
-        this.setcoins.clear();
-        this.setcoins = this.generator.generateCoins();
-        return this.setcoins;
-    } */
+    //we will use this in updateGame
+    private Set<GameEntity<? extends Hitbox>> regenerate(final Set<GameEntity<? extends Hitbox>> setToRegenerate) { //NOPMD
+        final var type = setToRegenerate.stream()
+            .toList()
+            .get(0);
+        setToRegenerate.clear();
+        if (type instanceof Platform) {
+            setToRegenerate.addAll(this.generator.generatePlatforms());
+        }
+        if (type instanceof Coin) {
+            setToRegenerate.addAll(this.generator.generateCoins());
+        }
+        if (type instanceof Enemy) {
+            setToRegenerate.addAll(this.generator.generateEnemies());
+        }
+        return setToRegenerate;
+    }
 }
