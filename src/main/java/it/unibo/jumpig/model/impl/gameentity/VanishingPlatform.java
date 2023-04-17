@@ -1,6 +1,7 @@
 package it.unibo.jumpig.model.impl.gameentity;
 
 import it.unibo.jumpig.common.api.Position;
+import it.unibo.jumpig.common.impl.hitbox.VanishingPlatformHitbox;
 import it.unibo.jumpig.model.api.gameentity.AbstractPlatform;
 import it.unibo.jumpig.model.api.gameentity.Player;
 import it.unibo.jumpig.model.api.gameentity.Targettable;
@@ -20,7 +21,8 @@ public class VanishingPlatform extends AbstractPlatform implements Targettable {
      * @param verticalJumpVelocity vertical velocity of a player when jumps on the platform. 
     */
     public VanishingPlatform(final Position position, final double verticalJumpVelocity) {
-        super(position, verticalJumpVelocity, (e, r) -> r.renderVanishingPlatform(e.getHitbox()));
+        super(position, new VanishingPlatformHitbox(position), verticalJumpVelocity,
+                (e, r) -> r.renderVanishingPlatform(e.getHitbox()));
     }
 
     /**

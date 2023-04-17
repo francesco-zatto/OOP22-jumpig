@@ -1,6 +1,7 @@
 package it.unibo.jumpig.model.impl.gameentity;
 
 import it.unibo.jumpig.common.api.Position;
+import it.unibo.jumpig.common.impl.hitbox.PlatformHitbox;
 import it.unibo.jumpig.model.api.gameentity.AbstractPlatform;
 import it.unibo.jumpig.model.api.gameentity.Player;
 import it.unibo.jumpig.model.impl.collision.BasicPlatformCollisionHandler;
@@ -17,7 +18,7 @@ public class BasicPlatform extends AbstractPlatform {
      * @param verticalJumpVelocity vertical velocity of a player when jumps on the platform.
      */
     public BasicPlatform(final Position position, final double verticalJumpVelocity) {
-        super(position, verticalJumpVelocity, (e, r) -> r.renderBasicPlatform(e.getHitbox()));
+        super(position, new PlatformHitbox(position), verticalJumpVelocity, (e, r) -> r.renderBasicPlatform(e.getHitbox()));
     }
 
     @Override

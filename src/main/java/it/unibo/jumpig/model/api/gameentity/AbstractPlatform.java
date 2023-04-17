@@ -18,12 +18,13 @@ public abstract class AbstractPlatform extends AbstractGameEntity<RectangleHitbo
     /**
      * Constructor for any kind of platform.
      * @param position position of the platform in the world.
+     * @param hitbox hitbox of the platform.
      * @param jumpVelocity vertical velocity of a player when jumps on the platform.
      * @param renderingComponent the rendering component of the platform
      */
-    protected AbstractPlatform(final Position position, final double jumpVelocity,
+    protected AbstractPlatform(final Position position, final PlatformHitbox hitbox, final double jumpVelocity,
             final RenderingComponent<RectangleHitbox> renderingComponent) {
-        super(position, new PlatformHitbox(position), renderingComponent);
+        super(position, hitbox, renderingComponent);
         this.jumpVelocity = new VelocityImpl(0, jumpVelocity);
     }
 
