@@ -25,7 +25,7 @@ public class EnemyImpl extends AbstractGameEntity<RectangleHitbox> implements En
      */
 
     public EnemyImpl(final Position position) {
-        super(position, new EnemyHitbox(position), (e, r) -> r.renderEnemy(e));
+        super(position, new EnemyHitbox(position), (e, r) -> r.renderEnemy(e.getHitbox()));
     }
 
     /**
