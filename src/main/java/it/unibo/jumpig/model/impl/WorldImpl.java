@@ -54,8 +54,10 @@ public class WorldImpl implements World {
      */
     @Override
     public Set<Platform> getPlatform() {
-        return this.setplatform.stream().filter(x -> x.getClass() == VanishingPlatform.class 
-        && !((Targettable) x).isTaken() || x.getClass() != VanishingPlatform.class).collect(Collectors.toSet());
+        return this.setplatform.stream()
+            .filter(x -> x.getClass() == VanishingPlatform.class && !((Targettable) x).isTaken() 
+                || x.getClass() != VanishingPlatform.class)
+            .collect(Collectors.toSet());
     }
 
     /**
@@ -71,7 +73,9 @@ public class WorldImpl implements World {
      */
     @Override
     public Set<Enemy> getEnemies() {
-        return this.setenemies.stream().filter(x -> !x.isTaken()).collect(Collectors.toSet());
+        return this.setenemies.stream()
+            .filter(x -> !x.isTaken())
+            .collect(Collectors.toSet());
     }
 
     /**
@@ -79,7 +83,9 @@ public class WorldImpl implements World {
      */
     @Override
     public Set<Coin> getCoins() {
-       return this.setcoins.stream().filter(x -> !x.isTaken()).collect(Collectors.toSet());
+       return this.setcoins.stream()
+            .filter(x -> !x.isTaken())
+            .collect(Collectors.toSet());
     }
 
     /**

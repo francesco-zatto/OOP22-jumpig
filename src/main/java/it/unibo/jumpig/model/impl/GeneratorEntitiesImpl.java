@@ -46,7 +46,8 @@ import it.unibo.jumpig.model.impl.gameentity.EnemyImpl;
     @Override
     public Set<Platform> generatePlatforms() {
         this.addPlatforms();
-        return setplatforms.stream().collect(Collectors.toSet());
+        return setplatforms.stream()
+            .collect(Collectors.toSet());
     }
     /**
      * {@inheritDoc}
@@ -54,7 +55,8 @@ import it.unibo.jumpig.model.impl.gameentity.EnemyImpl;
     @Override
     public Set<Enemy> generateEnemies() {
         this.addEnemies();
-        return setenemies.stream().collect(Collectors.toSet());
+        return setenemies.stream()
+            .collect(Collectors.toSet());
     }
 
     /**
@@ -63,7 +65,8 @@ import it.unibo.jumpig.model.impl.gameentity.EnemyImpl;
     @Override
     public Set<Coin> generateCoins() {
         this.addCoins();
-        return setcoins.stream().collect(Collectors.toSet());
+        return setcoins.stream()
+            .collect(Collectors.toSet());
     }
 
     private void addPlatforms() {
@@ -90,12 +93,6 @@ import it.unibo.jumpig.model.impl.gameentity.EnemyImpl;
         }
     }
 
-   /* private void addEnemies(Set<Enemy> setenemies) {
-        for (int i = 0; i < NUM_ENEMY; i++) {
-            final Position coordinate = new PositionImpl(Math.random() * MAX_WIDTH, Math.random() * MAX_HEIGHT * 2);
-            setenemies.add(new BasicEnemy(this.checkEqualsPosition(setenemies, coordinate), 1));
-        }
-    }*/
     /**
      * The method to generate coordinates (for a generic entity) without generating entities on the same y.
      * In this way I will not generate colliding entities.
@@ -103,9 +100,9 @@ import it.unibo.jumpig.model.impl.gameentity.EnemyImpl;
      * @return  the coordinates I'm going to generate.
      */
    private Position checkEqualsPosition(final Position startEntity) {
-        return this.setentities.stream().anyMatch(
-            x -> x.getY() == startEntity.getY()
-        ) ? this.checkEqualsPosition(
-            new PositionImpl(Math.random() * MAX_WIDTH, Math.random() * MAX_HEIGHT * 2)) : startEntity;
+        return this.setentities.stream()
+            .anyMatch(x -> x.getY() == startEntity.getY()) 
+                ? this.checkEqualsPosition(new PositionImpl(Math.random() * MAX_WIDTH, Math.random() * MAX_HEIGHT * 2)) 
+                : startEntity;
     }
 }
