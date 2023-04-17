@@ -10,6 +10,7 @@ import it.unibo.jumpig.model.api.GeneratorEntities;
 import it.unibo.jumpig.model.api.World;
 import it.unibo.jumpig.model.api.gameentity.Coin;
 import it.unibo.jumpig.model.api.gameentity.Collidable;
+import it.unibo.jumpig.model.api.gameentity.CollidableEntity;
 import it.unibo.jumpig.model.api.gameentity.Enemy;
 import it.unibo.jumpig.model.api.gameentity.GameEntity;
 import it.unibo.jumpig.model.api.gameentity.Platform;
@@ -122,17 +123,18 @@ public class WorldImpl implements World {
      */
     @Override
     public void updateGame(final long elapsed) {
-        final var collidables = createSetCollidables(Set.of(this.setcoins, this.setenemies, this.setplatform));
+        final var collidables = this.getCollidables(Set.of(this.setcoins, this.setenemies, this.setplatform));
         collidables.forEach(c -> c.handleCollision(this.player));
     }
 
-    private Set<Collidable> createSetCollidables(final Set<Set<? extends Collidable>> collidableSets) {
+    private Set<Collidable> getCollidables(final Set<Set<? extends CollidableEntity<? extends Hitbox>>> collidableSets) {
         return collidableSets.stream()
                 .flatMap(Set::stream)
+                .filter(this::isEntityNearPlayer)
                 .collect(Collectors.toSet());
     }
 
-    private boolean isEntityNearPlayer(final GameEntity<? extends Hitbox> entity) { //NOPMD TODO
+    private boolean isEntityNearPlayer(final GameEntity<? extends Hitbox> entity) {
         final double quarterOfWorld = HEIGHT / 4;
         final double playerHeight = this.player.getPosition().getY();
         final double entityHeight = entity.getPosition().getY();
