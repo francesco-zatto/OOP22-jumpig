@@ -18,7 +18,7 @@ public class BasicPlatform extends AbstractPlatform {
      * @param verticalJumpVelocity vertical velocity of a player when jumps on the platform.
      */
     public BasicPlatform(final Position position, final double verticalJumpVelocity) {
-        super(position, new PlatformHitbox(position), verticalJumpVelocity, (e, r) -> r.renderBasicPlatform(e.getHitbox()));
+        super(position, new PlatformHitbox(position), verticalJumpVelocity);
     }
 
     @Override

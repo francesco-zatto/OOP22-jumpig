@@ -21,8 +21,7 @@ public class VanishingPlatform extends AbstractPlatform implements Targettable {
      * @param verticalJumpVelocity vertical velocity of a player when jumps on the platform. 
     */
     public VanishingPlatform(final Position position, final double verticalJumpVelocity) {
-        super(position, new VanishingPlatformHitbox(position), verticalJumpVelocity,
-                (e, r) -> r.renderVanishingPlatform(e.getHitbox()));
+        super(position, new VanishingPlatformHitbox(position), verticalJumpVelocity);
     }
 
     /**
