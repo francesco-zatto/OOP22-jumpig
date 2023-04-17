@@ -41,7 +41,7 @@ public class WorldImpl implements World {
      */
 
     public WorldImpl() {
-        this.generator = new GeneratorEntitiesImpl();
+        this.generator = new GeneratorEntitiesImpl(WIDTH, HEIGHT);
         this.player = new PlayerImpl(null);
         this.setplatform = generator.generatePlatforms();
         this.setenemies = generator.generateEnemies();

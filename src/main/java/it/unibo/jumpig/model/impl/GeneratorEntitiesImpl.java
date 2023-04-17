@@ -24,16 +24,20 @@ import it.unibo.jumpig.model.impl.gameentity.EnemyImpl;
     private final Set<Coin> setcoins;
     private final Set<Enemy> setenemies;
     private final Set<Position> setentities;
-    private static final double MAX_WIDTH = 36;    /* The width of the game */
-    private static final double MAX_HEIGHT = 64;    /* The height of the game */
+    private final double maxWidth;    /* The width of the game */
+    private final double maxHeight;    /* The height of the game */
     private static final double NUM_PLATFORM = 50;    /* The number of platforms */
     private static final double NUM_ENEMY = 2;    /* The number of enemies */
     private static final double NUM_COIN = 30;    /* The number of coins */
 
     /**
      * The constructor to create a new generator of entities.
+     * @param width the width of the world
+     * @param height the height of the world
      */
-    public GeneratorEntitiesImpl() {
+    public GeneratorEntitiesImpl(final double width, final double height) {
+        this.maxWidth = width;
+        this.maxHeight = height;
         this.setplatforms = new HashSet<>();
         this.setcoins = new HashSet<>();
         this.setenemies = new HashSet<>();
@@ -71,7 +75,7 @@ import it.unibo.jumpig.model.impl.gameentity.EnemyImpl;
 
     private void addPlatforms() {
         for (int i = 0; i < NUM_PLATFORM; i++) {
-            final Position coordinate = new PositionImpl(Math.random() * MAX_WIDTH, Math.random() * MAX_HEIGHT * 2);
+            final Position coordinate = new PositionImpl(Math.random() * this.maxWidth, Math.random() * this.maxHeight * 2);
             this.setplatforms.add(new BasicPlatform(this.checkEqualsPosition(coordinate), 1));
             this.setentities.add(coordinate);
         }
@@ -79,7 +83,7 @@ import it.unibo.jumpig.model.impl.gameentity.EnemyImpl;
 
     private void addEnemies() {
         for (int i = 0; i < NUM_ENEMY; i++) {
-            final Position coordinate = new PositionImpl(Math.random() * MAX_WIDTH, Math.random() * MAX_HEIGHT * 2);
+            final Position coordinate = new PositionImpl(Math.random() * this.maxWidth, Math.random() * this.maxHeight * 2);
             this.setenemies.add(new EnemyImpl(this.checkEqualsPosition(coordinate)));
             this.setentities.add(coordinate);
         }
@@ -87,7 +91,7 @@ import it.unibo.jumpig.model.impl.gameentity.EnemyImpl;
 
     private void addCoins() {
         for (int i = 0; i < NUM_COIN; i++) {
-            final Position coordinate = new PositionImpl(Math.random() * MAX_WIDTH, Math.random() * MAX_HEIGHT * 2);
+            final Position coordinate = new PositionImpl(Math.random() * this.maxWidth, Math.random() * this.maxHeight * 2);
             this.setcoins.add(new BasicCoin(this.checkEqualsPosition(coordinate)));
             this.setentities.add(coordinate);
         }
@@ -102,7 +106,7 @@ import it.unibo.jumpig.model.impl.gameentity.EnemyImpl;
    private Position checkEqualsPosition(final Position startEntity) {
         return this.setentities.stream()
             .anyMatch(x -> x.getY() == startEntity.getY()) 
-                ? this.checkEqualsPosition(new PositionImpl(Math.random() * MAX_WIDTH, Math.random() * MAX_HEIGHT * 2)) 
+                ? this.checkEqualsPosition(new PositionImpl(Math.random() * this.maxWidth, Math.random() * this.maxHeight * 2)) 
                 : startEntity;
     }
 }
