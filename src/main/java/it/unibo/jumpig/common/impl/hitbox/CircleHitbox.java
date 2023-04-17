@@ -7,7 +7,7 @@ import it.unibo.jumpig.common.api.hitbox.Hitbox;
  * The class to manage a circular Hitbox.
  */
 
-public class CircleHitbox implements Hitbox {
+public abstract class CircleHitbox implements Hitbox {
 
     private Position center;
     private final double radius;

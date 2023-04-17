@@ -1,11 +1,12 @@
 package it.unibo.jumpig.common.api.hitbox;
 
 import it.unibo.jumpig.common.api.Position;
+import it.unibo.jumpig.model.api.gameentity.Renderable;
 
 /**
  * The interface to manage the existence area(Hitbox) of each game entity.
  */
-public interface Hitbox {
+public interface Hitbox extends Renderable {
 
     /**
      * The method to get the center of the shape.
