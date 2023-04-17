@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Set;
 
 import it.unibo.jumpig.model.impl.GeneratorEntitiesImpl;
+import it.unibo.jumpig.model.impl.WorldImpl;
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
 import it.unibo.jumpig.model.api.GeneratorEntities;
 import it.unibo.jumpig.model.api.gameentity.Coin;
@@ -20,7 +21,7 @@ import it.unibo.jumpig.model.api.gameentity.Enemy;
 
 class GeneratorEntitiesTest {
 
-    private final GeneratorEntities generator = new GeneratorEntitiesImpl();
+    private final GeneratorEntities generator = new GeneratorEntitiesImpl(WorldImpl.getWidth(), WorldImpl.getHeight());
 
     private <X extends GameEntity<H>, H extends Hitbox> void assertGeneration(final Set<X> entities) {
         for (int i = 0; i < entities.size(); i++) {
