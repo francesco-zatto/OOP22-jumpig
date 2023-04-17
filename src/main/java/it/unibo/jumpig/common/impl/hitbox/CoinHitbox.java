@@ -1,6 +1,7 @@
 package it.unibo.jumpig.common.impl.hitbox;
 
 import it.unibo.jumpig.common.api.Position;
+import it.unibo.jumpig.view.api.Renderer;
 
 /**
  * The class that represents a coin's hitbox.
@@ -16,5 +17,13 @@ public class CoinHitbox extends CircleHitbox {
      */
     public CoinHitbox(final Position center) {
         super(center, COIN_RADIUS);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateRendering(final Renderer renderer) {
+        renderer.renderCoin(this);
     }
 }
