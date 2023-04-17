@@ -15,8 +15,12 @@ public class ScorePanel extends JPanel {
         final JPanel componentsPanel = new JPanel(new FlowLayout());
         final JLabel scoreText = new JLabel("Score: ");
         final JLabel scoreNumber = new JLabel("0");
+        final JLabel coinAmount = new JLabel("Coins: ");
+        final JLabel coinNumber = new JLabel("0");
         componentsPanel.add(scoreText);
         componentsPanel.add(scoreNumber);
+        componentsPanel.add(coinAmount);
+        componentsPanel.add(coinNumber);
         componentsPanel.setBackground(Color.CYAN);
         this.add(componentsPanel, BorderLayout.NORTH);
      }
