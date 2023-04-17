@@ -32,6 +32,14 @@ public class ScorePanel extends JPanel {
         componentsPanel.setBackground(Color.CYAN);
         this.add(componentsPanel, BorderLayout.NORTH);
      }
+
+     /**
+      * Method that updates the score.
+      */
+     public void refresh() {
+          // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'refresh'");
+     }
      /*
      public static void main(final String[] args) {
           final JFrame frame = new JFrame();
