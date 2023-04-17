@@ -14,4 +14,8 @@ public interface GameController extends Status {
      */
     void notifyUpdate();
 
+    /**
+     * The game loop performing each frame update according to the game loop pattern.
+     */
+    void mainLoop();
 }
