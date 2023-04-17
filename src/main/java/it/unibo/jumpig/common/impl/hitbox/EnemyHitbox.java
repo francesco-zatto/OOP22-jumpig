@@ -1,6 +1,7 @@
 package it.unibo.jumpig.common.impl.hitbox;
 
 import it.unibo.jumpig.common.api.Position;
+import it.unibo.jumpig.view.api.Renderer;
 
 /**
  * The class that represent an enemy's hitbox.
@@ -17,5 +18,13 @@ public class EnemyHitbox extends RectangleHitbox {
      */
     public EnemyHitbox(final Position center) {
         super(center, ENEMY_WIDTH, ENEMY_HEIGHT);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateRendering(final Renderer renderer) {
+        renderer.renderEnemy(this);
     }
 }
