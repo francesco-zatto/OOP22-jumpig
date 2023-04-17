@@ -90,7 +90,6 @@ public class MenuViewSceneImpl implements MenuViewScene {
             final JPanel gamePanel = new GamePanel(width, height);
             frame.getContentPane().add(gamePanel);
             frame.pack();
-            
         });
         leaderboardButton.addActionListener(e -> this.controller.notifyStartLeaderboard());
     }
