@@ -107,6 +107,7 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
     /**
      * {@inheritDoc}
      */
+    @Override
     public void computePosition(final double deltaTime) {
         super.setPosition(this.playerVelocity.computeMovement(super.getPosition(), deltaTime));
     }
