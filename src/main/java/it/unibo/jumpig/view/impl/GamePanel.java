@@ -1,15 +1,22 @@
 package it.unibo.jumpig.view.impl;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.util.Optional;
 
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import it.unibo.jumpig.common.impl.PositionImpl;
+import it.unibo.jumpig.model.api.gameentity.Platform;
+import it.unibo.jumpig.model.impl.gameentity.BasicPlatform;
 
 /**
  * The GUI that shows the game currently going on.
@@ -33,6 +40,15 @@ public class GamePanel extends JPanel {
         this.worldHeight = worldHeight;
         this.setSize(this.startScreen);
         this.setPreferredSize(super.getSize());
+        JPanel scorePanel = new JPanel(new BorderLayout());
+        JPanel componentsPanel = new JPanel(new FlowLayout());
+        JLabel scoreText = new JLabel("Score: ");
+        JLabel scoreNumber = new JLabel("0");
+        componentsPanel.add(scoreText);
+        componentsPanel.add(scoreNumber);
+        componentsPanel.setBackground(Color.CYAN);
+        scorePanel.add(componentsPanel, BorderLayout.NORTH);
+        this.add(scorePanel);
     }
 
     /**
@@ -53,13 +69,13 @@ public class GamePanel extends JPanel {
         this.renderer.get().setRatio(this.getWidth(), this.getHeight());
     }
 
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         var frame = new JFrame();
         Platform platform = new BasicPlatform(new PositionImpl(15, 15), 30);
         Platform platform2 = new BasicPlatform(new PositionImpl(28, 56), 40);
-        var panel = new GamePanel(Set.of(platform, platform2));
+        var panel = new GamePanel(9,16);
         frame.getContentPane().add(panel);
         frame.pack();
         frame.setVisible(true);
-    }*/
+    }
 }
