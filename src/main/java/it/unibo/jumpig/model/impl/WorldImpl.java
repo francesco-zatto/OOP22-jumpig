@@ -122,6 +122,22 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
+    public double getHeight() {
+        return HEIGHT;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getWidth() {
+        return WIDTH;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void updateGame(final long elapsed) {
         final var collidables = this.getCollidables(Set.of(this.setcoins, this.setenemies, this.setplatform));
         collidables.forEach(c -> c.handleCollision(this.player));
@@ -157,13 +173,5 @@ public class WorldImpl implements World {
             setToRegenerate.addAll(this.generator.generateEnemies());
         }
         return setToRegenerate;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public double getHeight() {
-        return HEIGHT;
     }
 }
