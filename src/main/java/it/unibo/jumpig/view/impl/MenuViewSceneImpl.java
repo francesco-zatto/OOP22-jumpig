@@ -27,8 +27,7 @@ public class MenuViewSceneImpl implements MenuViewScene {
     private static final String FRAME_TITLE = "Jumpig";
     private final JFrame frame = new JFrame(FRAME_TITLE);
     private final MenuController controller;
-    final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-    final double percentageHeight = 0.7;
+    private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     private final Dimension startScreen = new Dimension((int) screen.getWidth() / 5, 
         (int) (screen.getWidth() / 5 * 1.7));
     /**
@@ -88,22 +87,22 @@ public class MenuViewSceneImpl implements MenuViewScene {
         gameButton.addActionListener(e -> {
             frame.remove(menuPanel);
             String username = "";
-            while(username.equals("")) {
-                username = (String)JOptionPane.showInputDialog(
+            while ("".equals(username)) {
+                username = JOptionPane.showInputDialog(
                         frame,
                         "Enter a valid username",
                         FRAME_TITLE,
                         JOptionPane.PLAIN_MESSAGE
                     );
-                if(username.equals("")) {
+                if ("".equals(username)) {
                     JOptionPane.showMessageDialog(frame,
                         "ENTER A VALID USERNAME!",
                         "Warning",
                         JOptionPane.WARNING_MESSAGE);
                 }
             }
-            final JPanel gamePanel = new GamePanel((int) screen.getWidth() / 5, 
-            (int) (screen.getWidth() / 5 * 1.7));
+            final JPanel gamePanel = new GamePanel((double) screen.getWidth() / 5, 
+            (double) (screen.getWidth() / 5 * 1.7));
             frame.getContentPane().add(gamePanel);
             frame.pack();
         });
