@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -24,4 +25,12 @@ public class ScorePanel extends JPanel {
         componentsPanel.setBackground(Color.CYAN);
         this.add(componentsPanel, BorderLayout.NORTH);
      }
+     /*
+     public static void main(String[] args) {
+          JFrame frame = new JFrame();
+          JPanel scorePanel = new ScorePanel();
+          frame.getContentPane().add(scorePanel);
+          frame.setVisible(true);
+     }
+     */
 }
