@@ -28,7 +28,6 @@ public class GameControllerImpl implements GameController {
      * The game loop performing each frame update according to the game loop pattern.
      */
     private void mainLoop() {
-        this.start();
         long previousCycleStartTime = System.currentTimeMillis();
         while (!game.isOVer()) {
             final long currentCycleStartTime = System.currentTimeMillis();
