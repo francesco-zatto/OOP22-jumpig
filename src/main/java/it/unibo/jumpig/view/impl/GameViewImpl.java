@@ -14,15 +14,19 @@ import it.unibo.jumpig.view.api.GameViewScene;
 
 public class GameViewImpl extends JPanel implements GameViewScene {
 
-    public static final long serialVersionUID = 1L;
-    // private final GameController gameController;
+    public static final long serialVersionUID = 1L; 
+    //private final GameController controller;
+    private final JPanel mainPanel = new JPanel();
 
     /**
-     * Constructor to create the game view that manage updates.
-     * @param gameController the controller of the game
-    public GameViewImpl(final GameController gameController) {
-        this.gameController = gameController;
-    } */
+     * Constructor to create the game view that manage updates. 
+     * */ //@param gameController the controller of the game
+    public GameViewImpl() { //final GameController gameController
+        //this.controller = gameController;
+        this.mainPanel.add(new GamePanel(WIDTH, HEIGHT));
+        this.mainPanel.add(new ScorePanel());
+        this.mainPanel.setVisible(false);
+    }
 
     /**
      * {@inheritDoc}
