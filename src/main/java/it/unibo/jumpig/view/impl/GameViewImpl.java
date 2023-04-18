@@ -33,8 +33,7 @@ public class GameViewImpl extends JPanel implements GameViewScene {
      */
     @Override
     public void show() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'show'");
+        this.mainPanel.setVisible(true);
     }
 
     /**
