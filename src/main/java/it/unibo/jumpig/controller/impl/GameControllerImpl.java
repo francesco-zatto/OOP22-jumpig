@@ -77,7 +77,7 @@ public class GameControllerImpl implements GameController {
      */
     @Override
     public void close() {
-        // TODO This method will close the game view.
+        this.gameView.quit();
     }
 
     /**
