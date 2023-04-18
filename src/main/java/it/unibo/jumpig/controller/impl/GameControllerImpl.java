@@ -3,6 +3,8 @@ package it.unibo.jumpig.controller.impl;
 import it.unibo.jumpig.controller.api.GameController;
 import it.unibo.jumpig.model.api.Game;
 import it.unibo.jumpig.model.impl.GameImpl;
+import it.unibo.jumpig.view.api.GameViewScene;
+import it.unibo.jumpig.view.impl.GameViewImpl;
 
 /**
  *The class to manage the game loop.
@@ -12,19 +14,20 @@ public class GameControllerImpl implements GameController {
 
     private static final long PERIOD = 20; /* 20 milliseconds are equal to 50 frames per sec */
     private final Game game;
+    private final GameViewScene gameView;
 
     /**
      * Constructor to create a new Game Controller in order to start a new Game.
      */
     public GameControllerImpl() {
         this.game = new GameImpl();
+        this.gameView = new GameViewImpl();
     }
 
     /**
-     * {@inheritDoc}
+     * The game loop performing each frame update according to the game loop pattern.
      */
-    @Override
-    public void mainLoop() {
+    private void mainLoop() {
         this.start();
         long previousCycleStartTime = System.currentTimeMillis();
         while (!game.isOVer()) {
@@ -82,6 +85,7 @@ public class GameControllerImpl implements GameController {
      */
     @Override
     public void start() {
-        // TODO This method will show the game view
+        this.gameView.show();
+        this.mainLoop();
     }
 }
