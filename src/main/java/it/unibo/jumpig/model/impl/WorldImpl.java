@@ -25,10 +25,10 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
 
 public class WorldImpl implements World {
 
-    private static final double WIDTH = 36; //NOPMD
+    private static final double WIDTH = 36;
     private static final double HEIGHT = 64;
     private static final double GRAVITY = 9.8;
-    private final GeneratorEntities generator; //NOPMD
+    private final GeneratorEntities generator;
     private final Player player;
     private final Set<Platform> setplatform;
     private final Set<Enemy> setenemies;
@@ -119,18 +119,18 @@ public class WorldImpl implements World {
     }
 
     /**
-     * The method to get the height of the world.
-     * @return the height of the world
+     * {@inheritDoc}
      */
-    public static double getHeight() {
+    @Override
+    public double getHeight() {
         return HEIGHT;
     }
 
     /**
-     * The method to get the width of the world.
-     * @return the width of the world
+     * {@inheritDoc}
      */
-    public static double getWidth() {
+    @Override
+    public double getWidth() {
         return WIDTH;
     }
 
