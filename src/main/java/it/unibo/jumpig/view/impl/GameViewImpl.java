@@ -2,6 +2,8 @@ package it.unibo.jumpig.view.impl;
 
 import java.util.Set;
 
+import javax.swing.JPanel;
+
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
 //import it.unibo.jumpig.controller.api.GameController;
 import it.unibo.jumpig.view.api.GameViewScene;
@@ -10,8 +12,9 @@ import it.unibo.jumpig.view.api.GameViewScene;
  * The class to manage updates of score and updates of the game.
  */
 
-public class GameViewImpl implements GameViewScene {
+public class GameViewImpl extends JPanel implements GameViewScene {
 
+    public static final long serialVersionUID = 1L;
     // private final GameController gameController;
 
     /**
