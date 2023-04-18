@@ -105,9 +105,9 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
     }
 
     /**
-     * Method that computes the next player's position. 
-     * @param deltaTime the time interval
+     * {@inheritDoc}
      */
+    @Override
     public void computePosition(final double deltaTime) {
         super.setPosition(this.playerVelocity.computeMovement(super.getPosition(), deltaTime));
     }

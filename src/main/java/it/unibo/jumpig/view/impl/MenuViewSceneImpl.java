@@ -27,6 +27,9 @@ public class MenuViewSceneImpl implements MenuViewScene {
     private static final String FRAME_TITLE = "Jumpig";
     private final JFrame frame = new JFrame(FRAME_TITLE);
     private final MenuController controller;
+    private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+    private final Dimension startScreen = new Dimension((int) screen.getWidth() / 5, 
+        (int) (screen.getWidth() / 5 * 1.7));
     /**
      * Contructor for building the view.
      * @param controller the controller that manages the interactions in the menu
@@ -73,19 +76,36 @@ public class MenuViewSceneImpl implements MenuViewScene {
         /*
          * Resizing the frame based on the screen dimensions.
          */
-        final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-        final int screenHeight = (int) screen.getHeight();
-        final double percentageHeight = 0.7;
-        final int height = (int) (screenHeight * percentageHeight);
-        final int width = (int) (height * 0.5625);
-        frame.setSize(width, height);
+        frame.setSize(this.startScreen);
         frame.setLocationByPlatform(true);
-        frame.setResizable(false);
+        frame.setPreferredSize(frame.getSize());
+        frame.setResizable(true);
         /*
          * Adding listeners to buttons.
          */
         quitButton.addActionListener(e -> this.controller.close());
-        gameButton.addActionListener(e -> this.controller.notifyStartGame());
+        gameButton.addActionListener(e -> {
+            frame.remove(menuPanel);
+            String username = "";
+            while ("".equals(username)) {
+                username = JOptionPane.showInputDialog(
+                        frame,
+                        "Enter a valid username",
+                        FRAME_TITLE,
+                        JOptionPane.PLAIN_MESSAGE
+                    );
+                if ("".equals(username)) {
+                    JOptionPane.showMessageDialog(frame,
+                        "ENTER A VALID USERNAME!",
+                        "Warning",
+                        JOptionPane.WARNING_MESSAGE);
+                }
+            }
+            final JPanel gamePanel = new GamePanel((double) screen.getWidth() / 5, 
+            (double) (screen.getWidth() / 5 * 1.7));
+            frame.getContentPane().add(gamePanel);
+            frame.pack();
+        });
         leaderboardButton.addActionListener(e -> this.controller.notifyStartLeaderboard());
     }
 
@@ -110,4 +130,9 @@ public class MenuViewSceneImpl implements MenuViewScene {
             this.frame.dispose();
         }
     }
+    /*
+    public static void main(String[] args) {
+        new MenuViewSceneImpl(null).show();
+    }
+    */
 }

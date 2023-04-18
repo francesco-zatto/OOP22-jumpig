@@ -23,7 +23,6 @@ public class PlayerHitbox extends RectangleHitbox {
      */
     @Override
     public void updateRendering(final Renderer renderer) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateRendering'");
+        renderer.renderPlayer(this);
     } 
 }
