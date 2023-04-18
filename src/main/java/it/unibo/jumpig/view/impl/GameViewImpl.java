@@ -3,6 +3,7 @@ package it.unibo.jumpig.view.impl;
 import java.util.Set;
 
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
+//import it.unibo.jumpig.controller.api.GameController;
 import it.unibo.jumpig.view.api.GameViewScene;
 
 /**
@@ -10,6 +11,15 @@ import it.unibo.jumpig.view.api.GameViewScene;
  */
 
 public class GameViewImpl implements GameViewScene {
+
+    // private final GameController gameController;
+
+    /**
+     * Constructor to create the game view that manage updates.
+     * @param gameController the controller of the game
+    public GameViewImpl(final GameController gameController) {
+        this.gameController = gameController;
+    } */
 
     /**
      * {@inheritDoc}
