@@ -53,8 +53,7 @@ public class CoinCollisionChecker extends AbstractCollisionChecker<CircleHitbox,
      */
     @Override
     protected boolean canPlayerCollide(final Player player) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'canPlayerCollide'");
+        return true;
     }
 
     /**
@@ -62,7 +61,6 @@ public class CoinCollisionChecker extends AbstractCollisionChecker<CircleHitbox,
      */
     @Override
     protected boolean canEntityCollide(final Coin gameEntity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'canEntityCollide'");
+        return !gameEntity.isTaken();
     }
 }
