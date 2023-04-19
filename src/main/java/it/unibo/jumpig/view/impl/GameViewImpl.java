@@ -82,7 +82,7 @@ public class GameViewImpl implements GameViewScene {
         final Set<Hitbox> entities
         ) {
             if (x instanceof ScorePanel) {
-               ((ScorePanel) x).refresh(); //devo passare entities a refresh 
+               ((ScorePanel) x).refresh(); //devo passare coins,height e lives a refresh 
             } else {
                 if (x instanceof GamePanel) {
                    ((GamePanel) x).refresh(entities);
@@ -111,7 +111,7 @@ public class GameViewImpl implements GameViewScene {
         final int lives//NOPMD
         ) {
             if (x instanceof ScorePanel) {
-                ((ScorePanel) x).refresh(); //devo passare entities a refresh
+                ((ScorePanel) x).refresh(); //devo passare coins,height e lives a refresh
             }
     }
 }
