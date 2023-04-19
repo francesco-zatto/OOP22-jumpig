@@ -140,6 +140,13 @@ public class WorldImpl implements World {
      */
     @Override
     public void updateGame(final long elapsed) {
+        this.player.computeVelocity(GRAVITY, elapsed);
+        this.player.computePosition(elapsed);
+        if (this.camera.getHeight(this.player).isPresent() 
+            && this.camera.getHeight(this.player).get() >= 64
+        ) {
+                this.setentities.addAll(regenerate(setentities));
+        }
         final var collidables = this.getCollidables(Set.of(this.setcoins, this.setenemies, this.setplatform));
         collidables.forEach(c -> c.handleCollision(this.player));
     }
