@@ -16,19 +16,21 @@ public abstract class AbstractCollisionActioner<H extends Hitbox, E extends Game
      */
     @Override
     public void act(final Player player, final E gameEntity) {
-        this.actOnPlayer(player);
-        this.actOnEntity(gameEntity);
+        this.actOnPlayer(player, gameEntity);
+        this.actOnEntity(player, gameEntity);
     }
 
     /**
      * Method that changes the behaviour of player.
      * @param player player that collided.
+     * @param gameEntity gameEntity that collided.
      */
-    protected abstract void actOnPlayer(Player player);
+    protected abstract void actOnPlayer(Player player, E gameEntity);
 
     /**
      * Method that changes the behaviour of gameEntity.
+     * @param player player that collided.
      * @param gameEntity gameEntity that collided.
      */
-    protected abstract void actOnEntity(E gameEntity);
+    protected abstract void actOnEntity(Player player, E gameEntity);
 }
