@@ -91,5 +91,6 @@ public class GameControllerImpl implements GameController {
     public void start() {
         this.gameView.show();
         this.mainLoop();
+        this.close();
     }
 }
