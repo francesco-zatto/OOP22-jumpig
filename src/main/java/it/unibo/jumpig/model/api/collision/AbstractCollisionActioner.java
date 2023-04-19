@@ -15,7 +15,7 @@ public abstract class AbstractCollisionActioner<H extends Hitbox, E extends Game
      * {@inheritDoc}
      */
     @Override
-    public void act(final Player player, final E gameEntity) {
+    public final void act(final Player player, final E gameEntity) {
         this.actOnPlayer(player, gameEntity);
         this.actOnEntity(player, gameEntity);
     }
