@@ -27,15 +27,15 @@ public final class EnemyCollisionHandler extends AbstractCollisionHandler<Rectan
         final double playerRightX = playerHitbox.getRectangleRightX();
         final double enemyLeftX = enemyHitbox.getRectangleLeftX();
         final double enemyRightX = enemyHitbox.getRectangleRightX();
-        final boolean isPlayerAligned = isBetween(playerLeftX, enemyLeftX, enemyRightX) 
+        /*final boolean isPlayerAligned = isBetween(playerLeftX, enemyLeftX, enemyRightX) 
                 || isBetween(playerRightX, enemyLeftX, enemyRightX);
         final double playerLowerY = playerHitbox.getRectangleLowerY();
         final double playerUpperY = playerHitbox.getRectangleUpperY();
         final double enemyLowerY = enemyHitbox.getRectangleLowerY();
         final double enemyUpperY = enemyHitbox.getRectangleUpperY();
         final boolean isPlayerOnTheSameHeight = isBetween(playerLowerY, enemyLowerY, enemyUpperY) 
-                || isBetween(playerUpperY, enemyLowerY, enemyUpperY);
-        return isPlayerAligned && isPlayerOnTheSameHeight;
+                || isBetween(playerUpperY, enemyLowerY, enemyUpperY);*/
+        return true; //TODO ADD isPlayerAligned, isPlayerOnTheSameHeight
     }
 
     @Override

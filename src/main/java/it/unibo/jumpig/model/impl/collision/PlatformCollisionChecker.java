@@ -16,8 +16,17 @@ public abstract class PlatformCollisionChecker<P extends Platform> extends Abstr
      */
     @Override
     protected boolean areBoundsColliding(final Player player, final P gameEntity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'areBoundsColliding'");
+        final RectangleHitbox playerHitbox = player.getHitbox();
+        final RectangleHitbox platformHitbox = gameEntity.getHitbox();
+        final double playerLeftX = playerHitbox.getRectangleLeftX();
+        final double playerRightX = playerHitbox.getRectangleRightX();
+        final double platformLeftX = platformHitbox.getRectangleLeftX();
+        final double platformRightX = platformHitbox.getRectangleRightX();
+        final boolean isPlayerAligned = super.isBetween(playerLeftX, platformLeftX, platformRightX) 
+                || super.isBetween(playerRightX, platformLeftX, platformRightX);
+        final boolean isPlayerAbove = isBetween(playerHitbox.getRectangleLowerY(), platformHitbox.getCenter().getY(),
+                platformHitbox.getRectangleUpperY());
+        return isPlayerAligned && isPlayerAbove;
     }
 
     /**

@@ -2,7 +2,6 @@ package it.unibo.jumpig.model.impl.collision;
 
 import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
-import it.unibo.jumpig.common.impl.PositionImpl;
 import it.unibo.jumpig.common.impl.hitbox.CircleHitbox;
 import it.unibo.jumpig.model.api.collision.AbstractCollisionHandler;
 import it.unibo.jumpig.model.api.collision.CollisionActioner;
@@ -34,15 +33,15 @@ public final class CoinCollisionHandler extends AbstractCollisionHandler<CircleH
         final Position nearestPosition;
         final boolean isCoinToTheRight = coinCenter.getX() > playerHitbox.getCenter().getX();
         final boolean isCoinAbove = coinCenter.getY() > playerHitbox.getCenter().getY();
-        if (isBetween(coinCenter.getY(), playerLowerY, playerUpperY)) {
+        /*if (isBetween(coinCenter.getY(), playerLowerY, playerUpperY)) {
             nearestPosition = new PositionImpl(isCoinToTheRight ? playerRightX : playerLeftX, coinCenter.getY());
         } else if (isBetween(coinCenter.getX(), playerLeftX, playerRightX)) {
             nearestPosition = new PositionImpl(coinCenter.getX(), isCoinAbove ? playerUpperY : playerLowerY);
         } else {
             nearestPosition = new PositionImpl(isCoinToTheRight ? playerRightX : playerLeftX, 
                     isCoinAbove ? playerUpperY : playerLowerY);
-        }
-        return isPositionInsideCircle(nearestPosition, coinHitbox); 
+        }*/
+        return isPositionInsideCircle(null, coinHitbox); //TODO ADD nearestPosition
     }
 
     /*This inequality is based on the equation of a circle: (x - xCenter) ^ 2 + (y - yCenter) ^ 2 = radius ^ 2.
