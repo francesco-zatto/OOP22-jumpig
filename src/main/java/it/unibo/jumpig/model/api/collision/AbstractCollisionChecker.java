@@ -16,9 +16,9 @@ public abstract class AbstractCollisionChecker<H extends Hitbox, E extends GameE
      */
     @Override
     public boolean check(final Player player, final E gameEntity) {
-        return this.areBoundsColliding(player, gameEntity)
-            && this.canPlayerCollide(player)
-            && this.canEntityCollide(gameEntity);
+        return this.canPlayerCollide(player)
+            && this.canEntityCollide(gameEntity)
+            && this.areBoundsColliding(player, gameEntity);
     }
 
     /**
