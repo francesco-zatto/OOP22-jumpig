@@ -12,7 +12,8 @@ public class VanishingPlatformCollisionActioner extends PlatformCollisionActione
      * {@inheritDoc}
      */
     @Override
-    protected void actOnEntity(final Player player, final VanishingPlatform gameEntity) {
+    public void act(final Player player, final VanishingPlatform gameEntity) {
+        super.act(player, gameEntity);
         gameEntity.markTarget();
     }
 }
