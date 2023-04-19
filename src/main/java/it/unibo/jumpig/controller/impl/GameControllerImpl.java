@@ -64,7 +64,6 @@ public class GameControllerImpl implements GameController {
      */
     @Override
     public void notifyUpdate() {
-        this.game.updateGame(PERIOD);
         this.gameView.renderEntities(this.game.getWorld().getEntities());
     }
 
