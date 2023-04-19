@@ -1,8 +1,11 @@
 package it.unibo.jumpig.view.impl;
 
+import java.util.Arrays;
 import java.util.Set;
 
 import javax.swing.JPanel;
+
+import java.awt.Component;
 import java.awt.event.KeyEvent;
 
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
@@ -70,8 +73,19 @@ public class GameViewImpl implements GameViewScene {
      */
     @Override
     public void renderEntities(final Set<Hitbox> entities) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'renderEntities'");
+        Arrays.stream(this.mainPanel.getComponents())
+            .forEach(x -> this.refresh(x, entities));
+    }
+
+    private void refresh(final Component x, final Set<Hitbox> entities) {
+        if (x instanceof ScorePanel) {
+            ((ScorePanel) x).refresh(); //devo passare entities a refresh 
+        } else {
+            if (x instanceof GamePanel) {
+                ((GamePanel) x).refresh(entities);
+                x.repaint();
+            }
+        }
     }
 
     /**
