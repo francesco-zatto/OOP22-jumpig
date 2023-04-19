@@ -17,7 +17,7 @@ public class PlatformCollisionActioner<P extends Platform> extends AbstractColli
      */
     @Override
     protected void actOnPlayer(final Player player, final P gameEntity) {
-        var platformJumpVelocity = gameEntity.getJumpVelocity();
+        final var platformJumpVelocity = gameEntity.getJumpVelocity();
         player.setVelocityFromJump(
             new VelocityImpl(platformJumpVelocity.getXComponent(), platformJumpVelocity.getYComponent())
         );
