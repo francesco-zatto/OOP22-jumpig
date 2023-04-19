@@ -21,7 +21,9 @@ public class GameControllerImpl implements GameController {
      */
     public GameControllerImpl() {
         this.game = new GameImpl();
-        this.gameView = new GameViewImpl(this);
+        this.gameView = new GameViewImpl(
+            this, this.game.getWorld().getWidth(), this.game.getWorld().getHeight()
+        );
     }
 
     /**

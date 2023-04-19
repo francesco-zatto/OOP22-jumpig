@@ -15,19 +15,29 @@ import it.unibo.jumpig.view.api.GameViewScene;
 
 public class GameViewImpl implements GameViewScene {
 
-    public static final long serialVersionUID = 1L; 
+    public static final long serialVersionUID = 1L;
+    private final double width; //NOPMD
+    private final double height; //NOPMD
     private final GameController controller;
     private final JPanel mainPanel = new JPanel();
 
     /**
      * Constructor to create the game view that manage updates. 
      * @param gameController the controller of the game
+     * @param width the width of the world
+     * @param height the height of the world
      * */
-    public GameViewImpl(final GameController gameController) {
-        this.controller = gameController;
-        this.mainPanel.add(new GamePanel(1, 1));
-        this.mainPanel.add(new ScorePanel());
-        this.mainPanel.setVisible(false);
+    public GameViewImpl(
+        final GameController gameController, 
+        final double width, 
+        final double height
+        ) {
+            this.controller = gameController;
+            this.width = width;
+            this.height = height;
+            this.mainPanel.add(new GamePanel(this.width, this.height));
+            this.mainPanel.add(new ScorePanel());
+            this.mainPanel.setVisible(false);
     }
 
     /**
