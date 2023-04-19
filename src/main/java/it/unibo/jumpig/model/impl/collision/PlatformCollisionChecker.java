@@ -34,6 +34,6 @@ public abstract class PlatformCollisionChecker<P extends Platform> extends Abstr
      */
     @Override
     protected boolean canPlayerCollide(final Player player) {
-        return player.getVelocity().getYComponent() <= 0;
+        return player.getVelocity().getYComponent() < 0;
     }
 }
