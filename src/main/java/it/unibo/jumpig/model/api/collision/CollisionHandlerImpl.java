@@ -23,6 +23,7 @@ public class CollisionHandlerImpl<H extends Hitbox, E extends GameEntity<H>>  im
         this.actioner = actioner;
         this.checker = checker;
     }
+    
     /**
      * {@inheritDoc}
      */
