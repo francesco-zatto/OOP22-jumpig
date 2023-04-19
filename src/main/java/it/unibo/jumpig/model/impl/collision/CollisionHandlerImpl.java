@@ -1,6 +1,9 @@
-package it.unibo.jumpig.model.api.collision;
+package it.unibo.jumpig.model.impl.collision;
 
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
+import it.unibo.jumpig.model.api.collision.CollisionActioner;
+import it.unibo.jumpig.model.api.collision.CollisionChecker;
+import it.unibo.jumpig.model.api.collision.CollisionHandler;
 import it.unibo.jumpig.model.api.gameentity.GameEntity;
 import it.unibo.jumpig.model.api.gameentity.Player;
 
@@ -23,7 +26,6 @@ public class CollisionHandlerImpl<H extends Hitbox, E extends GameEntity<H>>  im
         this.actioner = actioner;
         this.checker = checker;
     }
-    
     /**
      * {@inheritDoc}
      */
