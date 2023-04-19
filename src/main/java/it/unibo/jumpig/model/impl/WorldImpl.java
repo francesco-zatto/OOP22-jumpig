@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
+import it.unibo.jumpig.common.impl.PositionImpl;
 import it.unibo.jumpig.model.api.Camera;
 import it.unibo.jumpig.model.api.GeneratorEntities;
 import it.unibo.jumpig.model.api.World;
@@ -42,7 +43,7 @@ public class WorldImpl implements World {
 
     public WorldImpl() {
         this.generator = new GeneratorEntitiesImpl(WIDTH, HEIGHT);
-        this.player = new PlayerImpl(null);
+        this.player = new PlayerImpl(new PositionImpl(WIDTH / 2, 0));
         this.setplatform = generator.generatePlatforms();
         this.setenemies = generator.generateEnemies();
         this.setcoins = generator.generateCoins();
