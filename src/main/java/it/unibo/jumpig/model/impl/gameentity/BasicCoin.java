@@ -3,10 +3,13 @@ package it.unibo.jumpig.model.impl.gameentity;
 import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.impl.hitbox.CircleHitbox;
 import it.unibo.jumpig.common.impl.hitbox.CoinHitbox;
+import it.unibo.jumpig.model.api.collision.CollisionHandler;
 import it.unibo.jumpig.model.api.gameentity.AbstractGameEntity;
 import it.unibo.jumpig.model.api.gameentity.Coin;
 import it.unibo.jumpig.model.api.gameentity.Player;
-import it.unibo.jumpig.model.impl.collision.CoinCollisionHandler;
+import it.unibo.jumpig.model.impl.collision.CoinCollisionActioner;
+import it.unibo.jumpig.model.impl.collision.CoinCollisionChecker;
+import it.unibo.jumpig.model.impl.collision.CollisionHandlerImpl;
 
 /**
  * The class that represents a basic coin.
@@ -15,7 +18,9 @@ import it.unibo.jumpig.model.impl.collision.CoinCollisionHandler;
 public class BasicCoin extends AbstractGameEntity<CircleHitbox> implements Coin {
 
     private boolean taken;
-    private final CoinCollisionHandler collisionHandler = new CoinCollisionHandler();
+    private final CollisionHandler<CircleHitbox, Coin> collisionHandler = new CollisionHandlerImpl<>(
+        new CoinCollisionActioner(), new CoinCollisionChecker()
+    );
 
     /**
      * The constructor for a basic coin.

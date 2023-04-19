@@ -3,10 +3,13 @@ package it.unibo.jumpig.model.impl.gameentity;
 import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.impl.hitbox.EnemyHitbox;
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
+import it.unibo.jumpig.model.api.collision.CollisionHandler;
 import it.unibo.jumpig.model.api.gameentity.AbstractGameEntity;
 import it.unibo.jumpig.model.api.gameentity.Enemy;
 import it.unibo.jumpig.model.api.gameentity.Player;
-import it.unibo.jumpig.model.impl.collision.EnemyCollisionHandler;
+import it.unibo.jumpig.model.impl.collision.CollisionHandlerImpl;
+import it.unibo.jumpig.model.impl.collision.EnemyCollisionActioner;
+import it.unibo.jumpig.model.impl.collision.EnemyCollisionChecker;
 
 /**
  * This class EnemyImpl should represents an enemy.
@@ -16,7 +19,9 @@ import it.unibo.jumpig.model.impl.collision.EnemyCollisionHandler;
 public class EnemyImpl extends AbstractGameEntity<RectangleHitbox> implements Enemy {
 
     private boolean targettable;
-    private final EnemyCollisionHandler collisionHandler = new EnemyCollisionHandler();
+    private final CollisionHandler<RectangleHitbox, Enemy> collisionHandler = new CollisionHandlerImpl<>(
+        new EnemyCollisionActioner(), new EnemyCollisionChecker()
+    );
 
     /**
      * The constructor for an enemy.
