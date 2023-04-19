@@ -74,27 +74,44 @@ public class GameViewImpl implements GameViewScene {
     @Override
     public void renderEntities(final Set<Hitbox> entities) {
         Arrays.stream(this.mainPanel.getComponents())
-            .forEach(x -> this.refresh(x, entities));
+            .forEach(x -> this.refreshEntities(x, entities));
     }
 
-    private void refresh(final Component x, final Set<Hitbox> entities) {
-        if (x instanceof ScorePanel) {
-            ((ScorePanel) x).refresh(); //devo passare entities a refresh 
-        } else {
-            if (x instanceof GamePanel) {
-                ((GamePanel) x).refresh(entities);
-                x.repaint();
+    private void refreshEntities(
+        final Component x, 
+        final Set<Hitbox> entities
+        ) {
+            if (x instanceof ScorePanel) {
+               ((ScorePanel) x).refresh(); //devo passare entities a refresh 
+            } else {
+                if (x instanceof GamePanel) {
+                   ((GamePanel) x).refresh(entities);
+                   x.repaint();
+                }
             }
-        }
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void renderCurrentScore(final int coins, final int height, final int lives) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'renderCurrentScore'");
+    public void renderCurrentScore(
+        final int coins, 
+        final int height, 
+        final int lives
+        ) {
+            Arrays.stream(this.mainPanel.getComponents())
+                .forEach(x -> this.refreshScore(x, coins, height, lives)); //NOPMD
     }
 
+    private void refreshScore(
+        final Component x,  //NOPMD
+        final int coins, //NOPMD
+        final int height, //NOPMD
+        final int lives//NOPMD
+        ) {
+            if (x instanceof ScorePanel) {
+                ((ScorePanel) x).refresh(); //devo passare entities a refresh
+            }
+    }
 }
