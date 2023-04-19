@@ -11,12 +11,25 @@ import it.unibo.jumpig.model.api.gameentity.Player;
  */
 public class CollisionHandlerImpl<H extends Hitbox, E extends GameEntity<H>>  implements CollisionHandler<H, E> {
 
+    private final CollisionActioner<H, E> actioner;
+    private final CollisionChecker<H, E> checker;
+
+    /**
+     * Constructor for a collision handler for a player and an entity.
+     * @param actioner actioner that modifies player and entity status after a collision
+     * @param checker checker that checks if player and entity are colliding.
+     */
+    public CollisionHandlerImpl(final CollisionActioner<H, E> actioner, final CollisionChecker<H, E> checker) {
+        this.actioner = actioner;
+        this.checker = checker;
+    }
     /**
      * {@inheritDoc}
      */
     @Override
     public void handle(final Player player, final E gameEntity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'handle'");
+        if (this.checker.check(player, gameEntity)) {
+            this.actioner.act(player, gameEntity);
+        }
     }
 }
