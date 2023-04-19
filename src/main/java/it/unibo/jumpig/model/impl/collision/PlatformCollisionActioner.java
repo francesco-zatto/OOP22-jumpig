@@ -21,6 +21,7 @@ public class PlatformCollisionActioner<P extends Platform> extends AbstractColli
         player.setVelocityFromJump(
             new VelocityImpl(platformJumpVelocity.getXComponent(), platformJumpVelocity.getYComponent())
         );
+        player.setLastPlatformHeight(gameEntity.getPosition().getY());
     }
 
     /**
