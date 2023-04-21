@@ -143,7 +143,7 @@ public class WorldImpl implements World {
         this.player.computeVelocity(GRAVITY, elapsed);
         this.player.computePosition(elapsed);
         if (this.camera.getHeight(this.player).isPresent() 
-            && this.camera.getHeight(this.player).get() >= 64
+            && this.camera.getHeight(this.player).get() >= HEIGHT
         ) {
                 this.setentities.addAll(regenerate(setentities));
         }
