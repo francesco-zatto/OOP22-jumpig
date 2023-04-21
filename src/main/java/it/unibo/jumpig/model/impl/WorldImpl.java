@@ -5,10 +5,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
+import it.unibo.jumpig.common.impl.PositionImpl;
 import it.unibo.jumpig.model.api.Camera;
 import it.unibo.jumpig.model.api.GeneratorEntities;
 import it.unibo.jumpig.model.api.World;
 import it.unibo.jumpig.model.api.gameentity.Coin;
+import it.unibo.jumpig.model.api.gameentity.Collidable;
+import it.unibo.jumpig.model.api.gameentity.CollidableEntity;
 import it.unibo.jumpig.model.api.gameentity.Enemy;
 import it.unibo.jumpig.model.api.gameentity.GameEntity;
 import it.unibo.jumpig.model.api.gameentity.Platform;
@@ -23,8 +26,10 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
 
 public class WorldImpl implements World {
 
+    private static final double WIDTH = 36;
+    private static final double HEIGHT = 64;
     private static final double GRAVITY = 9.8;
-    private final GeneratorEntities generator; //NOPMD
+    private final GeneratorEntities generator;
     private final Player player;
     private final Set<Platform> setplatform;
     private final Set<Enemy> setenemies;
@@ -37,8 +42,8 @@ public class WorldImpl implements World {
      */
 
     public WorldImpl() {
-        this.generator = new GeneratorEntitiesImpl();
-        this.player = new PlayerImpl(null);
+        this.generator = new GeneratorEntitiesImpl(WIDTH, HEIGHT);
+        this.player = new PlayerImpl(new PositionImpl(WIDTH / 2, 0));
         this.setplatform = generator.generatePlatforms();
         this.setenemies = generator.generateEnemies();
         this.setcoins = generator.generateCoins();
@@ -118,9 +123,46 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
+    public double getHeight() {
+        return HEIGHT;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getWidth() {
+        return WIDTH;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void updateGame(final long elapsed) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateGame'");
+        this.player.computeVelocity(GRAVITY, elapsed);
+        this.player.computePosition(elapsed);
+        if (this.camera.getHeight(this.player).isPresent() 
+            && this.camera.getHeight(this.player).get() >= 64
+        ) {
+                this.setentities.addAll(regenerate(setentities));
+        }
+        final var collidables = this.getCollidables(Set.of(this.setcoins, this.setenemies, this.setplatform));
+        collidables.forEach(c -> c.handleCollision(this.player));
+    }
+
+    private Set<Collidable> getCollidables(final Set<Set<? extends CollidableEntity<? extends Hitbox>>> collidableSets) {
+        return collidableSets.stream()
+                .flatMap(Set::stream)
+                .filter(this::isEntityNearPlayer)
+                .collect(Collectors.toSet());
+    }
+
+    private boolean isEntityNearPlayer(final GameEntity<? extends Hitbox> entity) {
+        final double quarterOfWorld = HEIGHT / 4;
+        final double playerHeight = this.player.getPosition().getY();
+        final double entityHeight = entity.getPosition().getY();
+        return playerHeight - quarterOfWorld < entityHeight && entityHeight < playerHeight + quarterOfWorld;
     }
 
     //we will use this in updateGame

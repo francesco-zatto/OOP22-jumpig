@@ -1,8 +1,13 @@
 package it.unibo.jumpig.controller.impl;
 
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
+
 import it.unibo.jumpig.controller.api.GameController;
 import it.unibo.jumpig.model.api.Game;
 import it.unibo.jumpig.model.impl.GameImpl;
+import it.unibo.jumpig.view.api.GameViewScene;
+import it.unibo.jumpig.view.impl.GameViewImpl;
 
 /**
  *The class to manage the game loop.
@@ -12,20 +17,25 @@ public class GameControllerImpl implements GameController {
 
     private static final long PERIOD = 20; /* 20 milliseconds are equal to 50 frames per sec */
     private final Game game;
+    private final GameViewScene gameView;
+    private final Logger logger = System.getLogger("GameControllerImpl");
 
     /**
      * Constructor to create a new Game Controller in order to start a new Game.
      */
     public GameControllerImpl() {
         this.game = new GameImpl();
+        this.gameView = new GameViewImpl(
+            this, 
+            this.game.getWorld().getWidth(), 
+            this.game.getWorld().getHeight()
+        );
     }
 
     /**
-     * {@inheritDoc}
+     * The game loop performing each frame update according to the game loop pattern.
      */
-    @Override
-    public void mainLoop() {
-        this.start();
+    private void mainLoop() {
         long previousCycleStartTime = System.currentTimeMillis();
         while (!game.isOVer()) {
             final long currentCycleStartTime = System.currentTimeMillis();
@@ -48,7 +58,7 @@ public class GameControllerImpl implements GameController {
             try {
                 Thread.sleep(PERIOD - deltaTime);
             } catch (IllegalArgumentException | InterruptedException ex) {
-                return;
+                logger.log(Level.ERROR, "Exception in waiting for next frame");
             }
         }
     }
@@ -58,7 +68,7 @@ public class GameControllerImpl implements GameController {
      */
     @Override
     public void notifyUpdate() {
-        // TODO Avrò una view e un game qui dentro e chiamo view.render() e game.update()
+        this.gameView.renderEntities(this.game.getWorld().getEntities());
     }
 
     /**
@@ -74,7 +84,7 @@ public class GameControllerImpl implements GameController {
      */
     @Override
     public void close() {
-        // TODO This method will close the game view.
+        this.gameView.quit();
     }
 
     /**
@@ -82,6 +92,8 @@ public class GameControllerImpl implements GameController {
      */
     @Override
     public void start() {
-        // TODO This method will show the game view
+        this.gameView.show();
+        this.mainLoop();
+        this.close();
     }
 }

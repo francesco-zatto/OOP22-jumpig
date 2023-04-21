@@ -1,31 +1,25 @@
 package it.unibo.jumpig.model.impl.collision;
 
 import it.unibo.jumpig.common.api.Position;
-import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.common.impl.PositionImpl;
 import it.unibo.jumpig.common.impl.hitbox.CircleHitbox;
-import it.unibo.jumpig.model.api.collision.AbstractCollisionHandler;
-import it.unibo.jumpig.model.api.collision.CollisionActioner;
-import it.unibo.jumpig.model.api.collision.CollisionChecker;
+import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
+import it.unibo.jumpig.model.api.collision.AbstractCollisionChecker;
 import it.unibo.jumpig.model.api.gameentity.Coin;
 import it.unibo.jumpig.model.api.gameentity.Player;
 
 /**
- * Class that handles collisions between a player and a coin.
+ * Class that checks the collision of the player with a coin.
  */
-public final class CoinCollisionHandler extends AbstractCollisionHandler<CircleHitbox, Coin> {
+public class CoinCollisionChecker extends AbstractCollisionChecker<CircleHitbox, Coin> {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected CollisionChecker<CircleHitbox, Coin> getCollisionChecker() {
-        return this::isPlayerCollidingWithCoin;
-    }
-
-    private boolean isPlayerCollidingWithCoin(final Player player, final Coin coin) {
-        if (coin.isTaken()) {
-            return false;
-        }
+    protected boolean areBoundsColliding(final Player player, final Coin gameEntity) {
         final RectangleHitbox playerHitbox = player.getHitbox();
-        final CircleHitbox coinHitbox = coin.getHitbox();
+        final CircleHitbox coinHitbox = gameEntity.getHitbox();
         final Position coinCenter = coinHitbox.getCenter();
         final double playerLeftX = playerHitbox.getRectangleLeftX();
         final double playerRightX = playerHitbox.getRectangleRightX();
@@ -54,13 +48,19 @@ public final class CoinCollisionHandler extends AbstractCollisionHandler<CircleH
                 < Math.pow(circle.getRadius(), 2);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected CollisionActioner<CircleHitbox, Coin> getCollisionActioner() {
-        return this::playerTakesCoin;
+    protected boolean canPlayerCollide(final Player player) {
+        return true;
     }
 
-    private void playerTakesCoin(final Player player, final Coin coin) {
-        player.incrementCoins();
-        coin.markTarget();
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean canEntityCollide(final Coin gameEntity) {
+        return !gameEntity.isTaken();
     }
 }

@@ -7,8 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.impl.PositionImpl;
 import it.unibo.jumpig.model.api.gameentity.Targettable;
-import it.unibo.jumpig.model.impl.collision.CoinCollisionHandler;
-import it.unibo.jumpig.model.impl.collision.EnemyCollisionHandler;
 import it.unibo.jumpig.model.impl.gameentity.BasicCoin;
 import it.unibo.jumpig.model.impl.gameentity.EnemyImpl;
 import it.unibo.jumpig.model.impl.gameentity.PlayerImpl;
@@ -37,9 +35,8 @@ class CollisionHandlerTest {
     void testCoinCollision() {
         final var player = new PlayerImpl(PLAYER_POSITION);
         final var coin = new BasicCoin(COIN_POSITION);
-        final var coinCollisionHandler = new CoinCollisionHandler();
         final double pickedCoins = player.getCoins();
-        coinCollisionHandler.handle(player, coin);
+        coin.handleCollision(player);
         assertEquals(pickedCoins + 1, player.getCoins());
         assertIsTaken(coin);
     }
@@ -48,9 +45,8 @@ class CollisionHandlerTest {
     void testEnemyCollision() {
         final var player = new PlayerImpl(PLAYER_POSITION);
         final var enemy = new EnemyImpl(ENEMY_POSITION);
-        final var enemyCollisionHandler = new EnemyCollisionHandler();
         final int playerLives = player.getLives();
-        enemyCollisionHandler.handle(player, enemy);
+        enemy.handleCollision(player);
         assertEquals(playerLives - 1, player.getLives());
         assertIsTaken(enemy);
     }

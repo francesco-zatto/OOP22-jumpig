@@ -1,28 +1,22 @@
 package it.unibo.jumpig.model.impl.collision;
 
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
-import it.unibo.jumpig.model.api.collision.AbstractCollisionHandler;
-import it.unibo.jumpig.model.api.collision.CollisionActioner;
-import it.unibo.jumpig.model.api.collision.CollisionChecker;
+import it.unibo.jumpig.model.api.collision.AbstractCollisionChecker;
 import it.unibo.jumpig.model.api.gameentity.Enemy;
 import it.unibo.jumpig.model.api.gameentity.Player;
 
 /**
- * Class that handles collisions between a player and an enemy.
+ * Class that checks the collision of the player whith an enemy.
  */
-public final class EnemyCollisionHandler extends AbstractCollisionHandler<RectangleHitbox, Enemy> {
+public class EnemyCollisionChecker extends AbstractCollisionChecker<RectangleHitbox, Enemy> {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected CollisionChecker<RectangleHitbox, Enemy> getCollisionChecker() {
-        return this::isPlayerCollidingWithEnemy;
-    }
-
-    private boolean isPlayerCollidingWithEnemy(final Player player, final Enemy enemy) {
-        if (enemy.isTaken()) {
-            return false;
-        }
+    protected boolean areBoundsColliding(final Player player, final Enemy gameEntity) {
         final RectangleHitbox playerHitbox = player.getHitbox();
-        final RectangleHitbox enemyHitbox = enemy.getHitbox();
+        final RectangleHitbox enemyHitbox = gameEntity.getHitbox();
         final double playerLeftX = playerHitbox.getRectangleLeftX();
         final double playerRightX = playerHitbox.getRectangleRightX();
         final double enemyLeftX = enemyHitbox.getRectangleLeftX();
@@ -38,13 +32,19 @@ public final class EnemyCollisionHandler extends AbstractCollisionHandler<Rectan
         return isPlayerAligned && isPlayerOnTheSameHeight;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected CollisionActioner<RectangleHitbox, Enemy> getCollisionActioner() { 
-        return this::playerCollidesWithEnemy;
+    protected boolean canPlayerCollide(final Player player) {
+        return true;
     }
 
-    private void playerCollidesWithEnemy(final Player player, final Enemy enemy) {
-        player.decreaseLives();
-        enemy.markTarget();
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean canEntityCollide(final Enemy gameEntity) {
+        return !gameEntity.isTaken();
     }
 }
