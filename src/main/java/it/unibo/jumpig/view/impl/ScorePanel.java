@@ -33,8 +33,12 @@ public class ScorePanel extends JPanel {
           this.add(componentsPanel, BorderLayout.NORTH);
      }
 
+     
      /**
       * Method that updates the score.
+      * @param height the maximum height reached
+      * @param coins the number of coins gained
+      * @param lives the lives left
       */
      public void refresh(final double height, final int coins, final int lives) {
           this.scoreNumber.setText(Double.toString(height));
