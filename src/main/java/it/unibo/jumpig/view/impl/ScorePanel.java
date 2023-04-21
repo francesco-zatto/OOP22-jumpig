@@ -12,13 +12,13 @@ import javax.swing.JPanel;
  */
 public class ScorePanel extends JPanel {
      public static final long serialVersionUID = 1L;
-     final JPanel componentsPanel = new JPanel(new FlowLayout());
-     final JLabel scoreText = new JLabel("Score: ");
-     final JLabel scoreNumber = new JLabel("0");
-     final JLabel coinText = new JLabel("Coins: ");
-     final JLabel coinNumber = new JLabel("0");
-     final JLabel livesText = new JLabel("Lives: ");
-     final JLabel livesNumber = new JLabel("3"); 
+     private final JPanel componentsPanel = new JPanel(new FlowLayout());
+     private final JLabel scoreText = new JLabel("Score: ");
+     private final JLabel scoreNumber = new JLabel("0");
+     private final JLabel coinText = new JLabel("Coins: ");
+     private final JLabel coinNumber = new JLabel("0");
+     private final JLabel livesText = new JLabel("Lives: ");
+     private final JLabel livesNumber = new JLabel("3"); 
      /**
      * Constructor for the score.
      */
@@ -33,7 +33,6 @@ public class ScorePanel extends JPanel {
           this.add(componentsPanel, BorderLayout.NORTH);
      }
 
-     
      /**
       * Method that updates the score.
       * @param height the maximum height reached
