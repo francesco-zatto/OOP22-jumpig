@@ -15,7 +15,7 @@ public class ScorePanel extends JPanel {
      final JPanel componentsPanel = new JPanel(new FlowLayout());
      final JLabel scoreText = new JLabel("Score: ");
      final JLabel scoreNumber = new JLabel("0");
-     final JLabel coinAmount = new JLabel("Coins: ");
+     final JLabel coinText = new JLabel("Coins: ");
      final JLabel coinNumber = new JLabel("0");
      final JLabel livesText = new JLabel("Lives: ");
      final JLabel livesNumber = new JLabel("3"); 
@@ -25,7 +25,7 @@ public class ScorePanel extends JPanel {
     public ScorePanel() {
           componentsPanel.add(scoreText);
           componentsPanel.add(scoreNumber);
-          componentsPanel.add(coinAmount);
+          componentsPanel.add(coinText);
           componentsPanel.add(coinNumber);
           componentsPanel.add(livesText);
           componentsPanel.add(livesNumber);
