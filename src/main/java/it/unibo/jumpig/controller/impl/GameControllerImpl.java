@@ -1,5 +1,8 @@
 package it.unibo.jumpig.controller.impl;
 
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
+
 import it.unibo.jumpig.controller.api.GameController;
 import it.unibo.jumpig.model.api.Game;
 import it.unibo.jumpig.model.impl.GameImpl;
@@ -15,6 +18,7 @@ public class GameControllerImpl implements GameController {
     private static final long PERIOD = 20; /* 20 milliseconds are equal to 50 frames per sec */
     private final Game game;
     private final GameViewScene gameView;
+    private final Logger logger = System.getLogger("GameControllerImpl");
 
     /**
      * Constructor to create a new Game Controller in order to start a new Game.
@@ -54,7 +58,7 @@ public class GameControllerImpl implements GameController {
             try {
                 Thread.sleep(PERIOD - deltaTime);
             } catch (IllegalArgumentException | InterruptedException ex) {
-                return;
+                logger.log(Level.ERROR, "Exception in waiting for next frame");
             }
         }
     }
