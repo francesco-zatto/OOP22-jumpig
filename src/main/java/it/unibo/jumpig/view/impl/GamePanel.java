@@ -26,8 +26,10 @@ public class GamePanel extends JPanel {
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     private final Dimension startScreen = new Dimension((int) (screen.getWidth() / SCREEN_FRACTION),
             (int) (screen.getWidth() / SCREEN_FRACTION * ASPECT_RATIO));
-    @SuppressFBWarnings(value = "SE_BAD_FIELD", justification = "Set is not Serializable, while HashSet is, " 
-            + "but I'd rather use as type the interface Set instead of HashSet.") 
+    @SuppressFBWarnings(
+        value = "SE_BAD_FIELD", 
+        justification = "GamePanel is not meant to be serialized." 
+    ) 
     private final Set<Hitbox> entities = new HashSet<>();
     private transient Optional<SwingRenderer> renderer = Optional.empty();
 
