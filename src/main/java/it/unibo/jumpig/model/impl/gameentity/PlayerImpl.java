@@ -1,6 +1,5 @@
 package it.unibo.jumpig.model.impl.gameentity;
 
-import java.util.Objects;
 import java.util.Optional;
 
 import it.unibo.jumpig.common.api.Position;
@@ -124,8 +123,8 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
      * {@inheritDoc}
      */
     @Override
-    public void setLastPlatformHeight(final Double lastPlatformHeight) {
-        this.lastPlatformHeight = Optional.of(Objects.requireNonNull(lastPlatformHeight));
+    public void setLastPlatformHeight(final Optional<Double> lastPlatformHeight) {
+        this.lastPlatformHeight = lastPlatformHeight;
     }
 
     /**
