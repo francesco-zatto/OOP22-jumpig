@@ -86,6 +86,7 @@ public class MenuViewSceneImpl implements MenuViewScene {
         quitButton.addActionListener(e -> this.controller.close());
         gameButton.addActionListener(e -> {
             frame.remove(menuPanel);
+            /*
             String username = "";
             while ("".equals(username)) {
                 username = JOptionPane.showInputDialog(
@@ -105,6 +106,8 @@ public class MenuViewSceneImpl implements MenuViewScene {
             (double) (screen.getWidth() / 5 * 1.7));
             frame.getContentPane().add(gamePanel);
             frame.pack();
+            */
+            this.controller.notifyStartGame();
         });
         leaderboardButton.addActionListener(e -> this.controller.notifyStartLeaderboard());
     }
