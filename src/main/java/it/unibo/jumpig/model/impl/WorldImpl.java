@@ -1,6 +1,7 @@
 package it.unibo.jumpig.model.impl;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -142,13 +143,16 @@ public class WorldImpl implements World {
     public void updateGame(final long elapsed) {
         this.player.computeVelocity(GRAVITY, elapsed);
         this.player.computePosition(elapsed);
-        if (this.camera.getHeight(this.player).isPresent() 
-            && this.camera.getHeight(this.player).get() >= HEIGHT
-        ) {
-                this.setentities.addAll(regenerate(setentities));
-        }
+        this.checkRegeneration();
         final var collidables = this.getCollidables(Set.of(this.setcoins, this.setenemies, this.setplatform));
         collidables.forEach(c -> c.handleCollision(this.player));
+        this.setEmpty();
+    }
+
+    private void setEmpty() {
+        if (this.player.getPosition().getY() < this.camera.getHeight(this.player).get()) {
+            this.player.setLastPlatformHeight(Optional.empty());
+        }
     }
 
     private Set<Collidable> getCollidables(final Set<Set<? extends CollidableEntity<? extends Hitbox>>> collidableSets) {
@@ -165,8 +169,14 @@ public class WorldImpl implements World {
         return playerHeight - quarterOfWorld < entityHeight && entityHeight < playerHeight + quarterOfWorld;
     }
 
-    //we will use this in updateGame
-    private Set<GameEntity<? extends Hitbox>> regenerate(final Set<GameEntity<? extends Hitbox>> setToRegenerate) { //NOPMD
+    private void checkRegeneration() {
+        if (this.camera.getHeight(this.player).isPresent() 
+                && this.camera.getHeight(this.player).get() >= HEIGHT
+            ) {
+                    this.setentities.addAll(regenerate(setentities));
+        }
+    }
+    private Set<GameEntity<? extends Hitbox>> regenerate(final Set<GameEntity<? extends Hitbox>> setToRegenerate) {
         final var type = setToRegenerate.stream()
             .toList()
             .get(0);
