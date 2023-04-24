@@ -10,6 +10,7 @@ import it.unibo.jumpig.view.impl.MenuViewSceneImpl;
 public class MenuControllerImpl implements MenuController {
 
     private final MenuViewScene menuView = new MenuViewSceneImpl(this);
+    private final GameControllerImpl gameController = new GameControllerImpl();
 
     /**
      * {@inheritDoc}
@@ -32,8 +33,7 @@ public class MenuControllerImpl implements MenuController {
      */
     @Override
     public void notifyStartGame() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'notifyStartGame'");
+        this.gameController.start();
     }
 
     /**
