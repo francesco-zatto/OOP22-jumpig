@@ -6,7 +6,6 @@ import java.util.Set;
 import javax.swing.JPanel;
 
 import java.awt.Component;
-import java.awt.event.KeyEvent;
 
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
 import it.unibo.jumpig.controller.api.GameController;
@@ -63,9 +62,9 @@ public class GameViewImpl implements GameViewScene {
      * {@inheritDoc}
      */
     @Override
-    public void manageInput(final KeyEvent input) {
+    public int manageInput() {
         //TODO
-        this.controller.registerInput();
+        return 0;
     }
 
     /**

@@ -2,8 +2,6 @@ package it.unibo.jumpig.view.api;
 
 import java.util.Set;
 
-import java.awt.event.KeyEvent;
-
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
 
 /**
@@ -28,7 +26,6 @@ public interface GameViewScene extends ViewScene {
 
     /**
      * The method to manage the input.
-     * @param input the input
      */
-    void manageInput(KeyEvent input);
+    int manageInput();
 }

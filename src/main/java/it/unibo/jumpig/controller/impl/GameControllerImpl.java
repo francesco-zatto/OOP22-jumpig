@@ -76,7 +76,7 @@ public class GameControllerImpl implements GameController {
      */
     @Override
     public void registerInput() {
-        // TODO Auto-generated method stub 
+        this.gameView.manageInput();
     }
 
     /**
