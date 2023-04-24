@@ -81,13 +81,9 @@ public class GameViewImpl implements GameViewScene {
         final Component x, 
         final Set<Hitbox> entities
         ) {
-            if (x instanceof ScorePanel) {
-               ((ScorePanel) x).refresh(); //devo passare coins,height e lives a refresh 
-            } else {
-                if (x instanceof GamePanel) {
-                   ((GamePanel) x).refresh(entities);
-                   x.repaint();
-                }
+            if (x instanceof GamePanel) {
+                ((GamePanel) x).refresh(entities);
+                x.repaint();
             }
     }
 
@@ -101,17 +97,17 @@ public class GameViewImpl implements GameViewScene {
         final int lives
         ) {
             Arrays.stream(this.mainPanel.getComponents())
-                .forEach(x -> this.refreshScore(x, coins, height, lives)); //NOPMD
+                .forEach(x -> this.refreshScore(x, coins, height, lives));
     }
 
     private void refreshScore(
-        final Component x,  //NOPMD
-        final int coins, //NOPMD
-        final int height, //NOPMD
-        final int lives//NOPMD
+        final Component x, 
+        final int coins, 
+        final int height, 
+        final int lives
         ) {
             if (x instanceof ScorePanel) {
-                ((ScorePanel) x).refresh(); //devo passare coins,height e lives a refresh
+                ((ScorePanel) x).refresh(coins, height, lives);
             }
     }
 }
