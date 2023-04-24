@@ -22,13 +22,15 @@ public class GameControllerImpl implements GameController {
 
     /**
      * Constructor to create a new Game Controller in order to start a new Game.
+     * @param gameview the game view to copy
      */
-    public GameControllerImpl() {
+    public GameControllerImpl(final GameViewScene gameview) {
         this.game = new GameImpl();
         this.gameView = new GameViewImpl(
             this, 
             this.game.getWorld().getWidth(), 
-            this.game.getWorld().getHeight()
+            this.game.getWorld().getHeight(), 
+            gameview 
         );
     }
 

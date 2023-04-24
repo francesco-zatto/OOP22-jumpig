@@ -1,6 +1,8 @@
 package it.unibo.jumpig.controller.impl;
 
+import it.unibo.jumpig.controller.api.GameController;
 import it.unibo.jumpig.controller.api.MenuController;
+import it.unibo.jumpig.view.api.GameViewScene;
 import it.unibo.jumpig.view.api.MenuViewScene;
 import it.unibo.jumpig.view.impl.MenuViewSceneImpl;
 
@@ -10,7 +12,6 @@ import it.unibo.jumpig.view.impl.MenuViewSceneImpl;
 public class MenuControllerImpl implements MenuController {
 
     private final MenuViewScene menuView = new MenuViewSceneImpl(this);
-    private final GameControllerImpl gameController = new GameControllerImpl();
 
     /**
      * {@inheritDoc}
@@ -32,8 +33,9 @@ public class MenuControllerImpl implements MenuController {
      *{@inheritDoc}
      */
     @Override
-    public void notifyStartGame() {
-        this.gameController.start();
+    public void notifyStartGame(final GameViewScene gameview) {
+        final GameController gameController = new GameControllerImpl(gameview);
+        gameController.start();
     }
 
     /**

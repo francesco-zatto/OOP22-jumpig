@@ -1,5 +1,7 @@
 package it.unibo.jumpig.controller.api;
 
+import it.unibo.jumpig.view.api.GameViewScene;
+
 /**
  * Interface Menu Controller.
  */
@@ -7,8 +9,9 @@ package it.unibo.jumpig.controller.api;
 public interface MenuController extends Status {
     /**
      * This method notify when the game starts.
+     * @param gameview the game view
      */
-    void notifyStartGame();
+    void notifyStartGame(GameViewScene gameview);
 
     /**
      * This method notify when the leaderboard starts.
