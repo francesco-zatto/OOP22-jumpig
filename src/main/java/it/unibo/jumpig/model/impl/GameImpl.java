@@ -23,7 +23,7 @@ public class GameImpl implements Game {
      * {@inheritDoc}
      */
     @Override
-    public boolean isOVer() {
+    public boolean isOver() {
         return this.world.getPlayer().getLives() <= 0 
             || this.world.getCamera().getHeight(this.world.getPlayer()).isEmpty();
     }

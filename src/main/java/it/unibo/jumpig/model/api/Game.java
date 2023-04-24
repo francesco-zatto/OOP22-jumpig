@@ -10,7 +10,7 @@ public interface Game {
      * Method that checks if the game is over.
      * @return the game status
      */
-    boolean isOVer();
+    boolean isOver();
 
     /**
      * Method that updates the positions for every entity inside the game.

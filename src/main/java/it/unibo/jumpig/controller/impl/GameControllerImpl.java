@@ -37,7 +37,7 @@ public class GameControllerImpl implements GameController {
      */
     private void mainLoop() {
         long previousCycleStartTime = System.currentTimeMillis();
-        while (!game.isOVer()) {
+        while (!game.isOver()) {
             final long currentCycleStartTime = System.currentTimeMillis();
             final long elapsed = currentCycleStartTime - previousCycleStartTime;
             registerInput();
