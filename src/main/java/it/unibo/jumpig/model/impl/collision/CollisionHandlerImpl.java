@@ -12,7 +12,7 @@ import it.unibo.jumpig.model.api.gameentity.Player;
  * @param <H> any kind of hitbox
  * @param <E> any kind of game entity
  */
-public class CollisionHandlerImpl<H extends Hitbox, E extends GameEntity<H>>  implements CollisionHandler<H, E> {
+public final class CollisionHandlerImpl<H extends Hitbox, E extends GameEntity<H>>  implements CollisionHandler<H, E> {
 
     private final CollisionActioner<H, E> actioner;
     private final CollisionChecker<H, E> checker;
