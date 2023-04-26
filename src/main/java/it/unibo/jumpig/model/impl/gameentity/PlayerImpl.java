@@ -39,11 +39,13 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
      * @param coins player's coins
      * @param lives player's lives
      */
-    private PlayerImpl(final Position position, final Velocity velocity, final int coins, final int lives) {
+    private PlayerImpl(final Position position, final Velocity velocity, 
+        final int coins, final int lives, final Optional<Double> lastPlatformHeight) {
         super(position, new PlayerHitbox(position)); 
         this.playerVelocity = velocity;
         this.coins = coins;
         this.lives = lives;
+        this.lastPlatformHeight = lastPlatformHeight;
     }
     /**
      * {@inheritDoc}
@@ -116,7 +118,7 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
      */
     @Override
     public Player copy() {
-        return new PlayerImpl(this.getPosition(), this.getVelocity(), this.getCoins(), this.getLives());
+        return new PlayerImpl(this.getPosition(), this.getVelocity(), this.getCoins(), this.getLives(), this.getLastPlatformHeight());
     }
 
     /**
