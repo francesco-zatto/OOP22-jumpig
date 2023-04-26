@@ -105,7 +105,12 @@ public class MenuViewSceneImpl implements MenuViewScene {
             frame.getContentPane().add(gamePanel.getMainPanel());
             frame.pack();
             frame.repaint();
-            this.controller.notifyStartGame(gamePanel);
+            new Thread() {
+                @Override
+                public void run() {
+                    controller.notifyStartGame(gamePanel);
+                }
+            };
         });
         leaderboardButton.addActionListener(e -> this.controller.notifyStartLeaderboard());
     }
