@@ -29,7 +29,7 @@ public class WorldImpl implements World {
 
     private static final double WIDTH = 36;
     private static final double HEIGHT = 64;
-    private static final double GRAVITY = 9.8;
+    private static final double GRAVITY = -1.1;
     private final GeneratorEntities generator;
     private final Player player;
     private final Set<Platform> setplatform;
