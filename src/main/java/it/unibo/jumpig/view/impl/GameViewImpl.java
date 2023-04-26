@@ -20,8 +20,6 @@ import it.unibo.jumpig.view.api.GameViewScene;
 public class GameViewImpl implements GameViewScene {
 
     public static final long serialVersionUID = 1L;
-    private final double width; //NOPMD
-    private final double height; //NOPMD
     private final GameController controller; //NOPMD
     private final JPanel mainPanel;
 
@@ -36,11 +34,9 @@ public class GameViewImpl implements GameViewScene {
         final double width, 
         final double height
     ) {
-            this.height = height;
-            this.width = width;
             this.mainPanel = new JPanel();
             this.controller = null;
-            this.mainPanel.add(new GamePanel(this.width, this.height));
+            this.mainPanel.add(new GamePanel(width, height));
             this.mainPanel.add(new ScorePanel());
             this.mainPanel.setVisible(false);
     }
@@ -48,20 +44,14 @@ public class GameViewImpl implements GameViewScene {
     /**
      * Constructor to set the game controller of the game view. 
      * @param gameController the controller of the game
-     * @param width the width of the world
-     * @param height the height of the world
      * @param gameview the game view to copy
      * */
     public GameViewImpl(
         final GameController gameController, 
-        final double width, 
-        final double height, 
         final GameViewScene gameview 
         ) {
             this.mainPanel = gameview.getMainPanel();
             this.controller = gameController;
-            this.width = width;
-            this.height = height;
     }
 
     /**
