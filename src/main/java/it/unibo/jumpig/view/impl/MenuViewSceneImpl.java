@@ -101,11 +101,11 @@ public class MenuViewSceneImpl implements MenuViewScene {
                         JOptionPane.WARNING_MESSAGE);
                 }
             }
-            final JPanel gamePanel = new GamePanel((double) screen.getWidth() / 5, 
-            (double) (screen.getWidth() / 5 * 1.7));
-            frame.getContentPane().add(gamePanel);
+            final GameViewImpl gamePanel = new GameViewImpl(this.startScreen.getWidth(), this.startScreen.getHeight());
+            frame.getContentPane().add(gamePanel.getMainPanel());
             frame.pack();
-            this.controller.notifyStartGame(new GameViewImpl(Y_AXIS, Y_AXIS)); //TODO passare GameViewImpl
+            frame.repaint();
+            this.controller.notifyStartGame(gamePanel);
         });
         leaderboardButton.addActionListener(e -> this.controller.notifyStartLeaderboard());
     }
