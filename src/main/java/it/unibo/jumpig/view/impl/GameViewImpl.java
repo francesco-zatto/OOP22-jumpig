@@ -48,7 +48,7 @@ public class GameViewImpl implements GameViewScene {
      * */
     public GameViewImpl(
         final GameController gameController, 
-        final GameViewScene gameview 
+        final GameViewImpl gameview 
         ) {
             this.mainPanel = gameview.getMainPanel();
             this.controller = gameController;
@@ -123,9 +123,9 @@ public class GameViewImpl implements GameViewScene {
     }
 
     /**
-     * {@inheritDoc}
+     * The method to get the main panel (which contains score panel and game panel) of the game view.
+     * @return the main panel
      */
-    @Override
     @SuppressFBWarnings(value = "EI",
     justification = "I have to return the mainPanel")
     public JPanel getMainPanel() {

@@ -2,8 +2,6 @@ package it.unibo.jumpig.view.api;
 
 import java.util.Set;
 
-import javax.swing.JPanel;
-
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
 
 /**
@@ -32,9 +30,4 @@ public interface GameViewScene extends ViewScene {
      */
     int manageInput();
 
-    /**
-     * The method to get the main panel (which contains score panel and game panel) of the game view.
-     * @return the main panel
-     */
-    JPanel getMainPanel();
 }

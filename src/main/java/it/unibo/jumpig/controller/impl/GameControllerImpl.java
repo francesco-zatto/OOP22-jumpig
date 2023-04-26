@@ -28,7 +28,7 @@ public class GameControllerImpl implements GameController {
         this.game = new GameImpl();
         this.gameView = new GameViewImpl(
             this, 
-            gameview 
+            (GameViewImpl) gameview 
         );
     }
 
