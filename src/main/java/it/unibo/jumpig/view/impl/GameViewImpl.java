@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
@@ -20,7 +21,7 @@ import it.unibo.jumpig.view.api.GameViewScene;
 public class GameViewImpl implements GameViewScene {
 
     public static final long serialVersionUID = 1L;
-    private final GameController controller; //NOPMD
+    private GameController controller; //NOPMD
     private final JPanel mainPanel;
 
     /**
@@ -34,11 +35,9 @@ public class GameViewImpl implements GameViewScene {
         final double width, 
         final double height
     ) {
-            this.mainPanel = new JPanel();
-            this.controller = null;
-            this.mainPanel.add(new GamePanel(width, height));
-            this.mainPanel.add(new ScorePanel());
-            this.mainPanel.setVisible(false);
+            this.mainPanel = new JPanel(new BorderLayout());
+            this.mainPanel.add(new ScorePanel(), BorderLayout.NORTH);
+            this.mainPanel.add(new GamePanel(width, height), BorderLayout.SOUTH);
     }
 
     /**
