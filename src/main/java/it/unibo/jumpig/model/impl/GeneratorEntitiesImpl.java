@@ -26,9 +26,9 @@ import it.unibo.jumpig.model.impl.gameentity.EnemyImpl;
     private final Set<Position> setentities;
     private final double maxWidth;    /* The width of the game */
     private final double maxHeight;    /* The height of the game */
-    private static final double NUM_PLATFORM = 50;    /* The number of platforms */
+    private static final double NUM_PLATFORM = 20;    /* The number of platforms */
     private static final double NUM_ENEMY = 2;    /* The number of enemies */
-    private static final double NUM_COIN = 30;    /* The number of coins */
+    private static final double NUM_COIN = 10;    /* The number of coins */
 
     /**
      * The constructor to create a new generator of entities.
