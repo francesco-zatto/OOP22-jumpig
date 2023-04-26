@@ -38,6 +38,7 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
      * @param velocity player's velocity
      * @param coins player's coins
      * @param lives player's lives
+     * @param lastPlatformHeight the last platform's height the player has jumped in
      */
     private PlayerImpl(final Position position, final Velocity velocity, 
         final int coins, final int lives, final Optional<Double> lastPlatformHeight) {
