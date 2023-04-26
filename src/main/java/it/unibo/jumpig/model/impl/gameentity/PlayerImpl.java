@@ -69,9 +69,7 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
      */
     @Override
     public void decreaseLives() {
-        if (this.lives > 0) {
             this.lives--;
-        }
     }
 
     /**
