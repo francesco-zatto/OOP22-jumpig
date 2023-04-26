@@ -119,7 +119,8 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
      */
     @Override
     public Player copy() {
-        return new PlayerImpl(this.getPosition(), this.getVelocity(), this.getCoins(), this.getLives(), this.getLastPlatformHeight());
+        return new PlayerImpl(this.getPosition(), this.getVelocity(), this.getCoins(), 
+        this.getLives(), this.getLastPlatformHeight());
     }
 
     /**
