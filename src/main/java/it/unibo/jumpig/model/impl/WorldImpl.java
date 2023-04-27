@@ -1,10 +1,12 @@
 package it.unibo.jumpig.model.impl;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
+import it.unibo.jumpig.common.impl.PositionImpl;
 import it.unibo.jumpig.model.api.Camera;
 import it.unibo.jumpig.model.api.GeneratorEntities;
 import it.unibo.jumpig.model.api.World;
@@ -25,10 +27,10 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
 
 public class WorldImpl implements World {
 
-    private static final double WIDTH = 36; //NOPMD
+    private static final double WIDTH = 36;
     private static final double HEIGHT = 64;
-    private static final double GRAVITY = 9.8;
-    private final GeneratorEntities generator; //NOPMD
+    private static final double GRAVITY = -1.1;
+    private final GeneratorEntities generator;
     private final Player player;
     private final Set<Platform> setplatform;
     private final Set<Enemy> setenemies;
@@ -41,8 +43,8 @@ public class WorldImpl implements World {
      */
 
     public WorldImpl() {
-        this.generator = new GeneratorEntitiesImpl();
-        this.player = new PlayerImpl(null);
+        this.generator = new GeneratorEntitiesImpl(WIDTH, HEIGHT);
+        this.player = new PlayerImpl(new PositionImpl(WIDTH / 2, 0));
         this.setplatform = generator.generatePlatforms();
         this.setenemies = generator.generateEnemies();
         this.setcoins = generator.generateCoins();
@@ -122,9 +124,35 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
+    public double getHeight() {
+        return HEIGHT;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getWidth() {
+        return WIDTH;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void updateGame(final long elapsed) {
+        this.player.computeVelocity(GRAVITY, elapsed);
+        this.player.computePosition(elapsed);
+        this.checkRegeneration();
         final var collidables = this.getCollidables(Set.of(this.setcoins, this.setenemies, this.setplatform));
         collidables.forEach(c -> c.handleCollision(this.player));
+        this.setEmpty();
+    }
+
+    private void setEmpty() {
+        if (this.player.getPosition().getY() < this.camera.getHeight(this.player).get()) {
+            this.player.setLastPlatformHeight(Optional.empty());
+        }
     }
 
     private Set<Collidable> getCollidables(final Set<Set<? extends CollidableEntity<? extends Hitbox>>> collidableSets) {
@@ -141,8 +169,14 @@ public class WorldImpl implements World {
         return playerHeight - quarterOfWorld < entityHeight && entityHeight < playerHeight + quarterOfWorld;
     }
 
-    //we will use this in updateGame
-    private Set<GameEntity<? extends Hitbox>> regenerate(final Set<GameEntity<? extends Hitbox>> setToRegenerate) { //NOPMD
+    private void checkRegeneration() {
+        if (this.camera.getHeight(this.player).isPresent() 
+                && this.camera.getHeight(this.player).get() >= HEIGHT
+            ) {
+                    this.setentities.addAll(regenerate(setentities));
+        }
+    }
+    private Set<GameEntity<? extends Hitbox>> regenerate(final Set<GameEntity<? extends Hitbox>> setToRegenerate) {
         final var type = setToRegenerate.stream()
             .toList()
             .get(0);

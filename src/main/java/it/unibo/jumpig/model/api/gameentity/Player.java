@@ -51,6 +51,12 @@ public interface Player extends GameEntity<RectangleHitbox> {
     void incrementCoins();
 
     /**
+     *  Method that computes the next player's position.
+     * @param deltaTime the time interval
+     */
+    void computePosition(double deltaTime);
+
+    /**
      * Method for a defensive copy.
      * @return the player's copy
      */
@@ -60,7 +66,7 @@ public interface Player extends GameEntity<RectangleHitbox> {
      * Setter for the last platform's height the player has jumped on.
      * @param lastPlatformHeight the platform's height
      */
-    void setLastPlatformHeight(Double lastPlatformHeight);
+    void setLastPlatformHeight(Optional<Double> lastPlatformHeight);
 
     /**
      * Getter for the plast platform's height the player has jumped on.

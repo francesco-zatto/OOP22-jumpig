@@ -1,5 +1,6 @@
 package it.unibo.jumpig.model.impl;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.jumpig.model.api.Game;
 import it.unibo.jumpig.model.api.World;
 
@@ -22,8 +23,9 @@ public class GameImpl implements Game {
      * {@inheritDoc}
      */
     @Override
-    public boolean isOVer() {
-        return this.world.getPlayer().getLives() <= 0;
+    public boolean isOver() {
+        return this.world.getPlayer().getLives() <= 0 
+            || this.world.getCamera().getHeight(this.world.getPlayer()).isEmpty();
     }
 
     /**
@@ -54,6 +56,9 @@ public class GameImpl implements Game {
      * {@inheritDoc}
      */
     @Override
+    @SuppressFBWarnings(value = "EI", 
+                    justification = "it doesn't expose internal representation "
+                    + "because world has getters that return copies of objects.")
     public World getWorld() {
         return this.world;
     }

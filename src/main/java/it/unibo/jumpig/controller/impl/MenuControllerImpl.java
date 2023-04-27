@@ -1,8 +1,8 @@
 package it.unibo.jumpig.controller.impl;
 
+import it.unibo.jumpig.controller.api.GameController;
 import it.unibo.jumpig.controller.api.MenuController;
-import it.unibo.jumpig.model.api.Menu;
-import it.unibo.jumpig.model.impl.MenuImpl;
+import it.unibo.jumpig.view.api.GameViewScene;
 import it.unibo.jumpig.view.api.MenuViewScene;
 import it.unibo.jumpig.view.impl.MenuViewSceneImpl;
 
@@ -11,15 +11,14 @@ import it.unibo.jumpig.view.impl.MenuViewSceneImpl;
  */
 public class MenuControllerImpl implements MenuController {
 
-    private final MenuViewScene view = new MenuViewSceneImpl(this);
-    private final Menu menu = new MenuImpl();
+    private final MenuViewScene menuView = new MenuViewSceneImpl(this);
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void start() {
-        this.view.show();
+        this.menuView.show();
     }
 
     /**
@@ -27,15 +26,16 @@ public class MenuControllerImpl implements MenuController {
      */
     @Override
     public void close() {
-        this.view.quit();
+        this.menuView.quit();
     }
 
     /**
      *{@inheritDoc}
      */
     @Override
-    public void notifyStartGame() {
-        this.menu.startGame();
+    public void notifyStartGame(final GameViewScene gameview) {
+        final GameController gameController = new GameControllerImpl(gameview);
+        gameController.start();
     }
 
     /**
@@ -43,6 +43,7 @@ public class MenuControllerImpl implements MenuController {
      */
     @Override
     public void notifyStartLeaderboard() {
-        this.menu.getLeaderboard();
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'notifyStartLeaderboard'");
     }
 }

@@ -70,14 +70,15 @@ public class GamePanel extends JPanel {
         this.entities.clear();
         this.entities.addAll(entities);
     }
-
-    /*public static void main(String[] args) {
+    /*
+    public static void main(String[] args) {
         var frame = new JFrame();
         Platform platform = new BasicPlatform(new PositionImpl(15, 15), 30);
         Platform platform2 = new BasicPlatform(new PositionImpl(28, 56), 40);
-        var panel = new GamePanel(Set.of(platform, platform2));
+        var panel = new GamePanel(9,16);
         frame.getContentPane().add(panel);
         frame.pack();
         frame.setVisible(true);
-    }*/
+    }
+    */
 }

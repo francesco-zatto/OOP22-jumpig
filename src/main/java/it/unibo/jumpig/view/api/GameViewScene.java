@@ -24,4 +24,10 @@ public interface GameViewScene extends ViewScene {
      */
     void renderCurrentScore(int coins, int height, int lives);
 
+    /**
+     * The method to manage the input.
+     * @return 0 for left movement and 1 for right movement
+     */
+    int manageInput();
+
 }
