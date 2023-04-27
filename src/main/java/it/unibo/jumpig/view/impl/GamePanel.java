@@ -5,13 +5,13 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import javax.swing.JPanel;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
+import it.unibo.jumpig.common.impl.hitbox.EnemyHitbox;
 
 /**
  * The GUI that shows the game currently going on.
@@ -21,8 +21,6 @@ public class GamePanel extends JPanel {
     public static final long serialVersionUID = 1L;
     private static final double ASPECT_RATIO = 16.0 / 9.0;
     private static final double SCREEN_FRACTION = 5;
-    private final double worldWidth;
-    private final double worldHeight;
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     private final Dimension startScreen = new Dimension((int) (screen.getWidth() / SCREEN_FRACTION),
             (int) (screen.getWidth() / SCREEN_FRACTION * ASPECT_RATIO));
@@ -31,7 +29,7 @@ public class GamePanel extends JPanel {
         justification = "GamePanel is not meant to be serialized." 
     ) 
     private final Set<Hitbox> entities = new HashSet<>();
-    private transient Optional<SwingRenderer> renderer = Optional.empty();
+    private final transient SwingRenderer renderer;
 
     /**
      * Constructor for a gamePanel.
@@ -39,8 +37,7 @@ public class GamePanel extends JPanel {
      * @param worldHeight height of game's world.
      */
     public GamePanel(final double worldWidth, final double worldHeight) { 
-        this.worldWidth = worldWidth;
-        this.worldHeight = worldHeight;
+        this.renderer = new SwingRenderer(worldWidth, worldHeight);
         this.setSize(this.startScreen);
         this.setPreferredSize(super.getSize());
     }
@@ -54,12 +51,12 @@ public class GamePanel extends JPanel {
             justification = "It's a safe and necessary cast because g is Graphics2D")
     public void paint(final Graphics g) {
         final Graphics2D g2D = (Graphics2D) g;
-        if (this.renderer.isEmpty()) {
-            this.renderer = Optional.of(new SwingRenderer(g2D, this.worldWidth, this.worldHeight,
-                    this.getWidth(), this.getHeight()));
-        }
-        this.renderer.get().setRatio(this.getWidth(), this.getHeight());
-        this.entities.forEach(e -> e.updateRendering(this.renderer.get()));
+        this.renderer.setRatio(this.getWidth(), this.getHeight());
+        this.renderer.setGraphics(g2D);
+        this.entities.stream()
+                .filter(e -> !(e instanceof EnemyHitbox)) //TODO metodo non implementato
+                .forEach(e -> e.updateRendering(this.renderer));
+        g2D.dispose();
     }
 
     /**

@@ -118,6 +118,7 @@ public class GameViewImpl implements GameViewScene {
         ) {
             if (x instanceof ScorePanel) {
                 ((ScorePanel) x).refresh(height, coins, lives);
+                x.repaint();
             }
     }
 
