@@ -101,7 +101,7 @@ public class MenuViewSceneImpl implements MenuViewScene {
                         JOptionPane.WARNING_MESSAGE);
                 }
             }
-            final GameViewImpl gamePanel = new GameViewImpl(this.startScreen.getWidth(), this.startScreen.getHeight());
+            final GameViewImpl gamePanel = new GameViewImpl(36, 64); //TODO non qui ma in GameController
             frame.getContentPane().add(gamePanel.getMainPanel());
             frame.pack();
             frame.repaint();
