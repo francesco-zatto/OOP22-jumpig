@@ -29,7 +29,7 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
         super(position, new PlayerHitbox(position));
         this.playerVelocity = new VelocityImpl(0, 0);
         this.coins = 0;
-        this.lastPlatformHeight = Optional.empty();
+        this.lastPlatformHeight = Optional.ofNullable(0.0);
     }
 
     /**

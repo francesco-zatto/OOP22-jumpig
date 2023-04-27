@@ -28,7 +28,7 @@ public class GameControllerImpl implements GameController {
         this.game = new GameImpl();
         this.gameView = new GameViewImpl(
             this, 
-            gameview 
+            (GameViewImpl) gameview 
         );
     }
 
@@ -69,6 +69,11 @@ public class GameControllerImpl implements GameController {
     @Override
     public void notifyUpdate() {
         this.gameView.renderEntities(this.game.getWorld().getEntities());
+        this.gameView.renderCurrentScore(
+            this.game.getCurrentCoins(), 
+            this.game.getCurrentScore(), 
+            this.game.getWorld().getPlayer().getLives()
+            );
     }
 
     /**
