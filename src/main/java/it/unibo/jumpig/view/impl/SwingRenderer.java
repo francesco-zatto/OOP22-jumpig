@@ -109,10 +109,4 @@ public final class SwingRenderer implements Renderer {
     private int createScaledRadius(final CircleHitbox hitbox) {
         return (int) (hitbox.getRadius() * this.widthRatio);
     }
-
-    /*public static void main(String[] args) {
-        var hitbox = new RectangleHitbox(new PositionImpl(10, 10), 20, 5);
-        var r = new SwingRenderer(null, 200, 100, 50, 75);
-        System.out.println(r.scale(hitbox));
-    }*/
 }
