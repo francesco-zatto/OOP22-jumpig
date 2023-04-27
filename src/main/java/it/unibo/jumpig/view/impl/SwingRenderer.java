@@ -90,20 +90,23 @@ public final class SwingRenderer implements Renderer {
         this.graphics = graphics;
     }
 
+    /*The origin in World is the lower left vertex of the window, while in java swing is the upper left
+     * vertex, so rectangle's ordinate is computed with height - ordinate. 
+    */
     private Rectangle createScaledRectangle(final RectangleHitbox hitbox) {
-        return new Rectangle(new Point((int) (hitbox.getRectangleLeftX() * this.widthRatio),
-                (int) (hitbox.getRectangleUpperY() * this.heightRatio)),
-                new Dimension((int) (hitbox.getWidth() * this.widthRatio),
-                        (int) (hitbox.getHeight() * this.heightRatio)));
+        return new Rectangle(
+            new Point(
+                (int) (hitbox.getRectangleLeftX() * this.widthRatio),
+                (int) ((this.worldHeight - hitbox.getRectangleUpperY()) * this.heightRatio)
+            ),
+            new Dimension(
+                (int) (hitbox.getWidth() * this.widthRatio),
+                (int) (hitbox.getHeight() * this.heightRatio)
+            )
+        );
     }
 
     private int createScaledRadius(final CircleHitbox hitbox) {
         return (int) (hitbox.getRadius() * this.widthRatio);
     }
-
-    /*public static void main(String[] args) {
-        var hitbox = new RectangleHitbox(new PositionImpl(10, 10), 20, 5);
-        var r = new SwingRenderer(null, 200, 100, 50, 75);
-        System.out.println(r.scale(hitbox));
-    }*/
 }
