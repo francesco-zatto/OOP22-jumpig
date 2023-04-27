@@ -16,7 +16,7 @@ import it.unibo.jumpig.view.api.Renderer;
  */
 public final class SwingRenderer implements Renderer {
 
-    private final Graphics2D graphics;
+    private Graphics2D graphics;
     private final double worldWidth;
     private final double worldHeight;
     private double widthRatio;
@@ -88,6 +88,10 @@ public final class SwingRenderer implements Renderer {
     public void setRatio(final double realWidth, final double realHeight) {
         this.widthRatio = realWidth / this.worldWidth;
         this.heightRatio = realHeight / this.worldHeight;
+    }
+
+    public void setGraphics(final Graphics2D graphics) {
+        this.graphics = graphics;
     }
 
     private Rectangle createScaledRectangle(final RectangleHitbox hitbox) {

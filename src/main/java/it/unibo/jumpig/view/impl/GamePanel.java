@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
+import it.unibo.jumpig.common.impl.hitbox.EnemyHitbox;
 
 /**
  * The GUI that shows the game currently going on.
@@ -59,7 +60,13 @@ public class GamePanel extends JPanel {
                     this.getWidth(), this.getHeight()));
         }
         this.renderer.get().setRatio(this.getWidth(), this.getHeight());
-        this.entities.forEach(e -> e.updateRendering(this.renderer.get()));
+        this.renderer.get().setGraphics(g2D);
+        for (var e : entities) {
+            if (!(e instanceof EnemyHitbox)) { //TODO unimplemented method
+                e.updateRendering(this.renderer.get());
+            }
+        }
+        g2D.dispose();
     }
 
     /**
