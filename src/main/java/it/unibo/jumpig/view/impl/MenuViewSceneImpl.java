@@ -105,13 +105,11 @@ public class MenuViewSceneImpl implements MenuViewScene {
             frame.getContentPane().add(gamePanel.getMainPanel());
             frame.pack();
             frame.repaint();
-            final var thread = new Thread() {
-                @Override
-                public void run() {
-                    controller.notifyStartGame(gamePanel);
-                }
+            final Runnable thread = () -> {
+                controller.notifyStartGame(gamePanel);
             };
-            thread.start();
+            final Thread runthread = new Thread(thread);
+            runthread.start();
         });
         leaderboardButton.addActionListener(e -> this.controller.notifyStartLeaderboard());
     }
