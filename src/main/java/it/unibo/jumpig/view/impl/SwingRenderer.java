@@ -24,22 +24,12 @@ public final class SwingRenderer implements Renderer {
 
     /**
      * Constructor for a SwingRenderer.
-     * @param graphics Java Swing graphics used to render game entities.
      * @param worldWidth width of the game's world.
      * @param worldHeight height of the game's world.
-     * @param realWidth width of the game's panel.
-     * @param realHeight heigth of the game's panel.
      */
-    @SuppressFBWarnings(value = "EI_EXPOSE_REP",
-            justification = "graphics is used only by this class and by GamePanel superclasses that"
-                    + "should not make no change in the way game entities are rendered.")
-    public SwingRenderer(final Graphics2D graphics, final double worldWidth, final double worldHeight,
-            final double realWidth, final double realHeight) {
-        this.graphics = graphics;
+    public SwingRenderer(final double worldWidth, final double worldHeight) {
         this.worldWidth = worldWidth;
-        this.worldHeight = worldHeight;
-        this.widthRatio = realWidth / this.worldWidth;
-        this.heightRatio = realHeight / this.worldHeight; 
+        this.worldHeight = worldHeight; 
     } 
 
     @Override
@@ -90,6 +80,12 @@ public final class SwingRenderer implements Renderer {
         this.heightRatio = realHeight / this.worldHeight;
     }
 
+    /**
+     * Setter for the current graphics used to render.
+     * @param graphics java swing graphics to render in the game.
+     */
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP",
+    justification = "graphics is used only by this class and by GamePanel superclasses.")
     public void setGraphics(final Graphics2D graphics) {
         this.graphics = graphics;
     }
