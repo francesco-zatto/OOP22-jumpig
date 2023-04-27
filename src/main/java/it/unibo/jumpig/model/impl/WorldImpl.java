@@ -29,7 +29,7 @@ public class WorldImpl implements World {
 
     private static final double WIDTH = 36;
     private static final double HEIGHT = 64;
-    private static final double GRAVITY = -1.1;
+    private static final double GRAVITY = 0.0001; //TODO è -qualcosa
     private final GeneratorEntities generator;
     private final Player player;
     private final Set<Platform> setplatform;
@@ -76,6 +76,7 @@ public class WorldImpl implements World {
         this.setentities.addAll(this.getCoins());
         this.setentities.addAll(this.getEnemies());
         this.setentities.addAll(this.getPlatform());
+        this.setentities.add(this.getPlayer());
         return this.setentities.stream()
             .map(x -> x.getHitbox())
             .collect(Collectors.toSet());
