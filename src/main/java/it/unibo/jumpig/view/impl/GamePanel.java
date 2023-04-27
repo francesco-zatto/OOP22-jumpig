@@ -44,7 +44,7 @@ public class GamePanel extends JPanel {
 
     /**
      * Method that paints every drawing of the gamePanel.
-     * @param g graphics used to paint.
+     * @param graphics awt graphics used to paint.
      */
     @Override
     @SuppressFBWarnings(value = "BC_UNCONFIRMED_CAST",
