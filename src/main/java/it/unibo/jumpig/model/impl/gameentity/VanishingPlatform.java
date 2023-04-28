@@ -7,8 +7,8 @@ import it.unibo.jumpig.model.api.collision.CollisionHandler;
 import it.unibo.jumpig.model.api.gameentity.Player;
 import it.unibo.jumpig.model.api.gameentity.TargettablePlatform;
 import it.unibo.jumpig.model.impl.collision.CollisionHandlerImpl;
+import it.unibo.jumpig.model.impl.collision.TargettablePlatformCollisionChecker;
 import it.unibo.jumpig.model.impl.collision.VanishingPlatformCollisionActioner;
-import it.unibo.jumpig.model.impl.collision.VanishingPlatformCollisionChecker;
 
 /**
  * Class that represents a platform which, when the player jumps on it, it vanishes.
@@ -17,7 +17,7 @@ public class VanishingPlatform extends TargettablePlatform {
 
     private final CollisionHandler<RectangleHitbox, VanishingPlatform> collisionHandler = new CollisionHandlerImpl<>(
         new VanishingPlatformCollisionActioner(),
-        new VanishingPlatformCollisionChecker()
+        new TargettablePlatformCollisionChecker<VanishingPlatform>()
     );
 
     /**
