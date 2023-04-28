@@ -101,15 +101,15 @@ public class MenuViewSceneImpl implements MenuViewScene {
                         JOptionPane.WARNING_MESSAGE);
                 }
             }
-            final GameViewImpl gamePanel = new GameViewImpl(36, 64); //TODO non qui ma in GameController
-            frame.getContentPane().add(gamePanel.getMainPanel());
+            this.controller.notifyStartGame();
+            /*frame.getContentPane().add(gamePanel.getMainPanel());
             frame.pack();
             frame.repaint();
             final Runnable thread = () -> {
                 controller.notifyStartGame(gamePanel);
             };
             final Thread runthread = new Thread(thread);
-            runthread.start();
+            runthread.start();*/
         });
         leaderboardButton.addActionListener(e -> this.controller.notifyStartLeaderboard());
     }
