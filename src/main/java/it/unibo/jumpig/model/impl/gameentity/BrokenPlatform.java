@@ -1,7 +1,7 @@
 package it.unibo.jumpig.model.impl.gameentity;
 
 import it.unibo.jumpig.common.api.Position;
-import it.unibo.jumpig.common.impl.hitbox.PlatformHitbox;
+import it.unibo.jumpig.common.impl.hitbox.BrokenPlatformHitbox;
 import it.unibo.jumpig.model.api.gameentity.Player;
 import it.unibo.jumpig.model.api.gameentity.TargettablePlatform;
 
@@ -14,11 +14,9 @@ public class BrokenPlatform extends TargettablePlatform {
     /**
      * Constructor for a broken platform.
      * @param position position of the platform in the game's world
-     * @param hitbox hitbox of the platform
      */
-    protected BrokenPlatform(final Position position, final PlatformHitbox hitbox) {
-        super(position, hitbox, 0);
-        //TODO Auto-generated constructor stub
+    protected BrokenPlatform(final Position position) {
+        super(position, new BrokenPlatformHitbox(position), 0);
     }
 
     /**
