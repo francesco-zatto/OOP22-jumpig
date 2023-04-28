@@ -13,6 +13,7 @@ import it.unibo.jumpig.model.api.gameentity.Platform;
 import it.unibo.jumpig.model.impl.gameentity.BasicCoin;
 import it.unibo.jumpig.model.impl.gameentity.BasicPlatform;
 import it.unibo.jumpig.model.impl.gameentity.EnemyImpl;
+import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
 
 /**
  * The class to manage the generation of the entities.
@@ -26,9 +27,10 @@ import it.unibo.jumpig.model.impl.gameentity.EnemyImpl;
     private final Set<Position> setentities;
     private final double maxWidth;    /* The width of the game */
     private final double maxHeight;    /* The height of the game */
-    private static final double NUM_PLATFORM = 20;    /* The number of platforms */
+    private static final double NUM_BASIC_PLATFORM = 10;    /* The number of basic platforms */
+    private static final double NUM_VANISHING_PLATFORM = 5;    /* The number of vanishing platforms */
     private static final double NUM_ENEMY = 2;    /* The number of enemies */
-    private static final double NUM_COIN = 10;    /* The number of coins */
+    private static final double NUM_COIN = 6;    /* The number of coins */
 
     /**
      * The constructor to create a new generator of entities.
@@ -49,10 +51,12 @@ import it.unibo.jumpig.model.impl.gameentity.EnemyImpl;
      */
     @Override
     public Set<Platform> generatePlatforms() {
-        this.addPlatforms();
+        this.addBasicPlatforms();
+        this.addVanishingPlatforms();
         return setplatforms.stream()
             .collect(Collectors.toSet());
     }
+
     /**
      * {@inheritDoc}
      */
@@ -73,10 +77,18 @@ import it.unibo.jumpig.model.impl.gameentity.EnemyImpl;
             .collect(Collectors.toSet());
     }
 
-    private void addPlatforms() {
-        for (int i = 0; i < NUM_PLATFORM; i++) {
+    private void addBasicPlatforms() {
+        for (int i = 0; i < NUM_BASIC_PLATFORM; i++) {
             final Position coordinate = new PositionImpl(Math.random() * this.maxWidth, Math.random() * this.maxHeight * 2);
             this.setplatforms.add(new BasicPlatform(this.checkEqualsPosition(coordinate), 1));
+            this.setentities.add(coordinate);
+        }
+    }
+
+    private void addVanishingPlatforms() {
+        for (int i = 0; i < NUM_VANISHING_PLATFORM; i++) {
+            final Position coordinate = new PositionImpl(Math.random() * this.maxWidth, Math.random() * this.maxHeight * 2);
+            this.setplatforms.add(new VanishingPlatform(this.checkEqualsPosition(coordinate), 1));
             this.setentities.add(coordinate);
         }
     }
