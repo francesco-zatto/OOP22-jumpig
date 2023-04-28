@@ -37,11 +37,7 @@ class PlayerTest {
     void testPlayerVelocity() {
         final Velocity playerVelocity = finalVelocity;
         player.setVelocityFromJump(playerVelocity);
-        System.out.println(player.getVelocity().getYComponent());
-        System.out.println(finalVelocity.getYComponent());
         player.computeVelocity(gravity, deltaTime);
-        System.out.println(finalVelocity.getYComponent());       
-        System.out.println(player.getVelocity().getYComponent());
         assertEquals(finalVelocity.getModule(), player.getVelocity().getYComponent());
     }
 }
