@@ -44,4 +44,12 @@ public class CameraImpl implements Camera {
         this.cameraheight = cameraheight;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Camera copy() {
+        return new CameraImpl(this.cameraheight);
+    }
+
 }

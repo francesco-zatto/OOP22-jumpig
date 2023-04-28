@@ -28,4 +28,10 @@ public interface Camera {
      */
     void setCameraHeight(int cameraheight);
 
+    /**
+     * Method for a defensive copy.
+     * @return the camera's copy
+     */
+    Camera copy();
+
 }

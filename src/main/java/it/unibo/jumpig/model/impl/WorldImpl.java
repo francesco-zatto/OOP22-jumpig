@@ -118,7 +118,7 @@ public class WorldImpl implements World {
      */
     @Override
     public Camera getCamera() {
-        return this.camera;
+        return this.camera.copy();
     }
 
     /**
