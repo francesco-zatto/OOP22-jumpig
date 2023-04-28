@@ -33,6 +33,12 @@ public interface Renderer {
     void renderVanishingPlatform(RectangleHitbox entity);
 
     /**
+     * Method that renders a broken platform in the View.
+     * @param entity broken platform to render.
+     */
+    void renderBrokenPlatform(RectangleHitbox entity);
+
+    /**
      * Method that renders a coin in the View.
      * @param entity coin to render.
      */

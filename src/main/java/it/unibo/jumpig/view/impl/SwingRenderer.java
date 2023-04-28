@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.Optional;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.jumpig.common.impl.hitbox.CircleHitbox;
@@ -16,7 +17,7 @@ import it.unibo.jumpig.view.api.Renderer;
  */
 public final class SwingRenderer implements Renderer {
 
-    private Graphics2D graphics;
+    private Optional<Graphics2D> graphics = Optional.empty();
     private final double worldWidth;
     private final double worldHeight;
     private double widthRatio;
@@ -32,12 +33,18 @@ public final class SwingRenderer implements Renderer {
         this.worldHeight = worldHeight; 
     } 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void renderPlayer(final RectangleHitbox entity) {
-        graphics.setColor(Color.PINK);
-        graphics.fill(this.createScaledRectangle(entity));
+        graphics.get().setColor(Color.PINK);
+        graphics.get().fill(this.createScaledRectangle(entity));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void renderEnemy(final RectangleHitbox entity) {
         // TODO Auto-generated method stub
@@ -49,8 +56,7 @@ public final class SwingRenderer implements Renderer {
      */
     @Override
     public void renderBasicPlatform(final RectangleHitbox entity) {
-        graphics.setColor(Color.GREEN);
-        graphics.fill(this.createScaledRectangle(entity));
+        this.fillRectangle(Color.GREEN, this.graphics.get(), this.createScaledRectangle(entity));
     }
 
     /**
@@ -58,14 +64,25 @@ public final class SwingRenderer implements Renderer {
      */
     @Override
     public void renderVanishingPlatform(final RectangleHitbox entity) {
-        graphics.setColor(Color.RED);
-        graphics.fill(this.createScaledRectangle(entity));
+        this.fillRectangle(Color.RED, this.graphics.get(), this.createScaledRectangle(entity));
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void renderBrokenPlatform(final RectangleHitbox entity) {
+        final Color brown = new Color(139, 69, 19);
+        this.fillRectangle(brown, this.graphics.get(), this.createScaledRectangle(entity));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void renderCoin(final CircleHitbox entity) {
-        graphics.setColor(Color.YELLOW);
-        graphics.fillOval((int) (entity.getCenter().getX() * widthRatio), 
+        graphics.get().setColor(Color.YELLOW);
+        graphics.get().fillOval((int) (entity.getCenter().getX() * widthRatio), 
         (int) (entity.getCenter().getY() * heightRatio), 
         this.createScaledRadius(entity), this.createScaledRadius(entity));
     }
@@ -85,9 +102,9 @@ public final class SwingRenderer implements Renderer {
      * @param graphics java swing graphics to render in the game.
      */
     @SuppressFBWarnings(value = "EI_EXPOSE_REP",
-    justification = "graphics is used only by this class and by GamePanel superclasses.")
+        justification = "graphics is used only by this class and by GamePanel superclasses.")
     public void setGraphics(final Graphics2D graphics) {
-        this.graphics = graphics;
+        this.graphics = Optional.of(graphics);
     }
 
     /*The origin in World is the lower left vertex of the window, while in java swing is the upper left
@@ -104,6 +121,11 @@ public final class SwingRenderer implements Renderer {
                 (int) (hitbox.getHeight() * this.heightRatio)
             )
         );
+    }
+
+    private void fillRectangle(final Color color, final Graphics2D graphics, final Rectangle rectangle) {
+        graphics.setColor(color);
+        graphics.fill(rectangle);
     }
 
     private int createScaledRadius(final CircleHitbox hitbox) {

@@ -10,6 +10,7 @@ import it.unibo.jumpig.common.impl.PositionImpl;
 import it.unibo.jumpig.model.api.gameentity.Platform;
 import it.unibo.jumpig.model.api.gameentity.Player;
 import it.unibo.jumpig.model.impl.gameentity.BasicPlatform;
+import it.unibo.jumpig.model.impl.gameentity.BrokenPlatform;
 import it.unibo.jumpig.model.impl.gameentity.PlayerImpl;
 import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
 
@@ -50,6 +51,7 @@ class PlatformCollisionHandlerTest {
         final var player = new PlayerImpl(PLAYER_POSITION);
         final var platform = new BasicPlatform(PLATFORM_POSITION, PLATFORM_VELOCITY);
         platform.handleCollision(player);
+        /* The player jumps on a platform only if he is going down, i.e yComponent is negative.*/
         assertTrue(player.getVelocity().getYComponent() >= 0);
         assertNotEquals(player.getVelocity().getYComponent(), platform.getJumpVelocity().getYComponent());
     }
@@ -61,7 +63,7 @@ class PlatformCollisionHandlerTest {
         player.computeVelocity(GRAVITY, DELTA_TIME);
         platform.handleCollision(player);
         assertCollision(player, platform);
-        //CollisionHandlerTest.assertIsTaken(platform);
+        CollisionHandlerTest.assertIsTaken(platform);
     }
 
     @Test
@@ -70,10 +72,30 @@ class PlatformCollisionHandlerTest {
         final var platform = new VanishingPlatform(PLATFORM_POSITION, PLATFORM_VELOCITY);
         player.computeVelocity(GRAVITY, DELTA_TIME);
         platform.handleCollision(player);
+        /* 
+         * After a collision the player moves in the y axis with a decelerated movement, so the next line
+         * compute the time of fall before that the player is exactly in the position where he has just collided with
+         * the vanishing platform. But this time he will not jumps, because the platform is vanished.
+         */
         final double fallingTime = 2 * player.getVelocity().getYComponent() / -GRAVITY;
         player.computeVelocity(GRAVITY, fallingTime);
         platform.handleCollision(player);
-        //CollisionHandlerTest.assertIsTaken(platform);
+        CollisionHandlerTest.assertIsTaken(platform);
         assertEquals(platform.getJumpVelocity().getYComponent(), -player.getVelocity().getYComponent());
+    }
+
+    @Test
+    void testBrokenPlatformCollision() {
+        final var player = new PlayerImpl(PLAYER_POSITION);
+        final var platform = new BrokenPlatform(PLATFORM_POSITION);
+        player.computeVelocity(GRAVITY, DELTA_TIME);
+        final var playerVerticalVelocityBeforeCollision = player.getVelocity().getYComponent();
+        platform.handleCollision(player);
+        /*
+         * This assert checks that the velocity of the player is not changed because of the collision of a broken platform,
+         * that the player should not jump on it, but only break it.
+         */
+        assertEquals(playerVerticalVelocityBeforeCollision, player.getVelocity().getYComponent());
+        CollisionHandlerTest.assertIsTaken(platform);
     }
 }

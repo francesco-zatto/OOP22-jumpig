@@ -4,15 +4,15 @@ import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.view.api.Renderer;
 
 /**
- * Class that represents a vanishing platform's hitbox.
+ * Class that represents a broken platform's hitbox.
  */
-public class VanishingPlatformHitbox extends PlatformHitbox {
+public class BrokenPlatformHitbox extends PlatformHitbox {
 
     /**
-     * Constructor for the hitbox of a VanishingPlatform.
+     * Constructor for the hitbox of a BrokenPlatform.
      * @param center center position of the hitbox.
      */
-    public VanishingPlatformHitbox(final Position center) {
+    public BrokenPlatformHitbox(final Position center) {
         super(center);
     }
 
@@ -21,6 +21,6 @@ public class VanishingPlatformHitbox extends PlatformHitbox {
      */
     @Override
     public void updateRendering(final Renderer renderer) {
-        renderer.renderVanishingPlatform(this);
+        renderer.renderBrokenPlatform(this);
     }
 }
