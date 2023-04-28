@@ -35,9 +35,11 @@ class PlayerTest {
 
     @Test 
     void testPlayerVelocity() {
-        final Velocity playerVelocity = finalVelocity;
+        final Velocity playerVelocity = 
+        new VelocityImpl(finalVelocity.getXComponent(), finalVelocity.getYComponent());
         player.setVelocityFromJump(playerVelocity);
         player.computeVelocity(gravity, deltaTime);
-        assertEquals(finalVelocity.getModule(), player.getVelocity().getYComponent());
+        finalVelocity.computeAcceleratedVelocity(gravity, deltaTime);
+        assertEquals(finalVelocity.getModule(), player.getVelocity().getModule());
     }
 }
