@@ -6,6 +6,7 @@ import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.model.api.collision.CollisionHandler;
 import it.unibo.jumpig.model.api.gameentity.Player;
 import it.unibo.jumpig.model.api.gameentity.TargettablePlatform;
+import it.unibo.jumpig.model.impl.collision.BrokenPlatformCollisionActioner;
 import it.unibo.jumpig.model.impl.collision.CollisionHandlerImpl;
 import it.unibo.jumpig.model.impl.collision.TargettablePlatformCollisionChecker;
 
@@ -16,7 +17,7 @@ import it.unibo.jumpig.model.impl.collision.TargettablePlatformCollisionChecker;
 public class BrokenPlatform extends TargettablePlatform {
 
     private final CollisionHandler<RectangleHitbox, BrokenPlatform> collisionHandler = new CollisionHandlerImpl<>(
-        null, 
+        new BrokenPlatformCollisionActioner(), 
         new TargettablePlatformCollisionChecker<BrokenPlatform>()
     );
 
