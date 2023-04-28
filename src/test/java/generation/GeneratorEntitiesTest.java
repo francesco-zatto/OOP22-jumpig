@@ -23,7 +23,7 @@ import it.unibo.jumpig.model.api.gameentity.Enemy;
 class GeneratorEntitiesTest {
 
     private final World world = new WorldImpl();
-    private final GeneratorEntities generator = new GeneratorEntitiesImpl(world.getWidth(), world.getHeight());
+    private final GeneratorEntities generator = new GeneratorEntitiesImpl(world.getWidth(), world.getHeight(), world.getCamera());
 
     private <X extends GameEntity<H>, H extends Hitbox> void assertGeneration(final Set<X> entities) {
         for (int i = 0; i < entities.size(); i++) {

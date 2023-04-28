@@ -35,7 +35,7 @@ public class WorldImpl implements World {
     private final Set<Platform> setplatform;
     private final Set<Enemy> setenemies;
     private final Set<Coin> setcoins;
-    private Camera camera;
+    private final Camera camera;
     private final Set<GameEntity<? extends Hitbox>> setentities;
 
     /**
@@ -43,12 +43,12 @@ public class WorldImpl implements World {
      */
 
     public WorldImpl() {
-        this.generator = new GeneratorEntitiesImpl(WIDTH, HEIGHT);
+        this.camera = new CameraImpl(0);
+        this.generator = new GeneratorEntitiesImpl(WIDTH, HEIGHT, this.camera);
         this.player = new PlayerImpl(new PositionImpl(WIDTH / 2, 1));
         this.setplatform = generator.generatePlatforms();
         this.setenemies = generator.generateEnemies();
         this.setcoins = generator.generateCoins();
-        this.camera = new CameraImpl(1);
         this.setentities = new HashSet<>();
     }
 
@@ -174,7 +174,7 @@ public class WorldImpl implements World {
         if ((this.player.getPosition().getY() % HEIGHT) < 1
                 //check that it's almoast zero meaning that the generator has to regenerate entities.
             ) {
-                    this.camera = new CameraImpl((int) this.player.getPosition().getY());
+                    this.camera.setCameraHeight((int) this.player.getPosition().getY());
                     this.setentities.addAll(regenerate(setentities));
         }
     }
