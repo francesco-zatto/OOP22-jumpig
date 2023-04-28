@@ -10,20 +10,21 @@ import java.util.stream.Stream;
 import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.impl.PositionImpl;
 import it.unibo.jumpig.model.api.gameentity.Coin;
+import it.unibo.jumpig.model.api.gameentity.Enemy;
 import it.unibo.jumpig.model.api.gameentity.Targettable;
 import it.unibo.jumpig.model.impl.gameentity.BasicCoin;
 import it.unibo.jumpig.model.impl.gameentity.EnemyImpl;
 import it.unibo.jumpig.model.impl.gameentity.PlayerImpl;
 
 /**
- * Class to test correctness of subtypes of CollisionHandler.
+ * Class to test correctness of subtypes of CollisionHandler for enemies and coins.
  * {@link it.unibo.jumpig.model.api.collision.CollisionHandler}
  */
 class CollisionHandlerTest {
 
     private static final double PLAYER_POSITION_X = 5;
     private static final double PLAYER_POSITION_Y = 6.5;
-    private static final double COIN_POSITION_X = 7;
+    private static final double COIN_POSITION_X = 8;
     private static final double COIN_POSITION_Y = 7.5;
     private static final double ENEMY_POSITION_X = 6;
     private static final double ENEMY_POSITION_Y = 6.5;
@@ -78,5 +79,18 @@ class CollisionHandlerTest {
         enemy.handleCollision(player);
         assertEquals(playerLives - 1, player.getLives());
         assertIsTaken(enemy);
+    }
+
+    @Test
+    void testManyEnemyCollisions() {
+        final var player = new PlayerImpl(PLAYER_POSITION);
+        final List<? extends Enemy> enemies = Stream.iterate(0, i -> i + 1)
+                .limit(player.getLives())
+                .map(i -> ENEMY_POSITION)
+                .map(EnemyImpl::new)
+                .toList();
+        enemies.forEach(e -> e.handleCollision(player));
+        enemies.forEach(CollisionHandlerTest::assertIsTaken);
+        assertEquals(0, player.getLives());
     }
 }
