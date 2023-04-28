@@ -22,4 +22,10 @@ public interface Camera {
      */
     double getCameraHeight();
 
+    /**
+     * Setter to update camera's height.
+     * @param cameraheight the camera's height.
+     */
+    void setCameraHeight(int cameraheight);
+
 }

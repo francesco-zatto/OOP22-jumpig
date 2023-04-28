@@ -44,7 +44,7 @@ public class WorldImpl implements World {
 
     public WorldImpl() {
         this.generator = new GeneratorEntitiesImpl(WIDTH, HEIGHT);
-        this.player = new PlayerImpl(new PositionImpl(WIDTH / 2, 0));
+        this.player = new PlayerImpl(new PositionImpl(WIDTH / 2, 1));
         this.setplatform = generator.generatePlatforms();
         this.setenemies = generator.generateEnemies();
         this.setcoins = generator.generateCoins();
@@ -171,10 +171,10 @@ public class WorldImpl implements World {
     }
 
     private void checkRegeneration() {
-        if ((this.camera.getCameraHeight() % HEIGHT) < 1
+        if ((this.player.getPosition().getY() % HEIGHT) < 1
                 //check that it's almoast zero meaning that the generator has to regenerate entities.
             ) {
-                    this.camera = new CameraImpl((int) camera.getCameraHeight());
+                    this.camera = new CameraImpl((int) this.player.getPosition().getY());
                     this.setentities.addAll(regenerate(setentities));
         }
     }
