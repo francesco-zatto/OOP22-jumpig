@@ -21,4 +21,5 @@ public interface Camera {
      * @return the camra's height.
      */
     double getCameraHeight();
+
 }

@@ -11,8 +11,15 @@ import it.unibo.jumpig.model.api.gameentity.Player;
 
 public class CameraImpl implements Camera {
 
-    private final double cameraheight = 1.0; //NOPMD
+    private final int cameraheight;
 
+    /**
+     * Constructor to create a new camera.
+     * @param cameraheight the camera's height
+     */
+    public CameraImpl(final int cameraheight) {
+        this.cameraheight = cameraheight;
+    }
     /**
      * {@inheritDoc}
      */
@@ -28,4 +35,5 @@ public class CameraImpl implements Camera {
     public double getCameraHeight() {
         return this.cameraheight;
     }
+
 }
