@@ -151,7 +151,7 @@ public class WorldImpl implements World {
     }
 
     private void setEmpty() {
-        if (this.player.getPosition().getY() < this.camera.getHeight(this.player).get()) {
+        if (this.player.getPosition().getY() < this.camera.getPlatformHeight(this.player).get()) {
             this.player.setLastPlatformHeight(Optional.empty());
         }
     }
@@ -171,8 +171,8 @@ public class WorldImpl implements World {
     }
 
     private void checkRegeneration() {
-        if (this.camera.getHeight(this.player).isPresent() 
-                && this.camera.getHeight(this.player).get() >= HEIGHT
+        if ((this.camera.getCameraHeight() % HEIGHT) < 1
+                //check that it's almoast zero meaning that the generator has to regenerate entities.
             ) {
                     this.setentities.addAll(regenerate(setentities));
         }
