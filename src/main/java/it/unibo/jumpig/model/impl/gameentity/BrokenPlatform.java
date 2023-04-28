@@ -25,7 +25,7 @@ public class BrokenPlatform extends TargettablePlatform {
      * Constructor for a broken platform.
      * @param position position of the platform in the game's world
      */
-    protected BrokenPlatform(final Position position) {
+    public BrokenPlatform(final Position position) {
         super(position, new BrokenPlatformHitbox(position), 0);
     }
 
