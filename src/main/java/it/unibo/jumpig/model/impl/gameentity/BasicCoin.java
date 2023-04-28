@@ -19,7 +19,8 @@ public class BasicCoin extends AbstractGameEntity<CircleHitbox> implements Coin 
 
     private boolean taken;
     private final CollisionHandler<CircleHitbox, Coin> collisionHandler = new CollisionHandlerImpl<>(
-        new CoinCollisionActioner(), new CoinCollisionChecker()
+        new CoinCollisionActioner(), 
+        new CoinCollisionChecker()
     );
 
     /**
