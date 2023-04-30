@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Set;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
@@ -26,6 +27,7 @@ public class GameViewImpl implements GameViewScene {
     public static final long serialVersionUID = 1L;
     private GameController controller; //NOPMD
     private final JFrame frame = new JFrame();
+    private final JPanel mainPanel;
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     private final Dimension startScreen = new Dimension((int) screen.getWidth() / 5, 
         (int) (screen.getWidth() / 5 * 1.7));
@@ -45,8 +47,10 @@ public class GameViewImpl implements GameViewScene {
     ) {
             this.controller = gameController;
             this.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            this.frame.add(new ScorePanel(), BorderLayout.NORTH);
-            this.frame.add(new GamePanel(width, height), BorderLayout.SOUTH);
+            this.mainPanel = new JPanel(new BorderLayout());
+            this.mainPanel.add(new ScorePanel(), BorderLayout.NORTH);
+            this.mainPanel.add(new GamePanel(width, height), BorderLayout.SOUTH);
+            this.frame.add(this.mainPanel);
             this.frame.setSize(this.startScreen);
             this.frame.setLocationByPlatform(true);
             this.frame.setPreferredSize(this.frame.getSize());
@@ -83,7 +87,7 @@ public class GameViewImpl implements GameViewScene {
      */
     @Override
     public void renderEntities(final Set<Hitbox> entities) {
-        Arrays.stream(this.frame.getComponents())
+        Arrays.stream(this.mainPanel.getComponents())
             .forEach(x -> this.refreshEntities(x, entities));
     }
 
@@ -106,7 +110,7 @@ public class GameViewImpl implements GameViewScene {
         final int height, 
         final int lives
         ) {
-            Arrays.stream(this.frame.getComponents())
+            Arrays.stream(this.mainPanel.getComponents())
                 .forEach(x -> this.refreshScore(x, coins, height, lives));
     }
 
