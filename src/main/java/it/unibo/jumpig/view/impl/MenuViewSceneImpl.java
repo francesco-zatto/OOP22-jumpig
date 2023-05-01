@@ -101,9 +101,7 @@ public class MenuViewSceneImpl implements MenuViewScene {
                         JOptionPane.WARNING_MESSAGE);
                 }
             }
-            final Runnable thread = () -> {
-                controller.notifyStartGame();
-            };
+            final Runnable thread = controller :: notifyStartGame;
             final Thread runthread = new Thread(thread);
             runthread.start();
         });
