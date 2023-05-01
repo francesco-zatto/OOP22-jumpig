@@ -19,16 +19,16 @@ class PlayerTest {
 
     private static final double PLAYER_COMPONENT_X = 5;
     private static final double PLAYER_COMPONENT_Y = 5;
-    final Velocity finalVelocity = new VelocityImpl(0,10);
-    private static final double gravity = 10;
-    private static final double deltaTime = 2;
+    private final Velocity finalVelocity = new VelocityImpl(0, 10);
+    private static final double GRAVITY = 10.0;
+    private static final double TIME = 2.0;
     private final Player player = new PlayerImpl(new PositionImpl(0, 0));
 
     @Test
     void testPlayerPosition() {
         final Position finalPosition = new PositionImpl(PLAYER_COMPONENT_X, PLAYER_COMPONENT_Y);
         player.setVelocityFromJump(new VelocityImpl(PLAYER_COMPONENT_X, PLAYER_COMPONENT_Y));
-        player.computePosition(deltaTime);
+        player.computePosition(TIME);
         assertEquals(player.getPosition().getX(), 
             finalPosition.getX() * 2, () -> "testPlayerPosition failed");
         assertEquals(player.getPosition().getY(), 
@@ -40,8 +40,8 @@ class PlayerTest {
         final Velocity playerVelocity = 
         new VelocityImpl(finalVelocity.getXComponent(), finalVelocity.getYComponent());
         player.setVelocityFromJump(playerVelocity);
-        player.computeVelocity(gravity, deltaTime);
-        finalVelocity.computeAcceleratedVelocity(gravity, deltaTime);
+        player.computeVelocity(GRAVITY, TIME);
+        finalVelocity.computeAcceleratedVelocity(GRAVITY, TIME);
         assertEquals(finalVelocity.getModule(), 
             player.getVelocity().getModule(), () -> "testPlayerVelocity failed");
     }
