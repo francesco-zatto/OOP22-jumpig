@@ -78,7 +78,7 @@ public class WorldImpl implements World {
         this.setentities.addAll(this.getPlatform());
         this.setentities.add(this.getPlayer());
         return this.setentities.stream()
-            .map(x -> x.getHitbox())
+            .map(x -> this.updateheight(x))
             .collect(Collectors.toSet());
     }
 
@@ -168,6 +168,14 @@ public class WorldImpl implements World {
         final double playerHeight = this.player.getPosition().getY();
         final double entityHeight = entity.getPosition().getY();
         return playerHeight - quarterOfWorld < entityHeight && entityHeight < playerHeight + quarterOfWorld;
+    }
+
+    private Hitbox updateheight(final GameEntity<? extends Hitbox> x) {
+        x.getHitbox()
+            .updateHitBox(new PositionImpl(
+                    x.getPosition().getX(), 
+                    x.getPosition().getY() - this.camera.getCameraHeight()));
+        return x.getHitbox();
     }
 
     private void checkRegeneration() {
