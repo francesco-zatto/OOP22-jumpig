@@ -151,7 +151,7 @@ public class WorldImpl implements World {
     }
 
     private void setEmpty() {
-        if (this.player.getPosition().getY() < (this.camera.getPlatformHeight(this.player).get())) { // - camera.getCameraHeight() ??
+        if (this.player.getPosition().getY() < (this.camera.getPlatformHeight(this.player).get())) { // -camera.getCameraHeight()?
             this.player.setLastPlatformHeight(Optional.empty());
         }
     }
