@@ -14,6 +14,7 @@ import it.unibo.jumpig.model.api.gameentity.Enemy;
 import it.unibo.jumpig.model.api.gameentity.Platform;
 import it.unibo.jumpig.model.impl.gameentity.BasicCoin;
 import it.unibo.jumpig.model.impl.gameentity.BasicPlatform;
+import it.unibo.jumpig.model.impl.gameentity.BrokenPlatform;
 import it.unibo.jumpig.model.impl.gameentity.EnemyImpl;
 import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
 
@@ -30,10 +31,11 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
     private final Camera camera;
     private final double maxWidth;    /* The width of the game */
     private final double maxHeight;    /* The height of the game */
-    private static final double NUM_BASIC_PLATFORM = 10;    /* The number of basic platforms */
-    private static final double NUM_VANISHING_PLATFORM = 5;    /* The number of vanishing platforms */
-    private static final double NUM_ENEMY = 2;    /* The number of enemies */
-    private static final double NUM_COIN = 6;    /* The number of coins */
+    private static final int NUM_BASIC_PLATFORM = 8;    /* The number of basic platforms */
+    private static final int NUM_VANISHING_PLATFORM = 4;    /* The number of vanishing platforms */
+    private static final int NUM_ENEMY = 2;    /* The number of enemies */
+    private static final int NUM_COIN = 5;    /* The number of coins */
+    private static final int NUM_BROKEN_PLATFORM = 2;    /* The number of broken platforms */
 
     /**
      * The constructor to create a new generator of entities.
@@ -65,6 +67,7 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
     public Set<Platform> generatePlatforms() {
         this.addBasicPlatforms();
         this.addVanishingPlatforms();
+        this.addBrokenPlatforms();
         return setplatforms.stream()
             .collect(Collectors.toSet());
     }
@@ -107,6 +110,17 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
                     Math.random() * this.maxHeight * 2 + maxHeight + this.camera.getCameraHeight());
             this.setplatforms.add(new VanishingPlatform(
                     this.checkEqualsPosition(coordinate), 1));
+            this.setentities.add(coordinate);
+        }
+    }
+
+    private void addBrokenPlatforms() {
+        for (int i = 0; i < NUM_BROKEN_PLATFORM; i++) {
+            final Position coordinate = new PositionImpl(
+                    Math.random() * this.maxWidth, 
+                    Math.random() * this.maxHeight * 2 + maxHeight + this.camera.getCameraHeight());
+            this.setplatforms.add(new BrokenPlatform(
+                    this.checkEqualsPosition(coordinate)));
             this.setentities.add(coordinate);
         }
     }
