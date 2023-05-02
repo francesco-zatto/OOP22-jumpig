@@ -2,6 +2,7 @@ package collision;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.stream.Stream;
 
 import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.impl.PositionImpl;
+import it.unibo.jumpig.common.impl.hitbox.CoinHitbox;
 import it.unibo.jumpig.model.api.gameentity.Coin;
 import it.unibo.jumpig.model.api.gameentity.Enemy;
 import it.unibo.jumpig.model.api.gameentity.Targettable;
@@ -32,6 +34,7 @@ class CollisionHandlerTest {
     private static final Position PLAYER_POSITION = new PositionImpl(PLAYER_POSITION_X, PLAYER_POSITION_Y);
     private static final Position COIN_POSITION = new PositionImpl(COIN_POSITION_X, COIN_POSITION_Y);
     private static final Position ENEMY_POSITION = new PositionImpl(ENEMY_POSITION_X, ENEMY_POSITION_Y);
+    private static final double COIN_RADIUS = new CoinHitbox(COIN_POSITION).getRadius();
 
     static void assertIsTaken(final Targettable gameEntity) {
         assertTrue(gameEntity.isTaken());
@@ -69,6 +72,48 @@ class CollisionHandlerTest {
         final double pickedCoins = player.getCoins();
         coin.handleCollision(player);
         assertEquals(pickedCoins, player.getCoins());
+    }
+
+    @Test
+    void testCoinToTheRightOfPlayer() {
+        final var player = new PlayerImpl(PLAYER_POSITION);
+        final double pickedCoins = player.getCoins();
+        final var rightCoinPosition = new PositionImpl(
+            player.getHitbox().getRectangleRightX() + COIN_RADIUS + 2, 
+            player.getPosition().getY()
+        );
+        final var coin = new BasicCoin(rightCoinPosition);
+        coin.handleCollision(player);
+        assertFalse(coin.isTaken());
+        assertEquals(player.getCoins(), pickedCoins);
+    }
+
+    @Test
+    void testCoinToTheLeftOfPlayer() {
+        final var player = new PlayerImpl(PLAYER_POSITION);
+        final double pickedCoins = player.getCoins();
+        final var rightCoinPosition = new PositionImpl(
+            player.getHitbox().getRectangleLeftX() - COIN_RADIUS - 2, 
+            player.getPosition().getY()
+        );
+        final var coin = new BasicCoin(rightCoinPosition);
+        coin.handleCollision(player);
+        assertFalse(coin.isTaken());
+        assertEquals(player.getCoins(), pickedCoins);
+    }
+
+    @Test
+    void testCoinAbovePlayer() {
+        final var player = new PlayerImpl(PLAYER_POSITION);
+        final double pickedCoins = player.getCoins();
+        final var rightCoinPosition = new PositionImpl(
+            player.getHitbox().getRectangleLeftX() - COIN_RADIUS - 2, 
+            player.getPosition().getY()
+        );
+        final var coin = new BasicCoin(rightCoinPosition);
+        coin.handleCollision(player);
+        assertFalse(coin.isTaken());
+        assertEquals(player.getCoins(), pickedCoins);
     }
 
     @Test
