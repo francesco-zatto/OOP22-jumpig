@@ -34,9 +34,9 @@ public class PlayerKeyListener implements KeyListener {
     @Override
     public void keyPressed(final KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            System.out.println("Player si muove a sinistra");
+            this.controller.registerInput();
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            System.out.println("Player si muove a destra");
+            this.controller.registerInput();
         }
     }
 
