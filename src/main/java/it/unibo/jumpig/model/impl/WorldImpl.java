@@ -73,6 +73,7 @@ public class WorldImpl implements World {
      */
     @Override
     public Set<Hitbox> getEntities() {
+        this.setentities.clear();
         this.setentities.addAll(this.getCoins());
         this.setentities.addAll(this.getEnemies());
         this.setentities.addAll(this.getPlatform());
