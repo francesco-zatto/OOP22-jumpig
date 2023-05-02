@@ -96,7 +96,7 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
         for (int i = 0; i < NUM_BASIC_PLATFORM; i++) {
             final Position coordinate = new PositionImpl(
                     Math.random() * this.maxWidth, 
-                    Math.random() * this.maxHeight * 2 + maxHeight + this.camera.getCameraHeight());
+                    Math.random() * this.maxHeight * 3 + this.camera.getCameraHeight());
             this.setplatforms.add(new BasicPlatform(
                     this.checkEqualsPosition(coordinate), 1));
             this.setentities.add(coordinate);
@@ -107,7 +107,7 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
         for (int i = 0; i < NUM_VANISHING_PLATFORM; i++) {
             final Position coordinate = new PositionImpl(
                     Math.random() * this.maxWidth, 
-                    Math.random() * this.maxHeight * 2 + maxHeight + this.camera.getCameraHeight());
+                    Math.random() * this.maxHeight * 3 + this.camera.getCameraHeight());
             this.setplatforms.add(new VanishingPlatform(
                     this.checkEqualsPosition(coordinate), 1));
             this.setentities.add(coordinate);
@@ -118,7 +118,7 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
         for (int i = 0; i < NUM_BROKEN_PLATFORM; i++) {
             final Position coordinate = new PositionImpl(
                     Math.random() * this.maxWidth, 
-                    Math.random() * this.maxHeight * 2 + maxHeight + this.camera.getCameraHeight());
+                    Math.random() * this.maxHeight * 3 + this.camera.getCameraHeight());
             this.setplatforms.add(new BrokenPlatform(
                     this.checkEqualsPosition(coordinate)));
             this.setentities.add(coordinate);
@@ -129,7 +129,7 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
         for (int i = 0; i < NUM_ENEMY; i++) {
             final Position coordinate = new PositionImpl(
                     Math.random() * this.maxWidth, 
-                    Math.random() * this.maxHeight * 2 + maxHeight + this.camera.getCameraHeight());
+                    Math.random() * this.maxHeight * 3 + this.camera.getCameraHeight());
             this.setenemies.add(new EnemyImpl(this.checkEqualsPosition(coordinate)));
             this.setentities.add(coordinate);
         }
@@ -139,7 +139,7 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
         for (int i = 0; i < NUM_COIN; i++) {
             final Position coordinate = new PositionImpl(
                     Math.random() * this.maxWidth, 
-                    Math.random() * this.maxHeight * 2 + maxHeight + this.camera.getCameraHeight());
+                    Math.random() * this.maxHeight * 3 + this.camera.getCameraHeight());
             this.setcoins.add(new BasicCoin(this.checkEqualsPosition(coordinate)));
             this.setentities.add(coordinate);
         }
@@ -155,7 +155,7 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
         return this.setentities.stream()
             .anyMatch(x -> x.getY() == startEntity.getY()) 
                 ? this.checkEqualsPosition(new PositionImpl(Math.random() * this.maxWidth, 
-                        Math.random() * this.maxHeight * 2 + maxHeight + this.camera.getCameraHeight())) 
+                        Math.random() * this.maxHeight * 3 + this.camera.getCameraHeight())) 
                 : startEntity;
     }
 }

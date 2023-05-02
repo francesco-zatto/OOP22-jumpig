@@ -29,7 +29,7 @@ public class WorldImpl implements World {
 
     private static final double WIDTH = 36;
     private static final double HEIGHT = 64;
-    private static final double GRAVITY = 0.0001; //TODO è -qualcosa
+    private static final double GRAVITY = -0.4; //TODO è -qualcosa
     private final GeneratorEntities generator;
     private final Player player;
     private final Set<Platform> setplatform;
@@ -142,8 +142,9 @@ public class WorldImpl implements World {
      */
     @Override
     public void updateGame(final long elapsed) {
-        this.player.computeVelocity(GRAVITY, elapsed);
-        this.player.computePosition(elapsed);
+        final double time = ((double) elapsed) / 1000.0;
+        this.player.computeVelocity(GRAVITY, time);
+        this.player.computePosition(time);
         this.checkRegeneration();
         final var collidables = this.getCollidables(Set.of(this.setcoins, this.setenemies, this.setplatform));
         collidables.forEach(c -> c.handleCollision(this.player));
@@ -151,8 +152,10 @@ public class WorldImpl implements World {
     }
 
     private void setEmpty() {
-        if (this.player.getPosition().getY() < this.camera.getPlatformHeight(this.player).get()) { // -camera.getCameraHeight()?
-            this.player.setLastPlatformHeight(Optional.empty());
+        if (this.camera.getPlatformHeight(this.player).isPresent() 
+            && this.player.getPosition().getY() < this.camera.getPlatformHeight(this.player).get()) { 
+                //-camera.getCameraHeight() ???
+                this.player.setLastPlatformHeight(Optional.empty());
         }
     }
 
