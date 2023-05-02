@@ -16,7 +16,8 @@ import it.unibo.jumpig.model.impl.collision.PlatformCollisionActioner;
 public class BasicPlatform extends AbstractPlatform {
 
     private final CollisionHandler<RectangleHitbox, BasicPlatform> collisionHandler = new CollisionHandlerImpl<>(
-        new PlatformCollisionActioner<>(), new BasicPlatformCollisionChecker()
+        new PlatformCollisionActioner<>(),
+        new BasicPlatformCollisionChecker()
     );
     /**
      * Constructor for a basic platform that simply causes the jump of the player.

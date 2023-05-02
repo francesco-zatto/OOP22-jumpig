@@ -29,7 +29,7 @@ public class WorldImpl implements World {
 
     private static final double WIDTH = 36;
     private static final double HEIGHT = 64;
-    private static final double GRAVITY = 0.0001; //TODO è -qualcosa
+    private static final double GRAVITY = -0.4; //TODO è -qualcosa
     private final GeneratorEntities generator;
     private final Player player;
     private final Set<Platform> setplatform;
@@ -43,12 +43,12 @@ public class WorldImpl implements World {
      */
 
     public WorldImpl() {
-        this.generator = new GeneratorEntitiesImpl(WIDTH, HEIGHT);
-        this.player = new PlayerImpl(new PositionImpl(WIDTH / 2, 0));
+        this.camera = new CameraImpl(0);
+        this.generator = new GeneratorEntitiesImpl(WIDTH, HEIGHT, this.camera);
+        this.player = new PlayerImpl(new PositionImpl(WIDTH / 2, 1));
         this.setplatform = generator.generatePlatforms();
         this.setenemies = generator.generateEnemies();
         this.setcoins = generator.generateCoins();
-        this.camera = new CameraImpl();
         this.setentities = new HashSet<>();
     }
 
@@ -73,12 +73,13 @@ public class WorldImpl implements World {
      */
     @Override
     public Set<Hitbox> getEntities() {
+        this.setentities.clear();
         this.setentities.addAll(this.getCoins());
         this.setentities.addAll(this.getEnemies());
         this.setentities.addAll(this.getPlatform());
         this.setentities.add(this.getPlayer());
         return this.setentities.stream()
-            .map(x -> x.getHitbox())
+            .map(x -> this.updateheight(x))
             .collect(Collectors.toSet());
     }
 
@@ -118,7 +119,7 @@ public class WorldImpl implements World {
      */
     @Override
     public Camera getCamera() {
-        return this.camera;
+        return this.camera.copy();
     }
 
     /**
@@ -142,8 +143,9 @@ public class WorldImpl implements World {
      */
     @Override
     public void updateGame(final long elapsed) {
-        this.player.computeVelocity(GRAVITY, elapsed);
-        this.player.computePosition(elapsed);
+        final double time = ((double) elapsed) / 1000.0;
+        this.player.computeVelocity(GRAVITY, time);
+        this.player.computePosition(time);
         this.checkRegeneration();
         final var collidables = this.getCollidables(Set.of(this.setcoins, this.setenemies, this.setplatform));
         collidables.forEach(c -> c.handleCollision(this.player));
@@ -151,8 +153,10 @@ public class WorldImpl implements World {
     }
 
     private void setEmpty() {
-        if (this.player.getPosition().getY() < this.camera.getHeight(this.player).get()) {
-            this.player.setLastPlatformHeight(Optional.empty());
+        if (this.camera.getPlatformHeight(this.player).isPresent() 
+            && this.player.getPosition().getY() < this.camera.getPlatformHeight(this.player).get()) { 
+                //-camera.getCameraHeight() ???
+                this.player.setLastPlatformHeight(Optional.empty());
         }
     }
 
@@ -170,27 +174,27 @@ public class WorldImpl implements World {
         return playerHeight - quarterOfWorld < entityHeight && entityHeight < playerHeight + quarterOfWorld;
     }
 
+    private Hitbox updateheight(final GameEntity<? extends Hitbox> x) {
+        x.getHitbox()
+            .updateHitBox(new PositionImpl(
+                    x.getPosition().getX(), 
+                    x.getPosition().getY() - this.camera.getCameraHeight()));
+        return x.getHitbox();
+    }
+
     private void checkRegeneration() {
-        if (this.camera.getHeight(this.player).isPresent() 
-                && this.camera.getHeight(this.player).get() >= HEIGHT
+        if ((this.player.getPosition().getY() % HEIGHT) < 1
+                //check that it's almoast zero meaning that the generator has to regenerate entities.
             ) {
-                    this.setentities.addAll(regenerate(setentities));
+                    this.camera.setCameraHeight((int) this.player.getPosition().getY());
+                    setentities.clear();
+                    this.setentities.addAll(regenerate());
         }
     }
-    private Set<GameEntity<? extends Hitbox>> regenerate(final Set<GameEntity<? extends Hitbox>> setToRegenerate) {
-        final var type = setToRegenerate.stream()
-            .toList()
-            .get(0);
-        setToRegenerate.clear();
-        if (type instanceof Platform) {
-            setToRegenerate.addAll(this.generator.generatePlatforms());
-        }
-        if (type instanceof Coin) {
-            setToRegenerate.addAll(this.generator.generateCoins());
-        }
-        if (type instanceof Enemy) {
-            setToRegenerate.addAll(this.generator.generateEnemies());
-        }
-        return setToRegenerate;
+    private Set<GameEntity<? extends Hitbox>> regenerate() {
+        this.setentities.addAll(this.generator.generateCoins());
+        this.setentities.addAll(this.generator.generateEnemies());
+        this.setentities.addAll(this.generator.generatePlatforms());
+        return this.setentities;
     }
 }

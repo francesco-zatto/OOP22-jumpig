@@ -44,19 +44,28 @@ public class GamePanel extends JPanel {
 
     /**
      * Method that paints every drawing of the gamePanel.
-     * @param g graphics used to paint.
+     * @param graphics awt graphics used to paint.
      */
     @Override
     @SuppressFBWarnings(value = "BC_UNCONFIRMED_CAST",
             justification = "It's a safe and necessary cast because g is Graphics2D")
-    public void paint(final Graphics g) {
-        final Graphics2D g2D = (Graphics2D) g;
+    public void paint(final Graphics graphics) {
+        final Graphics2D graphics2D = (Graphics2D) graphics;
+        this.clearPreviousFrame(graphics2D);
+        this.setNextFrame(graphics2D);
+        graphics2D.dispose();
+    }
+
+    private void clearPreviousFrame(final Graphics2D graphics) {
+        graphics.clearRect(0, 0, this.getWidth(), this.getHeight());
+    }
+
+    private void setNextFrame(final Graphics2D graphics) {
         this.renderer.setRatio(this.getWidth(), this.getHeight());
-        this.renderer.setGraphics(g2D);
+        this.renderer.setGraphics(graphics);
         this.entities.stream()
                 .filter(e -> !(e instanceof EnemyHitbox)) //TODO metodo non implementato
                 .forEach(e -> e.updateRendering(this.renderer));
-        g2D.dispose();
     }
 
     /**

@@ -3,12 +3,16 @@ package it.unibo.jumpig.view.impl;
 import java.util.Arrays;
 import java.util.Set;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
 import it.unibo.jumpig.controller.api.GameController;
@@ -22,35 +26,35 @@ public class GameViewImpl implements GameViewScene {
 
     public static final long serialVersionUID = 1L;
     private GameController controller; //NOPMD
+    private final JFrame frame = new JFrame();
     private final JPanel mainPanel;
+    private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+    private final Dimension startScreen = new Dimension((int) screen.getWidth() / 5, 
+        (int) (screen.getWidth() / 5 * 1.7));
 
     /**
      * Constructor to create the game view that manage updates.
      * @param width the width of the world
      * @param height the height of the world
+     * @param gameController the controller of the game
      */
     @SuppressFBWarnings(value = "UrF", 
-            justification = "I have to initialize controller but it will be set with other constructor")
+        justification = "Controller will be used to manage input.")
     public GameViewImpl(
         final double width, 
-        final double height
+        final double height, 
+        final GameController gameController
     ) {
+            this.controller = gameController;
+            this.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             this.mainPanel = new JPanel(new BorderLayout());
             this.mainPanel.add(new ScorePanel(), BorderLayout.NORTH);
             this.mainPanel.add(new GamePanel(width, height), BorderLayout.SOUTH);
-    }
-
-    /**
-     * Constructor to set the game controller of the game view. 
-     * @param gameController the controller of the game
-     * @param gameview the game view to copy
-     * */
-    public GameViewImpl(
-        final GameController gameController, 
-        final GameViewImpl gameview 
-        ) {
-            this.mainPanel = gameview.getMainPanel();
-            this.controller = gameController;
+            this.frame.add(this.mainPanel);
+            this.frame.setSize(this.startScreen);
+            this.frame.setLocationByPlatform(true);
+            this.frame.setPreferredSize(this.frame.getSize());
+            this.frame.setResizable(true);
     }
 
     /**
@@ -58,7 +62,7 @@ public class GameViewImpl implements GameViewScene {
      */
     @Override
     public void show() {
-        this.mainPanel.setVisible(true);
+        this.frame.setVisible(true);
     }
 
     /**
@@ -66,7 +70,7 @@ public class GameViewImpl implements GameViewScene {
      */
     @Override
     public void quit() {
-        this.mainPanel.setVisible(false);
+        this.frame.setVisible(false);
     }
 
     /**
@@ -122,13 +126,4 @@ public class GameViewImpl implements GameViewScene {
             }
     }
 
-    /**
-     * The method to get the main panel (which contains score panel and game panel) of the game view.
-     * @return the main panel
-     */
-    @SuppressFBWarnings(value = "EI",
-    justification = "I have to return the mainPanel")
-    public JPanel getMainPanel() {
-        return this.mainPanel; //NOPMD
-    }
 }

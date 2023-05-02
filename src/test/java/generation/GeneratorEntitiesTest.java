@@ -1,6 +1,8 @@
 package generation;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Set;
@@ -23,12 +25,23 @@ import it.unibo.jumpig.model.api.gameentity.Enemy;
 class GeneratorEntitiesTest {
 
     private final World world = new WorldImpl();
-    private final GeneratorEntities generator = new GeneratorEntitiesImpl(world.getWidth(), world.getHeight());
+    private final GeneratorEntities generator = new GeneratorEntitiesImpl(world.getWidth(), world.getHeight(), world.getCamera());
+    private static final int NUM_BASIC_PLATFORM = 8;    /* The number of basic platforms */
+    private static final int NUM_VANISHING_PLATFORM = 4;    /* The number of vanishing platforms */
+    private static final int NUM_ENEMY = 2;    /* The number of enemies */
+    private static final int NUM_COIN = 5;    /* The number of coins */
+    private static final int NUM_BROKEN_PLATFORM = 2;    /* The number of broken platforms */
 
     private <X extends GameEntity<H>, H extends Hitbox> void assertGeneration(final Set<X> entities) {
         for (int i = 0; i < entities.size(); i++) {
-            final X next = entities.stream().toList().get(i);
-            assertTrue(entities.stream().skip(i + 1).allMatch(x -> x.getPosition().getY() != next.getPosition().getY()));
+            final X next = entities.stream()
+                    .toList()
+                    .get(i);
+            assertTrue(
+                    entities.stream()
+                    .skip(i + 1)
+                    .allMatch(x -> x.getPosition().getY() != next.getPosition().getY())
+            );
         }
     }
 
@@ -48,5 +61,25 @@ class GeneratorEntitiesTest {
     void testGenerationEnemies() {
         final Set<Enemy> setenemy = this.generator.generateEnemies();
         this.assertGeneration(setenemy);
+    }
+
+    @Test
+    void testNumberEntities() {
+        assertEquals(
+            world.getEntities().size(), 
+            NUM_BASIC_PLATFORM + NUM_BROKEN_PLATFORM + NUM_COIN + NUM_ENEMY + NUM_VANISHING_PLATFORM + 1
+        );  // +1 because in the set of entities there is also the player 
+        assertEquals(
+            this.generator.generateCoins().size(), 
+            NUM_COIN
+        );
+        assertEquals(
+            this.generator.generateEnemies().size(), 
+            NUM_ENEMY
+        );
+        assertEquals(
+            this.generator.generatePlatforms().size(), 
+            NUM_BASIC_PLATFORM + NUM_BROKEN_PLATFORM + NUM_VANISHING_PLATFORM
+        );
     }
 }

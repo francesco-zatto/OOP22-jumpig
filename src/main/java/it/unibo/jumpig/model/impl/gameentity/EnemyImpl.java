@@ -20,7 +20,8 @@ public class EnemyImpl extends AbstractGameEntity<RectangleHitbox> implements En
 
     private boolean targettable;
     private final CollisionHandler<RectangleHitbox, Enemy> collisionHandler = new CollisionHandlerImpl<>(
-        new EnemyCollisionActioner(), new EnemyCollisionChecker()
+        new EnemyCollisionActioner(), 
+        new EnemyCollisionChecker()
     );
 
     /**
