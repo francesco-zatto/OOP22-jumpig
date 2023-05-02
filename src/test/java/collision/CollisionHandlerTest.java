@@ -13,6 +13,7 @@ import it.unibo.jumpig.common.impl.PositionImpl;
 import it.unibo.jumpig.common.impl.hitbox.CoinHitbox;
 import it.unibo.jumpig.model.api.gameentity.Coin;
 import it.unibo.jumpig.model.api.gameentity.Enemy;
+import it.unibo.jumpig.model.api.gameentity.Player;
 import it.unibo.jumpig.model.api.gameentity.Targettable;
 import it.unibo.jumpig.model.impl.gameentity.BasicCoin;
 import it.unibo.jumpig.model.impl.gameentity.EnemyImpl;
@@ -38,6 +39,11 @@ class CollisionHandlerTest {
 
     static void assertIsTaken(final Targettable gameEntity) {
         assertTrue(gameEntity.isTaken());
+    }
+
+    private static void assertCoinIsNotTaken(final Coin coin, final Player player, final double coinsBeforeHandling) {
+        assertFalse(coin.isTaken());
+        assertEquals(player.getCoins(), coinsBeforeHandling);
     }
 
     @Test
@@ -84,8 +90,7 @@ class CollisionHandlerTest {
         );
         final var coin = new BasicCoin(rightCoinPosition);
         coin.handleCollision(player);
-        assertFalse(coin.isTaken());
-        assertEquals(player.getCoins(), pickedCoins);
+        assertCoinIsNotTaken(coin, player, pickedCoins);
     }
 
     @Test
@@ -98,8 +103,7 @@ class CollisionHandlerTest {
         );
         final var coin = new BasicCoin(leftCoinPosition);
         coin.handleCollision(player);
-        assertFalse(coin.isTaken());
-        assertEquals(player.getCoins(), pickedCoins);
+        assertCoinIsNotTaken(coin, player, pickedCoins);
     }
 
     @Test
@@ -112,8 +116,20 @@ class CollisionHandlerTest {
         );
         final var coin = new BasicCoin(aboveCoinPosition);
         coin.handleCollision(player);
-        assertFalse(coin.isTaken());
-        assertEquals(player.getCoins(), pickedCoins);
+        assertCoinIsNotTaken(coin, player, pickedCoins);
+    }
+
+    @Test
+    void testCoinUnderPlayer() {
+        final var player = new PlayerImpl(PLAYER_POSITION);
+        final double pickedCoins = player.getCoins();
+        final var aboveCoinPosition = new PositionImpl(
+            player.getPosition().getY(), 
+            player.getHitbox().getRectangleLowerY() - COIN_RADIUS - 2
+        );
+        final var coin = new BasicCoin(aboveCoinPosition);
+        coin.handleCollision(player);
+        assertCoinIsNotTaken(coin, player, pickedCoins);
     }
 
     @Test
