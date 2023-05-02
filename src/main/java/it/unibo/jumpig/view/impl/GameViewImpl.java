@@ -55,7 +55,7 @@ public class GameViewImpl implements GameViewScene {
             this.frame.setLocationByPlatform(true);
             this.frame.setPreferredSize(this.frame.getSize());
             this.frame.setResizable(true);
-            this.frame.addKeyListener(new PlayerKeyListener());
+            this.frame.addKeyListener(new PlayerKeyListener(this.controller));
     }
 
     /**
