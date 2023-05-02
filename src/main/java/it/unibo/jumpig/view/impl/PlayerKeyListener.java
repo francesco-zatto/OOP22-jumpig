@@ -13,8 +13,11 @@ public class PlayerKeyListener implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'keyPressed'");
+        if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+            System.out.println("Player si muove a sinistra");
+        } else if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            System.out.println("Player si muove a destra");
+        }
     }
 
     @Override
