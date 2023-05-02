@@ -85,7 +85,6 @@ public class MenuViewSceneImpl implements MenuViewScene {
          */
         quitButton.addActionListener(e -> this.controller.close());
         gameButton.addActionListener(e -> {
-            frame.remove(menuPanel);
             String username = "";
             while ("".equals(username)) {
                 username = JOptionPane.showInputDialog(
