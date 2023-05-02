@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.stream.Stream;
+
 import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.impl.PositionImpl;
 import it.unibo.jumpig.common.impl.hitbox.PlatformHitbox;
@@ -19,8 +21,11 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
 
 /**
  * Class to test correctness of CollisionHandlers for collisions only with platforms.
- * {@link it.unibo.jumpig.model.impl.collision.BasicPlatformCollisionHandler}
- * {@link it.unibo.jumpig.model.impl.collision.VanishingPlatformCollisionHandler}
+ * {@link it.unibo.jumpig.model.impl.collision.BasicPlatformCollisionChecker}
+ * {@link it.unibo.jumpig.model.impl.collision.PlatformCollisionActioner}
+ * {@link it.unibo.jumpig.model.impl.collision.TargettablePlatformCollisionChecker}
+ * {@link it.unibo.jumpig.model.impl.collision.VanishingPlatformCollisionActioner}
+ * {@link it.unibo.jumpig.model.impl.collision.BrokenPlatformCollisionActioner}
  */
 class PlatformCollisionHandlerTest {
 
@@ -51,11 +56,12 @@ class PlatformCollisionHandlerTest {
     }
 
     private void computeMovement(final PlayerImpl player, final double collisionTime) {
-        for (double i = 0; i < collisionTime; i = i + DELTA_TIME) {
-            player.computeVelocity(GRAVITY, DELTA_TIME);
-            player.computePosition(DELTA_TIME);
-            //TODO cava e mettici uno stream al posto del for
-        }
+        Stream.iterate(0.0, t -> t < collisionTime, t -> t + DELTA_TIME)
+                .map(t -> DELTA_TIME)
+                .forEach(dt -> {
+                    player.computeVelocity(GRAVITY, dt);
+                    player.computePosition(dt);
+                });
     }
 
     @Test
