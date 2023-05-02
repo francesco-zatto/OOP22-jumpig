@@ -92,11 +92,11 @@ class CollisionHandlerTest {
     void testCoinToTheLeftOfPlayer() {
         final var player = new PlayerImpl(PLAYER_POSITION);
         final double pickedCoins = player.getCoins();
-        final var rightCoinPosition = new PositionImpl(
+        final var leftCoinPosition = new PositionImpl(
             player.getHitbox().getRectangleLeftX() - COIN_RADIUS - 2, 
             player.getPosition().getY()
         );
-        final var coin = new BasicCoin(rightCoinPosition);
+        final var coin = new BasicCoin(leftCoinPosition);
         coin.handleCollision(player);
         assertFalse(coin.isTaken());
         assertEquals(player.getCoins(), pickedCoins);
@@ -106,11 +106,11 @@ class CollisionHandlerTest {
     void testCoinAbovePlayer() {
         final var player = new PlayerImpl(PLAYER_POSITION);
         final double pickedCoins = player.getCoins();
-        final var rightCoinPosition = new PositionImpl(
-            player.getHitbox().getRectangleLeftX() - COIN_RADIUS - 2, 
-            player.getPosition().getY()
+        final var aboveCoinPosition = new PositionImpl(
+            player.getPosition().getY(), 
+            player.getHitbox().getRectangleUpperY() + COIN_RADIUS + 2
         );
-        final var coin = new BasicCoin(rightCoinPosition);
+        final var coin = new BasicCoin(aboveCoinPosition);
         coin.handleCollision(player);
         assertFalse(coin.isTaken());
         assertEquals(player.getCoins(), pickedCoins);

@@ -44,8 +44,9 @@ public class CoinCollisionChecker extends AbstractCollisionChecker<CircleHitbox,
      * If a point is nearest to the center, then the first member of the equation is less than the second member.
      */
     private boolean isPositionInsideCircle(final Position position, final CircleHitbox circle) {
-        return Math.pow(position.getX() - circle.getCenter().getX(), 2) - Math.pow(position.getY() - circle.getCenter().getY(), 2)
-                < Math.pow(circle.getRadius(), 2);
+        return Math.pow(position.getX() - circle.getCenter().getX(), 2) + 
+            Math.pow(position.getY() - circle.getCenter().getY(), 2)
+            < Math.pow(circle.getRadius(), 2);
     }
 
     /**
