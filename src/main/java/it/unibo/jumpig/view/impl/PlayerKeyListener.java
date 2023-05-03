@@ -35,10 +35,8 @@ public class PlayerKeyListener implements KeyListener {
     public void keyPressed(final KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             this.controller.registerInput(-1);
-            this.controller.registerInput(0);
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             this.controller.registerInput(1);
-            this.controller.registerInput(0);
         }
     }
 
