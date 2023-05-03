@@ -9,7 +9,7 @@ import it.unibo.jumpig.model.api.Velocity;
  */
 public class VelocityImpl implements Velocity {
 
-    private static final double HORIZONTAL_VELOCITY = 10;
+    private static final double HORIZONTAL_VELOCITY = 1;
     private double componentX;
     private double componentY;
 
