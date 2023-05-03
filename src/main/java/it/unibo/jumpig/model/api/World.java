@@ -49,6 +49,7 @@ public interface World {
     /**
      * Method that updates the positions for every entity inside the game.
      * @param elapsed the elapsed time.
+     * @param direction the player's horizontal direction 
      */
-    void updateGame(long elapsed);
+    void updateGame(long elapsed, int direction);
 }
