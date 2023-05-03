@@ -41,8 +41,7 @@ public class GameControllerImpl implements GameController {
         while (!game.isOver()) {
             final long currentCycleStartTime = System.currentTimeMillis();
             final long elapsed = currentCycleStartTime - previousCycleStartTime;
-            registerInput(this.input);
-            this.game.updateGame(elapsed);
+            this.game.updateGame(elapsed, this.input);
             this.notifyUpdate();
             this.waitForNextFrame(currentCycleStartTime);
             previousCycleStartTime = currentCycleStartTime;
