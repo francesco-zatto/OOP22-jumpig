@@ -98,4 +98,10 @@ public class VelocityImpl implements Velocity {
         }
         return Double.doubleToLongBits(this.componentY) == Double.doubleToLongBits(other.componentY);
     }
+
+    @Override
+    public void computeHorizontalVelocity(int direction) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'computeHorizontalVelocity'");
+    }
 }
