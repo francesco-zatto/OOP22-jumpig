@@ -85,7 +85,7 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
      * {@inheritDoc}
      */
     @Override
-    public void computeVelocity(final double gravity, final double deltaTime) {
+    public void computeVelocity(final double gravity, final double deltaTime, final int direction) {
         this.playerVelocity.computeAcceleratedVelocity(gravity, deltaTime);
     }
 
