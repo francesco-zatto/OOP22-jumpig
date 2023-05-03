@@ -32,8 +32,8 @@ public class GameImpl implements Game {
      * {@inheritDoc}
      */
     @Override
-    public void updateGame(final long elapsed) {
-        this.world.updateGame(elapsed);
+    public void updateGame(final long elapsed, final int direction) {
+        this.world.updateGame(elapsed, direction);
     }
 
     /**
