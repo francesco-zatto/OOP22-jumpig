@@ -10,7 +10,7 @@ import it.unibo.jumpig.model.api.Velocity;
 public class VelocityImpl implements Velocity {
 
     private static final double HORIZONTAL_VELOCITY = 10;
-    private final double componentX;
+    private double componentX;
     private double componentY;
 
     /**
@@ -105,7 +105,6 @@ public class VelocityImpl implements Velocity {
      */
     @Override
     public void computeHorizontalVelocity(final int direction) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'computeHorizontalVelocity'");
+        this.componentX = this.componentX + direction * HORIZONTAL_VELOCITY;
     }
 }
