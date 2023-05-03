@@ -18,7 +18,7 @@ public class GameControllerImpl implements GameController {
     private static final long PERIOD = 20; /* 20 milliseconds are equal to 50 frames per sec */
     private final Game game;
     private final GameViewScene gameView;
-    private final int input = 0;
+    private int input = 0;
     private final Logger logger = System.getLogger("GameControllerImpl");
 
     /**
@@ -82,7 +82,7 @@ public class GameControllerImpl implements GameController {
      */
     @Override
     public void registerInput(final int input) {
-        //this.gameView.manageInput(); TODO
+        this.input = input;
     }
 
     /**
