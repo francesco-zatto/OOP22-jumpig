@@ -105,6 +105,6 @@ public class VelocityImpl implements Velocity {
      */
     @Override
     public void computeHorizontalVelocity(final int direction) {
-        this.componentX = this.componentX + direction * HORIZONTAL_VELOCITY;
+        this.componentX = this.componentX + (direction * HORIZONTAL_VELOCITY);
     }
 }
