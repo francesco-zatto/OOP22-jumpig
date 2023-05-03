@@ -34,9 +34,11 @@ public class PlayerKeyListener implements KeyListener {
     @Override
     public void keyPressed(final KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            this.controller.registerInput();
+            this.controller.registerInput(-1);
+            this.controller.registerInput(0);
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            this.controller.registerInput();
+            this.controller.registerInput(1);
+            this.controller.registerInput(0);
         }
     }
 
@@ -45,7 +47,6 @@ public class PlayerKeyListener implements KeyListener {
      */
     @Override
     public void keyReleased(final KeyEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'keyReleased'");
+        this.controller.registerInput(0);
     }
 }
