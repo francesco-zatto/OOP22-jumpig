@@ -41,7 +41,7 @@ class PlatformCollisionHandlerTest {
     void testBasicPlatformCollision() {
        final var player = new PlayerImpl(PLAYER_POSITION);
        final var platform = new BasicPlatform(PLATFORM_POSITION, PLATFORM_VELOCITY);
-       player.computeVelocity(GRAVITY, DELTA_TIME);
+       player.computeVelocity(GRAVITY, DELTA_TIME, 0);
        platform.handleCollision(player);
        assertCollision(player, platform);
     }
@@ -60,7 +60,7 @@ class PlatformCollisionHandlerTest {
     void testVanishingPlatformCollision() {
         final var player = new PlayerImpl(PLAYER_POSITION);
         final var platform = new VanishingPlatform(PLATFORM_POSITION, PLATFORM_VELOCITY);
-        player.computeVelocity(GRAVITY, DELTA_TIME);
+        player.computeVelocity(GRAVITY, DELTA_TIME, 0);
         platform.handleCollision(player);
         assertCollision(player, platform);
         CollisionHandlerTest.assertIsTaken(platform);
@@ -70,7 +70,7 @@ class PlatformCollisionHandlerTest {
     void testVanishingPlatformIsAlreadyTaken() {
         final var player = new PlayerImpl(PLAYER_POSITION);
         final var platform = new VanishingPlatform(PLATFORM_POSITION, PLATFORM_VELOCITY);
-        player.computeVelocity(GRAVITY, DELTA_TIME);
+        player.computeVelocity(GRAVITY, DELTA_TIME, 0);
         platform.handleCollision(player);
         /* 
          * After a collision the player moves in the y axis with a decelerated movement, so the next line
@@ -78,7 +78,7 @@ class PlatformCollisionHandlerTest {
          * the vanishing platform. But this time he will not jumps, because the platform is vanished.
          */
         final double fallingTime = 2 * player.getVelocity().getYComponent() / -GRAVITY;
-        player.computeVelocity(GRAVITY, fallingTime);
+        player.computeVelocity(GRAVITY, fallingTime, 0);
         platform.handleCollision(player);
         CollisionHandlerTest.assertIsTaken(platform);
         assertEquals(platform.getJumpVelocity().getYComponent(), -player.getVelocity().getYComponent());
@@ -88,7 +88,7 @@ class PlatformCollisionHandlerTest {
     void testBrokenPlatformCollision() {
         final var player = new PlayerImpl(PLAYER_POSITION);
         final var platform = new BrokenPlatform(PLATFORM_POSITION);
-        player.computeVelocity(GRAVITY, DELTA_TIME);
+        player.computeVelocity(GRAVITY, DELTA_TIME, 0);
         final var playerVerticalVelocityBeforeCollision = player.getVelocity().getYComponent();
         platform.handleCollision(player);
         /*
