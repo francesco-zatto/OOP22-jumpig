@@ -111,7 +111,7 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
                     Math.random() * this.maxWidth, 
                     Math.random() * this.maxHeight * 3 + this.camera.getCameraHeight());
             this.setplatforms.add(new VanishingPlatform(
-                    this.checkEqualsPosition(coordinate), 1));
+                    this.checkEqualsPosition(coordinate), VERTICAL_JUMP_VELOCITY));
             this.setentities.add(coordinate);
         }
     }
