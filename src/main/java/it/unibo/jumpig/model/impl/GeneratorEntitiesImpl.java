@@ -36,6 +36,8 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
     private static final int NUM_ENEMY = 2;    /* The number of enemies */
     private static final int NUM_COIN = 5;    /* The number of coins */
     private static final int NUM_BROKEN_PLATFORM = 2;    /* The number of broken platforms */
+    private static final double VERTICAL_JUMP_VELOCITY = 12;    /* The vertical velocity the player 
+                                                                gains when he jumps on a platform */
 
     /**
      * The constructor to create a new generator of entities.
@@ -98,7 +100,7 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
                     Math.random() * this.maxWidth, 
                     Math.random() * this.maxHeight * 3 + this.camera.getCameraHeight());
             this.setplatforms.add(new BasicPlatform(
-                    this.checkEqualsPosition(coordinate), 12));
+                    this.checkEqualsPosition(coordinate), VERTICAL_JUMP_VELOCITY));
             this.setentities.add(coordinate);
         }
     }
