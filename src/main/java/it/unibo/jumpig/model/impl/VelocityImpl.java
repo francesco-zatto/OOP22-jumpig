@@ -68,6 +68,14 @@ public class VelocityImpl implements Velocity {
      * {@inheritDoc}
      */
     @Override
+    public void computeHorizontalVelocity(final int direction) {
+        this.componentX = this.componentX + (direction * HORIZONTAL_VELOCITY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
@@ -98,13 +106,5 @@ public class VelocityImpl implements Velocity {
             return false;
         }
         return Double.doubleToLongBits(this.componentY) == Double.doubleToLongBits(other.componentY);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void computeHorizontalVelocity(final int direction) {
-        this.componentX = this.componentX + (direction * HORIZONTAL_VELOCITY);
     }
 }
