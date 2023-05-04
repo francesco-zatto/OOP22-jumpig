@@ -1,15 +1,13 @@
 package it.unibo.jumpig.view.impl;
 
-import static javax.swing.BoxLayout.Y_AXIS;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -46,33 +44,40 @@ public class MenuViewSceneImpl implements MenuViewScene {
         /*
          * Panel for the buttons.
          */
-        final JPanel panelButton = new JPanel();
-        panelButton.setBackground(Color.CYAN);
-        panelButton.setLayout(new BoxLayout(panelButton, Y_AXIS));
-        /*
-         * Initializing buttons.
-         */
         final JButton gameButton = new JButton("START GAME");
         final JButton leaderboardButton = new JButton("LEADERBOARD");
         final JButton quitButton = new JButton("QUIT");
         /*
-         * Adding buttons into the panelButton.
+         * Set the buttons' dimensions
          */
+        final Dimension buttonSize = new Dimension(200, 50);
+        gameButton.setPreferredSize(buttonSize);
+        leaderboardButton.setPreferredSize(buttonSize);
+        quitButton.setPreferredSize(buttonSize);
+        /*
+         * Creating a new panel that contains the buttons
+         */
+        final JPanel panelButton = new JPanel(new GridLayout(3, 1, 10, 10));
+        panelButton.setBackground(Color.LIGHT_GRAY);
+        panelButton.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panelButton.add(gameButton);
-        panelButton.add(Box.createRigidArea(new Dimension(0, 10)));
         panelButton.add(leaderboardButton);
-        panelButton.add(Box.createRigidArea(new Dimension(0, 10)));
         panelButton.add(quitButton);
         /*
-         * The main panel that contains panelButton.
+         * Creating the menu panel that contains panelButton
          */
         final JPanel menuPanel = new JPanel(new GridBagLayout());
-        menuPanel.setBackground(Color.CYAN);
+        menuPanel.setBackground(Color.WHITE);
         menuPanel.add(panelButton);
         /*
-         * Adding all the panels into the frame.
+         * Creating mainPanel that contains menuPanel
          */
-        frame.getContentPane().add(menuPanel, BorderLayout.CENTER);
+        final JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.add(menuPanel, BorderLayout.CENTER);
+        /*
+         * Adding mainPanel into the frame.
+         */
+        frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
         /*
          * Resizing the frame based on the screen dimensions.
          */
