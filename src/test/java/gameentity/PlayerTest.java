@@ -40,7 +40,7 @@ class PlayerTest {
         final Velocity playerVelocity = 
         new VelocityImpl(finalVelocity.getXComponent(), finalVelocity.getYComponent());
         player.setVelocityFromJump(playerVelocity);
-        player.computeVelocity(GRAVITY, TIME);
+        player.computeVelocity(GRAVITY, TIME, 0);
         finalVelocity.computeAcceleratedVelocity(GRAVITY, TIME);
         assertEquals(finalVelocity.getModule(), 
             player.getVelocity().getModule(), () -> "testPlayerVelocity failed");

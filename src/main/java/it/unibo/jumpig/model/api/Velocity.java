@@ -40,4 +40,10 @@ public interface Velocity {
      * @param deltaTime the time interval of the movement
      */
     void computeAcceleratedVelocity(double gravity, double deltaTime);
+
+    /**
+     * Method to compute the horizontal velocity.
+     * @param direction the direction the player moves (-1 sx, 1 dx, otherwise 0)
+     */
+    void computeHorizontalVelocity(int direction);
 }

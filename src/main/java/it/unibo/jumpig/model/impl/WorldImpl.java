@@ -29,7 +29,7 @@ public class WorldImpl implements World {
 
     private static final double WIDTH = 36;
     private static final double HEIGHT = 64;
-    private static final double GRAVITY = -0.4; //TODO è -qualcosa
+    private static final double GRAVITY = -3; //TODO è -qualcosa
     private final GeneratorEntities generator;
     private final Player player;
     private final Set<Platform> setplatform;
@@ -142,9 +142,9 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
-    public void updateGame(final long elapsed) {
+    public void updateGame(final long elapsed, final int direction) {
         final double time = ((double) elapsed) / 1000.0;
-        this.player.computeVelocity(GRAVITY, time);
+        this.player.computeVelocity(GRAVITY, time, direction);
         this.player.computePosition(time);
         this.checkRegeneration();
         final var collidables = this.getCollidables(Set.of(this.setcoins, this.setenemies, this.setplatform));

@@ -9,7 +9,8 @@ import it.unibo.jumpig.model.api.Velocity;
  */
 public class VelocityImpl implements Velocity {
 
-    private final double componentX;
+    private static final double HORIZONTAL_VELOCITY = 1;
+    private double componentX;
     private double componentY;
 
     /**
@@ -61,6 +62,14 @@ public class VelocityImpl implements Velocity {
     @Override
     public void computeAcceleratedVelocity(final double gravity, final double deltaTime) {
         this.componentY = this.componentY + (gravity * deltaTime); 
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void computeHorizontalVelocity(final int direction) {
+        this.componentX = this.componentX + (direction * HORIZONTAL_VELOCITY);
     }
 
     /**

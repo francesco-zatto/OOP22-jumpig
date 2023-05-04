@@ -18,6 +18,7 @@ public class GameControllerImpl implements GameController {
     private static final long PERIOD = 20; /* 20 milliseconds are equal to 50 frames per sec */
     private final Game game;
     private final GameViewScene gameView;
+    private int input;
     private final Logger logger = System.getLogger("GameControllerImpl");
 
     /**
@@ -40,8 +41,7 @@ public class GameControllerImpl implements GameController {
         while (!game.isOver()) {
             final long currentCycleStartTime = System.currentTimeMillis();
             final long elapsed = currentCycleStartTime - previousCycleStartTime;
-            registerInput();
-            this.game.updateGame(elapsed);
+            this.game.updateGame(elapsed, this.input);
             this.notifyUpdate();
             this.waitForNextFrame(currentCycleStartTime);
             previousCycleStartTime = currentCycleStartTime;
@@ -80,8 +80,8 @@ public class GameControllerImpl implements GameController {
      * {@inheritDoc}
      */
     @Override
-    public void registerInput() {
-        this.gameView.manageInput();
+    public void registerInput(final int input) {
+        this.input = input;
     }
 
     /**

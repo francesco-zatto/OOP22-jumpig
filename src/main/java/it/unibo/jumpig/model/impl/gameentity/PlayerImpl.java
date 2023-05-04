@@ -15,7 +15,7 @@ import it.unibo.jumpig.model.impl.VelocityImpl;
  */
 public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements Player {
 
-    private static final double INITIAL_VELOCITY = 5;
+    private static final double INITIAL_VELOCITY = 12;
     private static final int MAXLIVES = 3;
     private Velocity playerVelocity;
     private int lives = MAXLIVES;
@@ -85,8 +85,9 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
      * {@inheritDoc}
      */
     @Override
-    public void computeVelocity(final double gravity, final double deltaTime) {
+    public void computeVelocity(final double gravity, final double deltaTime, final int direction) {
         this.playerVelocity.computeAcceleratedVelocity(gravity, deltaTime);
+        this.playerVelocity.computeHorizontalVelocity(direction);
     }
 
     /**

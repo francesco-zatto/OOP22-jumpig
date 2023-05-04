@@ -36,8 +36,9 @@ public interface Player extends GameEntity<RectangleHitbox> {
      * Method that changes the player's velocity because of the world's gravity.
      * @param gravity gravity of the game's world.
      * @param deltaTime the time interval in which to compute the next velocity.
+     * @param direction the horizontal direction the player moves (-1 sx, 1 dx, otherwise 0)
      */
-    void computeVelocity(double gravity, double deltaTime);
+    void computeVelocity(double gravity, double deltaTime, int direction);
 
     /**
      * Getter for the amount of coins collected by the player.
