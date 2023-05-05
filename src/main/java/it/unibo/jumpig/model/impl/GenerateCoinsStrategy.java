@@ -10,7 +10,7 @@ import it.unibo.jumpig.model.api.gameentity.GameEntity;
  * The concrete strategy to generate coins.
  */
 
-public class GenerateCoinsStrategy<H extends Hitbox, G extends GameEntity<H>> implements GeneratorEntitiesStrategy<H, G>{
+public class GenerateCoinsStrategy<H extends Hitbox, G extends GameEntity<H>> implements GeneratorEntitiesStrategy<H, G> {
 
     @Override
     public Set<G> generate() {
