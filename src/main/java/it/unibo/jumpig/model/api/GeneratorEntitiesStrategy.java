@@ -3,7 +3,6 @@ package it.unibo.jumpig.model.api;
 import java.util.Set;
 
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
-import it.unibo.jumpig.model.api.gameentity.Enemy;
 import it.unibo.jumpig.model.api.gameentity.GameEntity;
 
 /**
@@ -18,11 +17,5 @@ public interface GeneratorEntitiesStrategy<H extends Hitbox, G extends GameEntit
      * @return the generated set of game entity
      */
     Set<G> generate();
-
-    /**
-     * The method to generate enemies.
-     * @return a set of generated enemies.
-     */
-    Set<Enemy> generateEnemies();
 
 }
