@@ -9,7 +9,7 @@ import it.unibo.jumpig.model.api.gameentity.GameEntity;
 import it.unibo.jumpig.model.api.gameentity.Platform;
 
 /**
- * The interface for a generator of entities.
+ * The strategy interface to generate entities.
  */
 
 public interface GeneratorEntitiesStrategy<H extends Hitbox, G extends GameEntity<H>> {
