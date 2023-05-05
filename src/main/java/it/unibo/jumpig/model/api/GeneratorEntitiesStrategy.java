@@ -6,7 +6,6 @@ import it.unibo.jumpig.common.api.hitbox.Hitbox;
 import it.unibo.jumpig.model.api.gameentity.Coin;
 import it.unibo.jumpig.model.api.gameentity.Enemy;
 import it.unibo.jumpig.model.api.gameentity.GameEntity;
-import it.unibo.jumpig.model.api.gameentity.Platform;
 
 /**
  * The strategy interface to generate entities.
@@ -20,12 +19,6 @@ public interface GeneratorEntitiesStrategy<H extends Hitbox, G extends GameEntit
      * @return the generated set of game entity
      */
     Set<G> generate();
-
-    /**
-     * The method to generate platforms.
-     * @return a set of generated platforms.
-     */
-    Set<Platform> generatePlatforms();
 
     /**
      * The method to generate enemies.
