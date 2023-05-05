@@ -1,6 +1,7 @@
 package it.unibo.jumpig.model.impl;
 
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -29,13 +30,15 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
     private final Set<Enemy> setenemies;
     private final Set<Position> setentities;
     private final Camera camera;
+    private final Random random;    /* used to create platforms that have the ordinate 
+                                        uniformly distributed in their ranges */
     private final double maxWidth;    /* The width of the game */
     private final double maxHeight;    /* The height of the game */
-    private static final int NUM_BASIC_PLATFORM = 8;    /* The number of basic platforms */
+    private static final int NUM_BASIC_PLATFORM = 21;    /* The number of basic platforms */
     private static final int NUM_VANISHING_PLATFORM = 4;    /* The number of vanishing platforms */
     private static final int NUM_ENEMY = 2;    /* The number of enemies */
-    private static final int NUM_COIN = 5;    /* The number of coins */
-    private static final int NUM_BROKEN_PLATFORM = 2;    /* The number of broken platforms */
+    private static final int NUM_COIN = 6;    /* The number of coins */
+    private static final int NUM_BROKEN_PLATFORM = 5;    /* The number of broken platforms */
     private static final double VERTICAL_JUMP_VELOCITY = 12;    /* The vertical velocity the player 
                                                                 gains when he jumps on a platform */
 
@@ -60,6 +63,7 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
             this.setenemies = new HashSet<>();
             this.setentities = new HashSet<>();
             this.camera = camera;
+            this.random = new Random();
     }
 
     /**
@@ -98,7 +102,7 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
         for (int i = 0; i < NUM_BASIC_PLATFORM; i++) {
             final Position coordinate = new PositionImpl(
                     Math.random() * this.maxWidth, 
-                    Math.random() * this.maxHeight * 3 + this.camera.getCameraHeight());
+                    random.nextDouble() * this.maxHeight * 3 + this.camera.getCameraHeight());
             this.setplatforms.add(new BasicPlatform(
                     this.checkEqualsPosition(coordinate), VERTICAL_JUMP_VELOCITY));
             this.setentities.add(coordinate);
@@ -109,7 +113,7 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
         for (int i = 0; i < NUM_VANISHING_PLATFORM; i++) {
             final Position coordinate = new PositionImpl(
                     Math.random() * this.maxWidth, 
-                    Math.random() * this.maxHeight * 3 + this.camera.getCameraHeight());
+                    random.nextDouble() * this.maxHeight * 3 + this.camera.getCameraHeight());
             this.setplatforms.add(new VanishingPlatform(
                     this.checkEqualsPosition(coordinate), 1));
             this.setentities.add(coordinate);
