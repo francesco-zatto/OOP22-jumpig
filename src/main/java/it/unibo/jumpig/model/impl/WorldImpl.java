@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
 import it.unibo.jumpig.common.impl.PositionImpl;
 import it.unibo.jumpig.model.api.Camera;
-import it.unibo.jumpig.model.impl.GeneratorEntitiesImpl;
 import it.unibo.jumpig.model.api.World;
 import it.unibo.jumpig.model.api.gameentity.Coin;
 import it.unibo.jumpig.model.api.gameentity.Collidable;
