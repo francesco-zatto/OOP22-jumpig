@@ -49,7 +49,7 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
      * @param camera the camera of the world
      */
     @SuppressFBWarnings(value = "EI2", 
-    justification = "Necessary to have the cameraheight (from the camera) that change during the game")
+        justification = "Necessary to have the cameraheight (from the camera) that change during the game")
 
     public GeneratorEntitiesImpl(
         final double width, 
@@ -115,7 +115,7 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
                     Math.random() * this.maxWidth, 
                     random.nextDouble() * this.maxHeight * 3 + this.camera.getCameraHeight());
             this.setplatforms.add(new VanishingPlatform(
-                    this.checkEqualsPosition(coordinate), 1));
+                    this.checkEqualsPosition(coordinate), VERTICAL_JUMP_VELOCITY));
             this.setentities.add(coordinate);
         }
     }
