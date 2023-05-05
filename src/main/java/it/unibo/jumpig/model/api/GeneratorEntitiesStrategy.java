@@ -3,7 +3,6 @@ package it.unibo.jumpig.model.api;
 import java.util.Set;
 
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
-import it.unibo.jumpig.model.api.gameentity.Coin;
 import it.unibo.jumpig.model.api.gameentity.Enemy;
 import it.unibo.jumpig.model.api.gameentity.GameEntity;
 
@@ -26,9 +25,4 @@ public interface GeneratorEntitiesStrategy<H extends Hitbox, G extends GameEntit
      */
     Set<Enemy> generateEnemies();
 
-    /**
-     * The method to generate coins.
-     * @return a set of generated coins.
-     */
-    Set<Coin> generateCoins();
 }
