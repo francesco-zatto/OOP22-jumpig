@@ -29,7 +29,7 @@ public class WorldImpl implements World {
 
     private static final double WIDTH = 36;
     private static final double HEIGHT = 64;
-    private static final double GRAVITY = -3; //TODO è -qualcosa
+    private static final double GRAVITY = -9; //TODO è -qualcosa
     private final GeneratorEntities generator;
     private final Player player;
     private final Set<Platform> setplatform;
@@ -144,6 +144,11 @@ public class WorldImpl implements World {
     @Override
     public void updateGame(final long elapsed, final int direction) {
         final double time = ((double) elapsed) / 1000.0;
+        if (this.player.getPosition().getX() > getWidth()) {
+            this.player.moveToEdges(new PositionImpl(0, this.player.getPosition().getY()));
+        } else if (this.player.getPosition().getX() < 0) {
+            this.player.moveToEdges(new PositionImpl(WIDTH, this.player.getPosition().getY()));
+        }
         this.player.computeVelocity(GRAVITY, time, direction);
         this.player.computePosition(time);
         this.checkRegeneration();
