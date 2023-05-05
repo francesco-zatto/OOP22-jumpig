@@ -2,6 +2,7 @@ package it.unibo.jumpig.model.api.gameentity;
 
 import java.util.Optional;
 
+import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.model.api.Velocity;
 
@@ -74,4 +75,10 @@ public interface Player extends GameEntity<RectangleHitbox> {
      * @return the last platform's height
      */
     Optional<Double> getLastPlatformHeight();
+
+    /**
+     * Moves the player from the left edge to the right edge and vice versa.
+     * @param egde the left or right edge of the world
+     */
+    void moveToEdges(Position egde);
 }
