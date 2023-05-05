@@ -9,7 +9,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.impl.PositionImpl;
 import it.unibo.jumpig.model.api.Camera;
-import it.unibo.jumpig.model.api.GeneratorEntities;
+//import it.unibo.jumpig.model.api.GeneratorEntitiesStrategy;
 import it.unibo.jumpig.model.api.gameentity.Coin;
 import it.unibo.jumpig.model.api.gameentity.Enemy;
 import it.unibo.jumpig.model.api.gameentity.Platform;
@@ -23,7 +23,7 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
  * The class to manage the generation of the entities.
  */
 
- public class GeneratorEntitiesImpl implements GeneratorEntities {
+ public class GeneratorEntitiesImpl {
 
     private final Set<Platform> setplatforms;
     private final Set<Coin> setcoins;
@@ -69,7 +69,6 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
     /**
      * {@inheritDoc}
      */
-    @Override
     public Set<Platform> generatePlatforms() {
         this.addBasicPlatforms();
         this.addVanishingPlatforms();
@@ -81,7 +80,6 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
     /**
      * {@inheritDoc}
      */
-    @Override
     public Set<Enemy> generateEnemies() {
         this.addEnemies();
         return setenemies.stream()
@@ -91,7 +89,6 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
     /**
      * {@inheritDoc}
      */
-    @Override
     public Set<Coin> generateCoins() {
         this.addCoins();
         return setcoins.stream()

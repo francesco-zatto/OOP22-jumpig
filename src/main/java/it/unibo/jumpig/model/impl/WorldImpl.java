@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
 import it.unibo.jumpig.common.impl.PositionImpl;
 import it.unibo.jumpig.model.api.Camera;
-import it.unibo.jumpig.model.api.GeneratorEntities;
+import it.unibo.jumpig.model.impl.GeneratorEntitiesImpl;
 import it.unibo.jumpig.model.api.World;
 import it.unibo.jumpig.model.api.gameentity.Coin;
 import it.unibo.jumpig.model.api.gameentity.Collidable;
@@ -30,7 +30,7 @@ public class WorldImpl implements World {
     private static final double WIDTH = 36;
     private static final double HEIGHT = 64;
     private static final double GRAVITY = -3;
-    private final GeneratorEntities generator;
+    private final GeneratorEntitiesImpl generator;
     private final Player player;
     private final Set<Platform> setplatform;
     private final Set<Enemy> setenemies;
