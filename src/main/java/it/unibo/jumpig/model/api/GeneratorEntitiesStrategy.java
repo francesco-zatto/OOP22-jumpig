@@ -16,9 +16,20 @@ public interface GeneratorEntitiesStrategy {
     /**
      * The refactored algorithm with the strategy pattern.
      * This is the method to generate the various set of entities. 
+     * @param maxWidth the width of the game
+     * @param maxHeight the height of the game
+     * @param camera the camera of thegame
+     * @param setentities the set of entity's positions
+     * @param <H> the hitbox type
+     * @param <G> the game entity's type
      * @return the generated set of game entity
      */
-    <H extends Hitbox, G extends GameEntity<H>> Set<G> generate(final double maxWidth, final double maxHeight, final Camera camera, final Set<Position> setentities);
+    <H extends Hitbox, G extends GameEntity<H>> Set<G> generate(
+        double maxWidth, 
+        double maxHeight, 
+        Camera camera, 
+        Set<Position> setentities
+        );
 
     /**
      * The method to generate coordinates (for a generic entity) without generating entities on the same y.
@@ -30,12 +41,24 @@ public interface GeneratorEntitiesStrategy {
      * @param camera the camera of the game
      * @return  the coordinates I'm going to generate
      */
-    default Position checkEqualsPosition(final Position startEntity, final double maxWidth, final double maxHeight, final Set<Position> setentities, final Camera camera) {
-        return setentities.stream()
-            .anyMatch(x -> x.getY() == startEntity.getY()) 
-                ? this.checkEqualsPosition(new PositionImpl(Math.random() * maxWidth, 
-                        Math.random() * maxHeight * 3 + camera.getCameraHeight()), maxWidth, maxHeight, setentities, camera) 
-                : startEntity;
+    default Position checkEqualsPosition(
+        final Position startEntity, 
+        final double maxWidth, 
+        final double maxHeight, 
+        final Set<Position> setentities, 
+        final Camera camera
+        ) {
+            return setentities.stream()
+                .anyMatch(x -> x.getY() == startEntity.getY()) 
+                    ? this.checkEqualsPosition(new PositionImpl(
+                            Math.random() * maxWidth, 
+                            Math.random() * maxHeight * 3 + camera.getCameraHeight()), 
+                        maxWidth, 
+                        maxHeight, 
+                        setentities, 
+                        camera
+                        ) 
+                    : startEntity;
     }
 
 }
