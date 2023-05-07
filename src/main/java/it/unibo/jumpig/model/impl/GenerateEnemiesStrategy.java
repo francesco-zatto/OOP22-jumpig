@@ -17,38 +17,30 @@ import it.unibo.jumpig.model.impl.gameentity.EnemyImpl;
  * The concrete strategy to generate enemies.
  */
 
-public class GenerateEnemiesStrategy<H extends Hitbox, G extends GameEntity<H>> implements GeneratorEntitiesStrategy<H, G> {
+public class GenerateEnemiesStrategy implements GeneratorEntitiesStrategy {
 
     private static final int NUM_ENEMY = 2;    /* The number of enemies */
-    private final double maxWidth=1;    /* The width of the game */
-    private final double maxHeight=1;    /* The height of the game */
     private final Set<Enemy> setenemies = new HashSet<>();
-    private final Set<Position> setentities = new HashSet<>();
-    private final Camera camera = null;
 
     @Override
-    public Set<G> generate() {
-        return (Set<G>) this.generateEnemies();
+    public <H extends Hitbox, G extends GameEntity<H>> Set<G> generate(final double maxWidth, final double maxHeight, final Camera camera, final Set<Position> setentities) {
+        return (Set<G>) this.generateEnemies(maxWidth, maxHeight, camera, setentities);
     }
     
     /**
      * The method to generate enemies.
      * @return a set of generated enemies.
      */
-    private Set<Enemy> generateEnemies(){
-        this.addEnemies();
-        return setenemies.stream()
-            .collect(Collectors.toSet());
-    }
-
-    private void addEnemies() {
+    private Set<Enemy> generateEnemies(final double maxWidth, final double maxHeight, final Camera camera, final Set<Position> setentities){
         for (int i = 0; i < NUM_ENEMY; i++) {
             final Position coordinate = new PositionImpl(
-                    Math.random() * this.maxWidth, 
-                    Math.random() * this.maxHeight * 3 + this.camera.getCameraHeight());
+                    Math.random() * maxWidth, 
+                    Math.random() * maxHeight * 3 + camera.getCameraHeight());
             this.setenemies.add(new EnemyImpl(checkEqualsPosition(coordinate, maxWidth, maxHeight, setentities, camera)));
-            this.setentities.add(coordinate);
+            setentities.add(coordinate);
         }
+        return setenemies.stream()
+            .collect(Collectors.toSet());
     }
 
 }
