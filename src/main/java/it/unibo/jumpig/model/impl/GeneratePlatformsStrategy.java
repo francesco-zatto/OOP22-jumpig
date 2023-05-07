@@ -20,13 +20,9 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
  * The concrete strategy to generate platforms.
  */
 
-public class GeneratePlatformsStrategy<H extends Hitbox, G extends GameEntity<H>> implements GeneratorEntitiesStrategy<H, G> {
+public class GeneratePlatformsStrategy implements GeneratorEntitiesStrategy {
 
-    private final double maxWidth=1;    /* The width of the game */
-    private final double maxHeight=1;    /* The height of the game */
     private final Set<Platform> setplatforms = new HashSet<>();
-    private final Set<Position> setentities = new HashSet<>();
-    private final Camera camera = null;
     private final Random random = new Random();;    /* used to create platforms that have the ordinate 
                                         uniformly distributed in their ranges */
     private static final int NUM_BASIC_PLATFORM = 21;    /* The number of basic platforms */
@@ -36,52 +32,52 @@ public class GeneratePlatformsStrategy<H extends Hitbox, G extends GameEntity<H>
                                                                 gains when he jumps on a platform */
 
     @Override
-    public Set<G> generate() {
-        return (Set<G>) this.generatePlatforms();
+    public <H extends Hitbox, G extends GameEntity<H>> Set<G> generate(final double maxWidth, final double maxHeight, final Camera camera, final Set<Position> setentities) {
+        return (Set<G>) this.generatePlatforms(maxWidth, maxHeight, camera, setentities);
     }
     
     /**
      * The method to generate platforms.
      * @return a set of generated platforms.
      */
-    private Set<Platform> generatePlatforms(){
-        this.addBasicPlatforms();
-        this.addVanishingPlatforms();
-        this.addBrokenPlatforms();
+    private Set<Platform> generatePlatforms(final double maxWidth, final double maxHeight, final Camera camera, final Set<Position> setentities){
+        this.addBasicPlatforms(maxWidth, maxHeight, camera, setentities);
+        this.addVanishingPlatforms(maxWidth, maxHeight, camera, setentities);
+        this.addBrokenPlatforms(maxWidth, maxHeight, camera, setentities);
         return setplatforms.stream()
             .collect(Collectors.toSet());
     }
 
-    private void addBasicPlatforms() {
+    private void addBasicPlatforms(final double maxWidth, final double maxHeight, final Camera camera, final Set<Position> setentities) {
         for (int i = 0; i < NUM_BASIC_PLATFORM; i++) {
             final Position coordinate = new PositionImpl(
-                    Math.random() * this.maxWidth, 
-                    random.nextDouble() * this.maxHeight * 3 + this.camera.getCameraHeight());
+                    Math.random() * maxWidth, 
+                    random.nextDouble() * maxHeight * 3 + camera.getCameraHeight());
             this.setplatforms.add(new BasicPlatform(
                     checkEqualsPosition(coordinate, maxWidth, maxHeight, setentities, camera), VERTICAL_JUMP_VELOCITY));
-            this.setentities.add(coordinate);
+            setentities.add(coordinate);
         }
     }
 
-    private void addVanishingPlatforms() {
+    private void addVanishingPlatforms(final double maxWidth, final double maxHeight, final Camera camera, final Set<Position> setentities) {
         for (int i = 0; i < NUM_VANISHING_PLATFORM; i++) {
             final Position coordinate = new PositionImpl(
-                    Math.random() * this.maxWidth, 
-                    random.nextDouble() * this.maxHeight * 3 + this.camera.getCameraHeight());
+                    Math.random() * maxWidth, 
+                    random.nextDouble() * maxHeight * 3 + camera.getCameraHeight());
             this.setplatforms.add(new VanishingPlatform(
                     this.checkEqualsPosition(coordinate, maxWidth, maxHeight, setentities, camera), VERTICAL_JUMP_VELOCITY));
-            this.setentities.add(coordinate);
+            setentities.add(coordinate);
         }
     }
 
-    private void addBrokenPlatforms() {
+    private void addBrokenPlatforms(final double maxWidth, final double maxHeight, final Camera camera, final Set<Position> setentities) {
         for (int i = 0; i < NUM_BROKEN_PLATFORM; i++) {
             final Position coordinate = new PositionImpl(
-                    Math.random() * this.maxWidth, 
-                    Math.random() * this.maxHeight * 3 + this.camera.getCameraHeight());
+                    Math.random() * maxWidth, 
+                    Math.random() * maxHeight * 3 + camera.getCameraHeight());
             this.setplatforms.add(new BrokenPlatform(
                     this.checkEqualsPosition(coordinate, maxWidth, maxHeight, setentities, camera)));
-            this.setentities.add(coordinate);
+            setentities.add(coordinate);
         }
     }
 
