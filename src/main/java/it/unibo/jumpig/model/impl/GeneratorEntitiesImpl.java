@@ -40,6 +40,7 @@ import it.unibo.jumpig.model.api.gameentity.GameEntity;
             this.maxHeight = height;
             this.setentities = new HashSet<>();
             this.camera = camera;
+            this.generateStrategy = new GenerateCoinsStrategy();
     }
 
     public <H extends Hitbox, G extends GameEntity<H>> Set<G> generateEntities(){
