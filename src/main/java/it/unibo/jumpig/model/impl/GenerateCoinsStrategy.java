@@ -17,41 +17,33 @@ import it.unibo.jumpig.model.impl.gameentity.BasicCoin;
  * The concrete strategy to generate coins.
  */
 
-public class GenerateCoinsStrategy<H extends Hitbox, G extends GameEntity<H>> implements GeneratorEntitiesStrategy<H, G> {
+public class GenerateCoinsStrategy implements GeneratorEntitiesStrategy {
 
     private static final int NUM_COIN = 6;    /* The number of coins */
-    private final double maxWidth=1;    /* The width of the game */
-    private final double maxHeight=1;    /* The height of the game */
     private final Set<Coin> setcoins = new HashSet<>();
-    private final Set<Position> setentities = new HashSet<>();
-    private final Camera camera = null;
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Set<G> generate() {
-        return (Set<G>) this.generateCoins();
+    public <H extends Hitbox, G extends GameEntity<H>> Set<G> generate(final double maxWidth, final double maxHeight, final Camera camera, final Set<Position> setentities) {
+        return (Set<G>) this.generateCoins(maxWidth, maxHeight, camera, setentities);
     }
     
     /**
      * The method to generate coins.
      * @return a set of generated coins.
      */
-    private Set<Coin> generateCoins(){
-        this.addCoins();
-        return setcoins.stream()
-            .collect(Collectors.toSet());
-    }
-
-    private void addCoins() {
+    private Set<Coin> generateCoins(final double maxWidth, final double maxHeight, final Camera camera, final Set<Position> setentities){
         for (int i = 0; i < NUM_COIN; i++) {
             final Position coordinate = new PositionImpl(
-                    Math.random() * this.maxWidth, 
-                    Math.random() * this.maxHeight * 3 + this.camera.getCameraHeight());
+                    Math.random() * maxWidth, 
+                    Math.random() * maxHeight * 3 + camera.getCameraHeight());
             this.setcoins.add(new BasicCoin(checkEqualsPosition(coordinate, maxWidth, maxHeight, setentities, camera)));
-            this.setentities.add(coordinate);
+            setentities.add(coordinate);
         }
+        return setcoins.stream()
+            .collect(Collectors.toSet());
     }
 
 }
