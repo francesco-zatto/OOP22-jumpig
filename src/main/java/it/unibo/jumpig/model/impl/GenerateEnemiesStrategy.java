@@ -1,10 +1,17 @@
 package it.unibo.jumpig.model.impl;
 
+import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
+import it.unibo.jumpig.common.impl.PositionImpl;
+import it.unibo.jumpig.model.api.Camera;
 import it.unibo.jumpig.model.api.GeneratorEntitiesStrategy;
+import it.unibo.jumpig.model.api.gameentity.Enemy;
 import it.unibo.jumpig.model.api.gameentity.GameEntity;
+import it.unibo.jumpig.model.impl.gameentity.EnemyImpl;
 
 /**
  * The concrete strategy to generate enemies.
@@ -12,16 +19,36 @@ import it.unibo.jumpig.model.api.gameentity.GameEntity;
 
 public class GenerateEnemiesStrategy<H extends Hitbox, G extends GameEntity<H>> implements GeneratorEntitiesStrategy<H, G> {
 
+    private static final int NUM_ENEMY = 2;    /* The number of enemies */
+    private final double maxWidth=1;    /* The width of the game */
+    private final double maxHeight=1;    /* The height of the game */
+    private final Set<Enemy> setenemies = new HashSet<>();
+    private final Set<Position> setentities = new HashSet<>();
+    private final Camera camera = null;
+
     @Override
     public Set<G> generate() {
-        return this.generateEnemies();
+        return (Set<G>) this.generateEnemies();
     }
     
     /**
      * The method to generate enemies.
      * @return a set of generated enemies.
      */
-    private Set<G> generateEnemies(){
-        return null;
+    private Set<Enemy> generateEnemies(){
+        this.addEnemies();
+        return setenemies.stream()
+            .collect(Collectors.toSet());
     }
+
+    private void addEnemies() {
+        for (int i = 0; i < NUM_ENEMY; i++) {
+            final Position coordinate = new PositionImpl(
+                    Math.random() * this.maxWidth, 
+                    Math.random() * this.maxHeight * 3 + this.camera.getCameraHeight());
+            this.setenemies.add(new EnemyImpl(checkEqualsPosition(coordinate, maxWidth, maxHeight, setentities, camera)));
+            this.setentities.add(coordinate);
+        }
+    }
+
 }
