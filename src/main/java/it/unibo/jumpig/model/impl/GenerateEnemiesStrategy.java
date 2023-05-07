@@ -22,25 +22,43 @@ public class GenerateEnemiesStrategy implements GeneratorEntitiesStrategy {
     private static final int NUM_ENEMY = 2;    /* The number of enemies */
     private final Set<Enemy> setenemies = new HashSet<>();
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
-    public <H extends Hitbox, G extends GameEntity<H>> Set<G> generate(final double maxWidth, final double maxHeight, final Camera camera, final Set<Position> setentities) {
-        return (Set<G>) this.generateEnemies(maxWidth, maxHeight, camera, setentities);
+    public <H extends Hitbox, G extends GameEntity<H>> Set<G> generate(
+        final double maxWidth, 
+        final double maxHeight, 
+        final Camera camera, 
+        final Set<Position> setentities
+        ) {
+            return (Set<G>) this.generateEnemies(maxWidth, maxHeight, camera, setentities);
     }
-    
+
     /**
      * The method to generate enemies.
+     * @param maxWidth the width of the game
+     * @param maxHeight the height of the game
+     * @param camera the camera of thegame
+     * @param setentities the set of entity's positions
      * @return a set of generated enemies.
      */
-    private Set<Enemy> generateEnemies(final double maxWidth, final double maxHeight, final Camera camera, final Set<Position> setentities){
-        for (int i = 0; i < NUM_ENEMY; i++) {
-            final Position coordinate = new PositionImpl(
-                    Math.random() * maxWidth, 
-                    Math.random() * maxHeight * 3 + camera.getCameraHeight());
-            this.setenemies.add(new EnemyImpl(checkEqualsPosition(coordinate, maxWidth, maxHeight, setentities, camera)));
-            setentities.add(coordinate);
-        }
-        return setenemies.stream()
-            .collect(Collectors.toSet());
+    private Set<Enemy> generateEnemies(
+        final double maxWidth, 
+        final double maxHeight, 
+        final Camera camera, 
+        final Set<Position> setentities
+        ) {
+            for (int i = 0; i < NUM_ENEMY; i++) {
+                final Position coordinate = new PositionImpl(
+                        Math.random() * maxWidth, 
+                        Math.random() * maxHeight * 3 + camera.getCameraHeight());
+                this.setenemies.add(new EnemyImpl(
+                        checkEqualsPosition(coordinate, maxWidth, maxHeight, setentities, camera)));
+                setentities.add(coordinate);
+            }
+            return setenemies.stream()
+                .collect(Collectors.toSet());
     }
 
 }
