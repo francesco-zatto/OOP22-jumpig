@@ -11,14 +11,14 @@ import it.unibo.jumpig.model.api.gameentity.GameEntity;
  * The strategy interface to generate entities.
  */
 
-public interface GeneratorEntitiesStrategy<H extends Hitbox, G extends GameEntity<H>> {
+public interface GeneratorEntitiesStrategy {
 
     /**
      * The refactored algorithm with the strategy pattern.
      * This is the method to generate the various set of entities. 
      * @return the generated set of game entity
      */
-    Set<G> generate();
+    <H extends Hitbox, G extends GameEntity<H>> Set<G> generate(final double maxWidth, final double maxHeight, final Camera camera, final Set<Position> setentities);
 
     /**
      * The method to generate coordinates (for a generic entity) without generating entities on the same y.
