@@ -43,11 +43,23 @@ import it.unibo.jumpig.model.api.gameentity.GameEntity;
             this.generateStrategy = new GenerateCoinsStrategy();
     }
 
-    public <H extends Hitbox, G extends GameEntity<H>> Set<G> generateEntities(){
+    /**
+     * The method that calls the method to generate entities of the game.
+     * {@link it.unibo.jumpig.model.api.GeneratorEntitiesStrategy}
+     * @param <H> the hitbox type
+     * @param <G> the game entity's type
+     * @return a set of generated entities
+     */
+    public <H extends Hitbox, G extends GameEntity<H>> Set<G> generateEntities() {
         return generateStrategy.generate(this.maxWidth, this.maxHeight, this.camera, this.setentities);
     }
 
-    public void setGenerateStrategy(final GeneratorEntitiesStrategy generateStrategyImpl){
+    /**
+     * The method to set the strategy of generation.
+     * @param generateStrategyImpl the strategy to set
+     */
+    public void setGenerateStrategy(final GeneratorEntitiesStrategy generateStrategyImpl) {
         this.generateStrategy = generateStrategyImpl;
     }
+
 }
