@@ -29,7 +29,7 @@ public class WorldImpl implements World {
     private static final double WIDTH = 36;
     private static final double HEIGHT = 64;
     private static final double GRAVITY = -3;
-    private final GeneratorEntitiesImpl generator;
+    private GeneratorEntitiesImpl generator;
     private final Player player;
     private final Set<Platform> setplatform;
     private final Set<Enemy> setenemies;
@@ -45,9 +45,12 @@ public class WorldImpl implements World {
         this.camera = new CameraImpl(0);
         this.generator = new GeneratorEntitiesImpl(WIDTH, HEIGHT, this.camera);
         this.player = new PlayerImpl(new PositionImpl(WIDTH / 2, 1));
-        this.setplatform = generator.generatePlatforms();
-        this.setenemies = generator.generateEnemies();
-        this.setcoins = generator.generateCoins();
+        generator.setGenerateStrategy(new GeneratePlatformsStrategy());
+        this.setplatform = generator.generateEntities();
+        generator.setGenerateStrategy(new GenerateEnemiesStrategy());
+        this.setenemies = generator.generateEntities();
+        generator.setGenerateStrategy(new GenerateCoinsStrategy());
+        this.setcoins = generator.generateEntities();
         this.setentities = new HashSet<>();
     }
 
@@ -191,9 +194,24 @@ public class WorldImpl implements World {
         }
     }
     private Set<GameEntity<? extends Hitbox>> regenerate() {
-        this.setentities.addAll(this.generator.generateCoins());
-        this.setentities.addAll(this.generator.generateEnemies());
-        this.setentities.addAll(this.generator.generatePlatforms());
+
+        this.setplatform.clear();
+        this.setcoins.clear();
+        this.setenemies.clear();
+        generator = new GeneratorEntitiesImpl(WIDTH, HEIGHT, this.camera);
+            /* I have to create a new generator to clean up the set of entities' positions 
+                which will be compared with positions that are goin to be created 
+                (in the method checkEqualsPosition) */
+        generator.setGenerateStrategy(new GeneratePlatformsStrategy());
+        this.setplatform.addAll(generator.generateEntities());
+        generator.setGenerateStrategy(new GenerateEnemiesStrategy());
+        this.setenemies.addAll(generator.generateEntities());
+        generator.setGenerateStrategy(new GenerateCoinsStrategy());
+        this.setcoins.addAll(generator.generateEntities());
+        this.setentities.clear();
+        this.setentities.addAll(this.setplatform);
+        this.setentities.addAll(this.setenemies);
+        this.setentities.addAll(this.setcoins);
         return this.setentities;
     }
 }
