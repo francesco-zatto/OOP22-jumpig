@@ -26,24 +26,39 @@ public class GenerateCoinsStrategy implements GeneratorEntitiesStrategy {
      * {@inheritDoc}
      */
     @Override
-    public <H extends Hitbox, G extends GameEntity<H>> Set<G> generate(final double maxWidth, final double maxHeight, final Camera camera, final Set<Position> setentities) {
-        return (Set<G>) this.generateCoins(maxWidth, maxHeight, camera, setentities);
+    public <H extends Hitbox, G extends GameEntity<H>> Set<G> generate(
+            final double maxWidth,
+            final double maxHeight,
+            final Camera camera,
+            final Set<Position> setentities
+            ) {
+                return (Set<G>) this.generateCoins(maxWidth, maxHeight, camera, setentities);
     }
-    
+
     /**
      * The method to generate coins.
+     * @param maxWidth the width of the game
+     * @param maxHeight the height of the game
+     * @param camera the camera of thegame
+     * @param setentities the set of entity's positions
      * @return a set of generated coins.
      */
-    private Set<Coin> generateCoins(final double maxWidth, final double maxHeight, final Camera camera, final Set<Position> setentities){
-        for (int i = 0; i < NUM_COIN; i++) {
-            final Position coordinate = new PositionImpl(
-                    Math.random() * maxWidth, 
-                    Math.random() * maxHeight * 3 + camera.getCameraHeight());
-            this.setcoins.add(new BasicCoin(checkEqualsPosition(coordinate, maxWidth, maxHeight, setentities, camera)));
-            setentities.add(coordinate);
-        }
-        return setcoins.stream()
-            .collect(Collectors.toSet());
+    private Set<Coin> generateCoins(
+        final double maxWidth, 
+        final double maxHeight, 
+        final Camera camera, 
+        final Set<Position> setentities
+        ) {
+            for (int i = 0; i < NUM_COIN; i++) {
+                final Position coordinate = new PositionImpl(
+                        Math.random() * maxWidth, 
+                        Math.random() * maxHeight * 3 + camera.getCameraHeight());
+                this.setcoins.add(new BasicCoin(
+                        checkEqualsPosition(coordinate, maxWidth, maxHeight, setentities, camera)));
+                setentities.add(coordinate);
+            }
+            return setcoins.stream()
+                .collect(Collectors.toSet());
     }
 
 }
