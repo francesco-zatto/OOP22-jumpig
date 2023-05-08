@@ -74,7 +74,7 @@ public class GeneratePlatformsStrategy implements GeneratorEntitiesStrategy {
             for (int i = 0; i < NUM_BASIC_PLATFORM; i++) {
                 final Position coordinate = new PositionImpl(
                         Math.random() * maxWidth, 
-                        random.nextDouble() * maxHeight * 2 + camera.getCameraHeight());
+                        random.nextDouble() * maxHeight + camera.getCameraHeight());
                 this.setplatforms.add(new BasicPlatform(
                         checkEqualsPosition(coordinate, maxWidth, maxHeight, setentities, camera), 
                         VERTICAL_JUMP_VELOCITY));
@@ -91,7 +91,7 @@ public class GeneratePlatformsStrategy implements GeneratorEntitiesStrategy {
             for (int i = 0; i < NUM_VANISHING_PLATFORM; i++) {
                 final Position coordinate = new PositionImpl(
                         Math.random() * maxWidth, 
-                        random.nextDouble() * maxHeight * 2 + camera.getCameraHeight());
+                        random.nextDouble() * maxHeight + camera.getCameraHeight());
                 this.setplatforms.add(new VanishingPlatform(
                         this.checkEqualsPosition(coordinate, maxWidth, maxHeight, setentities, camera), 
                         VERTICAL_JUMP_VELOCITY));
@@ -108,7 +108,7 @@ public class GeneratePlatformsStrategy implements GeneratorEntitiesStrategy {
             for (int i = 0; i < NUM_BROKEN_PLATFORM; i++) {
                 final Position coordinate = new PositionImpl(
                         Math.random() * maxWidth, 
-                        Math.random() * maxHeight * 2 + camera.getCameraHeight());
+                        Math.random() * maxHeight + camera.getCameraHeight());
                 this.setplatforms.add(new BrokenPlatform(
                         this.checkEqualsPosition(coordinate, maxWidth, maxHeight, setentities, camera)));
                 setentities.add(coordinate);
