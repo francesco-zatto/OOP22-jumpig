@@ -24,7 +24,7 @@ public class LeaderboardImpl implements Leaderboard {
      */
     @Override
     public List<Score> getScores() {
-        return new ArrayList<>(this.scoreLeaderboard);
+        return this.scoreLeaderboard.stream().toList();
     }
 
     /**

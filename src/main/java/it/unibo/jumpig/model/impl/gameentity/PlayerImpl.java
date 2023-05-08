@@ -15,7 +15,7 @@ import it.unibo.jumpig.model.impl.VelocityImpl;
  */
 public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements Player {
 
-    private static final double INITIAL_VELOCITY = 12;
+    private static final double INITIAL_VELOCITY = 20;
     private static final int MAXLIVES = 3;
     private Velocity playerVelocity;
     private int lives = MAXLIVES;
@@ -139,5 +139,13 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
     @Override
     public Optional<Double> getLastPlatformHeight() {
         return this.lastPlatformHeight;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void moveToEdges(final Position corner) {
+        super.setPosition(corner);
     }
 }
