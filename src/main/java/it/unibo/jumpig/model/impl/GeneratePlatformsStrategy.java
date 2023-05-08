@@ -25,9 +25,9 @@ public class GeneratePlatformsStrategy implements GeneratorEntitiesStrategy {
     private final Set<Platform> setplatforms = new HashSet<>();
     private final Random random = new Random();    /* used to create platforms that have the ordinate 
                                         uniformly distributed in their ranges */
-    private static final int NUM_BASIC_PLATFORM = 21;    /* The number of basic platforms */
-    private static final int NUM_VANISHING_PLATFORM = 4;    /* The number of vanishing platforms */
-    private static final int NUM_BROKEN_PLATFORM = 5;    /* The number of broken platforms */
+    private static final int NUM_BASIC_PLATFORM = 10;    /* The number of basic platforms */
+    private static final int NUM_VANISHING_PLATFORM = 5;    /* The number of vanishing platforms */
+    private static final int NUM_BROKEN_PLATFORM = 4;    /* The number of broken platforms */
     private static final double VERTICAL_JUMP_VELOCITY = 20;    /* The vertical velocity the player 
                                                                 gains when he jumps on a platform */
 

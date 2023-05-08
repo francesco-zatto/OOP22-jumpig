@@ -32,11 +32,11 @@ class GeneratorEntitiesTest {
         world.getHeight(), 
         world.getCamera()
         );
-    private static final int NUM_BASIC_PLATFORM = 21;    /* The number of basic platforms */
-    private static final int NUM_VANISHING_PLATFORM = 4;    /* The number of vanishing platforms */
+    private static final int NUM_BASIC_PLATFORM = 10;    /* The number of basic platforms */
+    private static final int NUM_VANISHING_PLATFORM = 5;    /* The number of vanishing platforms */
     private static final int NUM_ENEMY = 2;    /* The number of enemies */
-    private static final int NUM_COIN = 6;    /* The number of coins */
-    private static final int NUM_BROKEN_PLATFORM = 5;    /* The number of broken platforms */
+    private static final int NUM_COIN = 4;    /* The number of coins */
+    private static final int NUM_BROKEN_PLATFORM = 4;    /* The number of broken platforms */
 
     private <X extends GameEntity<H>, H extends Hitbox> void assertGeneration(final Set<X> entities) {
         for (int i = 0; i < entities.size(); i++) {

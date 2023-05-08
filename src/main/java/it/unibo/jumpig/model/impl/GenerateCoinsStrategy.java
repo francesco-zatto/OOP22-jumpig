@@ -19,7 +19,7 @@ import it.unibo.jumpig.model.impl.gameentity.BasicCoin;
 
 public class GenerateCoinsStrategy implements GeneratorEntitiesStrategy {
 
-    private static final int NUM_COIN = 6;    /* The number of coins */
+    private static final int NUM_COIN = 4;    /* The number of coins */
     private final Set<Coin> setcoins = new HashSet<>();
 
     /**
