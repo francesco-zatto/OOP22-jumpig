@@ -7,8 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -25,7 +23,6 @@ import it.unibo.jumpig.view.api.GameViewScene;
 public class GameViewImpl implements GameViewScene {
 
     public static final long serialVersionUID = 1L;
-    private GameController controller; //NOPMD
     private final JFrame frame = new JFrame();
     private final JPanel mainPanel;
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
@@ -38,14 +35,12 @@ public class GameViewImpl implements GameViewScene {
      * @param height the height of the world
      * @param gameController the controller of the game
      */
-    @SuppressFBWarnings(value = "UrF", 
-        justification = "Controller will be used to manage input.")
+
     public GameViewImpl(
         final double width, 
         final double height, 
         final GameController gameController
     ) {
-            this.controller = gameController;
             this.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             this.mainPanel = new JPanel(new BorderLayout());
             this.mainPanel.add(new ScorePanel(), BorderLayout.NORTH);
@@ -55,7 +50,7 @@ public class GameViewImpl implements GameViewScene {
             this.frame.setLocationByPlatform(true);
             this.frame.setPreferredSize(this.frame.getSize());
             this.frame.setResizable(true);
-            this.frame.addKeyListener(new PlayerKeyListener(this.controller));
+            this.frame.addKeyListener(new PlayerKeyListener(gameController));
     }
 
     /**
