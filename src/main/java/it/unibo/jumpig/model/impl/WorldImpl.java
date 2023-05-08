@@ -195,7 +195,7 @@ public class WorldImpl implements World {
             ) {
                     this.camera.setCameraHeight((int) this.player.getPosition().getY());
                     setentities.clear();
-                    this.setentities.addAll(regenerate());
+                    this.regenerate();
         }
     }
     private Set<GameEntity<? extends Hitbox>> regenerate() {
