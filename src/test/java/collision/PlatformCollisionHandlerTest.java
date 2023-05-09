@@ -59,7 +59,7 @@ class PlatformCollisionHandlerTest {
         Stream.iterate(0.0, t -> t < collisionTime, t -> t + DELTA_TIME)
                 .map(t -> DELTA_TIME)
                 .forEach(dt -> {
-                    player.computeVelocity(GRAVITY, dt);
+                    player.computeVelocity(GRAVITY, dt, 1); //TODO Da sistemare 
                     player.computePosition(dt);
                 });
     }
@@ -118,7 +118,7 @@ class PlatformCollisionHandlerTest {
     void testBrokenPlatformCollision() {
         final var player = new PlayerImpl(STARTING_POSITION);
         final var platform = new BrokenPlatform(PLATFORM_UNDER_PLAYER_POSITION);
-        player.computeVelocity(GRAVITY, DELTA_TIME);
+        player.computeVelocity(GRAVITY, DELTA_TIME, 1); //TODO Da sistemare 
         final var playerVerticalVelocityBeforeCollision = player.getVelocity().getYComponent();
         final double collisionTime = computeFallingTime(player);
         computeMovement(player, collisionTime);
