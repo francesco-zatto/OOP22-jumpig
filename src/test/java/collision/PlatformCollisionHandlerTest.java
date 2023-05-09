@@ -92,7 +92,7 @@ class PlatformCollisionHandlerTest {
         computeMovement(player, collisionTime);
         platform.handleCollision(player);
         assertCollision(player, platform);
-        CollisionHandlerTest.assertIsTaken(platform);
+        CoinCollisionHandlerTest.assertIsTaken(platform);
     }
 
     @Test
@@ -110,7 +110,7 @@ class PlatformCollisionHandlerTest {
         final double secondFallingTime = computeFallingTime(player);
         computeMovement(player, secondFallingTime);
         platform.handleCollision(player);
-        CollisionHandlerTest.assertIsTaken(platform);
+        CoinCollisionHandlerTest.assertIsTaken(platform);
         assertEquals(platform.getJumpVelocity().getYComponent(), -player.getVelocity().getYComponent(), DELTA_ERROR);
     }
 
@@ -128,6 +128,6 @@ class PlatformCollisionHandlerTest {
          * that the player should not jump on it, but only break it.
          */
         assertEquals(-playerVerticalVelocityBeforeCollision, player.getVelocity().getYComponent(), DELTA_ERROR);
-        CollisionHandlerTest.assertIsTaken(platform);
+        CoinCollisionHandlerTest.assertIsTaken(platform);
     }
 }

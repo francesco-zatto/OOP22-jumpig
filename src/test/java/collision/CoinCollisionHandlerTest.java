@@ -23,7 +23,7 @@ import it.unibo.jumpig.model.impl.gameentity.PlayerImpl;
  * Class to test correctness of subtypes of CollisionHandler for enemies and coins.
  * {@link it.unibo.jumpig.model.api.collision.CollisionHandler}
  */
-class CollisionHandlerTest {
+class CoinCollisionHandlerTest {
 
     private static final double PLAYER_POSITION_X = 5;
     private static final double PLAYER_POSITION_Y = 6.5;
@@ -67,7 +67,7 @@ class CollisionHandlerTest {
         final double pickedCoins = player.getCoins();
         coins.forEach(c -> c.handleCollision(player));
         assertEquals(pickedCoins + NUMBER_OF_COINS, player.getCoins());
-        coins.forEach(CollisionHandlerTest::assertIsTaken);
+        coins.forEach(CoinCollisionHandlerTest::assertIsTaken);
     }
 
     @Test
@@ -123,11 +123,11 @@ class CollisionHandlerTest {
     void testCoinUnderPlayer() {
         final var player = new PlayerImpl(PLAYER_POSITION);
         final double pickedCoins = player.getCoins();
-        final var aboveCoinPosition = new PositionImpl(
+        final var underCoinPosition = new PositionImpl(
             player.getPosition().getY(), 
             player.getHitbox().getRectangleLowerY() - COIN_RADIUS - 2
         );
-        final var coin = new BasicCoin(aboveCoinPosition);
+        final var coin = new BasicCoin(underCoinPosition);
         coin.handleCollision(player);
         assertCoinIsNotTaken(coin, player, pickedCoins);
     }
@@ -151,7 +151,7 @@ class CollisionHandlerTest {
                 .map(EnemyImpl::new)
                 .toList();
         enemies.forEach(e -> e.handleCollision(player));
-        enemies.forEach(CollisionHandlerTest::assertIsTaken);
+        enemies.forEach(CoinCollisionHandlerTest::assertIsTaken);
         assertEquals(0, player.getLives());
     }
 }
