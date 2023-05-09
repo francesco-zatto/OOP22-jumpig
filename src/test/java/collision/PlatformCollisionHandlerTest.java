@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.stream.Stream;
+
 import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.impl.PositionImpl;
 import it.unibo.jumpig.common.impl.hitbox.PlatformHitbox;
@@ -19,8 +21,11 @@ import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
 
 /**
  * Class to test correctness of CollisionHandlers for collisions only with platforms.
- * {@link it.unibo.jumpig.model.impl.collision.BasicPlatformCollisionHandler}
- * {@link it.unibo.jumpig.model.impl.collision.VanishingPlatformCollisionHandler}
+ * {@link it.unibo.jumpig.model.impl.collision.BasicPlatformCollisionChecker}
+ * {@link it.unibo.jumpig.model.impl.collision.PlatformCollisionActioner}
+ * {@link it.unibo.jumpig.model.impl.collision.TargettablePlatformCollisionChecker}
+ * {@link it.unibo.jumpig.model.impl.collision.VanishingPlatformCollisionActioner}
+ * {@link it.unibo.jumpig.model.impl.collision.BrokenPlatformCollisionActioner}
  */
 class PlatformCollisionHandlerTest {
 
@@ -51,11 +56,12 @@ class PlatformCollisionHandlerTest {
     }
 
     private void computeMovement(final PlayerImpl player, final double collisionTime) {
-        for (double i = 0; i < collisionTime; i = i + DELTA_TIME) {
-            player.computeVelocity(GRAVITY, DELTA_TIME, 0);
-            player.computePosition(DELTA_TIME);
-            //TODO cava e mettici uno stream al posto del for
-        }
+        Stream.iterate(0.0, t -> t < collisionTime, t -> t + DELTA_TIME)
+                .map(t -> DELTA_TIME)
+                .forEach(dt -> {
+                    player.computeVelocity(GRAVITY, dt);
+                    player.computePosition(dt);
+                });
     }
 
     @Test
@@ -86,7 +92,7 @@ class PlatformCollisionHandlerTest {
         computeMovement(player, collisionTime);
         platform.handleCollision(player);
         assertCollision(player, platform);
-        CollisionHandlerTest.assertIsTaken(platform);
+        CoinCollisionHandlerTest.assertIsTaken(platform);
     }
 
     @Test
@@ -104,7 +110,7 @@ class PlatformCollisionHandlerTest {
         final double secondFallingTime = computeFallingTime(player);
         computeMovement(player, secondFallingTime);
         platform.handleCollision(player);
-        CollisionHandlerTest.assertIsTaken(platform);
+        CoinCollisionHandlerTest.assertIsTaken(platform);
         assertEquals(platform.getJumpVelocity().getYComponent(), -player.getVelocity().getYComponent(), DELTA_ERROR);
     }
 
@@ -112,7 +118,7 @@ class PlatformCollisionHandlerTest {
     void testBrokenPlatformCollision() {
         final var player = new PlayerImpl(STARTING_POSITION);
         final var platform = new BrokenPlatform(PLATFORM_UNDER_PLAYER_POSITION);
-        player.computeVelocity(GRAVITY, DELTA_TIME, 0);
+        player.computeVelocity(GRAVITY, DELTA_TIME);
         final var playerVerticalVelocityBeforeCollision = player.getVelocity().getYComponent();
         final double collisionTime = computeFallingTime(player);
         computeMovement(player, collisionTime);
@@ -122,6 +128,6 @@ class PlatformCollisionHandlerTest {
          * that the player should not jump on it, but only break it.
          */
         assertEquals(-playerVerticalVelocityBeforeCollision, player.getVelocity().getYComponent(), DELTA_ERROR);
-        CollisionHandlerTest.assertIsTaken(platform);
+        CoinCollisionHandlerTest.assertIsTaken(platform);
     }
 }
