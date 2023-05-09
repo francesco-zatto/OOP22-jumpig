@@ -3,6 +3,7 @@ package it.unibo.jumpig.model.impl;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
@@ -43,20 +44,22 @@ public class GenerateEnemiesStrategy implements GeneratorEntitiesStrategy {
      * @param setentities the set of entity's positions
      * @return a set of generated enemies.
      */
-    private Set<Enemy> generateEnemies(
+    private synchronized Set<Enemy> generateEnemies(
         final double maxWidth, 
         final double maxHeight, 
         final Camera camera, 
         final Set<Position> setentities
         ) {
-            for (int i = 0; i < NUM_ENEMY; i++) {
-                final Position coordinate = new PositionImpl(
-                        Math.random() * maxWidth, 
-                        Math.random() * maxHeight + camera.getCameraHeight());
-                this.setenemies.add(new EnemyImpl(
-                        checkEqualsPosition(coordinate, maxWidth, maxHeight, setentities, camera)));
-                setentities.add(coordinate);
-            }
+            Stream.iterate(0, i -> i + 1)
+                    .limit(NUM_ENEMY)
+                    .forEach(i -> {
+                        final Position coordinate = new PositionImpl(
+                            Math.random() * maxWidth, 
+                            Math.random() * maxHeight + camera.getCameraHeight());
+                        this.setenemies.add(new EnemyImpl(
+                            checkEqualsPosition(coordinate, maxWidth, maxHeight, setentities, camera)));
+                        setentities.add(coordinate);
+                    });
             return setenemies.stream()
                 .collect(Collectors.toSet());
     }
