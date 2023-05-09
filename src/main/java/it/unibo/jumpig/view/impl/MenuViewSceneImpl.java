@@ -131,6 +131,7 @@ public class MenuViewSceneImpl implements MenuViewScene {
         if (option == JOptionPane.YES_OPTION) {
             this.frame.setVisible(false);
             this.frame.dispose();
+            Thread.currentThread().interrupt();
         }
     }
     /*
