@@ -3,6 +3,7 @@ package it.unibo.jumpig.model.api.gameentity;
 import java.util.Optional;
 
 import it.unibo.jumpig.common.api.Position;
+import it.unibo.jumpig.common.impl.Direction;
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.model.api.Velocity;
 
@@ -39,7 +40,7 @@ public interface Player extends GameEntity<RectangleHitbox> {
      * @param deltaTime the time interval in which to compute the next velocity.
      * @param direction the horizontal direction the player moves (-1 sx, 1 dx, otherwise 0)
      */
-    void computeVelocity(double gravity, double deltaTime, int direction);
+    void computeVelocity(double gravity, double deltaTime, Direction direction);
 
     /**
      * Getter for the amount of coins collected by the player.

@@ -3,6 +3,7 @@ package it.unibo.jumpig.model.impl.gameentity;
 import java.util.Optional;
 
 import it.unibo.jumpig.common.api.Position;
+import it.unibo.jumpig.common.impl.Direction;
 import it.unibo.jumpig.common.impl.hitbox.PlayerHitbox;
 import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.model.api.Velocity;
@@ -85,7 +86,7 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
      * {@inheritDoc}
      */
     @Override
-    public void computeVelocity(final double gravity, final double deltaTime, final int direction) {
+    public void computeVelocity(final double gravity, final double deltaTime, final Direction direction) {
         this.playerVelocity.computeAcceleratedVelocity(gravity, deltaTime);
         this.playerVelocity.computeHorizontalVelocity(direction);
     }
