@@ -55,7 +55,7 @@ public class GenerateCoinsStrategy implements GeneratorEntitiesStrategy {
                     forEach(i -> {
                         final Position coordinate = new PositionImpl(
                             Math.random() * maxWidth, 
-                            Math.random() * 2 * maxHeight + camera.getCameraHeight());
+                            Math.random() * 3 * maxHeight + camera.getCameraHeight());
                         this.setcoins.add(new BasicCoin(
                             checkEqualsPosition(coordinate, maxWidth, maxHeight, setentities, camera)));
                         setentities.add(coordinate);
