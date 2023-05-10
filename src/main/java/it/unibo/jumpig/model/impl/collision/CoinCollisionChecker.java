@@ -26,17 +26,46 @@ public class CoinCollisionChecker extends AbstractCollisionChecker<CircleHitbox,
         final double playerLowerY = playerHitbox.getRectangleLowerY();
         final double playerUpperY = playerHitbox.getRectangleUpperY();
         final Position nearestPosition;
-        final boolean isCoinToTheRight = coinCenter.getX() > playerHitbox.getCenter().getX();
-        final boolean isCoinAbove = coinCenter.getY() > playerHitbox.getCenter().getY();
+        final double nearestX = getNearestX(playerHitbox, coinCenter);
+        final double nearestY = getNearestY(playerHitbox, coinCenter);
+        /*
+         * If the coinY is in the range [playerLowerY, playerUpperY] the nearestPosition is on one
+         * of the two vertical lines of the rectangle, with posY = coinY.
+         */
         if (isBetween(coinCenter.getY(), playerLowerY, playerUpperY)) {
-            nearestPosition = new PositionImpl(isCoinToTheRight ? playerRightX : playerLeftX, coinCenter.getY());
+            nearestPosition = new PositionImpl(nearestX, coinCenter.getY());
+        /*
+         * If the coinX is in the range [playerLeftX, playerRightX] the nearestPosition is on one
+         * of the two horizontal lines of the rectangle, with posX = coinX.
+         */
         } else if (isBetween(coinCenter.getX(), playerLeftX, playerRightX)) {
-            nearestPosition = new PositionImpl(coinCenter.getX(), isCoinAbove ? playerUpperY : playerLowerY);
+            nearestPosition = new PositionImpl(coinCenter.getX(), nearestY);
+        /*
+         * If the coin coordinates are not in one of the two ranges checked before the nearestPosition
+         * is the nearest vertix of the rectangle.
+         */
         } else {
-            nearestPosition = new PositionImpl(isCoinToTheRight ? playerRightX : playerLeftX, 
-                    isCoinAbove ? playerUpperY : playerLowerY);
+            nearestPosition = new PositionImpl(nearestX, nearestY);
         }
-        return isPositionInsideCircle(nearestPosition, coinHitbox); 
+        boolean b =  isPositionInsideCircle(nearestPosition, coinHitbox);
+        /*System.out.println(
+            "Collision? " + b + "\n"
+            + "Player position: " + playerHitbox.getCenter() + "\n"
+            + "Coin position: " + coinCenter + "\n"
+        );*/
+        return b; 
+    }
+
+    private double getNearestX(final RectangleHitbox playerHitbox, final Position coinCenter) {
+        return coinCenter.getX() > playerHitbox.getCenter().getX() 
+            ? playerHitbox.getRectangleRightX()
+            : playerHitbox.getRectangleLeftX();
+    }
+
+    private double getNearestY(final RectangleHitbox playerHitbox, final Position coinCenter) {
+        return coinCenter.getY() > playerHitbox.getCenter().getY() 
+            ? playerHitbox.getRectangleUpperY() 
+            : playerHitbox.getRectangleLowerY();
     }
 
     /*This inequality is based on the equation of a circle: (x - xCenter) ^ 2 + (y - yCenter) ^ 2 = radius ^ 2.
