@@ -47,8 +47,7 @@ public final class SwingRenderer implements Renderer {
      */
     @Override
     public void renderEnemy(final RectangleHitbox entity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'renderEnemy'");
+        this.fillRectangle(Color.ORANGE, this.graphics.get(), this.createScaledRectangle(entity));
     }
 
     /**
