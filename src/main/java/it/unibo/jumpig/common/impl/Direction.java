@@ -7,7 +7,7 @@ public enum Direction {
 
     private final int actualDirection;
 
-    private Direction(final int actualDirection) {
+    Direction(final int actualDirection) {
         this.actualDirection = actualDirection;
     }
 
