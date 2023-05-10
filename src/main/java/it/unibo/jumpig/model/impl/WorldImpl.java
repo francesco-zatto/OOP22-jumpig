@@ -42,9 +42,9 @@ public class WorldImpl implements World {
      */
 
     public WorldImpl() {
-        this.camera = new CameraImpl(0);
-        this.generator = new GeneratorEntitiesImpl(WIDTH, HEIGHT, this.camera);
         this.player = new PlayerImpl(new PositionImpl(WIDTH / 2, 1));
+        this.camera = new CameraImpl(this.player);
+        this.generator = new GeneratorEntitiesImpl(WIDTH, HEIGHT, this.camera);
         generator.setGenerateStrategy(new GeneratePlatformsStrategy());
         this.setplatform = generator.generateEntities();
         generator.setGenerateStrategy(new GenerateEnemiesStrategy());
@@ -122,7 +122,7 @@ public class WorldImpl implements World {
      */
     @Override
     public Camera getCamera() {
-        return this.camera.copy();
+        return this.camera.copy(this.player);
     }
 
     /**
@@ -158,7 +158,9 @@ public class WorldImpl implements World {
         final var collidables = this.getCollidables(Set.of(this.setcoins, this.setenemies, this.setplatform));
         collidables.forEach(c -> c.handleCollision(this.player));
         this.setEmpty();
-        this.camera.updateCameraVelocity(this.player);
+        this.camera.setCameraVelocity(this.player);
+        this.camera.setCameraHeight(time);
+        this.camera.setLastPlatformHeight(this.player.getLastPlatformHeight());
     }
 
     private void setEmpty() {
@@ -195,7 +197,7 @@ public class WorldImpl implements World {
         if ((this.player.getPosition().getY() % HEIGHT) < 1
                 //check that it's almoast zero meaning that the generator has to regenerate entities.
             ) {
-                    this.camera.setCameraHeight((int) this.player.getPosition().getY());
+                    this.camera.setCameraHeight(this.player.getPosition().getY());
                     setentities.clear();
                     if (this.player.getVelocity().getYComponent() > 0) {
                         this.regenerate();

@@ -12,16 +12,19 @@ import it.unibo.jumpig.model.api.gameentity.Player;
 
 public class CameraImpl implements Camera {
 
-    private int cameraheight;
+    private double cameraheight;
     private Velocity cameraVelocity;
+    private Optional<Double> lastPlatform;
 
     /**
      * Constructor to create a new camera.
-     * @param cameraheight the camera's height
+     * @param player the player of the game
      */
-    public CameraImpl(final int cameraheight) {
-        this.cameraheight = cameraheight;
+
+    public CameraImpl(final Player player) {
+        this.cameraheight = 0;
         this.cameraVelocity = new VelocityImpl(0, 0);
+        this.lastPlatform = player.getLastPlatformHeight();
     }
 
     /**
@@ -29,7 +32,15 @@ public class CameraImpl implements Camera {
      */
     @Override
     public Optional<Double> getPlatformHeight(final Player player) {
-        return player.getLastPlatformHeight();
+        return this.lastPlatform;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setLastPlatformHeight(final Optional<Double> lastPlatform) {
+        this.lastPlatform = lastPlatform;
     }
 
     /**
@@ -44,28 +55,29 @@ public class CameraImpl implements Camera {
      * {@inheritDoc}
      */
     @Override
-    public void setCameraHeight(final int cameraheight) {
-        this.cameraheight = cameraheight;
+    public void setCameraHeight(final double time) {
+        this.cameraheight = this.cameraheight + this.cameraVelocity.getYComponent() * time;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void updateCameraVelocity(final Player player) {
-       /* if (player.getPosition().getY() >= (HEIGHT / 2 + this.getCameraHeight())) {
-            this.setCameraHeight(((int) this.player.getPosition().getY()) - 1);
-            // -1 to see the last platform in which the player has jumped
-        } */
-        this.cameraVelocity = player.getVelocity();
+    public void setCameraVelocity(final Player player) {
+        if (player.getLastPlatformHeight().isPresent() 
+                && (!player.getLastPlatformHeight().get().equals(this.lastPlatform.get()) 
+                    || this.lastPlatform.isEmpty())
+            ) {
+                this.cameraVelocity = player.getVelocity();
+            }
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Camera copy() {
-        return new CameraImpl(this.cameraheight);
+    public Camera copy(final Player player) {
+        return new CameraImpl(player);
     }
 
 }
