@@ -26,7 +26,6 @@ import it.unibo.jumpig.view.api.GameViewScene;
 public class GameViewImpl implements GameViewScene {
 
     public static final long serialVersionUID = 1L;
-    private GameController controller; //NOPMD
     private final JFrame frame = new JFrame();
     private final JPanel mainPanel;
     private final PlayerKeyListener playerKeyListener = new PlayerKeyListener();
@@ -44,10 +43,8 @@ public class GameViewImpl implements GameViewScene {
         justification = "Controller will be used to manage input.")
     public GameViewImpl(
         final double width, 
-        final double height, 
-        final GameController gameController
+        final double height
     ) {
-            this.controller = gameController;
             this.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             this.mainPanel = new JPanel(new BorderLayout());
             this.mainPanel.add(new ScorePanel(), BorderLayout.NORTH);
