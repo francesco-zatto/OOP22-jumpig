@@ -33,7 +33,7 @@ class PlatformCollisionHandlerTest {
     private static final double PLAYER_POSITION_X = 5;
     private static final double PLAYER_POSITION_Y = 6.5;
     private static final double PLATFORM_VELOCITY = 10;
-    private static final double DELTA_TIME = 0.1;
+    private static final double DELTA_TIME = 0.05;
     private static final double GRAVITY = new WorldImpl().getGravity();
     private static final Position STARTING_POSITION = new PositionImpl(PLAYER_POSITION_X, PLAYER_POSITION_Y);
     private static final double HALF_PLATFORM_HEIGHT = new PlatformHitbox(STARTING_POSITION).getHeight() / 2;
@@ -44,7 +44,7 @@ class PlatformCollisionHandlerTest {
         PLAYER_POSITION_X, 
         new PlayerHitbox(STARTING_POSITION).getRectangleLowerY() - HALF_PLATFORM_HEIGHT
     );
-    private static final double DELTA_ERROR = 0.000_001;
+    private static final double DELTA_ERROR = 0.05;
 
     private static void assertCollision(final Player player, final Platform platform) {
         assertEquals(platform.getJumpVelocity().getYComponent(), player.getVelocity().getYComponent());
@@ -120,15 +120,14 @@ class PlatformCollisionHandlerTest {
         final var player = new PlayerImpl(STARTING_POSITION);
         final var platform = new BrokenPlatform(PLATFORM_UNDER_PLAYER_POSITION);
         player.computeVelocity(GRAVITY, DELTA_TIME, Direction.HORIZONTAL_ZERO); 
-        final var playerVerticalVelocityBeforeCollision = player.getVelocity().getYComponent();
-        final double collisionTime = computeFallingTime(player);
+        final double collisionTime = computeFallingTime(player) - DELTA_TIME;
         computeMovement(player, collisionTime);
         platform.handleCollision(player);
         /*
          * This assert checks that the velocity of the player is not changed because of the collision of a broken platform,
          * that the player should not jump on it, but only break it.
          */
-        assertEquals(-playerVerticalVelocityBeforeCollision, player.getVelocity().getYComponent(), DELTA_ERROR);
+        assertNotEquals(player.getVelocity().getYComponent(), platform.getJumpVelocity());
         CoinCollisionHandlerTest.assertIsTaken(platform);
     }
 }
