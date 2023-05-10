@@ -1,6 +1,5 @@
 package it.unibo.jumpig.view.impl;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 
@@ -12,25 +11,25 @@ import javax.swing.JPanel;
  */
 public class ScorePanel extends JPanel {
      public static final long serialVersionUID = 1L;
-     private final JPanel componentsPanel = new JPanel(new FlowLayout());
      private final JLabel scoreText = new JLabel("Score: ");
      private final JLabel scoreNumber = new JLabel("0");
      private final JLabel coinText = new JLabel("Coins: ");
      private final JLabel coinNumber = new JLabel("0");
      private final JLabel livesText = new JLabel("Lives: ");
      private final JLabel livesNumber = new JLabel("3"); 
+     
      /**
      * Constructor for the score.
      */
     public ScorePanel() {
-          componentsPanel.add(scoreText);
-          componentsPanel.add(scoreNumber);
-          componentsPanel.add(coinText);
-          componentsPanel.add(coinNumber);
-          componentsPanel.add(livesText);
-          componentsPanel.add(livesNumber);
-          componentsPanel.setBackground(Color.CYAN);
-          this.add(componentsPanel, BorderLayout.NORTH);
+          super(new FlowLayout());
+          this.add(scoreText);
+          this.add(scoreNumber);
+          this.add(coinText);
+          this.add(coinNumber);
+          this.add(livesText);
+          this.add(livesNumber);
+          this.setBackground(Color.CYAN);
      }
 
      /**
