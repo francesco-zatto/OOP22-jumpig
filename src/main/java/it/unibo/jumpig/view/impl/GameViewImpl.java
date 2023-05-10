@@ -15,6 +15,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
+import it.unibo.jumpig.common.impl.Direction;
 import it.unibo.jumpig.controller.api.GameController;
 import it.unibo.jumpig.view.api.GameViewScene;
 
@@ -28,6 +29,7 @@ public class GameViewImpl implements GameViewScene {
     private GameController controller; //NOPMD
     private final JFrame frame = new JFrame();
     private final JPanel mainPanel;
+    private final PlayerKeyListener playerKeyListener = new PlayerKeyListener();
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     private final Dimension startScreen = new Dimension((int) screen.getWidth() / 5, 
         (int) (screen.getWidth() / 5 * 1.7));
@@ -55,7 +57,7 @@ public class GameViewImpl implements GameViewScene {
             this.frame.setLocationByPlatform(true);
             this.frame.setPreferredSize(this.frame.getSize());
             this.frame.setResizable(true);
-            this.frame.addKeyListener(new PlayerKeyListener(this.controller));
+            this.frame.addKeyListener(playerKeyListener);
     }
 
     /**
@@ -78,9 +80,8 @@ public class GameViewImpl implements GameViewScene {
      * {@inheritDoc}
      */
     @Override
-    public int manageInput() {
-        //TODO
-        return 0;
+    public Direction manageInput() {
+        return this.playerKeyListener.getLastInput();
     }
 
     /**
