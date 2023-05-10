@@ -16,7 +16,6 @@ import java.awt.Toolkit;
 
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
 import it.unibo.jumpig.common.impl.Direction;
-import it.unibo.jumpig.controller.api.GameController;
 import it.unibo.jumpig.view.api.GameViewScene;
 
 /**
