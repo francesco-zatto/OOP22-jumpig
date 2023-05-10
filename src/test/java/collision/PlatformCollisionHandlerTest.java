@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.stream.Stream;
 
 import it.unibo.jumpig.common.api.Position;
+import it.unibo.jumpig.common.impl.Direction;
 import it.unibo.jumpig.common.impl.PositionImpl;
 import it.unibo.jumpig.common.impl.hitbox.PlatformHitbox;
 import it.unibo.jumpig.common.impl.hitbox.PlayerHitbox;
@@ -59,7 +60,7 @@ class PlatformCollisionHandlerTest {
         Stream.iterate(0.0, t -> t < collisionTime, t -> t + DELTA_TIME)
                 .map(t -> DELTA_TIME)
                 .forEach(dt -> {
-                    player.computeVelocity(GRAVITY, dt, 1); //TODO Da sistemare 
+                    player.computeVelocity(GRAVITY, dt, Direction.HORIZONTAL_ZERO); 
                     player.computePosition(dt);
                 });
     }
@@ -118,7 +119,7 @@ class PlatformCollisionHandlerTest {
     void testBrokenPlatformCollision() {
         final var player = new PlayerImpl(STARTING_POSITION);
         final var platform = new BrokenPlatform(PLATFORM_UNDER_PLAYER_POSITION);
-        player.computeVelocity(GRAVITY, DELTA_TIME, 1); //TODO Da sistemare 
+        player.computeVelocity(GRAVITY, DELTA_TIME, Direction.HORIZONTAL_ZERO); 
         final var playerVerticalVelocityBeforeCollision = player.getVelocity().getYComponent();
         final double collisionTime = computeFallingTime(player);
         computeMovement(player, collisionTime);

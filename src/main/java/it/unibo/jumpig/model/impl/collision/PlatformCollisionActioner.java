@@ -20,9 +20,10 @@ public class PlatformCollisionActioner<P extends Platform> implements CollisionA
     @Override
     public void act(final Player player, final P gameEntity) {
         final var platformJumpVelocity = gameEntity.getJumpVelocity();
-        player.setVelocityFromJump(
-            new VelocityImpl(platformJumpVelocity.getXComponent(), platformJumpVelocity.getYComponent())
-        );
+        player.setVelocityFromJump(new VelocityImpl(
+            player.getVelocity().getXComponent(),
+            platformJumpVelocity.getYComponent()
+        ));
         player.setLastPlatformHeight(Optional.of(gameEntity.getPosition().getY()));
     }
 }

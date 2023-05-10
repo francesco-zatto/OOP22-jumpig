@@ -54,8 +54,10 @@ public class VelocityImpl implements Velocity {
      */
     @Override
     public Position computeMovement(final Position initialPosition, final double deltaTime) {
-        return new PositionImpl(initialPosition.getX() + this.componentX * deltaTime, 
-        initialPosition.getY() + this.componentY * deltaTime);
+        return new PositionImpl(
+            initialPosition.getX() + this.componentX * deltaTime, 
+            initialPosition.getY() + this.componentY * deltaTime
+        );
     }
 
     /**
