@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import it.unibo.jumpig.common.api.Position;
+import it.unibo.jumpig.common.impl.Direction;
 import it.unibo.jumpig.common.impl.PositionImpl;
 import it.unibo.jumpig.model.api.Velocity;
 import it.unibo.jumpig.model.api.gameentity.Player;
@@ -23,6 +24,7 @@ class PlayerTest {
     private static final double GRAVITY = 10.0;
     private static final double TIME = 2.0;
     private final Player player = new PlayerImpl(new PositionImpl(0, 0));
+    private final Direction direction = Direction.HORIZONTAL_ZERO;
 
     @Test
     void testPlayerPosition() {
@@ -40,7 +42,7 @@ class PlayerTest {
         final Velocity playerVelocity = 
         new VelocityImpl(finalVelocity.getXComponent(), finalVelocity.getYComponent());
         player.setVelocityFromJump(playerVelocity);
-        player.computeVelocity(GRAVITY, TIME, 0);
+        player.computeVelocity(GRAVITY, TIME, direction);
         finalVelocity.computeAcceleratedVelocity(GRAVITY, TIME);
         assertEquals(finalVelocity.getModule(), 
             player.getVelocity().getModule(), () -> "testPlayerVelocity failed");
