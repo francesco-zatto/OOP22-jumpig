@@ -35,4 +35,12 @@ public class PositionImpl implements Position {
     public double getY() {
         return this.y;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return "PositionImpl [x=" + x + ", y=" + y + "]";
+    }
 }

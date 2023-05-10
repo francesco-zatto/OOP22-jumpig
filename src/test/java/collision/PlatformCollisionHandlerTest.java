@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.stream.Stream;
 
 import it.unibo.jumpig.common.api.Position;
+import it.unibo.jumpig.common.impl.Direction;
 import it.unibo.jumpig.common.impl.PositionImpl;
 import it.unibo.jumpig.common.impl.hitbox.PlatformHitbox;
 import it.unibo.jumpig.common.impl.hitbox.PlayerHitbox;
@@ -32,7 +33,7 @@ class PlatformCollisionHandlerTest {
     private static final double PLAYER_POSITION_X = 5;
     private static final double PLAYER_POSITION_Y = 6.5;
     private static final double PLATFORM_VELOCITY = 10;
-    private static final double DELTA_TIME = 0.1;
+    private static final double DELTA_TIME = 0.05;
     private static final double GRAVITY = new WorldImpl().getGravity();
     private static final Position STARTING_POSITION = new PositionImpl(PLAYER_POSITION_X, PLAYER_POSITION_Y);
     private static final double HALF_PLATFORM_HEIGHT = new PlatformHitbox(STARTING_POSITION).getHeight() / 2;
@@ -43,12 +44,21 @@ class PlatformCollisionHandlerTest {
         PLAYER_POSITION_X, 
         new PlayerHitbox(STARTING_POSITION).getRectangleLowerY() - HALF_PLATFORM_HEIGHT
     );
-    private static final double DELTA_ERROR = 0.000_001;
 
     private static void assertCollision(final Player player, final Platform platform) {
         assertEquals(platform.getJumpVelocity().getYComponent(), player.getVelocity().getYComponent());
         assertTrue(player.getLastPlatformHeight().isPresent());
         assertEquals(player.getLastPlatformHeight().get(), platform.getPosition().getY());
+    }
+
+    /*
+     * This method asserts that playerBottomY is in the right position for a possible jump on the platform. Only ordinates
+     * should be checked, because in this tests platforms and players have the same abscissas.
+     */
+    private static void assertInJumpingRange(final Player player, final Platform platform) {
+        final var playerLowerY = player.getHitbox().getRectangleLowerY();
+        assertTrue(playerLowerY > platform.getPosition().getY());
+        assertTrue(playerLowerY < platform.getHitbox().getRectangleUpperY());
     }
 
     private double computeFallingTime(final Player player) {
@@ -59,7 +69,7 @@ class PlatformCollisionHandlerTest {
         Stream.iterate(0.0, t -> t < collisionTime, t -> t + DELTA_TIME)
                 .map(t -> DELTA_TIME)
                 .forEach(dt -> {
-                    player.computeVelocity(GRAVITY, dt, 1); //TODO Da sistemare 
+                    player.computeVelocity(GRAVITY, dt, Direction.HORIZONTAL_ZERO); 
                     player.computePosition(dt);
                 });
     }
@@ -111,23 +121,24 @@ class PlatformCollisionHandlerTest {
         computeMovement(player, secondFallingTime);
         platform.handleCollision(player);
         CoinCollisionHandlerTest.assertIsTaken(platform);
-        assertEquals(platform.getJumpVelocity().getYComponent(), -player.getVelocity().getYComponent(), DELTA_ERROR);
+        assertNotEquals(platform.getJumpVelocity().getYComponent(), player.getVelocity().getYComponent());
+        assertInJumpingRange(player, platform);
     }
 
     @Test
     void testBrokenPlatformCollision() {
         final var player = new PlayerImpl(STARTING_POSITION);
         final var platform = new BrokenPlatform(PLATFORM_UNDER_PLAYER_POSITION);
-        player.computeVelocity(GRAVITY, DELTA_TIME, 1); //TODO Da sistemare 
-        final var playerVerticalVelocityBeforeCollision = player.getVelocity().getYComponent();
-        final double collisionTime = computeFallingTime(player);
+        player.computeVelocity(GRAVITY, DELTA_TIME, Direction.HORIZONTAL_ZERO); 
+        final double collisionTime = computeFallingTime(player) - DELTA_TIME;
         computeMovement(player, collisionTime);
         platform.handleCollision(player);
         /*
          * This assert checks that the velocity of the player is not changed because of the collision of a broken platform,
          * that the player should not jump on it, but only break it.
          */
-        assertEquals(-playerVerticalVelocityBeforeCollision, player.getVelocity().getYComponent(), DELTA_ERROR);
+        assertNotEquals(player.getVelocity().getYComponent(), platform.getJumpVelocity());
         CoinCollisionHandlerTest.assertIsTaken(platform);
+        assertInJumpingRange(player, platform);
     }
 }

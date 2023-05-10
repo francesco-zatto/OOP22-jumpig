@@ -3,6 +3,7 @@ package it.unibo.jumpig.view.api;
 import java.util.Set;
 
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
+import it.unibo.jumpig.common.impl.Direction;
 
 /**
  * The interface to show the GameViewScene.
@@ -28,6 +29,6 @@ public interface GameViewScene extends ViewScene {
      * The method to manage the input.
      * @return 0 for left movement and 1 for right movement
      */
-    int manageInput();
+    Direction manageInput();
 
 }
