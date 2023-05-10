@@ -36,7 +36,6 @@ public class GameViewImpl implements GameViewScene {
      * Constructor to create the game view that manage updates.
      * @param width the width of the world
      * @param height the height of the world
-     * @param gameController the controller of the game
      */
     @SuppressFBWarnings(value = "UrF", 
         justification = "Controller will be used to manage input.")

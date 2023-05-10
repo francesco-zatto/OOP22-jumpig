@@ -17,7 +17,6 @@ public class ScorePanel extends JPanel {
      private final JLabel coinNumber = new JLabel("0");
      private final JLabel livesText = new JLabel("Lives: ");
      private final JLabel livesNumber = new JLabel("3"); 
-     
      /**
      * Constructor for the score.
      */
