@@ -1,6 +1,7 @@
 package it.unibo.jumpig.model.impl;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import it.unibo.jumpig.common.impl.Direction;
 import it.unibo.jumpig.model.api.Game;
 import it.unibo.jumpig.model.api.World;
 
@@ -32,7 +33,7 @@ public class GameImpl implements Game {
      * {@inheritDoc}
      */
     @Override
-    public void updateGame(final long elapsed, final int direction) {
+    public void updateGame(final long elapsed, final Direction direction) {
         this.world.updateGame(elapsed, direction);
     }
 
