@@ -152,7 +152,7 @@ public class WorldImpl implements World {
         } else if (this.player.getPosition().getX() < 0) {
             this.player.moveToEdges(new PositionImpl(WIDTH, this.player.getPosition().getY()));
         }
-        this.player.computeVelocity(GRAVITY, time, direction.getDirection());
+        this.player.computeVelocity(GRAVITY, time, direction);
         this.player.computePosition(time);
         this.checkRegeneration();
         final var collidables = this.getCollidables(Set.of(this.setcoins, this.setenemies, this.setplatform));
