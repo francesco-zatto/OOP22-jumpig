@@ -1,5 +1,7 @@
 package it.unibo.jumpig.model.api;
 
+import it.unibo.jumpig.common.impl.Direction;
+
 /**
  * Interface Game.
  */
@@ -17,7 +19,7 @@ public interface Game {
      * @param elapsed the elapsed time
      * @param direction the player's direction
      */
-    void updateGame(long elapsed, int direction);
+    void updateGame(long elapsed, Direction direction);
 
     /**
      * Getter that returns the player's final score.

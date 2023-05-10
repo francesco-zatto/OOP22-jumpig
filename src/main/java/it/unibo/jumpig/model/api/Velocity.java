@@ -1,6 +1,7 @@
 package it.unibo.jumpig.model.api;
 
 import it.unibo.jumpig.common.api.Position;
+import it.unibo.jumpig.common.impl.Direction;
 
 /**
  * Interface that represents the velocity
@@ -45,5 +46,5 @@ public interface Velocity {
      * Method to compute the horizontal velocity.
      * @param direction the direction the player moves (-1 sx, 1 dx, otherwise 0)
      */
-    void computeHorizontalVelocity(int direction);
+    void computeHorizontalVelocity(Direction direction);
 }

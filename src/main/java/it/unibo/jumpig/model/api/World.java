@@ -3,6 +3,7 @@ package it.unibo.jumpig.model.api;
 import java.util.Set;
 
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
+import it.unibo.jumpig.common.impl.Direction;
 import it.unibo.jumpig.model.api.gameentity.Player;
 
 /**
@@ -51,5 +52,5 @@ public interface World {
      * @param elapsed the elapsed time.
      * @param direction the player's horizontal direction 
      */
-    void updateGame(long elapsed, int direction);
+    void updateGame(long elapsed, Direction direction);
 }
