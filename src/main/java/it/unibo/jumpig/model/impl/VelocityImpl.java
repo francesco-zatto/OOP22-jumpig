@@ -1,5 +1,7 @@
 package it.unibo.jumpig.model.impl;
 
+
+import it.unibo.jumpig.common.impl.Direction;
 import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.impl.PositionImpl;
 import it.unibo.jumpig.model.api.Velocity;
@@ -68,8 +70,8 @@ public class VelocityImpl implements Velocity {
      * {@inheritDoc}
      */
     @Override
-    public void computeHorizontalVelocity(final int direction) {
-        this.componentX = direction * HORIZONTAL_VELOCITY;
+    public void computeHorizontalVelocity(final Direction direction) {
+        this.componentX = direction.getDirection() * HORIZONTAL_VELOCITY;
     }
 
     /**
