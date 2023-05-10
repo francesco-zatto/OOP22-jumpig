@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
+import it.unibo.jumpig.common.impl.Direction;
 import it.unibo.jumpig.common.impl.PositionImpl;
 import it.unibo.jumpig.model.api.Camera;
 import it.unibo.jumpig.model.api.World;
@@ -144,14 +145,14 @@ public class WorldImpl implements World {
      * {@inheritDoc}
      */
     @Override
-    public void updateGame(final long elapsed, final int direction) {
+    public void updateGame(final long elapsed, final Direction direction) {
         final double time = ((double) elapsed) / 1000.0;
         if (this.player.getPosition().getX() > getWidth()) {
             this.player.moveToEdges(new PositionImpl(0, this.player.getPosition().getY()));
         } else if (this.player.getPosition().getX() < 0) {
             this.player.moveToEdges(new PositionImpl(WIDTH, this.player.getPosition().getY()));
         }
-        this.player.computeVelocity(GRAVITY, time, direction);
+        this.player.computeVelocity(GRAVITY, time, direction.getDirection());
         this.player.computePosition(time);
         this.checkRegeneration();
         final var collidables = this.getCollidables(Set.of(this.setcoins, this.setenemies, this.setplatform));
