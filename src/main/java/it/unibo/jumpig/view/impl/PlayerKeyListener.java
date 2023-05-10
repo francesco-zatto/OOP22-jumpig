@@ -3,21 +3,14 @@ package it.unibo.jumpig.view.impl;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import it.unibo.jumpig.controller.api.GameController;
+import it.unibo.jumpig.common.impl.Direction;
 
 /**
  * Class that manages the input from the keyboard.
  */
 public class PlayerKeyListener implements KeyListener {
 
-    private final GameController controller;
-    /**
-     * Constructor for the PlayerKeyListener.
-     * @param controller the controller 
-     */
-    public PlayerKeyListener(final GameController controller) {
-        this.controller = controller;
-    }
+    private Direction lastInput;
 
     /**
      * {@inheritDoc}
@@ -34,9 +27,9 @@ public class PlayerKeyListener implements KeyListener {
     @Override
     public void keyPressed(final KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            this.controller.registerInput(-1);
+            this.lastInput = Direction.HORIZONTAL_SX;
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            this.controller.registerInput(1);
+            this.lastInput = Direction.HORIZONTAL_DX;
         }
     }
 
@@ -45,6 +38,14 @@ public class PlayerKeyListener implements KeyListener {
      */
     @Override
     public void keyReleased(final KeyEvent e) {
-        this.controller.registerInput(0);
+        this.lastInput = Direction.HORIZONTAL_NULL;
+    }
+
+    /**
+     * Getter for the lastInput.
+     * @return the last input
+     */
+    public Direction getLastInput() {
+        return this.lastInput;
     }
 }
