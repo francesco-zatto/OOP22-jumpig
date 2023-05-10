@@ -29,6 +29,12 @@ public interface Camera {
     void setCameraHeight(int cameraheight);
 
     /**
+     * The method to update the camera's height.
+     * @param player the player of the game
+     */
+    void updateCameraVelocity(Player player);
+
+    /**
      * Method for a defensive copy.
      * @return the camera's copy
      */

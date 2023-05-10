@@ -158,6 +158,7 @@ public class WorldImpl implements World {
         final var collidables = this.getCollidables(Set.of(this.setcoins, this.setenemies, this.setplatform));
         collidables.forEach(c -> c.handleCollision(this.player));
         this.setEmpty();
+        this.camera.updateCameraVelocity(this.player);
     }
 
     private void setEmpty() {
