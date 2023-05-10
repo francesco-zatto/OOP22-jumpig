@@ -10,7 +10,7 @@ import it.unibo.jumpig.common.impl.Direction;
  */
 public class PlayerKeyListener implements KeyListener {
 
-    private Direction lastInput = Direction.HORIZONTAL_NULL;
+    private Direction lastInput = Direction.HORIZONTAL_ZERO;
 
     /**
      * {@inheritDoc}
@@ -38,7 +38,7 @@ public class PlayerKeyListener implements KeyListener {
      */
     @Override
     public void keyReleased(final KeyEvent e) {
-        this.lastInput = Direction.HORIZONTAL_NULL;
+        this.lastInput = Direction.HORIZONTAL_ZERO;
     }
 
     /**

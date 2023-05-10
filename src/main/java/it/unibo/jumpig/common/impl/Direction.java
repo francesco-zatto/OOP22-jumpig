@@ -15,7 +15,7 @@ public enum Direction {
     /**
      * The direction zero, there's no horizontal movement.
      */
-    HORIZONTAL_NULL(0);
+    HORIZONTAL_ZERO(0);
 
     private final int actualDirection;
 
