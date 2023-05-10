@@ -26,8 +26,8 @@ public class CoinCollisionChecker extends AbstractCollisionChecker<CircleHitbox,
         final double playerLowerY = playerHitbox.getRectangleLowerY();
         final double playerUpperY = playerHitbox.getRectangleUpperY();
         final Position nearestPosition;
-        final double nearestX = getNearestX(playerHitbox, coinCenter);
-        final double nearestY = getNearestY(playerHitbox, coinCenter);
+        final double nearestX = getNearestRectangleX(playerHitbox, coinCenter);
+        final double nearestY = getNearestRectangleY(playerHitbox, coinCenter);
         /*
          * If the coinY is in the range [playerLowerY, playerUpperY] the nearestPosition is on one
          * of the two vertical lines of the rectangle, with posY = coinY.
@@ -47,22 +47,16 @@ public class CoinCollisionChecker extends AbstractCollisionChecker<CircleHitbox,
         } else {
             nearestPosition = new PositionImpl(nearestX, nearestY);
         }
-        boolean b =  isPositionInsideCircle(nearestPosition, coinHitbox);
-        /*System.out.println(
-            "Collision? " + b + "\n"
-            + "Player position: " + playerHitbox.getCenter() + "\n"
-            + "Coin position: " + coinCenter + "\n"
-        );*/
-        return b; 
+        return isPositionInsideCircle(nearestPosition, coinHitbox);
     }
 
-    private double getNearestX(final RectangleHitbox playerHitbox, final Position coinCenter) {
+    private double getNearestRectangleX(final RectangleHitbox playerHitbox, final Position coinCenter) {
         return coinCenter.getX() > playerHitbox.getCenter().getX() 
             ? playerHitbox.getRectangleRightX()
             : playerHitbox.getRectangleLeftX();
     }
 
-    private double getNearestY(final RectangleHitbox playerHitbox, final Position coinCenter) {
+    private double getNearestRectangleY(final RectangleHitbox playerHitbox, final Position coinCenter) {
         return coinCenter.getY() > playerHitbox.getCenter().getY() 
             ? playerHitbox.getRectangleUpperY() 
             : playerHitbox.getRectangleLowerY();

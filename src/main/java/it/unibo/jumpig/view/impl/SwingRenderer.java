@@ -82,7 +82,7 @@ public final class SwingRenderer implements Renderer {
     public void renderCoin(final CircleHitbox entity) {
         graphics.get().setColor(Color.YELLOW);
         graphics.get().fillOval((int) ((entity.getCenter().getX() - entity.getRadius()) * widthRatio), 
-            (int) ((entity.getCenter().getY() + entity.getRadius()) * heightRatio), 
+            (int) ((this.worldHeight - (entity.getCenter().getY() + entity.getRadius())) * heightRatio), 
             this.createScaledRadius(entity), 
             this.createScaledRadius(entity));
     }
