@@ -3,6 +3,7 @@ package it.unibo.jumpig.model.impl;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.impl.PositionImpl;
@@ -49,14 +50,16 @@ public class GenerateCoinsStrategy implements GeneratorEntitiesStrategy {
         final Camera camera, 
         final Set<Position> setentities
         ) {
-            for (int i = 0; i < NUM_COIN; i++) {
-                final Position coordinate = new PositionImpl(
-                        Math.random() * maxWidth, 
-                        Math.random() * maxHeight + camera.getCameraHeight());
-                this.setcoins.add(new BasicCoin(
-                        checkEqualsPosition(coordinate, maxWidth, maxHeight, setentities, camera)));
-                setentities.add(coordinate);
-            }
+            Stream.iterate(0, i -> i + 1).
+                    limit(NUM_COIN).
+                    forEach(i -> {
+                        final Position coordinate = new PositionImpl(
+                            Math.random() * maxWidth, 
+                            Math.random() * maxHeight + camera.getCameraHeight());
+                        this.setcoins.add(new BasicCoin(
+                            checkEqualsPosition(coordinate, maxWidth, maxHeight, setentities, camera)));
+                        setentities.add(coordinate);
+            });
             return setcoins.stream()
                 .collect(Collectors.toSet());
     }

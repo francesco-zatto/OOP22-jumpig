@@ -44,7 +44,7 @@ public class GenerateEnemiesStrategy implements GeneratorEntitiesStrategy {
      * @param setentities the set of entity's positions
      * @return a set of generated enemies.
      */
-    private synchronized Set<Enemy> generateEnemies(
+    private Set<Enemy> generateEnemies(
         final double maxWidth, 
         final double maxHeight, 
         final Camera camera, 
