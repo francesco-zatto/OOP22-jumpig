@@ -3,6 +3,7 @@ package it.unibo.jumpig.controller.impl;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 
+import it.unibo.jumpig.common.impl.Direction;
 import it.unibo.jumpig.controller.api.GameController;
 import it.unibo.jumpig.model.api.Game;
 import it.unibo.jumpig.model.impl.GameImpl;
@@ -18,7 +19,7 @@ public class GameControllerImpl implements GameController {
     private static final long PERIOD = 20; /* 20 milliseconds are equal to 50 frames per sec */
     private final Game game;
     private final GameViewScene gameView;
-    private int input;
+    private Direction input;
     private final Logger logger = System.getLogger("GameControllerImpl");
 
     /**
@@ -28,8 +29,7 @@ public class GameControllerImpl implements GameController {
         this.game = new GameImpl();
         this.gameView = new GameViewImpl(
             this.game.getWorld().getWidth(),
-            this.game.getWorld().getHeight(),
-            this
+            this.game.getWorld().getHeight()
         );
     }
 
@@ -41,6 +41,7 @@ public class GameControllerImpl implements GameController {
         while (!game.isOver()) {
             final long currentCycleStartTime = System.currentTimeMillis();
             final long elapsed = currentCycleStartTime - previousCycleStartTime;
+            this.registerInput();
             this.game.updateGame(elapsed, this.input);
             this.notifyUpdate();
             this.waitForNextFrame(currentCycleStartTime);
@@ -80,8 +81,8 @@ public class GameControllerImpl implements GameController {
      * {@inheritDoc}
      */
     @Override
-    public void registerInput(final int input) {
-        this.input = input;
+    public void registerInput() {
+        this.input = this.gameView.manageInput();
     }
 
     /**
