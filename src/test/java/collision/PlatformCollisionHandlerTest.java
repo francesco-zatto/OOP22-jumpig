@@ -44,12 +44,21 @@ class PlatformCollisionHandlerTest {
         PLAYER_POSITION_X, 
         new PlayerHitbox(STARTING_POSITION).getRectangleLowerY() - HALF_PLATFORM_HEIGHT
     );
-    private static final double DELTA_ERROR = 0.05;
 
     private static void assertCollision(final Player player, final Platform platform) {
         assertEquals(platform.getJumpVelocity().getYComponent(), player.getVelocity().getYComponent());
         assertTrue(player.getLastPlatformHeight().isPresent());
         assertEquals(player.getLastPlatformHeight().get(), platform.getPosition().getY());
+    }
+
+    /*
+     * This method asserts that playerBottomY is in the right position for a possible jump on the platform. Only ordinates
+     * should be checked, because in this tests platforms and players have the same abscissas.
+     */
+    private static void assertInJumpingRange(final Player player, final Platform platform) {
+        final var playerLowerY = player.getHitbox().getRectangleLowerY();
+        assertTrue(playerLowerY > platform.getPosition().getY());
+        assertTrue(playerLowerY < platform.getHitbox().getRectangleUpperY());
     }
 
     private double computeFallingTime(final Player player) {
@@ -112,7 +121,8 @@ class PlatformCollisionHandlerTest {
         computeMovement(player, secondFallingTime);
         platform.handleCollision(player);
         CoinCollisionHandlerTest.assertIsTaken(platform);
-        assertEquals(platform.getJumpVelocity().getYComponent(), -player.getVelocity().getYComponent(), DELTA_ERROR);
+        assertNotEquals(platform.getJumpVelocity().getYComponent(), player.getVelocity().getYComponent());
+        assertInJumpingRange(player, platform);
     }
 
     @Test
@@ -129,5 +139,6 @@ class PlatformCollisionHandlerTest {
          */
         assertNotEquals(player.getVelocity().getYComponent(), platform.getJumpVelocity());
         CoinCollisionHandlerTest.assertIsTaken(platform);
+        assertInJumpingRange(player, platform);
     }
 }
