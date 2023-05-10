@@ -19,7 +19,6 @@ import it.unibo.jumpig.model.api.gameentity.Platform;
 import it.unibo.jumpig.model.api.gameentity.Player;
 import it.unibo.jumpig.model.api.gameentity.Targettable;
 import it.unibo.jumpig.model.impl.gameentity.PlayerImpl;
-import it.unibo.jumpig.model.impl.gameentity.VanishingPlatform;
 
 /**
  * The class to manage the world of the game.
@@ -79,7 +78,7 @@ public class WorldImpl implements World {
         this.setentities.clear();
         this.setentities.addAll(this.getCoins());
         this.setentities.addAll(this.getEnemies());
-        this.setentities.addAll(this.getPlatform());
+        this.setentities.addAll(this.getPlatforms());
         this.setentities.add(this.getPlayer());
         return this.setentities.stream()
             .map(x -> this.updateheight(x))
@@ -87,13 +86,14 @@ public class WorldImpl implements World {
     }
 
     /**
-     * The method to filter only visible platforms.
+     * The method to get only visible platforms.
      * @return the set of platforms.
      */
-    private Set<Platform> getPlatform() {
-        return this.setplatform.stream()
-            .filter(x -> x.getClass() == VanishingPlatform.class && !((Targettable) x).isTaken() 
-                || x.getClass() != VanishingPlatform.class)
+    private Set<Platform> getPlatforms() {
+        final Set<Platform> takenPlatforms = this.setplatform.stream()
+            .filter(x -> x instanceof Targettable && ((Targettable) x).isTaken())
+            .collect(Collectors.toSet());
+        return this.setplatform.stream().filter(x -> !takenPlatforms.contains(x))
             .collect(Collectors.toSet());
     }
 
