@@ -8,12 +8,19 @@ import it.unibo.jumpig.model.api.gameentity.Player;
  * Interface Camera.
  */
 public interface Camera {
+
     /**
      * Getter that returns the last platform height.
      * @return a value that represents the camera's height (if it's present).
      * @param player the player the camera follows. 
      */
     Optional<Double> getPlatformHeight(Player player);
+
+    /**
+     * Setter for the last platform on which the player has jumped.
+     * @param lastPlatform the last platform on which the player has jumped
+     */
+    void setLastPlatformHeight(Optional<Double> lastPlatform);
 
     /**
      * Getter that returns the camera's height, 
@@ -25,13 +32,21 @@ public interface Camera {
     /**
      * Setter to update camera's height.
      * @param cameraheight the camera's height.
+     * @param player the player of the game.
      */
-    void setCameraHeight(int cameraheight);
+    void setCameraHeight(double cameraheight, Player player);
+
+    /**
+     * The method to update the camera's height.
+     * @param player the player of the game
+     */
+    void setCameraVelocity(Player player);
 
     /**
      * Method for a defensive copy.
+     * @param player the player of the game
      * @return the camera's copy
      */
-    Camera copy();
+    Camera copy(Player player);
 
 }

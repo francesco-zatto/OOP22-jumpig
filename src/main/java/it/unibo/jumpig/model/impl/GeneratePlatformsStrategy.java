@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import it.unibo.jumpig.common.api.Position;
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
@@ -58,61 +59,56 @@ public class GeneratePlatformsStrategy implements GeneratorEntitiesStrategy {
         final Camera camera, 
         final Set<Position> setentities
         ) {
-            this.addBasicPlatforms(maxWidth, maxHeight, camera, setentities);
-            this.addVanishingPlatforms(maxWidth, maxHeight, camera, setentities);
-            this.addBrokenPlatforms(maxWidth, maxHeight, camera, setentities);
+            this.addPlatforms(maxWidth, maxHeight, camera, setentities);
             return setplatforms.stream()
                 .collect(Collectors.toSet());
     }
 
-    private void addBasicPlatforms(
-        final double maxWidth, 
+    private void addPlatforms(final double maxWidth, 
         final double maxHeight, 
         final Camera camera, 
         final Set<Position> setentities
         ) {
-            for (int i = 0; i < NUM_BASIC_PLATFORM; i++) {
-                final Position coordinate = new PositionImpl(
-                        Math.random() * maxWidth, 
-                        random.nextDouble() * maxHeight + camera.getCameraHeight());
-                this.setplatforms.add(new BasicPlatform(
-                        checkEqualsPosition(coordinate, maxWidth, maxHeight, setentities, camera), 
-                        VERTICAL_JUMP_VELOCITY));
-                setentities.add(coordinate);
-            }
-    }
-
-    private void addVanishingPlatforms(
-        final double maxWidth, 
-        final double maxHeight, 
-        final Camera camera, 
-        final Set<Position> setentities
-        ) {
-            for (int i = 0; i < NUM_VANISHING_PLATFORM; i++) {
-                final Position coordinate = new PositionImpl(
-                        Math.random() * maxWidth, 
-                        random.nextDouble() * maxHeight + camera.getCameraHeight());
-                this.setplatforms.add(new VanishingPlatform(
-                        this.checkEqualsPosition(coordinate, maxWidth, maxHeight, setentities, camera), 
-                        VERTICAL_JUMP_VELOCITY));
-                setentities.add(coordinate);
-            }
-    }
-
-    private void addBrokenPlatforms(
-        final double maxWidth, 
-        final double maxHeight, 
-        final Camera camera, 
-        final Set<Position> setentities
-        ) {
-            for (int i = 0; i < NUM_BROKEN_PLATFORM; i++) {
-                final Position coordinate = new PositionImpl(
-                        Math.random() * maxWidth, 
-                        Math.random() * maxHeight + camera.getCameraHeight());
-                this.setplatforms.add(new BrokenPlatform(
-                        this.checkEqualsPosition(coordinate, maxWidth, maxHeight, setentities, camera)));
-                setentities.add(coordinate);
-            }
+            Stream.iterate(0, i -> i + 1)
+                    .limit(NUM_BROKEN_PLATFORM + NUM_BASIC_PLATFORM + NUM_VANISHING_PLATFORM)
+                    .forEach(i -> {
+                        final Position coordinate = new PositionImpl(
+                            Math.random() * maxWidth, 
+                            random.nextDouble(maxHeight * 2) + camera.getCameraHeight());
+                        if (i < NUM_BROKEN_PLATFORM) {
+                            this.setplatforms.add(new BrokenPlatform(
+                                this.checkEqualsPosition(
+                                    coordinate, 
+                                    maxWidth, 
+                                    maxHeight, 
+                                    setentities, 
+                                    camera
+                                    )));
+                        } else {
+                            if (i < NUM_BROKEN_PLATFORM + NUM_BASIC_PLATFORM) {
+                                this.setplatforms.add(new BasicPlatform(
+                                    checkEqualsPosition(
+                                        coordinate, 
+                                        maxWidth, 
+                                        maxHeight, 
+                                        setentities, 
+                                        camera
+                                        ), 
+                                    VERTICAL_JUMP_VELOCITY));
+                            } else {
+                                this.setplatforms.add(new VanishingPlatform(
+                                    this.checkEqualsPosition(
+                                        coordinate, 
+                                        maxWidth, 
+                                        maxHeight, 
+                                        setentities, 
+                                        camera
+                                        ), 
+                                    VERTICAL_JUMP_VELOCITY));
+                            }
+                        }
+                        setentities.add(coordinate);
+                    });
     }
 
 }

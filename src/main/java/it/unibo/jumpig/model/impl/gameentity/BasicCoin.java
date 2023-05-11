@@ -54,4 +54,12 @@ public class BasicCoin extends AbstractGameEntity<CircleHitbox> implements Coin 
     public void handleCollision(final Player player) {
         this.collisionHandler.handle(player, this);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CircleHitbox createScaledHitbox(final Position position) {
+        return new BasicCoin(position).getHitbox();
+    }
 }

@@ -44,7 +44,7 @@ public class GenerateEnemiesStrategy implements GeneratorEntitiesStrategy {
      * @param setentities the set of entity's positions
      * @return a set of generated enemies.
      */
-    private synchronized Set<Enemy> generateEnemies(
+    private Set<Enemy> generateEnemies(
         final double maxWidth, 
         final double maxHeight, 
         final Camera camera, 
@@ -55,7 +55,7 @@ public class GenerateEnemiesStrategy implements GeneratorEntitiesStrategy {
                     .forEach(i -> {
                         final Position coordinate = new PositionImpl(
                             Math.random() * maxWidth, 
-                            Math.random() * maxHeight + camera.getCameraHeight());
+                            Math.random() * 2 * maxHeight + camera.getCameraHeight());
                         this.setenemies.add(new EnemyImpl(
                             checkEqualsPosition(coordinate, maxWidth, maxHeight, setentities, camera)));
                         setentities.add(coordinate);

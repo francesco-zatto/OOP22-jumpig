@@ -20,4 +20,11 @@ public interface GameEntity<H extends Hitbox> {
      */
     H getHitbox();
 
+    /**
+     * The method to create a new scaled hitbox which will stay between 0 and the height of the world.
+     * @param position the position of the hitbox in thw world.
+     * @return the scaled hitbox
+     */
+    H createScaledHitbox(Position position);
+
 }
