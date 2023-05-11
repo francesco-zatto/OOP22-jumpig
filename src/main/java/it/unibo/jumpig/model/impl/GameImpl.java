@@ -75,7 +75,14 @@ public class GameImpl implements Game {
      */
     private void manageScoreUpdate(final Predicate<Double> predicate, final double score) {
         if (predicate.test(score)) {
-           
+           updateScore();
         }
+    }
+
+    /**
+     * Method that updates the heightScore.
+     */
+    private void updateScore() {
+        this.heightScore = this.getWorld().getPlayer().getPosition().getY();
     }
 }
