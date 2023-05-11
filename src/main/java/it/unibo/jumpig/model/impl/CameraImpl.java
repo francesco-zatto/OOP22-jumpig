@@ -73,6 +73,9 @@ public class CameraImpl implements Camera {
             ) {
                 this.cameraVelocity = player.getVelocity();
             }
+        if (player.getVelocity().getYComponent() < 0) {
+            this.cameraVelocity = new VelocityImpl(0, 0);
+        }
     }
 
     /**
