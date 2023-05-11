@@ -34,4 +34,12 @@ public abstract class AbstractPlatform extends AbstractGameEntity<RectangleHitbo
     public final double getLength() {
         return this.length;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public RectangleHitbox createScaledHitbox(final Position position) {
+        return new PlatformHitbox(position);
+    }
 }

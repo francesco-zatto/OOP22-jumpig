@@ -43,7 +43,7 @@ public class GameViewImpl implements GameViewScene {
             this.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             this.mainPanel = new JPanel(new BorderLayout());
             this.mainPanel.add(new ScorePanel(), BorderLayout.NORTH);
-            this.mainPanel.add(new GamePanel(width, height), BorderLayout.SOUTH);
+            this.mainPanel.add(new GamePanel(width, height), BorderLayout.CENTER);
             this.frame.add(this.mainPanel);
             this.frame.setSize(this.startScreen);
             this.frame.setLocationByPlatform(true);
