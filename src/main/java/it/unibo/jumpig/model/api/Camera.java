@@ -32,8 +32,9 @@ public interface Camera {
     /**
      * Setter to update camera's height.
      * @param cameraheight the camera's height.
+     * @param player the player of the game.
      */
-    void setCameraHeight(double cameraheight);
+    void setCameraHeight(double cameraheight, Player player);
 
     /**
      * The method to update the camera's height.

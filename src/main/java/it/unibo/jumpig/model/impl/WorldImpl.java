@@ -159,8 +159,14 @@ public class WorldImpl implements World {
         collidables.forEach(c -> c.handleCollision(this.player));
         this.setEmpty();
         this.camera.setCameraVelocity(this.player);
-        this.camera.setCameraHeight(time);
+        this.computeCameraHeight(time);
         this.camera.setLastPlatformHeight(this.player.getLastPlatformHeight());
+    }
+
+    private void computeCameraHeight(final double time) {
+        if (this.player.getPosition().getY() >= (HEIGHT / 2 + this.camera.getCameraHeight())) {
+            this.camera.setCameraHeight(time, this.player);
+        }
     }
 
     private void setEmpty() {
@@ -197,7 +203,7 @@ public class WorldImpl implements World {
         if ((this.player.getPosition().getY() % HEIGHT) < 1
                 //check that it's almoast zero meaning that the generator has to regenerate entities.
             ) {
-                    this.camera.setCameraHeight(this.player.getPosition().getY());
+                    this.camera.setCameraHeight(this.player.getPosition().getY(), this.player);
                     setentities.clear();
                     if (this.player.getVelocity().getYComponent() > 0) {
                         this.regenerate();
