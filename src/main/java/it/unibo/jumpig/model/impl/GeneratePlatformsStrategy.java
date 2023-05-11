@@ -74,7 +74,7 @@ public class GeneratePlatformsStrategy implements GeneratorEntitiesStrategy {
                     .forEach(i -> {
                         final Position coordinate = new PositionImpl(
                             Math.random() * maxWidth, 
-                            random.nextDouble(maxHeight * 3) + camera.getCameraHeight());
+                            random.nextDouble(maxHeight * 2) + camera.getCameraHeight());
                         if (i < NUM_BROKEN_PLATFORM) {
                             this.setplatforms.add(new BrokenPlatform(
                                 this.checkEqualsPosition(
