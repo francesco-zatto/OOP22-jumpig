@@ -149,4 +149,9 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
     public void moveToEdges(final Position corner) {
         super.setPosition(corner);
     }
+
+    @Override
+    public RectangleHitbox createScaledHitbox(Position position) {
+        return new PlayerHitbox(position);
+    }
 }
