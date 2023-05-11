@@ -22,6 +22,10 @@ public final class SwingRenderer implements Renderer {
     private final double worldHeight;
     private double widthRatio;
     private double heightRatio;
+    /*
+    private String filename = "src/main/resources/images/it/unibo/vanishing_platform.png";
+    private Image image; //TODO
+    */
 
     /**
      * Constructor for a SwingRenderer.
@@ -31,6 +35,11 @@ public final class SwingRenderer implements Renderer {
     public SwingRenderer(final double worldWidth, final double worldHeight) {
         this.worldWidth = worldWidth;
         this.worldHeight = worldHeight; 
+        /*try {
+            this.image = ImageIO.read(getClass().getResourceAsStream(filename));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/ //TODO
     } 
 
     /**
@@ -63,6 +72,14 @@ public final class SwingRenderer implements Renderer {
      */
     @Override
     public void renderVanishingPlatform(final RectangleHitbox entity) {
+        /*var r = this.createScaledRectangle(entity);
+        this.graphics.get().drawImage(this.image, 
+            (int) r.getCenterX(), 
+            (int) r.getCenterY(), 
+            (int) r.getWidth(), 
+            (int) r.getHeight(), 
+            null
+        );*/ //TODO
         this.fillRectangle(Color.RED, this.graphics.get(), this.createScaledRectangle(entity));
     }
 
