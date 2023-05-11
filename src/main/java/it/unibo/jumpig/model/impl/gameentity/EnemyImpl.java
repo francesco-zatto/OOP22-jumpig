@@ -63,7 +63,7 @@ public class EnemyImpl extends AbstractGameEntity<RectangleHitbox> implements En
      */
     @Override
     public RectangleHitbox createScaledHitbox(final Position position) {
-        return new EnemyImpl(position).getHitbox();
+        return new EnemyHitbox(position);
     }
 
 }

@@ -60,6 +60,6 @@ public class BasicCoin extends AbstractGameEntity<CircleHitbox> implements Coin 
      */
     @Override
     public CircleHitbox createScaledHitbox(final Position position) {
-        return new BasicCoin(position).getHitbox();
+        return new CoinHitbox(position);
     }
 }
