@@ -52,7 +52,7 @@ public interface GeneratorEntitiesStrategy {
                 .anyMatch(x -> x.getY() == startEntity.getY()) 
                     ? this.checkEqualsPosition(new PositionImpl(
                             Math.random() * maxWidth, 
-                            Math.random() * maxHeight + camera.getCameraHeight()), 
+                            Math.random() * 2 * maxHeight + camera.getCameraHeight()), 
                         maxWidth, 
                         maxHeight, 
                         setentities, 

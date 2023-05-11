@@ -58,4 +58,12 @@ public class EnemyImpl extends AbstractGameEntity<RectangleHitbox> implements En
         this.collisionHandler.handle(player, this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public RectangleHitbox createScaledHitbox(final Position position) {
+        return new EnemyImpl(position).getHitbox();
+    }
+
 }
