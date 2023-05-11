@@ -6,11 +6,9 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
@@ -25,13 +23,13 @@ public final class SwingRenderer implements Renderer {
 
     private static final String SEP = System.getProperty("file.separator");
     private static final String ROOT = "it" + SEP + "unibo" + SEP + "jumpig" + SEP + "images" + SEP;
-    private String filename = ROOT + "vanishing_platform.png";
+    private final String filename = ROOT + "vanishing_platform.png";
     private Optional<Graphics2D> graphics = Optional.empty();
     private final double worldWidth;
     private final double worldHeight;
     private double widthRatio;
     private double heightRatio;
-    private Image vanishingPlatformImage; 
+    private final Image vanishingPlatformImage; 
 
     /**
      * Constructor for a SwingRenderer.
@@ -41,7 +39,7 @@ public final class SwingRenderer implements Renderer {
     public SwingRenderer(final double worldWidth, final double worldHeight) {
         this.worldWidth = worldWidth;
         this.worldHeight = worldHeight;
-        URL imgUrl = ClassLoader.getSystemResource(filename);
+        final URL imgUrl = ClassLoader.getSystemResource(filename);
         this.vanishingPlatformImage = new ImageIcon(imgUrl).getImage();
     } 
 
@@ -75,7 +73,7 @@ public final class SwingRenderer implements Renderer {
      */
     @Override
     public void renderVanishingPlatform(final RectangleHitbox entity) {
-        var rectangle = this.createScaledRectangle(entity);
+        final var rectangle = this.createScaledRectangle(entity);
         this.graphics.get().drawImage(this.vanishingPlatformImage, 
             (int) rectangle.getX(), 
             (int) rectangle.getY(), 
