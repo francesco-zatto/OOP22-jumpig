@@ -154,7 +154,7 @@ public class PlayerImpl extends AbstractGameEntity<RectangleHitbox> implements P
      * {@inheritDoc}
      */
     @Override
-    public RectangleHitbox createScaledHitbox(Position position) {
+    public RectangleHitbox createScaledHitbox(final Position position) {
         return new PlayerHitbox(position);
     }
 }
