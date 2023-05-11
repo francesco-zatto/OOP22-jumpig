@@ -81,8 +81,11 @@ public class WorldImpl implements World {
         this.setentities.addAll(this.getPlatforms());
         this.setentities.add(this.getPlayer());
         return this.setentities.stream()
-            .map(x -> this.updateheight(x))
-            .collect(Collectors.toSet());
+                .map(x -> x.createScaledHitbox(
+                        new PositionImpl(
+                            x.getPosition().getX(), 
+                            x.getPosition().getY() - camera.getCameraHeight())))
+                .collect(Collectors.toSet());
     }
 
     /**
@@ -171,8 +174,7 @@ public class WorldImpl implements World {
 
     private void setEmpty() {
         if (this.camera.getPlatformHeight(this.player).isPresent() 
-            && this.player.getPosition().getY() < this.camera.getPlatformHeight(this.player).get()) { 
-                //-camera.getCameraHeight() ???
+            && this.player.getPosition().getY() < this.camera.getPlatformHeight(this.player).get()) {
                 this.player.setLastPlatformHeight(Optional.empty());
         }
     }
@@ -189,14 +191,6 @@ public class WorldImpl implements World {
         final double playerHeight = this.player.getPosition().getY();
         final double entityHeight = entity.getPosition().getY();
         return playerHeight - quarterOfWorld < entityHeight && entityHeight < playerHeight + quarterOfWorld;
-    }
-
-    private Hitbox updateheight(final GameEntity<? extends Hitbox> x) {
-        x.getHitbox()
-            .updateHitBox(new PositionImpl(
-                    x.getPosition().getX(), 
-                    x.getPosition().getY() - this.camera.getCameraHeight()));
-        return x.getHitbox();
     }
 
     private void checkRegeneration() {
