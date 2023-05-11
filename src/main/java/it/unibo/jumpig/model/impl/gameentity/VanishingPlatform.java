@@ -33,4 +33,12 @@ public class VanishingPlatform extends TargettablePlatform {
     public final void handleCollision(final Player player) {
         this.collisionHandler.handle(player, this);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public RectangleHitbox createScaledHitbox(final Position position) {
+        return new VanishingPlatformHitbox(position);
+    }
 }
