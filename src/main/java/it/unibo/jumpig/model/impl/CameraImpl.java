@@ -67,6 +67,7 @@ public class CameraImpl implements Camera {
         if (player.getLastPlatformHeight().isPresent() 
                 && (!player.getLastPlatformHeight().get().equals(this.lastPlatform.get()) 
                     || this.lastPlatform.isEmpty())
+                && player.getVelocity().getYComponent() >= 0
             ) {
                 this.cameraVelocity = player.getVelocity();
             }
