@@ -18,7 +18,7 @@ import it.unibo.jumpig.model.impl.gameentity.BasicCoin;
 import it.unibo.jumpig.model.impl.gameentity.PlayerImpl;
 
 /**
- * Class to test correctness of subtypes of CollisionHandler for enemies and coins.
+ * Class to test correctness of subtypes of CollisionHandler for coins.
  * {@link it.unibo.jumpig.model.api.collision.CollisionHandler}
  */
 class CoinCollisionHandlerTest {

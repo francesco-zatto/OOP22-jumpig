@@ -44,13 +44,13 @@ public abstract class AbstractCollisionChecker<H extends Hitbox, E extends GameE
     protected abstract boolean canEntityCollide(E gameEntity);
 
     /**
-     * Utility method used to create the collisionChecker that checks if a number is in a range (min, max).
+     * Utility method used to create the collisionChecker that checks if a number is in a range [min, max].
      * @param num number to check if is in range.
      * @param min the minimum of the range.
      * @param max the maximum of the range.
-     * @return whether or not num is in range(min, max).
+     * @return whether or not num is in range [min, max].
      */
     protected static final boolean isBetween(final double num, final double min, final double max) {
-        return min < num && num < max;
+        return min <= num && num <= max;
     }
 }

@@ -56,6 +56,7 @@ public final class SwingRenderer implements Renderer {
     @Override
     public void renderPlayer(final RectangleHitbox entity) {
         final var rectangle = this.createScaledRectangle(entity);
+        //TODO metti drawImage
         this.graphics.get().drawImage(this.jumpigImage, 
             (int) rectangle.getX(), 
             (int) rectangle.getY(), 
@@ -71,13 +72,7 @@ public final class SwingRenderer implements Renderer {
     @Override
     public void renderEnemy(final RectangleHitbox entity) {
         final var rectangle = this.createScaledRectangle(entity);
-        this.graphics.get().drawImage(this.enemyImage, 
-            (int) rectangle.getX(), 
-            (int) rectangle.getY(), 
-            (int) rectangle.getWidth(), 
-            (int) rectangle.getHeight(), 
-            null
-        );
+        drawImage(rectangle, this.enemyImage);
         //this.fillRectangle(Color.ORANGE, this.graphics.get(), this.createScaledRectangle(entity)); TODO remove
     }
 
@@ -95,13 +90,7 @@ public final class SwingRenderer implements Renderer {
     @Override
     public void renderVanishingPlatform(final RectangleHitbox entity) {
         final var rectangle = this.createScaledRectangle(entity);
-        this.graphics.get().drawImage(this.vanishingPlatformImage, 
-            (int) rectangle.getX(), 
-            (int) rectangle.getY(), 
-            (int) rectangle.getWidth(), 
-            (int) rectangle.getHeight(), 
-            null
-        );
+        drawImage(rectangle, this.vanishingPlatformImage);
         //this.fillRectangle(Color.RED, this.graphics.get(), this.createScaledRectangle(entity)); TODO remove
     }
 
@@ -122,8 +111,8 @@ public final class SwingRenderer implements Renderer {
         graphics.get().setColor(Color.YELLOW);
         graphics.get().fillOval((int) ((entity.getCenter().getX() - entity.getRadius()) * widthRatio), 
             (int) ((this.worldHeight - (entity.getCenter().getY() + entity.getRadius())) * heightRatio), 
-            this.createScaledRadius(entity), 
-            this.createScaledRadius(entity));
+            this.createScaledRadius(entity) * 2, 
+            this.createScaledRadius(entity) * 2);
     }
 
     /**
@@ -144,6 +133,16 @@ public final class SwingRenderer implements Renderer {
         justification = "graphics is used only by this class and by GamePanel superclasses.")
     public void setGraphics(final Graphics2D graphics) {
         this.graphics = Optional.of(graphics);
+    }
+
+    private void drawImage(final Rectangle rectangle, final Image image) {
+        this.graphics.get().drawImage(image, 
+            (int) rectangle.getX(), 
+            (int) rectangle.getY(), 
+            (int) rectangle.getWidth(), 
+            (int) rectangle.getHeight(), 
+            null
+        );
     }
 
     /*The origin in World is the lower left vertex of the window, while in java swing is the upper left

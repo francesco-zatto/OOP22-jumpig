@@ -3,7 +3,6 @@ package it.unibo.jumpig.view.impl;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -24,7 +23,7 @@ public class GamePanel extends JPanel {
         value = "SE_BAD_FIELD", 
         justification = "GamePanel is not meant to be serialized." 
     ) 
-    private final Set<Hitbox> entities = Collections.synchronizedSet(new HashSet<>());
+    private Set<Hitbox> entities = new HashSet<>();
     private final transient SwingRenderer renderer;
 
     /**
@@ -34,7 +33,7 @@ public class GamePanel extends JPanel {
      */
     public GamePanel(final double worldWidth, final double worldHeight) { 
         this.renderer = new SwingRenderer(worldWidth, worldHeight);
-        this.setPreferredSize(super.getSize());
+        //this.setPreferredSize(super.getSize());
     }
 
     /**
@@ -56,7 +55,7 @@ public class GamePanel extends JPanel {
         graphics.clearRect(0, 0, this.getWidth(), this.getHeight());
     }
 
-    private synchronized void setNextFrame(final Graphics2D graphics) {
+    private void setNextFrame(final Graphics2D graphics) {
         this.renderer.setRatio(this.getWidth(), this.getHeight());
         this.renderer.setGraphics(graphics);
         final Iterator<Hitbox> iterator = this.entities.iterator();
@@ -70,18 +69,6 @@ public class GamePanel extends JPanel {
      * @param entities entities to render in the panel.
      */
     public void refresh(final Set<Hitbox> entities) {
-        this.entities.clear();
-        this.entities.addAll(entities);
+        this.entities = new HashSet<>(entities);
     }
-    /*
-    public static void main(String[] args) {
-        var frame = new JFrame();
-        Platform platform = new BasicPlatform(new PositionImpl(15, 15), 30);
-        Platform platform2 = new BasicPlatform(new PositionImpl(28, 56), 40);
-        var panel = new GamePanel(9,16);
-        frame.getContentPane().add(panel);
-        frame.pack();
-        frame.setVisible(true);
-    }
-    */
 }
