@@ -23,13 +23,15 @@ public final class SwingRenderer implements Renderer {
 
     private static final String SEP = System.getProperty("file.separator");
     private static final String ROOT = "it" + SEP + "unibo" + SEP + "jumpig" + SEP + "images" + SEP;
-    private final String filename = ROOT + "vanishing_platform.png";
+    private final String vanishingPlatformFile = ROOT + "vanishing_platform.png";
+    private final String enemyFile = ROOT + "jumpier_enemy.png";
     private Optional<Graphics2D> graphics = Optional.empty();
     private final double worldWidth;
     private final double worldHeight;
     private double widthRatio;
     private double heightRatio;
     private final Image vanishingPlatformImage; 
+    private final Image enemyImage;
 
     /**
      * Constructor for a SwingRenderer.
@@ -39,8 +41,10 @@ public final class SwingRenderer implements Renderer {
     public SwingRenderer(final double worldWidth, final double worldHeight) {
         this.worldWidth = worldWidth;
         this.worldHeight = worldHeight;
-        final URL imgUrl = ClassLoader.getSystemResource(filename);
+        URL imgUrl = ClassLoader.getSystemResource(vanishingPlatformFile);
         this.vanishingPlatformImage = new ImageIcon(imgUrl).getImage();
+        imgUrl = ClassLoader.getSystemResource(enemyFile);
+        this.enemyImage = new ImageIcon(imgUrl).getImage();
     } 
 
     /**
@@ -57,7 +61,15 @@ public final class SwingRenderer implements Renderer {
      */
     @Override
     public void renderEnemy(final RectangleHitbox entity) {
-        this.fillRectangle(Color.ORANGE, this.graphics.get(), this.createScaledRectangle(entity));
+        final var rectangle = this.createScaledRectangle(entity);
+        this.graphics.get().drawImage(this.enemyImage, 
+            (int) rectangle.getX(), 
+            (int) rectangle.getY(), 
+            (int) rectangle.getWidth(), 
+            (int) rectangle.getHeight(), 
+            null
+        );
+        //this.fillRectangle(Color.ORANGE, this.graphics.get(), this.createScaledRectangle(entity)); TODO remove
     }
 
     /**
