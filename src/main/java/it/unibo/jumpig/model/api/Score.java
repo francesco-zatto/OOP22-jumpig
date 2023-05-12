@@ -19,7 +19,7 @@ public interface Score extends Serializable {
      * 
      * @return the score
      */
-    double getHeightScore();
+    int getHeightScore();
 
     /**
      * Getter for the amount of coins collected in a game.

@@ -32,6 +32,7 @@ public final class SwingRenderer implements Renderer {
     private double heightRatio;
     private final Image vanishingPlatformImage; 
     private final Image enemyImage;
+    private final Image jumpigImage;
 
     /**
      * Constructor for a SwingRenderer.
@@ -41,10 +42,12 @@ public final class SwingRenderer implements Renderer {
     public SwingRenderer(final double worldWidth, final double worldHeight) {
         this.worldWidth = worldWidth;
         this.worldHeight = worldHeight;
-        URL imgUrl = ClassLoader.getSystemResource(vanishingPlatformFile);
-        this.vanishingPlatformImage = new ImageIcon(imgUrl).getImage();
-        imgUrl = ClassLoader.getSystemResource(enemyFile);
-        this.enemyImage = new ImageIcon(imgUrl).getImage();
+        final URL vanishingUrl = ClassLoader.getSystemResource(vanishingPlatformFile);
+        this.vanishingPlatformImage = new ImageIcon(vanishingUrl).getImage();
+        final URL enemyUrl = ClassLoader.getSystemResource(enemyFile);
+        this.enemyImage = new ImageIcon(enemyUrl).getImage();
+        final URL jumpigUrl = ClassLoader.getSystemResource(ROOT + "jumpigIcon.png");
+        this.jumpigImage = new ImageIcon(jumpigUrl).getImage();
     } 
 
     /**
@@ -52,8 +55,14 @@ public final class SwingRenderer implements Renderer {
      */
     @Override
     public void renderPlayer(final RectangleHitbox entity) {
-        graphics.get().setColor(Color.PINK);
-        graphics.get().fill(this.createScaledRectangle(entity));
+        final var rectangle = this.createScaledRectangle(entity);
+        this.graphics.get().drawImage(this.jumpigImage, 
+            (int) rectangle.getX(), 
+            (int) rectangle.getY(), 
+            (int) rectangle.getWidth(), 
+            (int) rectangle.getHeight(), 
+            null
+        );
     }
 
     /**
