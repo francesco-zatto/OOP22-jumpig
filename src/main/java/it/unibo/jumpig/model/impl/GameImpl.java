@@ -25,6 +25,10 @@ public class GameImpl implements Game {
      */
     @Override
     public boolean isOver() {
+        return this.checkGameOver();
+    }
+
+    private boolean checkGameOver() {
         return this.world.getPlayer().getLives() <= 0 
             || this.world.getCamera().getPlatformHeight(this.world.getPlayer()).isEmpty() 
                 && this.world.getPlayer().getVelocity().getYComponent() < 0;

@@ -197,7 +197,6 @@ public class WorldImpl implements World {
         if ((this.player.getPosition().getY() % HEIGHT) < 1
                 //check that it's almoast zero meaning that the generator has to regenerate entities.
             ) {
-                    this.camera.setCameraHeight(this.player.getPosition().getY(), this.player);
                     setentities.clear();
                     if (this.player.getVelocity().getYComponent() > 0) {
                         this.regenerate();

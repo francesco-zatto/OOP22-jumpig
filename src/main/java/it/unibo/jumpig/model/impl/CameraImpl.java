@@ -66,13 +66,19 @@ public class CameraImpl implements Camera {
      */
     @Override
     public void setCameraVelocity(final Player player) {
-        if (player.getLastPlatformHeight().isPresent() 
-                && (!player.getLastPlatformHeight().get().equals(this.lastPlatform.get()) 
-                    || this.lastPlatform.isEmpty())
-                && player.getVelocity().getYComponent() >= 0
-            ) {
+        if (this.checkTosetCameraVelocity(player)) {
                 this.cameraVelocity = player.getVelocity();
             }
+        if (player.getVelocity().getYComponent() < 0) {
+            this.cameraVelocity = new VelocityImpl(0, 0);
+        }
+    }
+
+    private boolean checkTosetCameraVelocity(final Player player) {
+        return player.getLastPlatformHeight().isPresent() 
+            && (!player.getLastPlatformHeight().get().equals(this.lastPlatform.get()) 
+                || this.lastPlatform.isEmpty())
+            && player.getVelocity().getYComponent() >= 0;
     }
 
     /**
