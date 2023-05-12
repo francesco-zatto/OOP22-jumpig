@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.swing.JPanel;
@@ -62,8 +63,10 @@ public class GamePanel extends JPanel {
     private void setNextFrame(final Graphics2D graphics) {
         this.renderer.setRatio(this.getWidth(), this.getHeight());
         this.renderer.setGraphics(graphics);
-        this.entities.stream()
-                .forEach(e -> e.updateRendering(this.renderer));
+        final Iterator<Hitbox> iterator = this.entities.iterator();
+        while (iterator.hasNext()) {
+            iterator.next().updateRendering(this.renderer);
+        }
     }
 
     /**

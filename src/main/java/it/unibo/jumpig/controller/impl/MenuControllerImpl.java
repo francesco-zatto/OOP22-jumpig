@@ -1,6 +1,7 @@
 package it.unibo.jumpig.controller.impl;
 
 import it.unibo.jumpig.controller.api.GameController;
+import it.unibo.jumpig.controller.api.LeaderboardController;
 import it.unibo.jumpig.controller.api.MenuController;
 import it.unibo.jumpig.view.api.MenuViewScene;
 import it.unibo.jumpig.view.impl.MenuViewSceneImpl;
@@ -42,7 +43,7 @@ public class MenuControllerImpl implements MenuController {
      */
     @Override
     public void notifyStartLeaderboard() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'notifyStartLeaderboard'");
+        final LeaderboardController leaderboardController = new LeaderBoardControllerImpl();
+        leaderboardController.start();
     }
 }

@@ -1,5 +1,7 @@
 package it.unibo.jumpig.model.impl;
 
+import java.util.function.Predicate;
+
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.jumpig.common.impl.Direction;
 import it.unibo.jumpig.model.api.Game;
@@ -12,7 +14,7 @@ import it.unibo.jumpig.model.api.World;
 public class GameImpl implements Game {
 
     private final World world;
-
+    private double heightScore;
     /**
      * The constructor to create a new game.
      */
@@ -40,6 +42,7 @@ public class GameImpl implements Game {
     @Override
     public void updateGame(final long elapsed, final Direction direction) {
         this.world.updateGame(elapsed, direction);
+        manageScoreUpdate(x -> x < this.getWorld().getPlayer().getPosition().getY(), heightScore);
     }
 
     /**
@@ -47,7 +50,7 @@ public class GameImpl implements Game {
      */
     @Override
     public int getCurrentScore() {
-        return (int) this.world.getPlayer().getPosition().getY();
+        return (int) this.heightScore;
     }
 
     /**
@@ -67,5 +70,23 @@ public class GameImpl implements Game {
                     + "because world has getters that return copies of objects.")
     public World getWorld() {
         return this.world;
+    }
+
+    /**
+     * Method that checks if the heightScore needs an update.
+     * @param predicate the condition that triggers the update
+     * @param score the score that needs an update
+     */
+    private void manageScoreUpdate(final Predicate<Double> predicate, final double score) {
+        if (predicate.test(score)) {
+           updateScore();
+        }
+    }
+
+    /**
+     * Method that updates the heightScore.
+     */
+    private void updateScore() {
+        this.heightScore = this.getWorld().getPlayer().getPosition().getY();
     }
 }
