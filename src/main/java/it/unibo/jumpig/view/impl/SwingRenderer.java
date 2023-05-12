@@ -30,6 +30,7 @@ public final class SwingRenderer implements Renderer {
     private double widthRatio;
     private double heightRatio;
     private final Image vanishingPlatformImage; 
+    private final Image jumpigImage;
 
     /**
      * Constructor for a SwingRenderer.
@@ -41,6 +42,8 @@ public final class SwingRenderer implements Renderer {
         this.worldHeight = worldHeight;
         final URL imgUrl = ClassLoader.getSystemResource(filename);
         this.vanishingPlatformImage = new ImageIcon(imgUrl).getImage();
+        final URL jumpigUrl = ClassLoader.getSystemResource(ROOT + "jumpigIcon.png");
+        this.jumpigImage = new ImageIcon(jumpigUrl).getImage();
     } 
 
     /**
@@ -48,8 +51,14 @@ public final class SwingRenderer implements Renderer {
      */
     @Override
     public void renderPlayer(final RectangleHitbox entity) {
-        graphics.get().setColor(Color.PINK);
-        graphics.get().fill(this.createScaledRectangle(entity));
+        final var rectangle = this.createScaledRectangle(entity);
+        this.graphics.get().drawImage(this.jumpigImage, 
+            (int) rectangle.getX(), 
+            (int) rectangle.getY(), 
+            (int) rectangle.getWidth(), 
+            (int) rectangle.getHeight(), 
+            null
+        );
     }
 
     /**
