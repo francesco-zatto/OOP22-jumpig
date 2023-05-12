@@ -23,12 +23,14 @@ import it.unibo.jumpig.view.api.GameViewScene;
 public class GameViewImpl implements GameViewScene {
 
     public static final long serialVersionUID = 1L;
+    private static final double ASPECT_RATIO = 16.0 / 9.0;
+    private static final double SCREEN_FRACTION = 4;
     private final JFrame frame = new JFrame();
     private final JPanel mainPanel;
     private final PlayerKeyListener playerKeyListener = new PlayerKeyListener();
     private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-    private final Dimension startScreen = new Dimension((int) screen.getWidth() / 5, 
-        (int) (screen.getWidth() / 5 * 1.7));
+    private final Dimension startScreen = new Dimension((int) (screen.getWidth() / SCREEN_FRACTION), 
+        (int) (screen.getWidth() / SCREEN_FRACTION * ASPECT_RATIO));
 
     /**
      * Constructor to create the game view that manage updates.

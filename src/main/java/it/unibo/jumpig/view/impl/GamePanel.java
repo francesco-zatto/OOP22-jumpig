@@ -1,10 +1,8 @@
 package it.unibo.jumpig.view.impl;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Toolkit;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -21,11 +19,7 @@ import it.unibo.jumpig.common.api.hitbox.Hitbox;
 public class GamePanel extends JPanel { 
 
     public static final long serialVersionUID = 1L;
-    private static final double ASPECT_RATIO = 16.0 / 9.0;
-    private static final double SCREEN_FRACTION = 5;
-    private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-    private final Dimension startScreen = new Dimension((int) (screen.getWidth() / SCREEN_FRACTION),
-            (int) (screen.getWidth() / SCREEN_FRACTION * ASPECT_RATIO));
+    private static final Color BACKGROUND_COLOR = new Color(102, 178, 255);
     @SuppressFBWarnings(
         value = "SE_BAD_FIELD", 
         justification = "GamePanel is not meant to be serialized." 
@@ -40,7 +34,6 @@ public class GamePanel extends JPanel {
      */
     public GamePanel(final double worldWidth, final double worldHeight) { 
         this.renderer = new SwingRenderer(worldWidth, worldHeight);
-        this.setSize(this.startScreen);
         this.setPreferredSize(super.getSize());
     }
 
@@ -59,7 +52,7 @@ public class GamePanel extends JPanel {
     }
 
     private void clearPreviousFrame(final Graphics2D graphics) {
-        //graphics.setBackground(new Color(102, 178, 255));
+        graphics.setBackground(BACKGROUND_COLOR);
         graphics.clearRect(0, 0, this.getWidth(), this.getHeight());
     }
 
