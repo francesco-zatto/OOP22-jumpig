@@ -54,11 +54,11 @@ public interface Camera {
      * It will be a multiple of the HEIGHT of the world. 
      * @return the height from which the camera start
      */
-    double getCameraStartHeight();
+    int getCameraStartHeight();
 
     /**
      * Setter for the height from which the camera starts.
      * @param startHeight the height from which the camera start
      */
-    void setCameraHeight(double startHeight);
+    void setCameraStartHeight(int startHeight);
 }
