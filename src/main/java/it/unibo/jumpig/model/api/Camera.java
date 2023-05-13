@@ -49,4 +49,10 @@ public interface Camera {
      */
     Camera copy(Player player);
 
+    /**
+     * The getter for the height from which the camera starts.
+     * It will be a multiple of the HEIGHT of the world. 
+     * @return the height from which the camera start
+     */
+    double getCameraStartHeight();
 }

@@ -12,6 +12,7 @@ import it.unibo.jumpig.model.api.gameentity.Player;
 
 public class CameraImpl implements Camera {
 
+    private final double startHeight;
     private double cameraheight;
     private Velocity cameraVelocity;
     private Optional<Double> lastPlatform;
@@ -23,6 +24,7 @@ public class CameraImpl implements Camera {
 
     public CameraImpl(final Player player) {
         this.cameraheight = 0;
+        this.startHeight = 0;
         this.cameraVelocity = new VelocityImpl(0, 0);
         this.lastPlatform = player.getLastPlatformHeight();
     }
@@ -87,6 +89,14 @@ public class CameraImpl implements Camera {
     @Override
     public Camera copy(final Player player) {
         return new CameraImpl(player);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getCameraStartHeight() {
+        return this.startHeight;
     }
 
 }
