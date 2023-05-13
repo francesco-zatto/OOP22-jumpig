@@ -55,4 +55,10 @@ public interface Camera {
      * @return the height from which the camera start
      */
     double getCameraStartHeight();
+
+    /**
+     * Setter for the height from which the camera starts.
+     * @param startHeight the height from which the camera start
+     */
+    void setCameraHeight(double startHeight);
 }
