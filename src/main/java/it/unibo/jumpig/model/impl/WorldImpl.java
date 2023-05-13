@@ -36,6 +36,9 @@ public class WorldImpl implements World {
     private final Set<Coin> setcoins;
     private final Camera camera;
     private final Set<GameEntity<? extends Hitbox>> setentities;
+    private int constant = 1; 
+                            /* constant that multiplies height for each constant = 1,3,5,7,9,...
+                                It will always be odd because of the construction of the game */
 
     /**
      * The constructor to create a new world.
@@ -194,20 +197,32 @@ public class WorldImpl implements World {
     }
 
     private void checkRegeneration() {
-        if ((this.player.getPosition().getY() % HEIGHT) < 1
-                //check that it's almoast zero meaning that the generator has to regenerate entities.
-            ) {
-                    setentities.clear();
-                    if (this.player.getVelocity().getYComponent() > 0) {
-                        this.regenerate();
-                    }
+        if ((int) this.player.getPosition().getY() == HEIGHT * constant) {
+                setentities.stream()
+                        .filter(x -> 
+                            x.getPosition().getY() >= this.player.getPosition().getY())
+                        .collect(Collectors.toSet());
+                camera.setCameraStartHeight((int) this.player.getPosition().getY() + (int) HEIGHT);
+                if (this.player.getVelocity().getYComponent() > 0) {
+                    this.regenerate();
                 }
+                constant = constant + 2;
+            }
     }
-    private Set<GameEntity<? extends Hitbox>> regenerate() {
 
-        this.setplatform.clear();
-        this.setcoins.clear();
-        this.setenemies.clear();
+    private Set<GameEntity<? extends Hitbox>> regenerate() {
+        this.setplatform.stream().
+                filter(x -> 
+                    x.getPosition().getY() >= this.player.getPosition().getY())
+                .collect(Collectors.toSet());
+        this.setcoins.stream()
+                .filter(x -> 
+                    x.getPosition().getY() >= this.player.getPosition().getY())
+                .collect(Collectors.toSet());
+        this.setenemies.stream()
+                .filter(x -> 
+                    x.getPosition().getY() >= this.player.getPosition().getY())
+                .collect(Collectors.toSet());
         generator = new GeneratorEntitiesImpl(WIDTH, HEIGHT, this.camera);
             /* I have to create a new generator to clean up the set of entities' positions 
                 which will be compared with positions that are goin to be created 
