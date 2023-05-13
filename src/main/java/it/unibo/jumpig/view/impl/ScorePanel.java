@@ -37,8 +37,8 @@ public class ScorePanel extends JPanel {
       * @param coins the number of coins gained
       * @param lives the lives left
       */
-     public void refresh(final double height, final int coins, final int lives) {
-          this.scoreNumber.setText(Double.toString(height));
+     public void refresh(final int height, final int coins, final int lives) {
+          this.scoreNumber.setText(Integer.toString(height));
           this.coinNumber.setText(Integer.toString(coins));
           this.livesNumber.setText(Integer.toString(lives));
      }

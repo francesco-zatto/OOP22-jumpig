@@ -23,13 +23,19 @@ public final class SwingRenderer implements Renderer {
 
     private static final String SEP = System.getProperty("file.separator");
     private static final String ROOT = "it" + SEP + "unibo" + SEP + "jumpig" + SEP + "images" + SEP;
-    private final String filename = ROOT + "vanishing_platform.png";
+    private final String basicPlatformfile = ROOT + "basic_platform.png";
+    private final String vanishingPlatformFile = ROOT + "vanishing_platform.png";
+    private final String brokenPlatformFile = ROOT + "broken_platform.png";
+    private final String enemyFile = ROOT + "jumpier_enemy.png";
     private Optional<Graphics2D> graphics = Optional.empty();
     private final double worldWidth;
     private final double worldHeight;
     private double widthRatio;
     private double heightRatio;
+    private final Image basicPlatformImage;
     private final Image vanishingPlatformImage; 
+    private final Image brokenPlatformImage;
+    private final Image enemyImage;
     private final Image jumpigImage;
 
     /**
@@ -40,8 +46,14 @@ public final class SwingRenderer implements Renderer {
     public SwingRenderer(final double worldWidth, final double worldHeight) {
         this.worldWidth = worldWidth;
         this.worldHeight = worldHeight;
-        final URL imgUrl = ClassLoader.getSystemResource(filename);
-        this.vanishingPlatformImage = new ImageIcon(imgUrl).getImage();
+        final URL basicUrl = ClassLoader.getSystemResource(basicPlatformfile);
+        this.basicPlatformImage = new ImageIcon(basicUrl).getImage();
+        final URL vanishingUrl = ClassLoader.getSystemResource(vanishingPlatformFile);
+        this.vanishingPlatformImage = new ImageIcon(vanishingUrl).getImage();
+        final URL brokenUrl = ClassLoader.getSystemResource(brokenPlatformFile);
+        this.brokenPlatformImage = new ImageIcon(brokenUrl).getImage();
+        final URL enemyUrl = ClassLoader.getSystemResource(enemyFile);
+        this.enemyImage = new ImageIcon(enemyUrl).getImage();
         final URL jumpigUrl = ClassLoader.getSystemResource(ROOT + "jumpigIcon.png");
         this.jumpigImage = new ImageIcon(jumpigUrl).getImage();
     } 
@@ -52,6 +64,7 @@ public final class SwingRenderer implements Renderer {
     @Override
     public void renderPlayer(final RectangleHitbox entity) {
         final var rectangle = this.createScaledRectangle(entity);
+        //TODO metti drawImage
         this.graphics.get().drawImage(this.jumpigImage, 
             (int) rectangle.getX(), 
             (int) rectangle.getY(), 
@@ -66,7 +79,9 @@ public final class SwingRenderer implements Renderer {
      */
     @Override
     public void renderEnemy(final RectangleHitbox entity) {
-        this.fillRectangle(Color.ORANGE, this.graphics.get(), this.createScaledRectangle(entity));
+        final var rectangle = this.createScaledRectangle(entity);
+        drawImage(rectangle, this.enemyImage);
+        //this.fillRectangle(Color.ORANGE, this.graphics.get(), this.createScaledRectangle(entity)); TODO remove
     }
 
     /**
@@ -74,7 +89,9 @@ public final class SwingRenderer implements Renderer {
      */
     @Override
     public void renderBasicPlatform(final RectangleHitbox entity) {
-        this.fillRectangle(Color.GREEN, this.graphics.get(), this.createScaledRectangle(entity));
+        final var rectangle = this.createScaledRectangle(entity);
+        drawImage(rectangle, this.basicPlatformImage);
+        //this.fillRectangle(Color.GREEN, this.graphics.get(), this.createScaledRectangle(entity));
     }
 
     /**
@@ -83,13 +100,7 @@ public final class SwingRenderer implements Renderer {
     @Override
     public void renderVanishingPlatform(final RectangleHitbox entity) {
         final var rectangle = this.createScaledRectangle(entity);
-        this.graphics.get().drawImage(this.vanishingPlatformImage, 
-            (int) rectangle.getX(), 
-            (int) rectangle.getY(), 
-            (int) rectangle.getWidth(), 
-            (int) rectangle.getHeight(), 
-            null
-        );
+        drawImage(rectangle, this.vanishingPlatformImage);
         //this.fillRectangle(Color.RED, this.graphics.get(), this.createScaledRectangle(entity)); TODO remove
     }
 
@@ -98,8 +109,10 @@ public final class SwingRenderer implements Renderer {
      */
     @Override
     public void renderBrokenPlatform(final RectangleHitbox entity) {
-        final Color brown = new Color(139, 69, 19);
-        this.fillRectangle(brown, this.graphics.get(), this.createScaledRectangle(entity));
+        final var rectangle = this.createScaledRectangle(entity);
+        drawImage(rectangle, this.brokenPlatformImage);
+        //final Color brown = new Color(139, 69, 19); TODO remove
+        //this.fillRectangle(brown, this.graphics.get(), this.createScaledRectangle(entity));
     }
 
     /**
@@ -110,8 +123,8 @@ public final class SwingRenderer implements Renderer {
         graphics.get().setColor(Color.YELLOW);
         graphics.get().fillOval((int) ((entity.getCenter().getX() - entity.getRadius()) * widthRatio), 
             (int) ((this.worldHeight - (entity.getCenter().getY() + entity.getRadius())) * heightRatio), 
-            this.createScaledRadius(entity), 
-            this.createScaledRadius(entity));
+            this.createScaledRadius(entity) * 2, 
+            this.createScaledRadius(entity) * 2);
     }
 
     /**
@@ -134,6 +147,16 @@ public final class SwingRenderer implements Renderer {
         this.graphics = Optional.of(graphics);
     }
 
+    private void drawImage(final Rectangle rectangle, final Image image) {
+        this.graphics.get().drawImage(image, 
+            (int) rectangle.getX(), 
+            (int) rectangle.getY(), 
+            (int) rectangle.getWidth(), 
+            (int) rectangle.getHeight(), 
+            null
+        );
+    }
+
     /*The origin in World is the lower left vertex of the window, while in java swing is the upper left
      * vertex, so rectangle's ordinate is computed with height - ordinate. 
     */
@@ -150,10 +173,11 @@ public final class SwingRenderer implements Renderer {
         );
     }
 
-    private void fillRectangle(final Color color, final Graphics2D graphics, final Rectangle rectangle) {
+    /*private void fillRectangle(final Color color, final Graphics2D graphics, final Rectangle rectangle) {
         graphics.setColor(color);
         graphics.fill(rectangle);
-    }
+    } TODO remove
+    */
 
     private int createScaledRadius(final CircleHitbox hitbox) {
         return (int) (hitbox.getRadius() * this.widthRatio);

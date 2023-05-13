@@ -9,7 +9,7 @@ import it.unibo.jumpig.view.api.Renderer;
 
 public class CoinHitbox extends CircleHitbox {
 
-    private static final double COIN_RADIUS = 3;
+    private static final double COIN_RADIUS = 1.5;
 
     /**
      * Constructor for the coin's hitbox.

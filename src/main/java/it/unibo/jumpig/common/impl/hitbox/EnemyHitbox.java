@@ -9,7 +9,7 @@ import it.unibo.jumpig.view.api.Renderer;
 
 public class EnemyHitbox extends RectangleHitbox {
 
-    private static final double ENEMY_WIDTH = 8;
+    private static final double ENEMY_WIDTH = 6;
     private static final double ENEMY_HEIGHT = 8;
 
     /**

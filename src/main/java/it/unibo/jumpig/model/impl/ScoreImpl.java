@@ -9,7 +9,7 @@ public class ScoreImpl implements Score {
 
     private static final long serialVersionUID = 1L;
     private final String username;
-    private final double heightScore;
+    private final int heightScore;
     private final int coins;
 
     /**
@@ -18,7 +18,7 @@ public class ScoreImpl implements Score {
      * @param heightScore the final score, i.e. the maximum height reached
      * @param coins the amount of coins collected in a game
      */
-    public ScoreImpl(final String username, final double heightScore, final int coins) {
+    public ScoreImpl(final String username, final int heightScore, final int coins) {
         this.username = username;
         this.heightScore = heightScore;
         this.coins = coins;
@@ -36,7 +36,7 @@ public class ScoreImpl implements Score {
      * {@inheritDoc}
      */
     @Override
-    public double getHeightScore() {
+    public int getHeightScore() {
         return this.heightScore;
     }
 

@@ -1,9 +1,8 @@
 package it.unibo.jumpig.view.impl;
 
-import java.awt.Dimension;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Toolkit;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -19,16 +18,12 @@ import it.unibo.jumpig.common.api.hitbox.Hitbox;
 public class GamePanel extends JPanel { 
 
     public static final long serialVersionUID = 1L;
-    private static final double ASPECT_RATIO = 16.0 / 9.0;
-    private static final double SCREEN_FRACTION = 5;
-    private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-    private final Dimension startScreen = new Dimension((int) (screen.getWidth() / SCREEN_FRACTION),
-            (int) (screen.getWidth() / SCREEN_FRACTION * ASPECT_RATIO));
+    private static final Color BACKGROUND_COLOR = new Color(102, 178, 255);
     @SuppressFBWarnings(
         value = "SE_BAD_FIELD", 
         justification = "GamePanel is not meant to be serialized." 
     ) 
-    private final Set<Hitbox> entities = new HashSet<>();
+    private Set<Hitbox> entities = new HashSet<>();
     private final transient SwingRenderer renderer;
 
     /**
@@ -38,8 +33,7 @@ public class GamePanel extends JPanel {
      */
     public GamePanel(final double worldWidth, final double worldHeight) { 
         this.renderer = new SwingRenderer(worldWidth, worldHeight);
-        this.setSize(this.startScreen);
-        this.setPreferredSize(super.getSize());
+        //this.setPreferredSize(super.getSize());
     }
 
     /**
@@ -57,6 +51,7 @@ public class GamePanel extends JPanel {
     }
 
     private void clearPreviousFrame(final Graphics2D graphics) {
+        graphics.setBackground(BACKGROUND_COLOR);
         graphics.clearRect(0, 0, this.getWidth(), this.getHeight());
     }
 
@@ -74,18 +69,6 @@ public class GamePanel extends JPanel {
      * @param entities entities to render in the panel.
      */
     public void refresh(final Set<Hitbox> entities) {
-        this.entities.clear();
-        this.entities.addAll(entities);
+        this.entities = new HashSet<>(entities);
     }
-    /*
-    public static void main(String[] args) {
-        var frame = new JFrame();
-        Platform platform = new BasicPlatform(new PositionImpl(15, 15), 30);
-        Platform platform2 = new BasicPlatform(new PositionImpl(28, 56), 40);
-        var panel = new GamePanel(9,16);
-        frame.getContentPane().add(panel);
-        frame.pack();
-        frame.setVisible(true);
-    }
-    */
 }

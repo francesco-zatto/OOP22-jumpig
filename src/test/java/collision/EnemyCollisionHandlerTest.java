@@ -15,6 +15,10 @@ import it.unibo.jumpig.model.api.gameentity.Enemy;
 import it.unibo.jumpig.model.impl.gameentity.EnemyImpl;
 import it.unibo.jumpig.model.impl.gameentity.PlayerImpl;
 
+/**
+ * Class to test correctness of subtypes of CollisionHandler for enemies.
+ * {@link it.unibo.jumpig.model.api.collision.CollisionHandler}
+ */
 class EnemyCollisionHandlerTest {
 
     private static final double PLAYER_POSITION_X = 5;

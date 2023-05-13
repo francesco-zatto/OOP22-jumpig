@@ -14,7 +14,7 @@ import it.unibo.jumpig.model.api.World;
 public class GameImpl implements Game {
 
     private final World world;
-    private double heightScore;
+    private int heightScore;
     /**
      * The constructor to create a new game.
      */
@@ -77,7 +77,7 @@ public class GameImpl implements Game {
      * @param predicate the condition that triggers the update
      * @param score the score that needs an update
      */
-    private void manageScoreUpdate(final Predicate<Double> predicate, final double score) {
+    private void manageScoreUpdate(final Predicate<Integer> predicate, final int score) {
         if (predicate.test(score)) {
            updateScore();
         }
@@ -87,6 +87,6 @@ public class GameImpl implements Game {
      * Method that updates the heightScore.
      */
     private void updateScore() {
-        this.heightScore = this.getWorld().getPlayer().getPosition().getY();
+        this.heightScore = (int) this.getWorld().getPlayer().getPosition().getY();
     }
 }
