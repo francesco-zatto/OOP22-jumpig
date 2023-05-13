@@ -24,6 +24,7 @@ public final class SwingRenderer implements Renderer {
     private static final String SEP = System.getProperty("file.separator");
     private static final String ROOT = "it" + SEP + "unibo" + SEP + "jumpig" + SEP + "images" + SEP;
     private final String vanishingPlatformFile = ROOT + "vanishing_platform.png";
+    private final String brokenPlatformFile = ROOT + "broken_platform.png";
     private final String enemyFile = ROOT + "jumpier_enemy.png";
     private Optional<Graphics2D> graphics = Optional.empty();
     private final double worldWidth;
@@ -31,6 +32,7 @@ public final class SwingRenderer implements Renderer {
     private double widthRatio;
     private double heightRatio;
     private final Image vanishingPlatformImage; 
+    private final Image brokenPlatformImage;
     private final Image enemyImage;
     private final Image jumpigImage;
 
@@ -44,6 +46,8 @@ public final class SwingRenderer implements Renderer {
         this.worldHeight = worldHeight;
         final URL vanishingUrl = ClassLoader.getSystemResource(vanishingPlatformFile);
         this.vanishingPlatformImage = new ImageIcon(vanishingUrl).getImage();
+        final URL brokenUrl = ClassLoader.getSystemResource(brokenPlatformFile);
+        this.brokenPlatformImage = new ImageIcon(brokenUrl).getImage();
         final URL enemyUrl = ClassLoader.getSystemResource(enemyFile);
         this.enemyImage = new ImageIcon(enemyUrl).getImage();
         final URL jumpigUrl = ClassLoader.getSystemResource(ROOT + "jumpigIcon.png");
@@ -99,8 +103,10 @@ public final class SwingRenderer implements Renderer {
      */
     @Override
     public void renderBrokenPlatform(final RectangleHitbox entity) {
-        final Color brown = new Color(139, 69, 19);
-        this.fillRectangle(brown, this.graphics.get(), this.createScaledRectangle(entity));
+        final var rectangle = this.createScaledRectangle(entity);
+        drawImage(rectangle, this.brokenPlatformImage);
+        //final Color brown = new Color(139, 69, 19); TODO remove
+        //this.fillRectangle(brown, this.graphics.get(), this.createScaledRectangle(entity));
     }
 
     /**
