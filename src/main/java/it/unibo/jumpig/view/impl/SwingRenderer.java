@@ -23,6 +23,7 @@ public final class SwingRenderer implements Renderer {
 
     private static final String SEP = System.getProperty("file.separator");
     private static final String ROOT = "it" + SEP + "unibo" + SEP + "jumpig" + SEP + "images" + SEP;
+    private final String basicPlatformfile = ROOT + "basic_platform.png";
     private final String vanishingPlatformFile = ROOT + "vanishing_platform.png";
     private final String brokenPlatformFile = ROOT + "broken_platform.png";
     private final String enemyFile = ROOT + "jumpier_enemy.png";
@@ -31,6 +32,7 @@ public final class SwingRenderer implements Renderer {
     private final double worldHeight;
     private double widthRatio;
     private double heightRatio;
+    private final Image basicPlatformImage;
     private final Image vanishingPlatformImage; 
     private final Image brokenPlatformImage;
     private final Image enemyImage;
@@ -44,6 +46,8 @@ public final class SwingRenderer implements Renderer {
     public SwingRenderer(final double worldWidth, final double worldHeight) {
         this.worldWidth = worldWidth;
         this.worldHeight = worldHeight;
+        final URL basicUrl = ClassLoader.getSystemResource(basicPlatformfile);
+        this.basicPlatformImage = new ImageIcon(basicUrl).getImage();
         final URL vanishingUrl = ClassLoader.getSystemResource(vanishingPlatformFile);
         this.vanishingPlatformImage = new ImageIcon(vanishingUrl).getImage();
         final URL brokenUrl = ClassLoader.getSystemResource(brokenPlatformFile);
@@ -85,7 +89,9 @@ public final class SwingRenderer implements Renderer {
      */
     @Override
     public void renderBasicPlatform(final RectangleHitbox entity) {
-        this.fillRectangle(Color.GREEN, this.graphics.get(), this.createScaledRectangle(entity));
+        final var rectangle = this.createScaledRectangle(entity);
+        drawImage(rectangle, this.basicPlatformImage);
+        //this.fillRectangle(Color.GREEN, this.graphics.get(), this.createScaledRectangle(entity));
     }
 
     /**
@@ -167,10 +173,11 @@ public final class SwingRenderer implements Renderer {
         );
     }
 
-    private void fillRectangle(final Color color, final Graphics2D graphics, final Rectangle rectangle) {
+    /*private void fillRectangle(final Color color, final Graphics2D graphics, final Rectangle rectangle) {
         graphics.setColor(color);
         graphics.fill(rectangle);
-    }
+    } TODO remove
+    */
 
     private int createScaledRadius(final CircleHitbox hitbox) {
         return (int) (hitbox.getRadius() * this.widthRatio);
