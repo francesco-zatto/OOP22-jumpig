@@ -17,19 +17,25 @@ public class EnemyCollisionChecker extends AbstractCollisionChecker<RectangleHit
     protected boolean areBoundsColliding(final Player player, final Enemy gameEntity) {
         final RectangleHitbox playerHitbox = player.getHitbox();
         final RectangleHitbox enemyHitbox = gameEntity.getHitbox();
+        return isPlayerAligned(playerHitbox, enemyHitbox) && isPlayerOnTheSameHeight(playerHitbox, enemyHitbox);
+    }
+
+    private boolean isPlayerAligned(final RectangleHitbox playerHitbox, final RectangleHitbox enemyHitbox) {
         final double playerLeftX = playerHitbox.getRectangleLeftX();
         final double playerRightX = playerHitbox.getRectangleRightX();
         final double enemyLeftX = enemyHitbox.getRectangleLeftX();
         final double enemyRightX = enemyHitbox.getRectangleRightX();
-        final boolean isPlayerAligned = isBetween(playerLeftX, enemyLeftX, enemyRightX) 
-                || isBetween(playerRightX, enemyLeftX, enemyRightX);
+        return super.isBetween(playerLeftX, enemyLeftX, enemyRightX) 
+            || super.isBetween(playerRightX, enemyLeftX, enemyRightX);
+    }
+
+    private boolean isPlayerOnTheSameHeight(final RectangleHitbox playerHitbox, final RectangleHitbox enemyHitbox) {
         final double playerLowerY = playerHitbox.getRectangleLowerY();
         final double playerUpperY = playerHitbox.getRectangleUpperY();
         final double enemyLowerY = enemyHitbox.getRectangleLowerY();
         final double enemyUpperY = enemyHitbox.getRectangleUpperY();
-        final boolean isPlayerOnTheSameHeight = isBetween(playerLowerY, enemyLowerY, enemyUpperY) 
-                || isBetween(playerUpperY, enemyLowerY, enemyUpperY);
-        return isPlayerAligned && isPlayerOnTheSameHeight;
+        return isBetween(playerLowerY, enemyLowerY, enemyUpperY) 
+            || isBetween(playerUpperY, enemyLowerY, enemyUpperY);
     }
 
     /**
