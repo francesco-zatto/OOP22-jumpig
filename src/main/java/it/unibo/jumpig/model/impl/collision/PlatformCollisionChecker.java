@@ -18,15 +18,24 @@ public abstract class PlatformCollisionChecker<P extends Platform> extends Abstr
     protected boolean areBoundsColliding(final Player player, final P gameEntity) {
         final RectangleHitbox playerHitbox = player.getHitbox();
         final RectangleHitbox platformHitbox = gameEntity.getHitbox();
+        return isPlayerAligned(playerHitbox, platformHitbox) && isPlayerAbove(playerHitbox, platformHitbox);
+    }
+
+    private boolean isPlayerAligned(final RectangleHitbox playerHitbox, final RectangleHitbox platformHitbox) {
         final double playerLeftX = playerHitbox.getRectangleLeftX();
         final double playerRightX = playerHitbox.getRectangleRightX();
         final double platformLeftX = platformHitbox.getRectangleLeftX();
         final double platformRightX = platformHitbox.getRectangleRightX();
-        final boolean isPlayerAligned = super.isBetween(playerLeftX, platformLeftX, platformRightX) 
-                || super.isBetween(playerRightX, platformLeftX, platformRightX);
-        final boolean isPlayerAbove = isBetween(playerHitbox.getRectangleLowerY(), platformHitbox.getCenter().getY(),
-                platformHitbox.getRectangleUpperY());
-        return isPlayerAligned && isPlayerAbove;
+        return super.isBetween(playerLeftX, platformLeftX, platformRightX) 
+            || super.isBetween(playerRightX, platformLeftX, platformRightX);
+    }
+
+    private boolean isPlayerAbove(final RectangleHitbox playerHitbox, final RectangleHitbox platformHitbox) {
+        return isBetween(
+            playerHitbox.getRectangleLowerY(), 
+            platformHitbox.getCenter().getY(), 
+            platformHitbox.getRectangleUpperY()
+        );
     }
 
     /**
