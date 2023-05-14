@@ -47,13 +47,13 @@ public class WorldImpl implements World {
     public WorldImpl() {
         this.player = new PlayerImpl(new PositionImpl(WIDTH / 2, 1));
         this.camera = new CameraImpl(this.player);
-        this.generator = new GeneratorEntitiesImpl(WIDTH, HEIGHT, this.camera);
+        this.generator = new GeneratorEntitiesImpl(WIDTH, HEIGHT);
         generator.setGenerateStrategy(new GeneratePlatformsStrategy());
-        this.setplatform = generator.generateEntities();
+        this.setplatform = generator.generateEntities(this.camera);
         generator.setGenerateStrategy(new GenerateEnemiesStrategy());
-        this.setenemies = generator.generateEntities();
+        this.setenemies = generator.generateEntities(this.camera);
         generator.setGenerateStrategy(new GenerateCoinsStrategy());
-        this.setcoins = generator.generateEntities();
+        this.setcoins = generator.generateEntities(this.camera);
         this.setentities = new HashSet<>();
     }
 
@@ -223,16 +223,16 @@ public class WorldImpl implements World {
                 .filter(x -> 
                     x.getPosition().getY() >= this.player.getPosition().getY())
                 .collect(Collectors.toSet());
-        generator = new GeneratorEntitiesImpl(WIDTH, HEIGHT, this.camera);
+        generator = new GeneratorEntitiesImpl(WIDTH, HEIGHT);
             /* I have to create a new generator to clean up the set of entities' positions 
                 which will be compared with positions that are goin to be created 
                 (in the method checkEqualsPosition) */
         generator.setGenerateStrategy(new GeneratePlatformsStrategy());
-        this.setplatform.addAll(generator.generateEntities());
+        this.setplatform.addAll(generator.generateEntities(this.camera));
         generator.setGenerateStrategy(new GenerateEnemiesStrategy());
-        this.setenemies.addAll(generator.generateEntities());
+        this.setenemies.addAll(generator.generateEntities(this.camera));
         generator.setGenerateStrategy(new GenerateCoinsStrategy());
-        this.setcoins.addAll(generator.generateEntities());
+        this.setcoins.addAll(generator.generateEntities(this.camera));
         this.setentities.clear();
         this.setentities.addAll(this.setplatform);
         this.setentities.addAll(this.setenemies);

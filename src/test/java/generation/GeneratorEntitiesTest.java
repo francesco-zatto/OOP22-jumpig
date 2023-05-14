@@ -29,8 +29,7 @@ class GeneratorEntitiesTest {
     private final World world = new WorldImpl();
     private final GeneratorEntitiesImpl generator = new GeneratorEntitiesImpl(
         world.getWidth(), 
-        world.getHeight(), 
-        world.getCamera()
+        world.getHeight()
         );
     private static final int NUM_BASIC_PLATFORM = 20;    /* The number of basic platforms */
     private static final int NUM_VANISHING_PLATFORM = 5;    /* The number of vanishing platforms */
@@ -54,21 +53,21 @@ class GeneratorEntitiesTest {
     @Test
     void testGenerationPlatforms() {
         this.generator.setGenerateStrategy(new GeneratePlatformsStrategy());
-        final Set<Platform> setplatform = this.generator.generateEntities();
+        final Set<Platform> setplatform = this.generator.generateEntities(this.world.getCamera());
         this.assertGeneration(setplatform);
     }
 
     @Test
     void testGenerationCoins() {
         this.generator.setGenerateStrategy(new GenerateCoinsStrategy());
-        final Set<Coin> setcoin = this.generator.generateEntities();
+        final Set<Coin> setcoin = this.generator.generateEntities(this.world.getCamera());
         this.assertGeneration(setcoin);
     }
 
     @Test
     void testGenerationEnemies() {
         this.generator.setGenerateStrategy(new GenerateEnemiesStrategy());
-        final Set<Enemy> setenemy = this.generator.generateEntities();
+        final Set<Enemy> setenemy = this.generator.generateEntities(this.world.getCamera());
         this.assertGeneration(setenemy);
     }
 
@@ -80,17 +79,17 @@ class GeneratorEntitiesTest {
         );  // +1 because in the set of entities there is also the player 
         this.generator.setGenerateStrategy(new GenerateCoinsStrategy());
         assertEquals(
-            this.generator.generateEntities().size(), 
+            this.generator.generateEntities(this.world.getCamera()).size(), 
             NUM_COIN
         );
         this.generator.setGenerateStrategy(new GenerateEnemiesStrategy());
         assertEquals(
-            this.generator.generateEntities().size(), 
+            this.generator.generateEntities(this.world.getCamera()).size(), 
             NUM_ENEMY
         );
         this.generator.setGenerateStrategy(new GeneratePlatformsStrategy());
         assertEquals(
-            this.generator.generateEntities().size(), 
+            this.generator.generateEntities(this.world.getCamera()).size(), 
             NUM_BASIC_PLATFORM + NUM_BROKEN_PLATFORM + NUM_VANISHING_PLATFORM
         );
     }
