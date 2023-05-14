@@ -16,6 +16,7 @@ public class CameraImpl implements Camera {
     private double cameraheight;
     private Velocity cameraVelocity;
     private Optional<Double> lastPlatform;
+    private static final double PLATFORM_HEIGHT = 2;
 
     /**
      * Constructor to create a new camera.
@@ -59,7 +60,8 @@ public class CameraImpl implements Camera {
     @Override
     public void setCameraHeight(final double time, final Player player) {
         if (this.cameraheight < player.getPosition().getY() - 1) {
-            this.cameraheight = this.cameraheight + this.cameraVelocity.getYComponent() * time;
+            this.cameraheight = player.getLastPlatformHeight().get() - PLATFORM_HEIGHT
+                + this.cameraVelocity.getYComponent() * time;
         }
     }
 
