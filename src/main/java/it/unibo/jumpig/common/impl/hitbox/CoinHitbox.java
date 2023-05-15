@@ -39,8 +39,7 @@ public class CoinHitbox extends CircleHitbox {
 
     @Override
     public double getUpperY() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUpperY'");
+        return super.getCenter().getY() + super.getRadius();
     }
 
     @Override
