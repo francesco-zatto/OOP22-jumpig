@@ -117,8 +117,8 @@ public final class SwingRenderer implements Renderer {
         graphics.get().fillOval(
             (int) ((entity.getCenter().getX() - entity.getRadius()) * widthRatio), 
             (int) ((this.worldHeight - (entity.getCenter().getY() + entity.getRadius())) * heightRatio), 
-            this.createScaledRadius(entity) * 2, 
-            this.createScaledRadius(entity) * 2
+            this.createWidthScaledRadius(entity) * 2, 
+            this.createHeightScaledRadius(entity) * 2
             );
     }
 
@@ -174,7 +174,21 @@ public final class SwingRenderer implements Renderer {
     } TODO remove
     */
 
-    private int createScaledRadius(final CircleHitbox hitbox) {
+    /**
+     * Method to scale the width of the coin.
+     * @param hitbox the coin hitbox
+     * @return the scaled width radius of the coin
+     */
+    private int createWidthScaledRadius(final CircleHitbox hitbox) {
         return (int) (hitbox.getRadius() * this.widthRatio);
+    }
+
+    /**
+     * Method to scale the height of the coin.
+     * @param hitbox the coin hitbox
+     * @return the scaled height radius of the coin
+     */
+    private int createHeightScaledRadius(final CircleHitbox hitbox) {
+        return (int) (hitbox.getRadius() * this.heightRatio);
     }
 }
