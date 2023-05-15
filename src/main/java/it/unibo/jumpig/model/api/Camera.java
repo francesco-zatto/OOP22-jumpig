@@ -49,4 +49,16 @@ public interface Camera {
      */
     Camera copy(Player player);
 
+    /**
+     * The getter for the height from which the camera starts.
+     * It will be a multiple of the HEIGHT of the world. 
+     * @return the height from which the camera start
+     */
+    int getCameraStartHeight();
+
+    /**
+     * Setter for the height from which the camera starts.
+     * @param startHeight the height from which the camera start
+     */
+    void setCameraStartHeight(int startHeight);
 }
