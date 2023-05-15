@@ -177,7 +177,7 @@ public class WorldImpl implements World {
 
     private void setEmpty() {
         if (this.camera.getPlatformHeight(this.player).isPresent() 
-            && this.player.getPosition().getY() < this.camera.getCameraHeight()) {
+            && this.player.getPosition().getY() <= this.camera.getCameraHeight()) {
                 this.player.setLastPlatformHeight(Optional.empty());
         }
     }
@@ -200,7 +200,7 @@ public class WorldImpl implements World {
         if ((int) this.player.getPosition().getY() == HEIGHT * constant) {
                 setentities.stream()
                         .filter(x -> 
-                            x.getPosition().getY() >= this.player.getPosition().getY())
+                            x.getPosition().getY() > this.player.getPosition().getY())
                         .collect(Collectors.toSet());
                 camera.setCameraStartHeight((int) this.player.getPosition().getY() + (int) HEIGHT);
                 if (this.player.getVelocity().getYComponent() > 0) {
@@ -213,15 +213,15 @@ public class WorldImpl implements World {
     private Set<GameEntity<? extends Hitbox>> regenerate() {
         this.setplatform.stream().
                 filter(x -> 
-                    x.getPosition().getY() >= this.player.getPosition().getY())
+                    x.getPosition().getY() > this.player.getPosition().getY())
                 .collect(Collectors.toSet());
         this.setcoins.stream()
                 .filter(x -> 
-                    x.getPosition().getY() >= this.player.getPosition().getY())
+                    x.getPosition().getY() > this.player.getPosition().getY())
                 .collect(Collectors.toSet());
         this.setenemies.stream()
                 .filter(x -> 
-                    x.getPosition().getY() >= this.player.getPosition().getY())
+                    x.getPosition().getY() > this.player.getPosition().getY())
                 .collect(Collectors.toSet());
         generator = new GeneratorEntitiesImpl(WIDTH, HEIGHT);
             /* I have to create a new generator to clean up the set of entities' positions 

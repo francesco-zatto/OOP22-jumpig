@@ -58,7 +58,7 @@ public class CameraImpl implements Camera {
      */
     @Override
     public void setCameraHeight(final double time, final Player player) {
-        if (this.cameraheight < player.getPosition().getY() - 1) {
+        if (this.cameraheight <= player.getPosition().getY()) {
             this.cameraheight = this.cameraheight + this.cameraVelocity.getYComponent() * time;
         }
     }
