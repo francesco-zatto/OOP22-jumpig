@@ -31,4 +31,9 @@ public interface GameViewScene extends ViewScene {
      */
     Direction manageInput();
 
+    /**
+     * Method that checks if the view is still active.
+     * @return if the view is still active
+     */
+    boolean isViewActive();
 }
