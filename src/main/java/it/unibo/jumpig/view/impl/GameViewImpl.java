@@ -123,4 +123,12 @@ public class GameViewImpl implements GameViewScene {
             }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isViewActive() {
+        return this.frame.isShowing();
+    }
+
 }
