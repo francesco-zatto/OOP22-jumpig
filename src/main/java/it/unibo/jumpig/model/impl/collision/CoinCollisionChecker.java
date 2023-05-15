@@ -62,7 +62,8 @@ public class CoinCollisionChecker extends AbstractCollisionChecker<CircleHitbox,
             : playerHitbox.getRectangleLowerY();
     }
 
-    /*This inequality is based on the equation of a circumference: (x - xCenter) ^ 2 + (y - yCenter) ^ 2 = radius ^ 2.
+    /*
+     * This inequality is based on the equation of a circumference: (x - xCenter) ^ 2 + (y - yCenter) ^ 2 = radius ^ 2.
      * The equation means that every point on the circumference is distant from the center a length that equals to the radius.
      * If a point is nearest to the center, then the first member of the equation is less than the second member.
      */

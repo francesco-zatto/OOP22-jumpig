@@ -42,7 +42,7 @@ public class GameViewImpl implements GameViewScene {
         final double width, 
         final double height
     ) {
-            this.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            this.frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             this.mainPanel = new JPanel(new BorderLayout());
             this.mainPanel.add(new ScorePanel(), BorderLayout.NORTH);
             this.mainPanel.add(new GamePanel(width, height), BorderLayout.CENTER);
@@ -68,6 +68,7 @@ public class GameViewImpl implements GameViewScene {
     @Override
     public void quit() {
         this.frame.setVisible(false);
+        this.frame.dispose();
     }
 
     /**
