@@ -54,15 +54,18 @@ class CoinCollisionHandlerTest {
     @Test
     void testManyCoinCollisions() {
         final var player = new PlayerImpl(PLAYER_POSITION);
-        final List<? extends Coin> coins = Stream.iterate(0, i -> i + 1)
-                .limit(NUMBER_OF_COINS)
-                .map(i -> COIN_POSITION)
-                .map(BasicCoin::new)
-                .toList();
+        final List<? extends Coin> coins = createCoins();
         final double pickedCoins = player.getCoins();
         coins.forEach(c -> c.handleCollision(player));
         assertEquals(pickedCoins + NUMBER_OF_COINS, player.getCoins());
         coins.forEach(CoinCollisionHandlerTest::assertIsTaken);
+    }
+
+    private List<BasicCoin> createCoins() {
+        return Stream.generate(() -> COIN_POSITION)
+                .limit(NUMBER_OF_COINS)
+                .map(BasicCoin::new)
+                .toList();
     }
 
     @Test
