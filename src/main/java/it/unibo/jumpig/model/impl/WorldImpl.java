@@ -194,6 +194,10 @@ public class WorldImpl implements World {
                 .collect(Collectors.toSet());
     }
 
+    /* 
+     * Calling q = quarter of world's height. This method checks if entity's height is in range
+     * [player's height - q, player's Height + q] to avoid useless calls to Collidable.handleCollision(Player).
+     */
     private boolean isEntityNearPlayer(final GameEntity<? extends Hitbox> entity) {
         final double quarterOfWorld = HEIGHT / 4;
         final double playerHeight = this.player.getPosition().getY();
@@ -202,7 +206,7 @@ public class WorldImpl implements World {
     }
 
     private boolean isAboveCamera(final GameEntity<? extends Hitbox> entity) {
-        return entity.getPosition().getY() > this.camera.getCameraHeight();
+        return entity.getHitbox().getUpperY() > this.camera.getCameraHeight();
     }
 
     private void checkRegeneration() {

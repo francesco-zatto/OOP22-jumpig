@@ -158,8 +158,8 @@ public final class SwingRenderer implements Renderer {
     private Rectangle createScaledRectangle(final RectangleHitbox hitbox) {
         return new Rectangle(
             new Point(
-                (int) (hitbox.getRectangleLeftX() * this.widthRatio),
-                (int) ((this.worldHeight - hitbox.getRectangleUpperY()) * this.heightRatio)
+                (int) (hitbox.getLeftX() * this.widthRatio),
+                (int) ((this.worldHeight - hitbox.getUpperY()) * this.heightRatio)
             ),
             new Dimension(
                 (int) (hitbox.getWidth() * this.widthRatio),

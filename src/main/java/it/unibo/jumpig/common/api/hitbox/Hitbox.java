@@ -19,4 +19,28 @@ public interface Hitbox extends Renderable {
      * @param center  the abscissa and the ordinate of the center of the Hitbox.
      */
      void updateHitBox(Position center);
+
+    /**
+     * Getter for the left abscissa of the hitbox.
+     * @return the left abscissa of the hitbox
+     */
+    double getLeftX();
+
+    /**
+     * Getter for the right abscissa of the hitbox.
+     * @return the right abscissa of the hitbox
+     */
+    double getRightX();
+
+    /**
+     * Getter for the upper ordinate of the hitbox.
+     * @return the upper ordinate of the hitbox
+     */
+    double getUpperY();
+
+    /**
+     * Getter for the lower ordinate of the hitbox.
+     * @return the lower ordinate of the hitbox
+     */
+    double getLowerY();
 }
