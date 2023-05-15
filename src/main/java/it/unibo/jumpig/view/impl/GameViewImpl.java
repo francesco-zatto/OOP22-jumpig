@@ -48,7 +48,7 @@ public class GameViewImpl implements GameViewScene {
             this.mainPanel.add(new GamePanel(width, height), BorderLayout.CENTER);
             this.frame.add(this.mainPanel);
             this.frame.setSize(this.startScreen);
-            this.frame.setLocationByPlatform(true);
+            this.frame.setLocationByPlatform(false);
             this.frame.setPreferredSize(this.frame.getSize());
             this.frame.setResizable(true);
             this.frame.addKeyListener(playerKeyListener);
