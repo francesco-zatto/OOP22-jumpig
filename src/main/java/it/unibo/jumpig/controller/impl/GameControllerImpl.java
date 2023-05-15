@@ -38,7 +38,7 @@ public class GameControllerImpl implements GameController {
      */
     private void mainLoop() {
         long previousCycleStartTime = System.currentTimeMillis();
-        while (!game.isOver()) {
+        while (!game.isOver() && gameView.isViewActive()) {
             final long currentCycleStartTime = System.currentTimeMillis();
             final long elapsed = currentCycleStartTime - previousCycleStartTime;
             this.registerInput();
