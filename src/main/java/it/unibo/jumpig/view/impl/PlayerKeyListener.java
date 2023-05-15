@@ -17,8 +17,7 @@ public class PlayerKeyListener implements KeyListener {
      */
     @Override
     public void keyTyped(final KeyEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
+        this.lastInput = Direction.HORIZONTAL_ZERO;
     }
 
     /**
