@@ -27,21 +27,33 @@ public class CoinHitbox extends CircleHitbox {
         renderer.renderCoin(this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public double getLeftX() {
         return super.getCenter().getX() - super.getRadius();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public double getRightX() {
         return super.getCenter().getX() + super.getRadius();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public double getUpperY() {
         return super.getCenter().getY() + super.getRadius();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public double getLowerY() {
         return super.getCenter().getY() - super.getRadius();
