@@ -61,7 +61,7 @@ class EnemyCollisionHandlerTest {
     private Supplier<Position> insidePlayerPositions(final RectangleHitbox player) {
         return new Supplier<>() {
 
-            private double enemyOrdinate = player.getRectangleLowerY();
+            private double enemyOrdinate = player.getLowerY();
 
             @Override
             public Position get() {

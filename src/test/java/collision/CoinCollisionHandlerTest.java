@@ -80,7 +80,7 @@ class CoinCollisionHandlerTest {
         final var player = new PlayerImpl(PLAYER_POSITION);
         final double pickedCoins = player.getCoins();
         final var rightCoinPosition = new PositionImpl(
-            player.getHitbox().getRectangleRightX() + COIN_RADIUS + 2, 
+            player.getHitbox().getRightX() + COIN_RADIUS + 2, 
             player.getPosition().getY()
         );
         final var coin = new BasicCoin(rightCoinPosition);
@@ -93,7 +93,7 @@ class CoinCollisionHandlerTest {
         final var player = new PlayerImpl(PLAYER_POSITION);
         final double pickedCoins = player.getCoins();
         final var leftCoinPosition = new PositionImpl(
-            player.getHitbox().getRectangleLeftX() - COIN_RADIUS - 2, 
+            player.getHitbox().getLeftX() - COIN_RADIUS - 2, 
             player.getPosition().getY()
         );
         final var coin = new BasicCoin(leftCoinPosition);
@@ -107,7 +107,7 @@ class CoinCollisionHandlerTest {
         final double pickedCoins = player.getCoins();
         final var aboveCoinPosition = new PositionImpl(
             player.getPosition().getY(), 
-            player.getHitbox().getRectangleUpperY() + COIN_RADIUS + 2
+            player.getHitbox().getUpperY() + COIN_RADIUS + 2
         );
         final var coin = new BasicCoin(aboveCoinPosition);
         coin.handleCollision(player);
@@ -120,7 +120,7 @@ class CoinCollisionHandlerTest {
         final double pickedCoins = player.getCoins();
         final var underCoinPosition = new PositionImpl(
             player.getPosition().getY(), 
-            player.getHitbox().getRectangleLowerY() - COIN_RADIUS - 2
+            player.getHitbox().getLowerY() - COIN_RADIUS - 2
         );
         final var coin = new BasicCoin(underCoinPosition);
         coin.handleCollision(player);

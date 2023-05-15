@@ -42,7 +42,7 @@ class PlatformCollisionHandlerTest {
     */
     private static final Position PLATFORM_UNDER_PLAYER_POSITION = new PositionImpl(
         PLAYER_POSITION_X, 
-        new PlayerHitbox(STARTING_POSITION).getRectangleLowerY() - HALF_PLATFORM_HEIGHT
+        new PlayerHitbox(STARTING_POSITION).getLowerY() - HALF_PLATFORM_HEIGHT
     );
 
     private static void assertCollision(final Player player, final Platform platform) {
@@ -56,9 +56,9 @@ class PlatformCollisionHandlerTest {
      * should be checked, because in this tests platforms and players have the same abscissas.
      */
     private static void assertInJumpingRange(final Player player, final Platform platform) {
-        final var playerLowerY = player.getHitbox().getRectangleLowerY();
+        final var playerLowerY = player.getHitbox().getLowerY();
         assertTrue(playerLowerY > platform.getPosition().getY());
-        assertTrue(playerLowerY < platform.getHitbox().getRectangleUpperY());
+        assertTrue(playerLowerY < platform.getHitbox().getUpperY());
     }
 
     private double computeFallingTime(final Player player) {
