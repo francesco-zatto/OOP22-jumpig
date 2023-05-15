@@ -64,14 +64,7 @@ public final class SwingRenderer implements Renderer {
     @Override
     public void renderPlayer(final RectangleHitbox entity) {
         final var rectangle = this.createScaledRectangle(entity);
-        //TODO metti drawImage
-        this.graphics.get().drawImage(this.jumpigImage, 
-            (int) rectangle.getX(), 
-            (int) rectangle.getY(), 
-            (int) rectangle.getWidth(), 
-            (int) rectangle.getHeight(), 
-            null
-        );
+        drawImage(rectangle, this.jumpigImage);
     }
 
     /**
