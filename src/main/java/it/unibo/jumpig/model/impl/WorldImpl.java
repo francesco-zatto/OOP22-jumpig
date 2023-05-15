@@ -157,13 +157,17 @@ public class WorldImpl implements World {
         }
         this.player.computeVelocity(GRAVITY, time, direction);
         this.player.computePosition(time);
+        updateCollisions();
         this.checkRegeneration();
-        final var collidables = this.getCollidables(Set.of(this.setcoins, this.setenemies, this.setplatform));
-        collidables.forEach(c -> c.handleCollision(this.player));
         this.setEmpty();
         this.camera.setCameraVelocity(this.player);
         this.computeCameraHeight(time);
         this.camera.setLastPlatformHeight(this.player.getLastPlatformHeight());
+    }
+
+    private void updateCollisions() {
+        final var collidableEntities = this.getCollidableEntities(Set.of(this.setcoins, this.setenemies, this.setplatform));
+        collidableEntities.forEach(c -> c.handleCollision(this.player));
     }
 
     private void computeCameraHeight(final double time) {
@@ -179,9 +183,10 @@ public class WorldImpl implements World {
         }
     }
 
-    private Set<Collidable> getCollidables(final Set<Set<? extends CollidableEntity<? extends Hitbox>>> collidableSets) {
+    private Set<Collidable> getCollidableEntities(final Set<Set<? extends CollidableEntity<? extends Hitbox>>> collidableSets) {
         return collidableSets.stream()
                 .flatMap(Set::stream)
+                .filter(this::isAboveCamera)
                 .filter(this::isEntityNearPlayer)
                 .collect(Collectors.toSet());
     }
@@ -191,6 +196,10 @@ public class WorldImpl implements World {
         final double playerHeight = this.player.getPosition().getY();
         final double entityHeight = entity.getPosition().getY();
         return playerHeight - quarterOfWorld < entityHeight && entityHeight < playerHeight + quarterOfWorld;
+    }
+
+    private boolean isAboveCamera(final GameEntity<? extends Hitbox> entity) {
+        return entity.getPosition().getY() > this.camera.getCameraHeight();
     }
 
     private void checkRegeneration() {
