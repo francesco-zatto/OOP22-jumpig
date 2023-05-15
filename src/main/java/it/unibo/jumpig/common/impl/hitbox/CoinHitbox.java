@@ -26,4 +26,27 @@ public class CoinHitbox extends CircleHitbox {
     public void updateRendering(final Renderer renderer) {
         renderer.renderCoin(this);
     }
+
+    @Override
+    public double getLeftX() {
+        return super.getCenter().getX() - super.getRadius();
+    }
+
+    @Override
+    public double getRightX() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getRightX'");
+    }
+
+    @Override
+    public double getUpperY() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getUpperY'");
+    }
+
+    @Override
+    public double getLowerY() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getLowerY'");
+    }
 }
