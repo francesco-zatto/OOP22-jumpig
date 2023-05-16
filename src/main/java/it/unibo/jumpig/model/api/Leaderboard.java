@@ -17,4 +17,10 @@ public interface Leaderboard {
      * @param score the score to add inside the leaderbeard
      */
     void addScore(Score score);
+
+    /**
+     * Defensive copy.
+     * @return a new copy of the leaderboard
+     */
+    Leaderboard copy();
 }
