@@ -27,6 +27,7 @@ public final class SwingRenderer implements Renderer {
     private final String vanishingPlatformFile = ROOT + "vanishing_platform.png";
     private final String brokenPlatformFile = ROOT + "broken_platform.png";
     private final String enemyFile = ROOT + "jumpier_enemy.png";
+    private final String playerFile = ROOT + "jumpig_player.png";
     private Optional<Graphics2D> graphics = Optional.empty();
     private final double worldWidth;
     private final double worldHeight;
@@ -54,7 +55,7 @@ public final class SwingRenderer implements Renderer {
         this.brokenPlatformImage = new ImageIcon(brokenUrl).getImage();
         final URL enemyUrl = ClassLoader.getSystemResource(enemyFile);
         this.enemyImage = new ImageIcon(enemyUrl).getImage();
-        final URL jumpigUrl = ClassLoader.getSystemResource(ROOT + "jumpigIcon.png");
+        final URL jumpigUrl = ClassLoader.getSystemResource(playerFile);
         this.jumpigImage = new ImageIcon(jumpigUrl).getImage();
     } 
 
