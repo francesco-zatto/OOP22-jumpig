@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.WindowConstants;
 
 import it.unibo.jumpig.controller.api.LeaderboardController;
 import it.unibo.jumpig.model.api.Leaderboard;
@@ -39,7 +38,6 @@ public class LeaderboardViewSceneImpl implements LeaderboardViewScene {
         final Leaderboard leaderboard
         ) {
         this.controller = controller;
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         createLeaderboardOfScores(mainPanel, leaderboard);
@@ -94,6 +92,7 @@ public class LeaderboardViewSceneImpl implements LeaderboardViewScene {
      */
     @Override
     public void quit() {
+        frame.setVisible(false);
         frame.dispose();
     }
 }
