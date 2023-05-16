@@ -27,7 +27,6 @@ public class LeaderBoardControllerImpl implements LeaderboardController {
      */
     @Override
     public void close() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'close'");
+        leaderboardView.quit();
     }
 }
