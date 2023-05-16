@@ -3,6 +3,7 @@ package it.unibo.jumpig.view.impl;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 
 import javax.swing.BorderFactory;
@@ -68,6 +69,7 @@ public class LeaderboardViewSceneImpl implements LeaderboardViewScene {
         for (final Score singleScore : leaderboard.getScores()) {
             final JLabel score = new JLabel(singleScore.toString());
             score.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+            score.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 15));
             panel.add(score);
         }
     }
