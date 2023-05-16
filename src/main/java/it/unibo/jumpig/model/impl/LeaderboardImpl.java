@@ -67,17 +67,7 @@ public class LeaderboardImpl implements Leaderboard {
     public String toString() {
         final StringBuilder s = new StringBuilder(26);
         for (final Score score : getScores()) {
-            s.append(
-                "User: " 
-                + score.getUsername() 
-                + "\t" 
-                + "Score: " 
-                + score.getHeightScore() 
-                + "\t" 
-                + "Coins: " 
-                + score.getCoins() 
-                + "\n"
-                );
+            s.append(score.toString());
         }
         return s.toString();
     }
