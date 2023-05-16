@@ -11,6 +11,11 @@ import it.unibo.jumpig.view.impl.LeaderboardViewSceneImpl;
 public class LeaderBoardControllerImpl implements LeaderboardController {
 
     private final LeaderboardViewScene leaderboardView;
+
+    /**
+     * Constructor for LeaderboardControllerImpl.
+     * @param leaderboard the leaderboard
+     */
     public LeaderBoardControllerImpl(final Leaderboard leaderboard) {
         this.leaderboardView = new LeaderboardViewSceneImpl(leaderboard);
     }
