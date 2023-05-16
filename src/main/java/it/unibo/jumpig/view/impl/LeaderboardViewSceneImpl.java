@@ -44,8 +44,7 @@ public class LeaderboardViewSceneImpl implements LeaderboardViewScene {
 
     @Override
     public void quit() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'quit'");
+        frame.dispose();
     }
     
 }
