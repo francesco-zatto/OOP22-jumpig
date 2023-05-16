@@ -17,7 +17,7 @@ public class LeaderBoardControllerImpl implements LeaderboardController {
      * @param leaderboard the leaderboard
      */
     public LeaderBoardControllerImpl(final Leaderboard leaderboard) {
-        this.leaderboardView = new LeaderboardViewSceneImpl(leaderboard);
+        this.leaderboardView = new LeaderboardViewSceneImpl(this, leaderboard);
     }
     /**
      * {@inheritDoc}
