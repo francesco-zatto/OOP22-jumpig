@@ -37,8 +37,8 @@ public class MenuViewSceneImpl implements MenuViewScene {
     private static final int VERTICAL_BORDERS = 20;
     private static final int HORIZONTAL_BORDERS = 50;
     private final JFrame frame = new JFrame(FRAME_TITLE);
-    private final MenuController controller;
-    private final String username; 
+    private final JTextField textField = new JTextField();
+    private final MenuController controller; 
     /**
      * Contructor for building the view.
      * @param controller the controller that manages the interactions in the menu
@@ -90,9 +90,7 @@ public class MenuViewSceneImpl implements MenuViewScene {
         final JPanel usernamePanel = new JPanel(new GridLayout(1, 0));
         usernamePanel.setBorder(BorderFactory.createTitledBorder("Enter a username"));
         usernamePanel.setBackground(Color.PINK);
-        final JTextField textField = new JTextField();
         usernamePanel.add(textField);
-        username = textField.getText();
         /*
          * Adding usernamePanel into the menuPanel.
          */
@@ -157,10 +155,10 @@ public class MenuViewSceneImpl implements MenuViewScene {
     }
 
     /**
-     * Getter for the username a person has typed.
-     * @return the username
+     * {@inheritDoc}
      */
+    @Override
     public String getUsername() {
-        return this.username;
+        return textField.getText();
     }
 }
