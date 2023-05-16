@@ -4,6 +4,9 @@ import it.unibo.jumpig.view.api.LeaderboardViewScene;
 
 public class LeaderboardViewSceneImpl implements LeaderboardViewScene {
 
+    public LeaderboardViewSceneImpl() {
+        
+    }
     @Override
     public void show() {
         // TODO Auto-generated method stub
