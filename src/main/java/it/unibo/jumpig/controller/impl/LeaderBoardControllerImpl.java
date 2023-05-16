@@ -19,8 +19,7 @@ public class LeaderBoardControllerImpl implements LeaderboardController {
      */
     @Override
     public void start() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'start'");
+        leaderboardView.show();
     }
 
     /**
