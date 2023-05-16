@@ -53,6 +53,6 @@ public class ScoreImpl implements Score {
      */
     @Override
     public String toString() {
-        return "[username=" + username + ", heightScore=" + heightScore + ", coins=" + coins + "]";
+        return username + ":" + " heightScore= " + heightScore + "\t" + " coins= " + coins;
     }
 }
