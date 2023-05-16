@@ -1,8 +1,8 @@
 package it.unibo.jumpig.view.impl;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
@@ -10,8 +10,11 @@ import java.awt.Toolkit;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
 import it.unibo.jumpig.controller.api.MenuController;
@@ -23,11 +26,19 @@ import it.unibo.jumpig.view.api.MenuViewScene;
 public class MenuViewSceneImpl implements MenuViewScene {
 
     private static final String FRAME_TITLE = "Jumpig";
+    private static final String WELCOME_TITLE = "WELCOME TO JUMPIG!";
+    private static final String GAME = "START GAME";
+    private static final String LEADERBOARD = "LEADERBOARD";
+    private static final String QUIT = "QUIT";
+    private static final double ASPECT_RATIO = 16.0 / 9.0;
+    private static final double SCREEN_FRACTION = 5;
+    private static final int ROWS = 5;
+    private static final int FONT_SIZE = 20;
+    private static final int VERTICAL_BORDERS = 20;
+    private static final int HORIZONTAL_BORDERS = 50;
     private final JFrame frame = new JFrame(FRAME_TITLE);
     private final MenuController controller;
-    private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-    private final Dimension startScreen = new Dimension((int) screen.getWidth() / 5, 
-        (int) (screen.getWidth() / 5 * 1.7));
+    private final String username; 
     /**
      * Contructor for building the view.
      * @param controller the controller that manages the interactions in the menu
@@ -42,69 +53,79 @@ public class MenuViewSceneImpl implements MenuViewScene {
          */
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         /*
-         * Panel for the buttons.
-         */
-        final JButton gameButton = new JButton("START GAME");
-        final JButton leaderboardButton = new JButton("LEADERBOARD");
-        final JButton quitButton = new JButton("QUIT");
-        /*
-         * Set the buttons' dimensions
-         */
-        final Dimension buttonSize = new Dimension(200, 50);
-        gameButton.setPreferredSize(buttonSize);
-        leaderboardButton.setPreferredSize(buttonSize);
-        quitButton.setPreferredSize(buttonSize);
-        /*
-         * Creating a new panel that contains the buttons
-         */
-        final JPanel panelButton = new JPanel(new GridLayout(3, 1, 10, 10));
-        panelButton.setBackground(Color.LIGHT_GRAY);
-        panelButton.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        panelButton.add(gameButton);
-        panelButton.add(leaderboardButton);
-        panelButton.add(quitButton);
-        /*
-         * Creating the menu panel that contains panelButton
+         * Creating the menu panel that contains everything.
          */
         final JPanel menuPanel = new JPanel(new GridBagLayout());
-        menuPanel.setBackground(Color.WHITE);
-        menuPanel.add(panelButton);
+        menuPanel.setLayout(
+            new GridLayout(
+                ROWS, 
+                0, 
+                VERTICAL_BORDERS / 2, 
+                VERTICAL_BORDERS / 2
+                )
+            );
+        menuPanel.setBorder(
+            BorderFactory.createEmptyBorder(
+                HORIZONTAL_BORDERS, 
+                VERTICAL_BORDERS, 
+                HORIZONTAL_BORDERS, 
+                VERTICAL_BORDERS
+                )
+            );
+        menuPanel.setBackground(Color.PINK);
         /*
-         * Creating mainPanel that contains menuPanel
+         * Adding menuPanel into frame.
          */
-        final JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.add(menuPanel, BorderLayout.CENTER);
+        frame.getContentPane().add(menuPanel);
         /*
-         * Adding mainPanel into the frame.
+         * Welcome label.
          */
-        frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
+        final JLabel welcomeLabel = new JLabel(WELCOME_TITLE);
+        welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        welcomeLabel.setFont(new Font(Font.DIALOG_INPUT, Font.PLAIN, FONT_SIZE));
+        menuPanel.add(welcomeLabel);
         /*
-         * Resizing the frame based on the screen dimensions.
+         * Creation of usernamePanel.
          */
-        frame.setSize(this.startScreen);
+        final JPanel usernamePanel = new JPanel(new GridLayout(1, 0));
+        usernamePanel.setBorder(BorderFactory.createTitledBorder("Enter a username"));
+        usernamePanel.setBackground(Color.PINK);
+        final JTextField textField = new JTextField();
+        usernamePanel.add(textField);
+        username = textField.getText();
+        /*
+         * Adding usernamePanel into the menuPanel.
+         */
+        menuPanel.add(usernamePanel);
+        /*
+         * Creation of the buttons.
+         */
+        final JButton gameButton = new JButton(GAME);
+        final JButton leaderboardButton = new JButton(LEADERBOARD);
+        final JButton quitButton = new JButton(QUIT);
+        /*
+         * Adding the buttons into the menuPanel.
+         */
+        menuPanel.add(gameButton);
+        menuPanel.add(leaderboardButton);
+        menuPanel.add(quitButton);
+        /*
+         * Resizing the frame based on the screen dimensions, and with the 16:9 ratio.
+         */
+        final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+        final Dimension startScreen = new Dimension(
+            (int) (screen.getWidth() / SCREEN_FRACTION), 
+            (int) (screen.getWidth() / SCREEN_FRACTION * ASPECT_RATIO)
+            );
+        frame.setSize(startScreen);
         frame.setLocationByPlatform(true);
         frame.setPreferredSize(frame.getSize());
         frame.setResizable(true);
         /*
-         * Adding listeners to buttons.
+         * Adding action listeners to buttons.
          */
         quitButton.addActionListener(e -> this.controller.close());
         gameButton.addActionListener(e -> {
-            String username = "";
-            while ("".equals(username)) {
-                username = JOptionPane.showInputDialog(
-                        frame,
-                        "Enter a valid username",
-                        FRAME_TITLE,
-                        JOptionPane.PLAIN_MESSAGE
-                    );
-                if ("".equals(username)) {
-                    JOptionPane.showMessageDialog(frame,
-                        "ENTER A VALID USERNAME!",
-                        "Warning",
-                        JOptionPane.WARNING_MESSAGE);
-                }
-            }
             final Runnable thread = controller :: notifyStartGame;
             final Thread runthread = new Thread(thread);
             runthread.start();
@@ -117,14 +138,14 @@ public class MenuViewSceneImpl implements MenuViewScene {
      */
     @Override
     public void show() {
-        frame.setVisible(true);
+        this.frame.setVisible(true);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public final void quit() {
+    public void quit() {
         final int option = JOptionPane.showConfirmDialog(frame,
                 "Do you really want to quit?",
                 "Quitting..", JOptionPane.YES_NO_OPTION); 
@@ -134,9 +155,12 @@ public class MenuViewSceneImpl implements MenuViewScene {
             Thread.currentThread().interrupt();
         }
     }
-    /*
-    public static void main(String[] args) {
-        new MenuViewSceneImpl(null).show();
+
+    /**
+     * Getter for the username a person has typed.
+     * @return the username
+     */
+    public String getUsername() {
+        return this.username;
     }
-    */
 }
