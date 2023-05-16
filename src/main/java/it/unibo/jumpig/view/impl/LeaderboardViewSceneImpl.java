@@ -1,9 +1,12 @@
 package it.unibo.jumpig.view.impl;
 
 import java.awt.Dimension;
+import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import it.unibo.jumpig.model.api.Leaderboard;
@@ -19,6 +22,11 @@ public class LeaderboardViewSceneImpl implements LeaderboardViewScene {
     public LeaderboardViewSceneImpl(final Leaderboard leaderboard) {
         this.leaderboard = leaderboard.copy();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new GridBagLayout());
+        JLabel leaderboardLabel = new JLabel(this.leaderboard.toString());
+        mainPanel.add(leaderboardLabel);
+        frame.getContentPane().add(mainPanel);
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         final Dimension startScreen = new Dimension(
             (int) (screen.getWidth() / SCREEN_FRACTION), 
