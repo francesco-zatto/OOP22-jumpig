@@ -20,6 +20,13 @@ public class LeaderboardImpl implements Leaderboard {
     }
 
     /**
+     * Private constructor for defensive copy.
+     * @param scoreLeaderboard list of scores
+     */
+    private LeaderboardImpl(final List<Score> scoreLeaderboard) {
+        this.scoreLeaderboard = scoreLeaderboard;
+    }
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -33,5 +40,35 @@ public class LeaderboardImpl implements Leaderboard {
     @Override
     public void addScore(final Score score) {
         this.scoreLeaderboard.add(score);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        final StringBuilder s = new StringBuilder(26);
+        for (final Score score : scoreLeaderboard) {
+            s.append(
+                "User: " 
+                + score.getUsername() 
+                + "\t" 
+                + "Score: " 
+                + score.getHeightScore() 
+                + "\t" 
+                + "Coins: " 
+                + score.getCoins() 
+                + "\n"
+                );
+        }
+        return s.toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Leaderboard copy() {
+        return new LeaderboardImpl(this.scoreLeaderboard);
     }
 }
