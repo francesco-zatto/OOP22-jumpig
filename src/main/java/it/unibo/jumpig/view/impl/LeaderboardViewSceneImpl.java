@@ -3,10 +3,10 @@ package it.unibo.jumpig.view.impl;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -41,7 +41,7 @@ public class LeaderboardViewSceneImpl implements LeaderboardViewScene {
         this.controller = controller;
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
-        mainPanel.setLayout(new GridLayout(1, 0));
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         createLeaderboardOfScores(mainPanel, leaderboard);
         frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
         final JButton exitButton = new JButton("EXIT");
