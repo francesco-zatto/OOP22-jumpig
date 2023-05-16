@@ -9,8 +9,9 @@ public class LeaderboardViewSceneImpl implements LeaderboardViewScene {
 
     private static final String FRAME_TITLE = "Leaderboard";
     private final JFrame frame = new JFrame(FRAME_TITLE);
+    private final Leaderboard leaderboard;
     public LeaderboardViewSceneImpl(final Leaderboard leaderboard) {
-
+        this.leaderboard = leaderboard;
     }
     @Override
     public void show() {
