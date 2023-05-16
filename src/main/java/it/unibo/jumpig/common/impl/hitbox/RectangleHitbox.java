@@ -46,7 +46,8 @@ public abstract class RectangleHitbox implements Hitbox {
      * The method to get the x of the left side of the rectangle.
      * @return a double that is the x of the left side of the rectangle.
      */
-    public double getRectangleLeftX() {
+    @Override
+    public double getLeftX() {
         return getRectangleCoordinate(this.center.getX(), this.getWidth(), true);
     }
 
@@ -54,7 +55,8 @@ public abstract class RectangleHitbox implements Hitbox {
      * The method to get the x of the right side of the rectangle.
      * @return a double that is the x of the right side of the rectangle.
      */
-    public double getRectangleRightX() {
+    @Override
+    public double getRightX() {
         return getRectangleCoordinate(this.center.getX(), this.getWidth(), false);
     }
 
@@ -62,7 +64,8 @@ public abstract class RectangleHitbox implements Hitbox {
      * The method to get the y of the lower side of the rectangle.
      * @return a double that is the y of the lower side of the rectangle.
      */
-    public double getRectangleLowerY() {
+    @Override
+    public double getLowerY() {
         return getRectangleCoordinate(this.center.getY(), this.getHeight(), true);
     }
 
@@ -70,7 +73,8 @@ public abstract class RectangleHitbox implements Hitbox {
      * The method to get the y of the upper side of the rectangle.
      * @return a double that is the y of the upper side of the rectangle.
      */
-    public double getRectangleUpperY() {
+    @Override
+    public double getUpperY() {
         return getRectangleCoordinate(this.center.getY(), this.getHeight(), false);
     }
 
@@ -90,7 +94,8 @@ public abstract class RectangleHitbox implements Hitbox {
         this.center = center;
     }
 
-    /*The boolean isSignNegative is true for lowerY and leftX, because methods to get those coordinates has to
+    /*
+     * The boolean isSignNegative is true for lowerY and leftX, because methods to get those coordinates has to
      * subtract the half of dimension from the center coordinate. Instead, isSignNegative is false for upperY and rightY, 
      * because methods to get those coordinates has to add the half of dimension from the center coordinate.
     */

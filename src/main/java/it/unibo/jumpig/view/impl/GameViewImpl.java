@@ -42,13 +42,13 @@ public class GameViewImpl implements GameViewScene {
         final double width, 
         final double height
     ) {
-            this.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            this.frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             this.mainPanel = new JPanel(new BorderLayout());
             this.mainPanel.add(new ScorePanel(), BorderLayout.NORTH);
             this.mainPanel.add(new GamePanel(width, height), BorderLayout.CENTER);
             this.frame.add(this.mainPanel);
             this.frame.setSize(this.startScreen);
-            this.frame.setLocationByPlatform(true);
+            this.frame.setLocationByPlatform(false);
             this.frame.setPreferredSize(this.frame.getSize());
             this.frame.setResizable(true);
             this.frame.addKeyListener(playerKeyListener);
@@ -68,6 +68,7 @@ public class GameViewImpl implements GameViewScene {
     @Override
     public void quit() {
         this.frame.setVisible(false);
+        this.frame.dispose();
     }
 
     /**
@@ -120,6 +121,14 @@ public class GameViewImpl implements GameViewScene {
                 ((ScorePanel) x).refresh(height, coins, lives);
                 x.repaint();
             }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isViewActive() {
+        return this.frame.isShowing();
     }
 
 }

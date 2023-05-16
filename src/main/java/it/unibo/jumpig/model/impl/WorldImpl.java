@@ -36,6 +36,9 @@ public class WorldImpl implements World {
     private final Set<Coin> setcoins;
     private final Camera camera;
     private final Set<GameEntity<? extends Hitbox>> setentities;
+    private int constant = 1; 
+                            /* constant that multiplies height for each constant = 1,3,5,7,9,...
+                                It will always be odd because of the construction of the game */
 
     /**
      * The constructor to create a new world.
@@ -44,13 +47,13 @@ public class WorldImpl implements World {
     public WorldImpl() {
         this.player = new PlayerImpl(new PositionImpl(WIDTH / 2, 1));
         this.camera = new CameraImpl(this.player);
-        this.generator = new GeneratorEntitiesImpl(WIDTH, HEIGHT, this.camera);
+        this.generator = new GeneratorEntitiesImpl(WIDTH, HEIGHT);
         generator.setGenerateStrategy(new GeneratePlatformsStrategy());
-        this.setplatform = generator.generateEntities();
+        this.setplatform = generator.generateEntities(this.camera);
         generator.setGenerateStrategy(new GenerateEnemiesStrategy());
-        this.setenemies = generator.generateEntities();
+        this.setenemies = generator.generateEntities(this.camera);
         generator.setGenerateStrategy(new GenerateCoinsStrategy());
-        this.setcoins = generator.generateEntities();
+        this.setcoins = generator.generateEntities(this.camera);
         this.setentities = new HashSet<>();
     }
 
@@ -157,13 +160,17 @@ public class WorldImpl implements World {
         }
         this.player.computeVelocity(GRAVITY, time, direction);
         this.player.computePosition(time);
+        updateCollisions();
         this.checkRegeneration();
-        final var collidables = this.getCollidables(Set.of(this.setcoins, this.setenemies, this.setplatform));
-        collidables.forEach(c -> c.handleCollision(this.player));
         this.setEmpty();
         this.camera.setCameraVelocity(this.player);
         this.computeCameraHeight(time);
         this.camera.setLastPlatformHeight(this.player.getLastPlatformHeight());
+    }
+
+    private void updateCollisions() {
+        final var collidableEntities = this.getCollidableEntities(Set.of(this.setcoins, this.setenemies, this.setplatform));
+        collidableEntities.forEach(c -> c.handleCollision(this.player));
     }
 
     private void computeCameraHeight(final double time) {
@@ -174,18 +181,23 @@ public class WorldImpl implements World {
 
     private void setEmpty() {
         if (this.camera.getPlatformHeight(this.player).isPresent() 
-            && this.player.getPosition().getY() < this.camera.getPlatformHeight(this.player).get()) {
+            && this.player.getPosition().getY() <= this.camera.getCameraHeight()) {
                 this.player.setLastPlatformHeight(Optional.empty());
         }
     }
 
-    private Set<Collidable> getCollidables(final Set<Set<? extends CollidableEntity<? extends Hitbox>>> collidableSets) {
+    private Set<Collidable> getCollidableEntities(final Set<Set<? extends CollidableEntity<? extends Hitbox>>> collidableSets) {
         return collidableSets.stream()
                 .flatMap(Set::stream)
+                .filter(this::isAboveCamera)
                 .filter(this::isEntityNearPlayer)
                 .collect(Collectors.toSet());
     }
 
+    /* 
+     * Calling q = quarter of world's height. This method checks if entity's height is in range
+     * [player's height - q, player's Height + q] to avoid useless calls to Collidable.handleCollision(Player).
+     */
     private boolean isEntityNearPlayer(final GameEntity<? extends Hitbox> entity) {
         final double quarterOfWorld = HEIGHT / 4;
         final double playerHeight = this.player.getPosition().getY();
@@ -193,31 +205,47 @@ public class WorldImpl implements World {
         return playerHeight - quarterOfWorld < entityHeight && entityHeight < playerHeight + quarterOfWorld;
     }
 
-    private void checkRegeneration() {
-        if ((this.player.getPosition().getY() % HEIGHT) < 1
-                //check that it's almoast zero meaning that the generator has to regenerate entities.
-            ) {
-                    setentities.clear();
-                    if (this.player.getVelocity().getYComponent() > 0) {
-                        this.regenerate();
-                    }
-                }
+    private boolean isAboveCamera(final GameEntity<? extends Hitbox> entity) {
+        return entity.getHitbox().getUpperY() > this.camera.getCameraHeight();
     }
-    private Set<GameEntity<? extends Hitbox>> regenerate() {
 
-        this.setplatform.clear();
-        this.setcoins.clear();
-        this.setenemies.clear();
-        generator = new GeneratorEntitiesImpl(WIDTH, HEIGHT, this.camera);
+    private void checkRegeneration() {
+        if ((int) this.player.getPosition().getY() == HEIGHT * constant) {
+                setentities.stream()
+                        .filter(x -> 
+                            x.getPosition().getY() > this.player.getPosition().getY())
+                        .collect(Collectors.toSet());
+                camera.setCameraStartHeight((int) this.player.getPosition().getY() + (int) HEIGHT);
+                if (this.player.getVelocity().getYComponent() > 0) {
+                    this.regenerate();
+                }
+                constant = constant + 2;
+            }
+    }
+
+    private Set<GameEntity<? extends Hitbox>> regenerate() {
+        this.setplatform.stream().
+                filter(x -> 
+                    x.getPosition().getY() > this.player.getPosition().getY())
+                .collect(Collectors.toSet());
+        this.setcoins.stream()
+                .filter(x -> 
+                    x.getPosition().getY() > this.player.getPosition().getY())
+                .collect(Collectors.toSet());
+        this.setenemies.stream()
+                .filter(x -> 
+                    x.getPosition().getY() > this.player.getPosition().getY())
+                .collect(Collectors.toSet());
+        generator = new GeneratorEntitiesImpl(WIDTH, HEIGHT);
             /* I have to create a new generator to clean up the set of entities' positions 
                 which will be compared with positions that are goin to be created 
                 (in the method checkEqualsPosition) */
         generator.setGenerateStrategy(new GeneratePlatformsStrategy());
-        this.setplatform.addAll(generator.generateEntities());
+        this.setplatform.addAll(generator.generateEntities(this.camera));
         generator.setGenerateStrategy(new GenerateEnemiesStrategy());
-        this.setenemies.addAll(generator.generateEntities());
+        this.setenemies.addAll(generator.generateEntities(this.camera));
         generator.setGenerateStrategy(new GenerateCoinsStrategy());
-        this.setcoins.addAll(generator.generateEntities());
+        this.setcoins.addAll(generator.generateEntities(this.camera));
         this.setentities.clear();
         this.setentities.addAll(this.setplatform);
         this.setentities.addAll(this.setenemies);

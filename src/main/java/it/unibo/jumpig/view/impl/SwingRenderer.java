@@ -115,10 +115,12 @@ public final class SwingRenderer implements Renderer {
     @Override
     public void renderCoin(final CircleHitbox entity) {
         graphics.get().setColor(Color.YELLOW);
-        graphics.get().fillOval((int) ((entity.getCenter().getX() - entity.getRadius()) * widthRatio), 
+        graphics.get().fillOval(
+            (int) ((entity.getCenter().getX() - entity.getRadius()) * widthRatio), 
             (int) ((this.worldHeight - (entity.getCenter().getY() + entity.getRadius())) * heightRatio), 
-            this.createScaledRadius(entity) * 2, 
-            this.createScaledRadius(entity) * 2);
+            this.createWidthScaledRadius(entity) * 2, 
+            this.createHeightScaledRadius(entity) * 2
+            );
     }
 
     /**
@@ -157,8 +159,8 @@ public final class SwingRenderer implements Renderer {
     private Rectangle createScaledRectangle(final RectangleHitbox hitbox) {
         return new Rectangle(
             new Point(
-                (int) (hitbox.getRectangleLeftX() * this.widthRatio),
-                (int) ((this.worldHeight - hitbox.getRectangleUpperY()) * this.heightRatio)
+                (int) (hitbox.getLeftX() * this.widthRatio),
+                (int) ((this.worldHeight - hitbox.getUpperY()) * this.heightRatio)
             ),
             new Dimension(
                 (int) (hitbox.getWidth() * this.widthRatio),
@@ -173,7 +175,21 @@ public final class SwingRenderer implements Renderer {
     } TODO remove
     */
 
-    private int createScaledRadius(final CircleHitbox hitbox) {
+    /**
+     * Method to scale the width of the coin.
+     * @param hitbox the coin hitbox
+     * @return the scaled width radius of the coin
+     */
+    private int createWidthScaledRadius(final CircleHitbox hitbox) {
         return (int) (hitbox.getRadius() * this.widthRatio);
+    }
+
+    /**
+     * Method to scale the height of the coin.
+     * @param hitbox the coin hitbox
+     * @return the scaled height radius of the coin
+     */
+    private int createHeightScaledRadius(final CircleHitbox hitbox) {
+        return (int) (hitbox.getRadius() * this.heightRatio);
     }
 }

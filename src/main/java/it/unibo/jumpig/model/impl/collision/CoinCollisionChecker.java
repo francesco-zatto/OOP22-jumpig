@@ -21,10 +21,10 @@ public class CoinCollisionChecker extends AbstractCollisionChecker<CircleHitbox,
         final RectangleHitbox playerHitbox = player.getHitbox();
         final CircleHitbox coinHitbox = gameEntity.getHitbox();
         final Position coinCenter = coinHitbox.getCenter();
-        final double playerLeftX = playerHitbox.getRectangleLeftX();
-        final double playerRightX = playerHitbox.getRectangleRightX();
-        final double playerLowerY = playerHitbox.getRectangleLowerY();
-        final double playerUpperY = playerHitbox.getRectangleUpperY();
+        final double playerLeftX = playerHitbox.getLeftX();
+        final double playerRightX = playerHitbox.getRightX();
+        final double playerLowerY = playerHitbox.getLowerY();
+        final double playerUpperY = playerHitbox.getUpperY();
         final Position nearestPosition;
         final double nearestX = getNearestRectangleX(playerHitbox, coinCenter);
         final double nearestY = getNearestRectangleY(playerHitbox, coinCenter);
@@ -52,17 +52,18 @@ public class CoinCollisionChecker extends AbstractCollisionChecker<CircleHitbox,
 
     private double getNearestRectangleX(final RectangleHitbox playerHitbox, final Position coinCenter) {
         return coinCenter.getX() > playerHitbox.getCenter().getX() 
-            ? playerHitbox.getRectangleRightX()
-            : playerHitbox.getRectangleLeftX();
+            ? playerHitbox.getRightX()
+            : playerHitbox.getLeftX();
     }
 
     private double getNearestRectangleY(final RectangleHitbox playerHitbox, final Position coinCenter) {
         return coinCenter.getY() > playerHitbox.getCenter().getY() 
-            ? playerHitbox.getRectangleUpperY() 
-            : playerHitbox.getRectangleLowerY();
+            ? playerHitbox.getUpperY() 
+            : playerHitbox.getLowerY();
     }
 
-    /*This inequality is based on the equation of a circumference: (x - xCenter) ^ 2 + (y - yCenter) ^ 2 = radius ^ 2.
+    /*
+     * This inequality is based on the equation of a circumference: (x - xCenter) ^ 2 + (y - yCenter) ^ 2 = radius ^ 2.
      * The equation means that every point on the circumference is distant from the center a length that equals to the radius.
      * If a point is nearest to the center, then the first member of the equation is less than the second member.
      */

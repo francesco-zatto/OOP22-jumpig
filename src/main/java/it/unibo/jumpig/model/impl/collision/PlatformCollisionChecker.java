@@ -22,19 +22,19 @@ public abstract class PlatformCollisionChecker<P extends Platform> extends Abstr
     }
 
     private boolean isPlayerAligned(final RectangleHitbox playerHitbox, final RectangleHitbox platformHitbox) {
-        final double playerLeftX = playerHitbox.getRectangleLeftX();
-        final double playerRightX = playerHitbox.getRectangleRightX();
-        final double platformLeftX = platformHitbox.getRectangleLeftX();
-        final double platformRightX = platformHitbox.getRectangleRightX();
+        final double playerLeftX = playerHitbox.getLeftX();
+        final double playerRightX = playerHitbox.getRightX();
+        final double platformLeftX = platformHitbox.getLeftX();
+        final double platformRightX = platformHitbox.getRightX();
         return super.isBetween(playerLeftX, platformLeftX, platformRightX) 
             || super.isBetween(playerRightX, platformLeftX, platformRightX);
     }
 
     private boolean isPlayerAbove(final RectangleHitbox playerHitbox, final RectangleHitbox platformHitbox) {
         return isBetween(
-            playerHitbox.getRectangleLowerY(), 
+            playerHitbox.getLowerY(), 
             platformHitbox.getCenter().getY(), 
-            platformHitbox.getRectangleUpperY()
+            platformHitbox.getUpperY()
         );
     }
 
