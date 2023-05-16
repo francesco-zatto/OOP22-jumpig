@@ -66,15 +66,7 @@ public class LeaderboardViewSceneImpl implements LeaderboardViewScene {
         final Leaderboard leaderboard
         ) {
         for (final Score singleScore : leaderboard.getScores()) {
-            final JLabel score = new JLabel(
-                singleScore.getUsername()
-                + "\t"
-                + "score:"
-                + singleScore.getHeightScore()
-                + "\t"
-                + "coins: "
-                + singleScore.getCoins()
-                );
+            final JLabel score = new JLabel(singleScore.toString());
             score.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
             panel.add(score);
         }
