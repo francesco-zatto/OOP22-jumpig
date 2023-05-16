@@ -7,7 +7,8 @@ import it.unibo.jumpig.view.api.LeaderboardViewScene;
 
 public class LeaderboardViewSceneImpl implements LeaderboardViewScene {
 
-    private final JFrame frame = new JFrame();
+    private static final String FRAME_TITLE = "Leaderboard";
+    private final JFrame frame = new JFrame(FRAME_TITLE);
     public LeaderboardViewSceneImpl(final Leaderboard leaderboard) {
 
     }
