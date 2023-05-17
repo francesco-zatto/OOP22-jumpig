@@ -38,13 +38,28 @@ public class LeaderboardViewSceneImpl implements LeaderboardViewScene {
         final LeaderboardController controller,
         final Leaderboard leaderboard
         ) {
+        /*
+         * Set the controller.
+         */
         this.controller = controller;
+        /*
+         * Set the layouts.
+         */
         frame.setLayout(new BorderLayout());
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        /*
+         * Call to method that creates the leaderboard.
+         */
         createLeaderboardOfScores(mainPanel, leaderboard);
         frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
+        /*
+         * Created an exit button.
+         */
         final JButton exitButton = new JButton("EXIT");
         frame.getContentPane().add(exitButton, BorderLayout.SOUTH);
+        /*
+         * Set the frame dimensions.
+         */
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         final Dimension startScreen = new Dimension(
             (int) (screen.getWidth() / SCREEN_FRACTION), 
@@ -54,6 +69,9 @@ public class LeaderboardViewSceneImpl implements LeaderboardViewScene {
         frame.setLocationByPlatform(true);
         frame.setPreferredSize(frame.getSize());
         frame.setResizable(true);
+        /*
+         * Added action listener in exit button.
+         */
         exitButton.addActionListener(e -> this.controller.close());
     }
 
