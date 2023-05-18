@@ -25,6 +25,7 @@ public class LeaderboardViewSceneImpl implements LeaderboardViewScene {
     private static final String FRAME_TITLE = "Leaderboard";
     private static final double ASPECT_RATIO = 16.0 / 9.0;
     private static final double SCREEN_FRACTION = 5;
+    private static final int FONT_SIZE = 12;
     private final LeaderboardController controller;
     private final JFrame frame = new JFrame(FRAME_TITLE);
     private final JPanel mainPanel = new JPanel();
@@ -86,7 +87,7 @@ public class LeaderboardViewSceneImpl implements LeaderboardViewScene {
         for (final Score singleScore : leaderboard.getScores()) {
             final JLabel score = new JLabel(singleScore.toString());
             score.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
-            score.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
+            score.setFont(new Font(Font.MONOSPACED, Font.PLAIN, FONT_SIZE));
             panel.add(score);
         }
     }
