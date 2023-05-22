@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 import it.unibo.jumpig.controller.api.LeaderboardController;
 import it.unibo.jumpig.model.api.Leaderboard;
@@ -38,6 +39,10 @@ public class LeaderboardViewSceneImpl implements LeaderboardViewScene {
         final LeaderboardController controller,
         final Leaderboard leaderboard
         ) {
+        /*
+         * Default close operation
+         */
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         /*
          * Set the controller.
          */
