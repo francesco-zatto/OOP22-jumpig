@@ -3,6 +3,8 @@ package it.unibo.jumpig.controller.impl;
 import it.unibo.jumpig.controller.api.GameController;
 import it.unibo.jumpig.controller.api.LeaderboardController;
 import it.unibo.jumpig.controller.api.MenuController;
+import it.unibo.jumpig.model.api.Leaderboard;
+import it.unibo.jumpig.model.impl.LeaderboardImpl;
 import it.unibo.jumpig.view.api.MenuViewScene;
 import it.unibo.jumpig.view.impl.MenuViewSceneImpl;
 
@@ -12,6 +14,7 @@ import it.unibo.jumpig.view.impl.MenuViewSceneImpl;
 public class MenuControllerImpl implements MenuController {
 
     private final MenuViewScene menuView = new MenuViewSceneImpl(this);
+    private final Leaderboard leaderboard = new LeaderboardImpl();
 
     /**
      * {@inheritDoc}
@@ -34,7 +37,7 @@ public class MenuControllerImpl implements MenuController {
      */
     @Override
     public void notifyStartGame() {
-        final GameController gameController = new GameControllerImpl();
+        final GameController gameController = new GameControllerImpl(this.leaderboard, menuView.getUsername());
         gameController.start();
     }
 
@@ -43,7 +46,7 @@ public class MenuControllerImpl implements MenuController {
      */
     @Override
     public void notifyStartLeaderboard() {
-        final LeaderboardController leaderboardController = new LeaderBoardControllerImpl();
+        final LeaderboardController leaderboardController = new LeaderBoardControllerImpl(this.leaderboard);
         leaderboardController.start();
     }
 }

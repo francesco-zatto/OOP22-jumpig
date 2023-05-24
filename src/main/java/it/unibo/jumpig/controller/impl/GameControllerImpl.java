@@ -6,6 +6,7 @@ import java.lang.System.Logger.Level;
 import it.unibo.jumpig.common.impl.Direction;
 import it.unibo.jumpig.controller.api.GameController;
 import it.unibo.jumpig.model.api.Game;
+import it.unibo.jumpig.model.api.Leaderboard;
 import it.unibo.jumpig.model.impl.GameImpl;
 import it.unibo.jumpig.view.api.GameViewScene;
 import it.unibo.jumpig.view.impl.GameViewImpl;
@@ -24,9 +25,14 @@ public class GameControllerImpl implements GameController {
 
     /**
      * Constructor to create a new Game Controller in order to start a new Game.
+     * @param leaderboard the leaderboard 
+     * @param username the username
      */
-    public GameControllerImpl() {
-        this.game = new GameImpl();
+    public GameControllerImpl(
+        final Leaderboard leaderboard,
+        final String username
+        ) {
+        this.game = new GameImpl(leaderboard, username);
         this.gameView = new GameViewImpl(
             this.game.getWorld().getWidth(),
             this.game.getWorld().getHeight()
@@ -90,6 +96,7 @@ public class GameControllerImpl implements GameController {
      */
     @Override
     public void close() {
+        this.game.addScoreToLeaderboard();
         this.gameView.quit();
     }
 

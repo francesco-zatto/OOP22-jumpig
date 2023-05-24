@@ -38,4 +38,9 @@ public interface Game {
      * @return the world of the game.
      */
     World getWorld();
+
+    /**
+     * Method that adds the score into the leaderboard once the game is over.
+     */
+    void addScoreToLeaderboard();
 }
