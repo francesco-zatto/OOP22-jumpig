@@ -116,8 +116,8 @@ public final class SwingRenderer implements Renderer {
     public void renderCoin(final CircleHitbox entity) {
         graphics.get().setColor(Color.YELLOW);
         graphics.get().fillOval(
-            (int) ((entity.getCenter().getX() - entity.getRadius()) * widthRatio), 
-            (int) ((this.worldHeight - (entity.getCenter().getY() + entity.getRadius())) * heightRatio), 
+            this.createScaledLeftX(entity), 
+            this.createScaledUpperY(entity), 
             this.createWidthScaledRadius(entity) * 2, 
             this.createHeightScaledRadius(entity) * 2
             );
@@ -191,5 +191,23 @@ public final class SwingRenderer implements Renderer {
      */
     private int createHeightScaledRadius(final CircleHitbox hitbox) {
         return (int) (hitbox.getRadius() * this.heightRatio);
+    }
+
+    /**
+     * The method to create the scaled upper left corner of the oval to be filled.
+     * @param entity the oval to be filled
+     * @return the scaled left x
+     */
+    private int createScaledLeftX(final CircleHitbox entity) {
+        return (int) (entity.getLeftX() * widthRatio);
+    }
+
+    /**
+     * The method to create the scaled upper left corner of the oval to be filled.
+     * @param entity the oval to be filled
+     * @return the scaled upper y
+     */
+    private int createScaledUpperY(CircleHitbox entity) {
+        return (int) ((this.worldHeight - entity.getUpperY()) * heightRatio);
     }
 }
