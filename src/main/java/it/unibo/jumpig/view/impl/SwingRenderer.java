@@ -207,7 +207,7 @@ public final class SwingRenderer implements Renderer {
      * @param entity the oval to be filled
      * @return the scaled upper y
      */
-    private int createScaledUpperY(CircleHitbox entity) {
+    private int createScaledUpperY(final CircleHitbox entity) {
         return (int) ((this.worldHeight - entity.getUpperY()) * heightRatio);
     }
 }
