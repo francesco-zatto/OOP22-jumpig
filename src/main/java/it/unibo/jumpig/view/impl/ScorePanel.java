@@ -56,12 +56,4 @@ public class ScorePanel extends JPanel {
           this.coinNumber.setText(Integer.toString(coins));
           this.livesNumber.setText(Integer.toString(lives));
      }
-     /*
-     public static void main(final String[] args) {
-          final JFrame frame = new JFrame();
-          final JPanel scorePanel = new ScorePanel();
-          frame.getContentPane().add(scorePanel);
-          frame.setVisible(true);
-     }
-     */
 }
