@@ -77,6 +77,11 @@ public class CameraImpl implements Camera {
         }
     }
 
+    /**
+     * Method to know when the camera's velocity has to been updated. 
+     * @param player the player of the game
+     * @return true if the camera's velocity has to been updated
+     */
     private boolean checkTosetCameraVelocity(final Player player) {
         return player.getLastPlatformHeight().isPresent() 
             && (!player.getLastPlatformHeight().get().equals(this.lastPlatform.get()) 
