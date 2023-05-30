@@ -73,6 +73,7 @@ public class CameraImpl implements Camera {
             }
         if (player.getVelocity().getYComponent() < 0) {
             this.cameraVelocity = new VelocityImpl(0, 0);
+            /* If player velocity is < 0 the camera shouldn't move down (while the player does). */
         }
     }
 
