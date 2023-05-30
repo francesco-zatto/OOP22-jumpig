@@ -33,7 +33,6 @@ public class GamePanel extends JPanel {
      */
     public GamePanel(final double worldWidth, final double worldHeight) { 
         this.renderer = new SwingRenderer(worldWidth, worldHeight);
-        //this.setPreferredSize(super.getSize());
     }
 
     /**
