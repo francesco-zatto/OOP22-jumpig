@@ -39,6 +39,7 @@ public class GeneratePlatformsStrategy implements GeneratorEntitiesStrategy {
     * {@inheritDoc}}
     */
     @Override
+    @SuppressWarnings("unchecked")
     public <H extends Hitbox, G extends GameEntity<H>> Set<G> generate(
         final double maxWidth, 
         final double maxHeight, 
