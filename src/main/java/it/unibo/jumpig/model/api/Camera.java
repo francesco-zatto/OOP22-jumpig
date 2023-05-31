@@ -25,7 +25,7 @@ public interface Camera {
     /**
      * Getter that returns the camera's height, 
      * that is the height from which the world we see starts.
-     * @return the camra's height.
+     * @return the camera's height.
      */
     double getCameraHeight();
 

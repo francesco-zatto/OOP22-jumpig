@@ -26,16 +26,20 @@ public class GeneratePlatformsStrategy implements GeneratorEntitiesStrategy {
     private final Set<Platform> setplatforms = new HashSet<>();
     private final Random random = new Random();    /* used to create platforms that have the ordinate 
                                         uniformly distributed in their ranges */
-    private static final int NUM_BASIC_PLATFORM = 20;    /* The number of basic platforms */
-    private static final int NUM_VANISHING_PLATFORM = 5;    /* The number of vanishing platforms */
-    private static final int NUM_BROKEN_PLATFORM = 4;    /* The number of broken platforms */
+    private static final int NUM_BASIC_PLATFORM = 22;    /* The number of basic platforms */
+    private static final int NUM_VANISHING_PLATFORM = 8;    /* The number of vanishing platforms */
+    private static final int NUM_BROKEN_PLATFORM = 5;    /* The number of broken platforms */
     private static final double VERTICAL_JUMP_VELOCITY = 20;    /* The vertical velocity the player 
                                                                 gains when he jumps on a platform */
+    private static final int COSTANT_TO_CHECK_GENERATION_DISTANCE = 5;   /* The dividend 
+                                                                            to get the minimum distance 
+                                                                            between entities */
 
     /**
     * {@inheritDoc}}
     */
     @Override
+    @SuppressWarnings("unchecked")
     public <H extends Hitbox, G extends GameEntity<H>> Set<G> generate(
         final double maxWidth, 
         final double maxHeight, 
@@ -88,7 +92,13 @@ public class GeneratePlatformsStrategy implements GeneratorEntitiesStrategy {
                             if (i < NUM_BROKEN_PLATFORM + NUM_BASIC_PLATFORM) {
                                 this.setplatforms.add(new BasicPlatform(
                                     checkEqualsPosition(
-                                        coordinate, 
+                                        checkGeneration(
+                                            coordinate, 
+                                            maxWidth, 
+                                            maxHeight, 
+                                            setentities, 
+                                            camera
+                                            ), 
                                         maxWidth, 
                                         maxHeight, 
                                         setentities, 
@@ -98,7 +108,13 @@ public class GeneratePlatformsStrategy implements GeneratorEntitiesStrategy {
                             } else {
                                 this.setplatforms.add(new VanishingPlatform(
                                     this.checkEqualsPosition(
-                                        coordinate, 
+                                        checkGeneration(
+                                            coordinate, 
+                                            maxWidth, 
+                                            maxHeight, 
+                                            setentities, 
+                                            camera
+                                            ), 
                                         maxWidth, 
                                         maxHeight, 
                                         setentities, 
@@ -109,6 +125,31 @@ public class GeneratePlatformsStrategy implements GeneratorEntitiesStrategy {
                         }
                         setentities.add(coordinate);
                     });
+    }
+
+    private Position checkGeneration(
+        final Position coordinate, 
+        final double maxWidth, 
+        final double maxHeight, 
+        final Set<Position> setentities, 
+        final Camera camera
+        ) {
+            return coordinate.getY() 
+                - setentities.stream()
+                        .max((x, y) -> Double.compare(x.getY(), y.getY()))
+                        .get()
+                        .getY() 
+                + 1
+                >= maxHeight / COSTANT_TO_CHECK_GENERATION_DISTANCE
+                ? this.checkGeneration(new PositionImpl(
+                        Math.random() * maxWidth, 
+                        Math.random() * 2 * maxHeight + camera.getCameraStartHeight()), 
+                    maxWidth, 
+                    maxHeight, 
+                    setentities, 
+                    camera
+                    ) 
+                : coordinate;
     }
 
 }

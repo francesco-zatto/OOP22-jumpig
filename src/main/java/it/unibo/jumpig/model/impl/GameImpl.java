@@ -1,10 +1,12 @@
 package it.unibo.jumpig.model.impl;
 
+import java.util.Random;
 import java.util.function.Predicate;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.jumpig.common.impl.Direction;
 import it.unibo.jumpig.model.api.Game;
+import it.unibo.jumpig.model.api.Leaderboard;
 import it.unibo.jumpig.model.api.World;
 
 /**
@@ -13,13 +15,23 @@ import it.unibo.jumpig.model.api.World;
 
 public class GameImpl implements Game {
 
+    private static final Random RANDOM = new Random();
     private final World world;
     private int heightScore;
+    private final Leaderboard leaderboard;
+    private String username;
     /**
      * The constructor to create a new game.
+     * @param leaderboard the leaderboard
+     * @param username the username
      */
-    public GameImpl() {
+    public GameImpl(
+        final Leaderboard leaderboard,
+        final String username
+        ) {
         this.world = new WorldImpl();
+        this.leaderboard = leaderboard.copy();
+        this.username = username;
     }
 
     /**
@@ -88,5 +100,17 @@ public class GameImpl implements Game {
      */
     private void updateScore() {
         this.heightScore = (int) this.getWorld().getPlayer().getPosition().getY();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addScoreToLeaderboard() {
+        if ("".equals(username)) {
+            final var random = RANDOM.nextInt(0, Integer.MAX_VALUE);
+            username = "user" + random;
+        }
+        leaderboard.addScore(new ScoreImpl(username, getCurrentScore(), getCurrentCoins()));
     }
 }

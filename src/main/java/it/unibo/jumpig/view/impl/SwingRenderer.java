@@ -27,6 +27,7 @@ public final class SwingRenderer implements Renderer {
     private final String vanishingPlatformFile = ROOT + "vanishing_platform.png";
     private final String brokenPlatformFile = ROOT + "broken_platform.png";
     private final String enemyFile = ROOT + "jumpier_enemy.png";
+    private final String playerFile = ROOT + "jumpig_player.png";
     private Optional<Graphics2D> graphics = Optional.empty();
     private final double worldWidth;
     private final double worldHeight;
@@ -54,7 +55,7 @@ public final class SwingRenderer implements Renderer {
         this.brokenPlatformImage = new ImageIcon(brokenUrl).getImage();
         final URL enemyUrl = ClassLoader.getSystemResource(enemyFile);
         this.enemyImage = new ImageIcon(enemyUrl).getImage();
-        final URL jumpigUrl = ClassLoader.getSystemResource(ROOT + "jumpigIcon.png");
+        final URL jumpigUrl = ClassLoader.getSystemResource(playerFile);
         this.jumpigImage = new ImageIcon(jumpigUrl).getImage();
     } 
 
@@ -110,8 +111,8 @@ public final class SwingRenderer implements Renderer {
     public void renderCoin(final CircleHitbox entity) {
         graphics.get().setColor(Color.YELLOW);
         graphics.get().fillOval(
-            (int) ((entity.getCenter().getX() - entity.getRadius()) * widthRatio), 
-            (int) ((this.worldHeight - (entity.getCenter().getY() + entity.getRadius())) * heightRatio), 
+            this.createScaledLeftX(entity), 
+            this.createScaledUpperY(entity), 
             this.createWidthScaledRadius(entity) * 2, 
             this.createHeightScaledRadius(entity) * 2
             );
@@ -179,5 +180,23 @@ public final class SwingRenderer implements Renderer {
      */
     private int createHeightScaledRadius(final CircleHitbox hitbox) {
         return (int) (hitbox.getRadius() * this.heightRatio);
+    }
+
+    /**
+     * The method to create the scaled upper left corner of the oval to be filled.
+     * @param entity the oval to be filled
+     * @return the scaled left x
+     */
+    private int createScaledLeftX(final CircleHitbox entity) {
+        return (int) (entity.getLeftX() * widthRatio);
+    }
+
+    /**
+     * The method to create the scaled upper left corner of the oval to be filled.
+     * @param entity the oval to be filled
+     * @return the scaled upper y
+     */
+    private int createScaledUpperY(final CircleHitbox entity) {
+        return (int) ((this.worldHeight - entity.getUpperY()) * heightRatio);
     }
 }

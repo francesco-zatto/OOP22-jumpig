@@ -47,4 +47,12 @@ public class ScoreImpl implements Score {
     public int getCoins() {
         return this.coins;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return username + ":" + " heightScore= " + heightScore + "\t" + " coins= " + coins;
+    }
 }

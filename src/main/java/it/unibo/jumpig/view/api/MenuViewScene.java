@@ -5,4 +5,9 @@ package it.unibo.jumpig.view.api;
  */
 
 public interface MenuViewScene extends ViewScene {
+    /**
+     * Getter for the username the player enters.
+     * @return the username.
+     */
+    String getUsername();
 }
