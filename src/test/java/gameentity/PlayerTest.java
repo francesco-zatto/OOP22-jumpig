@@ -69,6 +69,6 @@ class PlayerTest {
     }
 
     private boolean isPlayerAlive() {
-        return this.player.getLives() > 0 ? true : false;
+        return this.player.getLives() > 0;
     }
 }
