@@ -92,7 +92,6 @@ public final class SwingRenderer implements Renderer {
     public void renderVanishingPlatform(final RectangleHitbox entity) {
         final var rectangle = this.createScaledRectangle(entity);
         drawImage(rectangle, this.vanishingPlatformImage);
-        //this.fillRectangle(Color.RED, this.graphics.get(), this.createScaledRectangle(entity)); TODO remove
     }
 
     /**
