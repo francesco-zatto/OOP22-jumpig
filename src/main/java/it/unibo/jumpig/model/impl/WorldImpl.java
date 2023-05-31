@@ -97,10 +97,11 @@ public class WorldImpl implements World {
      */
     private Set<Platform> getPlatforms() {
         final Set<Platform> takenPlatforms = this.setplatform.stream()
-            .filter(x -> x instanceof Targettable && ((Targettable) x).isTaken())
-            .collect(Collectors.toSet());
-        return this.setplatform.stream().filter(x -> !takenPlatforms.contains(x))
-            .collect(Collectors.toSet());
+                .filter(x -> x instanceof Targettable && ((Targettable) x).isTaken())
+                .collect(Collectors.toSet());
+        return this.setplatform.stream()
+                .filter(x -> !takenPlatforms.contains(x))
+                .collect(Collectors.toSet());
     }
 
     /**
