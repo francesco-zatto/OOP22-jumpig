@@ -161,7 +161,7 @@ public class WorldImpl implements World {
         }
         this.player.computeVelocity(GRAVITY, time, direction);
         this.player.computePosition(time);
-        updateCollisions();
+        this.updateCollisions();
         this.checkRegeneration();
         this.setEmpty();
         this.camera.setCameraVelocity(this.player);

@@ -75,7 +75,6 @@ public final class SwingRenderer implements Renderer {
     public void renderEnemy(final RectangleHitbox entity) {
         final var rectangle = this.createScaledRectangle(entity);
         drawImage(rectangle, this.enemyImage);
-        //this.fillRectangle(Color.ORANGE, this.graphics.get(), this.createScaledRectangle(entity)); TODO remove
     }
 
     /**
@@ -85,7 +84,6 @@ public final class SwingRenderer implements Renderer {
     public void renderBasicPlatform(final RectangleHitbox entity) {
         final var rectangle = this.createScaledRectangle(entity);
         drawImage(rectangle, this.basicPlatformImage);
-        //this.fillRectangle(Color.GREEN, this.graphics.get(), this.createScaledRectangle(entity));
     }
 
     /**
@@ -105,8 +103,6 @@ public final class SwingRenderer implements Renderer {
     public void renderBrokenPlatform(final RectangleHitbox entity) {
         final var rectangle = this.createScaledRectangle(entity);
         drawImage(rectangle, this.brokenPlatformImage);
-        //final Color brown = new Color(139, 69, 19); TODO remove
-        //this.fillRectangle(brown, this.graphics.get(), this.createScaledRectangle(entity));
     }
 
     /**
@@ -168,12 +164,6 @@ public final class SwingRenderer implements Renderer {
             )
         );
     }
-
-    /*private void fillRectangle(final Color color, final Graphics2D graphics, final Rectangle rectangle) {
-        graphics.setColor(color);
-        graphics.fill(rectangle);
-    } TODO remove
-    */
 
     /**
      * Method to scale the width of the coin.
