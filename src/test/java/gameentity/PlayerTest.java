@@ -1,6 +1,8 @@
 package gameentity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -54,5 +56,19 @@ class PlayerTest {
         this.player.incrementCoins();
         this.player.incrementCoins();
         assertEquals(3, this.player.getCoins());
+    }
+
+    @Test
+    void testLives() {
+        this.player.decreaseLives();
+        assertTrue(isPlayerAlive());
+        this.player.decreaseLives();
+        assertTrue(isPlayerAlive());
+        this.player.decreaseLives();
+        assertFalse(isPlayerAlive());
+    }
+
+    private boolean isPlayerAlive() {
+        return this.player.getLives() > 0 ? true : false;
     }
 }
