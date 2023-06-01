@@ -5,12 +5,18 @@ import java.net.URL;
 
 import javax.swing.ImageIcon;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Class that loads the images needed for the SwingRenderer. When an ImageLoader instance is created, it has the references
  * to all the images for each game entity, calling the corresponding method.
  */
+@SuppressFBWarnings(
+    value = "EI_EXPOSE_REP",
+    justification = "This class is meant to collect all the references to the images needed in the game "
+            + "otherwise the images should be loaded for every frame and it would slow down considerably the game."
+)
 public class ImageLoader {
-    
     private static final String ROOT = "it/unibo/jumpig/images/";
     private static final String BASIC_PLATFORM_FILE = ROOT + "basic_platform.png";
     private static final String VANISHING_PLATFORM_FILE = ROOT + "vanishing_platform.png";
