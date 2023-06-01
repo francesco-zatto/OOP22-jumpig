@@ -35,7 +35,7 @@ class PlayerTest {
         this.player.computePosition(TIME);
         assertEquals(this.player.getPosition().getX(), 
             finalPosition.getX() * 2, () -> "testPlayerPosition failed");
-        assertEquals(player.getPosition().getY(), 
+        assertEquals(this.player.getPosition().getY(), 
             finalPosition.getY() * 2, () -> "testPlayerPosition failed");
     }
 
@@ -47,7 +47,7 @@ class PlayerTest {
         this.player.computeVelocity(GRAVITY, TIME, direction);
         finalVelocity.computeAcceleratedVelocity(GRAVITY, TIME);
         assertEquals(finalVelocity.getModule(), 
-            player.getVelocity().getModule(), () -> "testPlayerVelocity failed");
+            this.player.getVelocity().getModule(), () -> "testPlayerVelocity failed");
     }
 
     @Test
