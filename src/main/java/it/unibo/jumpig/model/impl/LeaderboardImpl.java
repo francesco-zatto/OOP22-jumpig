@@ -68,7 +68,7 @@ public class LeaderboardImpl implements Leaderboard {
     @Override
     public String toString() {
         final StringBuilder s = new StringBuilder(26);
-        for (final Score score : getScores()) {
+        for (final Score score : this.getScores()) {
             s.append(score.toString());
         }
         return s.toString();
