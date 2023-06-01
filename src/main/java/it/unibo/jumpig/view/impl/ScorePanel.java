@@ -27,12 +27,12 @@ public class ScorePanel extends JPanel {
      */
     public ScorePanel() {
           super(new FlowLayout());
-          this.add(scoreText);
-          this.add(scoreNumber);
-          this.add(coinText);
-          this.add(coinNumber);
-          this.add(livesText);
-          this.add(livesNumber);
+          this.add(this.scoreText);
+          this.add(this.scoreNumber);
+          this.add(this.coinText);
+          this.add(this.coinNumber);
+          this.add(this.livesText);
+          this.add(this.livesNumber);
           addFontToComponents();
           this.setBackground(BACKGROUND_COLOR);
      }
@@ -42,7 +42,7 @@ public class ScorePanel extends JPanel {
       */
      private void addFontToComponents() {
           for (final Component component : super.getComponents()) {
-               component.setFont(font);
+               component.setFont(this.font);
           }
      }
      /**
