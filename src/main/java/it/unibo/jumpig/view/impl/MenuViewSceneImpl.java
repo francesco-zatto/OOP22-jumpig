@@ -51,7 +51,7 @@ public class MenuViewSceneImpl implements MenuViewScene {
         /*
          * Once you click the window's close button, the app will close.
          */
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         /*
          * Creating the menu panel that contains everything.
          */
@@ -76,7 +76,7 @@ public class MenuViewSceneImpl implements MenuViewScene {
         /*
          * Adding menuPanel into frame.
          */
-        frame.getContentPane().add(menuPanel);
+        this.frame.getContentPane().add(menuPanel);
         /*
          * Welcome label.
          */
@@ -90,7 +90,7 @@ public class MenuViewSceneImpl implements MenuViewScene {
         final JPanel usernamePanel = new JPanel(new GridLayout(1, 0));
         usernamePanel.setBorder(BorderFactory.createTitledBorder("Enter a username"));
         usernamePanel.setBackground(Color.PINK);
-        usernamePanel.add(textField);
+        usernamePanel.add(this.textField);
         /*
          * Adding usernamePanel into the menuPanel.
          */
@@ -115,10 +115,10 @@ public class MenuViewSceneImpl implements MenuViewScene {
             (int) (screen.getWidth() / SCREEN_FRACTION), 
             (int) (screen.getWidth() / SCREEN_FRACTION * ASPECT_RATIO)
             );
-        frame.setSize(startScreen);
-        frame.setLocationByPlatform(true);
-        frame.setPreferredSize(frame.getSize());
-        frame.setResizable(true);
+        this.frame.setSize(startScreen);
+        this.frame.setLocationByPlatform(true);
+        this.frame.setPreferredSize(frame.getSize());
+        this.frame.setResizable(true);
         /*
          * Adding action listeners to buttons.
          */
@@ -144,7 +144,7 @@ public class MenuViewSceneImpl implements MenuViewScene {
      */
     @Override
     public void quit() {
-        final int option = JOptionPane.showConfirmDialog(frame,
+        final int option = JOptionPane.showConfirmDialog(this.frame,
                 "Do you really want to quit?",
                 "Quitting..", JOptionPane.YES_NO_OPTION); 
         if (option == JOptionPane.YES_OPTION) {
@@ -159,6 +159,6 @@ public class MenuViewSceneImpl implements MenuViewScene {
      */
     @Override
     public String getUsername() {
-        return textField.getText();
+        return this.textField.getText();
     }
 }
