@@ -6,10 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.net.URL;
 import java.util.Optional;
-
-import javax.swing.ImageIcon;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.jumpig.common.impl.hitbox.CircleHitbox;
@@ -17,27 +14,19 @@ import it.unibo.jumpig.common.impl.hitbox.RectangleHitbox;
 import it.unibo.jumpig.view.api.Renderer;
 
 /**
- * Class the uses Java Swing library to render the gameEntity.
+ * Class the uses Java Swing library to render the gameEntities.
+ * To render them it uses a Graphics2D object, that must be setted every time rendering is needed.
+ * The Graphics2D object must not be disposed or deleted in other ways before the actual rendering of game entities.
+ * {@link java.awt.Graphics2D}
  */
 public final class SwingRenderer implements Renderer {
 
-    //private static final String SEP = "/";
-    private static final String ROOT = "it/unibo/jumpig/images/";
-    private static final String BASIC_PLATFORM_FILE = ROOT + "basic_platform.png";
-    private static final String VANISHING_PLATFORM_FILE = ROOT + "vanishing_platform.png";
-    private static final String BROKEN_PLATFORM_FILE = ROOT + "broken_platform.png";
-    private static final String ENEMY_FILE = ROOT + "jumpier_enemy.png";
-    private static final String PLAYER_FILE = ROOT + "jumpig_player.png";
     private Optional<Graphics2D> graphics = Optional.empty();
+    private final ImageLoader imageLoader = new ImageLoader();
     private final double worldWidth;
     private final double worldHeight;
     private double widthRatio;
     private double heightRatio;
-    private final Image basicPlatformImage;
-    private final Image vanishingPlatformImage; 
-    private final Image brokenPlatformImage;
-    private final Image enemyImage;
-    private final Image jumpigImage;
 
     /**
      * Constructor for a SwingRenderer.
@@ -47,16 +36,6 @@ public final class SwingRenderer implements Renderer {
     public SwingRenderer(final double worldWidth, final double worldHeight) {
         this.worldWidth = worldWidth;
         this.worldHeight = worldHeight;
-        final URL basicUrl = ClassLoader.getSystemResource(BASIC_PLATFORM_FILE);
-        this.basicPlatformImage = new ImageIcon(basicUrl).getImage();
-        final URL vanishingUrl = ClassLoader.getSystemResource(VANISHING_PLATFORM_FILE);
-        this.vanishingPlatformImage = new ImageIcon(vanishingUrl).getImage();
-        final URL brokenUrl = ClassLoader.getSystemResource(BROKEN_PLATFORM_FILE);
-        this.brokenPlatformImage = new ImageIcon(brokenUrl).getImage();
-        final URL enemyUrl = ClassLoader.getSystemResource(ENEMY_FILE);
-        this.enemyImage = new ImageIcon(enemyUrl).getImage();
-        final URL jumpigUrl = ClassLoader.getSystemResource(PLAYER_FILE);
-        this.jumpigImage = new ImageIcon(jumpigUrl).getImage();
     } 
 
     /**
@@ -65,7 +44,7 @@ public final class SwingRenderer implements Renderer {
     @Override
     public void renderPlayer(final RectangleHitbox entity) {
         final var rectangle = this.createScaledRectangle(entity);
-        drawImage(rectangle, this.jumpigImage);
+        drawImage(rectangle, this.imageLoader.getJumpigImage());
     }
 
     /**
@@ -74,7 +53,7 @@ public final class SwingRenderer implements Renderer {
     @Override
     public void renderEnemy(final RectangleHitbox entity) {
         final var rectangle = this.createScaledRectangle(entity);
-        drawImage(rectangle, this.enemyImage);
+        drawImage(rectangle, this.imageLoader.getEnemyImage());
     }
 
     /**
@@ -83,7 +62,7 @@ public final class SwingRenderer implements Renderer {
     @Override
     public void renderBasicPlatform(final RectangleHitbox entity) {
         final var rectangle = this.createScaledRectangle(entity);
-        drawImage(rectangle, this.basicPlatformImage);
+        drawImage(rectangle, this.imageLoader.getBasicPlatformImage());
     }
 
     /**
@@ -92,7 +71,7 @@ public final class SwingRenderer implements Renderer {
     @Override
     public void renderVanishingPlatform(final RectangleHitbox entity) {
         final var rectangle = this.createScaledRectangle(entity);
-        drawImage(rectangle, this.vanishingPlatformImage);
+        drawImage(rectangle, this.imageLoader.getVanishingPlatformImage());
     }
 
     /**
@@ -101,7 +80,7 @@ public final class SwingRenderer implements Renderer {
     @Override
     public void renderBrokenPlatform(final RectangleHitbox entity) {
         final var rectangle = this.createScaledRectangle(entity);
-        drawImage(rectangle, this.brokenPlatformImage);
+        drawImage(rectangle, this.imageLoader.getBrokenPlatformImage());
     }
 
     /**
