@@ -21,13 +21,13 @@ import it.unibo.jumpig.view.api.Renderer;
  */
 public final class SwingRenderer implements Renderer {
 
-    private static final String SEP = System.getProperty("file.separator");
-    private static final String ROOT = "it" + SEP + "unibo" + SEP + "jumpig" + SEP + "images" + SEP;
-    private final String basicPlatformfile = ROOT + "basic_platform.png";
-    private final String vanishingPlatformFile = ROOT + "vanishing_platform.png";
-    private final String brokenPlatformFile = ROOT + "broken_platform.png";
-    private final String enemyFile = ROOT + "jumpier_enemy.png";
-    private final String playerFile = ROOT + "jumpig_player.png";
+    //private static final String SEP = "/";
+    private static final String ROOT = "it/unibo/jumpig/images/";
+    private static final String BASIC_PLATFORM_FILE = ROOT + "basic_platform.png";
+    private static final String VANISHING_PLATFORM_FILE = ROOT + "vanishing_platform.png";
+    private static final String BROKEN_PLATFORM_FILE = ROOT + "broken_platform.png";
+    private static final String ENEMY_FILE = ROOT + "jumpier_enemy.png";
+    private static final String PLAYER_FILE = ROOT + "jumpig_player.png";
     private Optional<Graphics2D> graphics = Optional.empty();
     private final double worldWidth;
     private final double worldHeight;
@@ -47,15 +47,15 @@ public final class SwingRenderer implements Renderer {
     public SwingRenderer(final double worldWidth, final double worldHeight) {
         this.worldWidth = worldWidth;
         this.worldHeight = worldHeight;
-        final URL basicUrl = ClassLoader.getSystemResource(basicPlatformfile);
+        final URL basicUrl = ClassLoader.getSystemResource(BASIC_PLATFORM_FILE);
         this.basicPlatformImage = new ImageIcon(basicUrl).getImage();
-        final URL vanishingUrl = ClassLoader.getSystemResource(vanishingPlatformFile);
+        final URL vanishingUrl = ClassLoader.getSystemResource(VANISHING_PLATFORM_FILE);
         this.vanishingPlatformImage = new ImageIcon(vanishingUrl).getImage();
-        final URL brokenUrl = ClassLoader.getSystemResource(brokenPlatformFile);
+        final URL brokenUrl = ClassLoader.getSystemResource(BROKEN_PLATFORM_FILE);
         this.brokenPlatformImage = new ImageIcon(brokenUrl).getImage();
-        final URL enemyUrl = ClassLoader.getSystemResource(enemyFile);
+        final URL enemyUrl = ClassLoader.getSystemResource(ENEMY_FILE);
         this.enemyImage = new ImageIcon(enemyUrl).getImage();
-        final URL jumpigUrl = ClassLoader.getSystemResource(playerFile);
+        final URL jumpigUrl = ClassLoader.getSystemResource(PLAYER_FILE);
         this.jumpigImage = new ImageIcon(jumpigUrl).getImage();
     } 
 
