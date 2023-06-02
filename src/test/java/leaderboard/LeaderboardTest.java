@@ -52,7 +52,7 @@ class LeaderboardTest {
         assertEquals(TOP_10, leaderboard.getScores().stream().count());
     }
 
-    void createLeaderboard(final Leaderboard leaderboard) {
+    private void createLeaderboard(final Leaderboard leaderboard) {
         for (int i = 0; i < NUM_SCORES; i++) {
             leaderboard.addScore(new ScoreImpl("a" + Integer.toString(i), RANDOM.nextInt(), RANDOM.nextInt()));
         }
