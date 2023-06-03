@@ -53,6 +53,6 @@ public class ScoreImpl implements Score {
      */
     @Override
     public String toString() {
-        return username + ":" + " heightScore= " + heightScore + "\t" + " coins= " + coins;
+        return this.username + ":" + " heightScore= " + this.heightScore + "\t" + " coins= " + this.coins;
     }
 }

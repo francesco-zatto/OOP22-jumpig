@@ -24,7 +24,7 @@ public class LeaderBoardControllerImpl implements LeaderboardController {
      */
     @Override
     public void start() {
-        leaderboardView.show();
+        this.leaderboardView.show();
     }
 
     /**
@@ -32,6 +32,6 @@ public class LeaderBoardControllerImpl implements LeaderboardController {
      */
     @Override
     public void close() {
-        leaderboardView.quit();
+        this.leaderboardView.quit();
     }
 }

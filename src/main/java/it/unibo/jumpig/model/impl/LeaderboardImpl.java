@@ -14,6 +14,7 @@ import it.unibo.jumpig.model.api.Score;
  */
 public class LeaderboardImpl implements Leaderboard {
 
+    private static final int TOP_SCORES = 10;
     private final List<Score> scoreLeaderboard;
     /**
      * Constructor for the leaderboard.
@@ -49,6 +50,7 @@ public class LeaderboardImpl implements Leaderboard {
             .thenComparingInt(Score::getCoins)
             .reversed()
         )
+        .limit(TOP_SCORES)
         .toList();
     }
 
@@ -66,7 +68,7 @@ public class LeaderboardImpl implements Leaderboard {
     @Override
     public String toString() {
         final StringBuilder s = new StringBuilder(26);
-        for (final Score score : getScores()) {
+        for (final Score score : this.getScores()) {
             s.append(score.toString());
         }
         return s.toString();

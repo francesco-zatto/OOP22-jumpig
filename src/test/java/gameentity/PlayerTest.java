@@ -1,6 +1,8 @@
 package gameentity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -29,11 +31,11 @@ class PlayerTest {
     @Test
     void testPlayerPosition() {
         final Position finalPosition = new PositionImpl(PLAYER_COMPONENT_X, PLAYER_COMPONENT_Y);
-        player.setVelocityFromJump(new VelocityImpl(PLAYER_COMPONENT_X, PLAYER_COMPONENT_Y));
-        player.computePosition(TIME);
-        assertEquals(player.getPosition().getX(), 
+        this.player.setVelocityFromJump(new VelocityImpl(PLAYER_COMPONENT_X, PLAYER_COMPONENT_Y));
+        this.player.computePosition(TIME);
+        assertEquals(this.player.getPosition().getX(), 
             finalPosition.getX() * 2, () -> "testPlayerPosition failed");
-        assertEquals(player.getPosition().getY(), 
+        assertEquals(this.player.getPosition().getY(), 
             finalPosition.getY() * 2, () -> "testPlayerPosition failed");
     }
 
@@ -41,10 +43,32 @@ class PlayerTest {
     void testPlayerVelocity() {
         final Velocity playerVelocity = 
         new VelocityImpl(finalVelocity.getXComponent(), finalVelocity.getYComponent());
-        player.setVelocityFromJump(playerVelocity);
-        player.computeVelocity(GRAVITY, TIME, direction);
+        this.player.setVelocityFromJump(playerVelocity);
+        this.player.computeVelocity(GRAVITY, TIME, direction);
         finalVelocity.computeAcceleratedVelocity(GRAVITY, TIME);
         assertEquals(finalVelocity.getModule(), 
-            player.getVelocity().getModule(), () -> "testPlayerVelocity failed");
+            this.player.getVelocity().getModule(), () -> "testPlayerVelocity failed");
+    }
+
+    @Test
+    void testCoins() {
+        this.player.incrementCoins();
+        this.player.incrementCoins();
+        this.player.incrementCoins();
+        assertEquals(3, this.player.getCoins());
+    }
+
+    @Test
+    void testLives() {
+        this.player.decreaseLives();
+        assertTrue(isPlayerAlive());
+        this.player.decreaseLives();
+        assertTrue(isPlayerAlive());
+        this.player.decreaseLives();
+        assertFalse(isPlayerAlive());
+    }
+
+    private boolean isPlayerAlive() {
+        return this.player.getLives() > 0;
     }
 }
