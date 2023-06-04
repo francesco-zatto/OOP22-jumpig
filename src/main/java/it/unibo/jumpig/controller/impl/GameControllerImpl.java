@@ -17,7 +17,7 @@ import it.unibo.jumpig.view.impl.GameViewImpl;
 
 public class GameControllerImpl implements GameController {
 
-    private static final long PERIOD = 20; /* 20 milliseconds are equal to 50 frames per sec */
+    private static final long PERIOD = 10; /* 10 milliseconds are equal to 100 frames per sec */
     private final Game game;
     private final GameViewScene gameView;
     private Direction input;
