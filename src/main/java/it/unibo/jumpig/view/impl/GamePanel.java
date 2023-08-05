@@ -3,14 +3,17 @@ package it.unibo.jumpig.view.impl;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.util.HashSet;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.swing.JPanel;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.jumpig.common.api.hitbox.Hitbox;
+import it.unibo.jumpig.common.impl.hitbox.HitboxComparator;
 
 /**
  * The GUI that shows the game currently going on.
@@ -19,11 +22,12 @@ public class GamePanel extends JPanel {
 
     public static final long serialVersionUID = 1L;
     private static final Color BACKGROUND_COLOR = new Color(102, 178, 255);
+    private static final Comparator<Hitbox> HITBOX_COMPARATOR = new HitboxComparator();
     @SuppressFBWarnings(
         value = "SE_BAD_FIELD", 
         justification = "GamePanel is not meant to be serialized." 
     ) 
-    private Set<Hitbox> entities = new HashSet<>();
+    private SortedSet<Hitbox> entities = new TreeSet<>(HITBOX_COMPARATOR);
     private final transient SwingRenderer renderer;
 
     /**
@@ -68,6 +72,7 @@ public class GamePanel extends JPanel {
      * @param entities entities to render in the panel.
      */
     public void refresh(final Set<Hitbox> entities) {
-        this.entities = new HashSet<>(entities);
+        this.entities = new TreeSet<>(HITBOX_COMPARATOR);
+        this.entities.addAll(entities);
     }
 }
