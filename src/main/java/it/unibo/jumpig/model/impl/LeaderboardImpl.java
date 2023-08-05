@@ -7,6 +7,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import it.unibo.jumpig.model.api.Leaderboard;
+import it.unibo.jumpig.model.api.LeaderboardLoader;
 import it.unibo.jumpig.model.api.Score;
 
 /**
@@ -16,11 +17,12 @@ public class LeaderboardImpl implements Leaderboard {
 
     private static final int TOP_SCORES = 10;
     private final List<Score> scoreLeaderboard;
+    private final LeaderboardLoader loader = new LeaderboardLoaderImpl();
     /**
      * Constructor for the leaderboard.
      */
     public LeaderboardImpl() {
-        this.scoreLeaderboard = new ArrayList<>();
+        this.scoreLeaderboard = this.loader.loadScores();
     }
 
     /**
@@ -60,6 +62,7 @@ public class LeaderboardImpl implements Leaderboard {
     @Override
     public void addScore(final Score score) {
         this.scoreLeaderboard.add(score);
+        this.loader.saveScores(this.scoreLeaderboard);
     }
 
     /**
