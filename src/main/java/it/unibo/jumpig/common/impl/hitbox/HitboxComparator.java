@@ -31,6 +31,6 @@ public class HitboxComparator implements Comparator<Hitbox> {
     }
 
     private String buildNameGameEntity(final Hitbox arg) {
-        return arg.getClass().getSimpleName() + arg.hashCode();
+        return arg.getClass().getSimpleName() + arg.getCenter().getY();
     }
 }
