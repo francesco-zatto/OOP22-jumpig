@@ -13,3 +13,6 @@ bin/
 *.DS_Store
 deleteme/
 .vscode
+
+#Ignore leaderboard file's edits
+*Leaderboard.txt
