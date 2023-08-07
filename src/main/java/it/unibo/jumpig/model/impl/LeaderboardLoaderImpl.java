@@ -21,8 +21,8 @@ public class LeaderboardLoaderImpl implements LeaderboardLoader, Serializable {
 
     private static final long serialVersionUID = 1L;
     private static final String FILE_SEPARATOR = System.getProperty("file.separator");
-    private static final String PATH_TO_LEADERBOARD = "src" + FILE_SEPARATOR + "main" + FILE_SEPARATOR + "resources" + 
-        FILE_SEPARATOR + "it" + FILE_SEPARATOR + "unibo" + FILE_SEPARATOR + "jumpig" + FILE_SEPARATOR;
+    private static final String PATH_TO_LEADERBOARD = "src" + FILE_SEPARATOR + "main" + FILE_SEPARATOR + "resources" 
+        + FILE_SEPARATOR + "it" + FILE_SEPARATOR + "unibo" + FILE_SEPARATOR + "jumpig" + FILE_SEPARATOR;
     private static final String FILE_NAME = PATH_TO_LEADERBOARD + "leaderboard" + FILE_SEPARATOR + "Leaderboard.txt";
 
     /**
@@ -44,8 +44,6 @@ public class LeaderboardLoaderImpl implements LeaderboardLoader, Serializable {
 
     /**
      * {@inheritDoc}
-     * 
-     * @return scores from leaderboard.txt
      */
     @Override
     @SuppressWarnings("unchecked")
@@ -54,10 +52,7 @@ public class LeaderboardLoaderImpl implements LeaderboardLoader, Serializable {
         try (var inputStream = new ObjectInputStream(new FileInputStream(FILE_NAME))) {
             scores.addAll((List<Score>) inputStream.readObject());
         } catch (IOException | ClassNotFoundException e) {
-            Logger.getLogger(LeaderboardLoader.class.getName()).log(
-                Level.SEVERE,
-                "An error occurred while reading from file " + FILE_NAME
-            );
+            scores = List.of();
         }
         return scores;
     }

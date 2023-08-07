@@ -1,5 +1,7 @@
 package it.unibo.jumpig.controller.impl;
 
+import java.util.LinkedList;
+
 import it.unibo.jumpig.controller.api.LeaderboardController;
 import it.unibo.jumpig.model.api.Leaderboard;
 import it.unibo.jumpig.view.api.LeaderboardViewScene;
@@ -17,7 +19,7 @@ public class LeaderBoardControllerImpl implements LeaderboardController {
      * @param leaderboard the leaderboard
      */
     public LeaderBoardControllerImpl(final Leaderboard leaderboard) {
-        this.leaderboardView = new LeaderboardViewSceneImpl(this, leaderboard);
+        this.leaderboardView = new LeaderboardViewSceneImpl(this, new LinkedList<>(leaderboard.getScores()));
     }
     /**
      * {@inheritDoc}

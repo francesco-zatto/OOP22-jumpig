@@ -7,17 +7,14 @@ import java.util.List;
  */
 public interface LeaderboardLoader {
     /**
-     * This method should take the list of the score and save them in the file.
-     * 
-     * @param score the list of score
+     * Method that saves the passed scores as argument.
+     * @param scores the list of score
      */
     void saveScores(List<Score> scores);
 
     /**
-     * This method should take the list of the score and save them in the file.
-     * 
-     * @param file the file that contains leaderboard
-     * @return saved score
+     * Method that gets the list of scores saved.
+     * @return list of scores.
      */
     List<Score> loadScores();
 }

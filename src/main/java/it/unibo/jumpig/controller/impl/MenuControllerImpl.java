@@ -46,6 +46,7 @@ public class MenuControllerImpl implements MenuController {
      */
     @Override
     public void notifyStartLeaderboard() {
+        this.leaderboard.loadScores();
         final LeaderboardController leaderboardController = new LeaderBoardControllerImpl(this.leaderboard);
         leaderboardController.start();
     }

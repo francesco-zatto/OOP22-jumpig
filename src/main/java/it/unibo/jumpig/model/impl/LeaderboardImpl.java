@@ -1,7 +1,7 @@
 package it.unibo.jumpig.model.impl;
 
-import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -16,13 +16,14 @@ import it.unibo.jumpig.model.api.Score;
 public class LeaderboardImpl implements Leaderboard {
 
     private static final int TOP_SCORES = 10;
-    private final List<Score> scoreLeaderboard;
     private final LeaderboardLoader loader = new LeaderboardLoaderImpl();
+    private final List<Score> scoreLeaderboard;
+
     /**
-     * Constructor for the leaderboard.
+     * Public constructor for an empty leaderboard.
      */
     public LeaderboardImpl() {
-        this.scoreLeaderboard = this.loader.loadScores();
+        this.scoreLeaderboard = new LinkedList<>();
     }
 
     /**
@@ -32,6 +33,7 @@ public class LeaderboardImpl implements Leaderboard {
     private LeaderboardImpl(final List<Score> scoreLeaderboard) {
         this.scoreLeaderboard = scoreLeaderboard;
     }
+
     /**
      * {@inheritDoc}
      */
@@ -62,7 +64,6 @@ public class LeaderboardImpl implements Leaderboard {
     @Override
     public void addScore(final Score score) {
         this.scoreLeaderboard.add(score);
-        this.loader.saveScores(this.scoreLeaderboard);
     }
 
     /**
@@ -83,5 +84,14 @@ public class LeaderboardImpl implements Leaderboard {
     @Override
     public Leaderboard copy() {
         return new LeaderboardImpl(this.scoreLeaderboard);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void loadScores() {
+        this.scoreLeaderboard.addAll(this.loader.loadScores());
+        this.loader.saveScores(this.scoreLeaderboard);
     }
 }
