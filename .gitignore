@@ -15,4 +15,4 @@ deleteme/
 .vscode
 
 #Ignore leaderboard file's edits
-*Leaderboard.txt
+*/Leaderboard.txt
