@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.Comparator;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.SortedSet;
@@ -63,7 +64,11 @@ public class GamePanel extends JPanel {
         this.renderer.setGraphics(graphics);
         final Iterator<Hitbox> iterator = this.entities.iterator();
         while (iterator.hasNext()) {
-            iterator.next().updateRendering(this.renderer);
+            try {
+                iterator.next().updateRendering(this.renderer);
+            } catch (ConcurrentModificationException e) {
+                continue;
+            }
         }
     }
 
